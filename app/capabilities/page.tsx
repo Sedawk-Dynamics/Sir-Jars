@@ -1,0 +1,59 @@
+import type { Metadata } from 'next'
+import PageHeader from '@/components/page-header'
+import CapabilityCards from '@/components/capability-cards'
+import CapabilityOrbit from '@/components/capability-orbit'
+import ClosingCta from '@/components/home/closing-cta'
+
+export const metadata: Metadata = {
+  title: 'Capabilities — six routes into the work',
+  description:
+    'Publishing, media, digital and AI, data operations, cybersecurity and digital forensics — six connected capabilities coordinated by one accountable partner.',
+  alternates: { canonical: '/capabilities' },
+}
+
+export default function CapabilitiesPage() {
+  return (
+    <>
+      <PageHeader
+        eyebrow="Capabilities"
+        title="Six routes into the work."
+        intro="Each jar is a distinct service promise. Together they form one governed operating system — six routes into the work, one accountable relationship across all of it."
+        breadcrumbs={[{ label: 'Capabilities', href: '/capabilities' }]}
+      />
+
+      <CapabilityCards
+        eyebrow="Choose the capability"
+        heading="Start with the problem you need solved."
+        intro="Six Jars assembles the right specialists and keeps one accountable line from brief to verified outcome. Cross-capability engagements are the norm, not an exception."
+      />
+
+      <section
+        className="on-dark py-20 lg:py-28"
+        style={{ background: 'var(--color-plum)' }}
+      >
+        <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2
+              className="font-extrabold tracking-tight leading-tight"
+              style={{
+                color: 'var(--color-ivory)',
+                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+              }}
+            >
+              How the six connect
+            </h2>
+            <p
+              className="mt-4 text-base leading-relaxed"
+              style={{ color: 'rgba(252,251,248,0.7)' }}
+            >
+              Select a capability to see what it covers and where human review sits.
+            </p>
+          </div>
+          <CapabilityOrbit variant="dark" />
+        </div>
+      </section>
+
+      <ClosingCta />
+    </>
+  )
+}

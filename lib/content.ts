@@ -1,0 +1,561 @@
+/**
+ * Single source of truth for every capability, article, phase and proof item.
+ *
+ * Everything the navigation, footer and sitemap point at is derived from here,
+ * so a destination cannot exist in the UI without a real page behind it.
+ */
+
+export type Capability = {
+  slug: string
+  /** Short label — navigation, cards, filters. (Review p.7) */
+  shortName: string
+  /** Full name — detail page H1 and metadata only. */
+  fullName: string
+  number: string
+  /** One-word brand cue from the jar system. */
+  cue: string
+  summary: string
+  intro: string
+  capabilities: string[]
+  /** What the client actually receives at close. */
+  deliverables: string[]
+  /** Where human review sits in this discipline. */
+  humanReview: string
+  /** Single-letter mark used in the orbit and card chips. */
+  mark: string
+}
+
+export const capabilities: Capability[] = [
+  {
+    slug: 'publishing',
+    shortName: 'Publishing',
+    fullName: 'Publishing & Print Operations',
+    number: '01',
+    cue: 'Form',
+    mark: 'P',
+    summary: 'Editorial production, conversion, print coordination and distribution.',
+    intro:
+      'We coordinate the full path from manuscript to distributed publication — holding editorial standards, institutional voice and production schedules together across print and digital channels.',
+    capabilities: [
+      'Editorial production coordination',
+      'Print layout, typesetting and conversion',
+      'Distribution workflow management',
+      'Asset archival and rights tracking',
+      'Multilingual publishing support',
+    ],
+    deliverables: [
+      'Production schedule with named owners at each gate',
+      'Approved proofs and version history',
+      'Distribution manifest and delivery confirmation',
+      'Archived source assets with retention terms',
+    ],
+    humanReview:
+      'An accountable editor signs off every proof before release. Automation handles conversion and formatting; it never approves content.',
+  },
+  {
+    slug: 'media',
+    shortName: 'Media',
+    fullName: 'Media & Content Operations',
+    number: '02',
+    cue: 'Voice',
+    mark: 'M',
+    summary: 'Video, podcast, social and content repurposing with human review.',
+    intro:
+      'Your institutional voice is the asset. We run the production and repurposing pipeline around it — with review points that keep tone, doctrine and context intact at every stage.',
+    capabilities: [
+      'Video production coordination',
+      'Podcast and audio operations',
+      'Social channel operations',
+      'Livestream production support',
+      'Content repurposing workflows',
+    ],
+    deliverables: [
+      'Content calendar with approval checkpoints',
+      'Master assets plus channel-ready derivatives',
+      'Caption, transcript and accessibility files',
+      'Publication log with approver of record',
+    ],
+    humanReview:
+      'Nothing publishes on your channels without a named reviewer approving the cut, the caption and the context.',
+  },
+  {
+    slug: 'digital-ai',
+    shortName: 'Digital + AI',
+    fullName: 'Digital Platforms & AI Governance',
+    number: '03',
+    cue: 'Connect',
+    mark: 'D',
+    summary: 'Websites, CRM, LMS, cloud migration and governed AI integration.',
+    intro:
+      'Modern platform capability without erasing institutional identity. We coordinate the build, the migration and the governance framework that decides where AI is allowed to act and where it is not.',
+    capabilities: [
+      'Website and platform management',
+      'CRM and LMS implementation',
+      'Cloud migration governance',
+      'AI integration oversight and policy',
+      'Security coordination with your IT function',
+    ],
+    deliverables: [
+      'Platform architecture and migration runbook',
+      'AI use policy stating permitted and prohibited uses',
+      'Access model and administrative handover',
+      'Post-migration verification record',
+    ],
+    humanReview:
+      'AI-assisted output enters a review queue before it reaches a member, a donor or the public. The policy names who holds that queue.',
+  },
+  {
+    slug: 'data-operations',
+    shortName: 'Data operations',
+    fullName: 'Data & Administrative Operations',
+    number: '04',
+    cue: 'Order',
+    mark: 'O',
+    summary: 'Records, donor, registration, research and administrative workflows.',
+    intro:
+      'Systematic order for the operational work that keeps an institution running — records, registrations, donor data and research support, handled with defined retention and access discipline.',
+    capabilities: [
+      'Data management and archival',
+      'Donor and supporter database operations',
+      'Research workflow support',
+      'Registration and enrolment coordination',
+      'Administrative scheduling',
+    ],
+    deliverables: [
+      'Data map with classification and retention terms',
+      'Documented processing procedures',
+      'Access register naming every authorised handler',
+      'Reconciliation and exception reports',
+    ],
+    humanReview:
+      'Exceptions never auto-resolve. They route to a named handler with the authority to decide and a record of what was decided.',
+  },
+  {
+    slug: 'cybersecurity',
+    shortName: 'Cybersecurity',
+    fullName: 'Cybersecurity',
+    number: '05',
+    cue: 'Protect',
+    mark: 'C',
+    summary: 'Risk identification, protective controls, incident readiness and remediation.',
+    intro:
+      'Protective coordination for mission-critical systems, scoped precisely and overseen by qualified people. We state clearly what falls inside our coordination and what requires a specialist practice.',
+    capabilities: [
+      'Risk identification and assessment',
+      'Protective control coordination',
+      'Incident readiness planning',
+      'Remediation governance',
+      'Security compliance support',
+    ],
+    deliverables: [
+      'Risk register ranked by mission impact',
+      'Control implementation plan with owners',
+      'Incident response runbook and contact tree',
+      'Remediation verification record',
+    ],
+    humanReview:
+      'Scope boundaries are written down before work starts. Anything outside them is escalated, not improvised.',
+  },
+  {
+    slug: 'digital-forensics',
+    shortName: 'Digital forensics',
+    fullName: 'Digital Forensics',
+    number: '06',
+    cue: 'Establish',
+    mark: 'F',
+    summary: 'Authorised analysis, evidence preservation and decision-ready reporting.',
+    intro:
+      'Authorised forensic work under chain-of-custody discipline. Authorisation comes first, scope is stated in writing, and the report distinguishes what the evidence establishes from what it does not.',
+    capabilities: [
+      'Authorised forensic analysis',
+      'Evidence preservation protocols',
+      'Timeline reconstruction',
+      'Chain-of-custody management',
+      'Decision-ready reporting',
+    ],
+    deliverables: [
+      'Written authorisation and scope statement',
+      'Chain-of-custody log for every artefact',
+      'Reconstructed timeline with evidentiary basis',
+      'Report separating findings from inference',
+    ],
+    humanReview:
+      'No analysis begins without documented authorisation. Every artefact is logged from acquisition to release.',
+  },
+]
+
+export function getCapability(slug: string) {
+  return capabilities.find((c) => c.slug === slug)
+}
+
+/* ── Three-phase homepage method. The six operational stages sit underneath. ── */
+
+export type Phase = {
+  slug: string
+  name: string
+  headline: string
+  description: string
+  /** The detailed stages this homepage phase rolls up. */
+  stages: { number: string; name: string; description: string; outputs: string[] }[]
+}
+
+export const phases: Phase[] = [
+  {
+    slug: 'understand',
+    name: 'Understand',
+    headline: 'Context, scope and authorisation before any work begins',
+    description:
+      'We learn your institutional context, then write down what is in scope, who may authorise what, and where confidentiality applies — before a single task is executed.',
+    stages: [
+      {
+        number: '01',
+        name: 'Discover',
+        description:
+          'A structured discovery conversation covering institutional context, governance requirements, service needs, authorisation levels and confidentiality requirements.',
+        outputs: [
+          'Mission context brief',
+          'Service route identification',
+          'Authorisation and governance mapping',
+          'Initial scope definition',
+        ],
+      },
+      {
+        number: '02',
+        name: 'Assess',
+        description:
+          'We define service boundaries, identify the human review points, map risk and sensitivity, and clarify what falls within our coordination versus a specialist practice.',
+        outputs: [
+          'Scope and boundary document',
+          'Risk and sensitivity assessment',
+          'Human review point mapping',
+          'Engagement proposal',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'execute',
+    name: 'Execute',
+    headline: 'Governed delivery with accountable people at every decision',
+    description:
+      'The governance framework is established first — approvals, confidentiality protocols, reporting cadence, escalation paths — and only then does coordinated delivery begin.',
+    stages: [
+      {
+        number: '03',
+        name: 'Govern',
+        description:
+          'Before execution begins we establish authorisation approvals, approval pathways, confidentiality protocols, reporting cadence and escalation paths.',
+        outputs: [
+          'Authorisation documentation',
+          'Governance framework',
+          'Confidentiality protocols',
+          'Escalation pathway',
+        ],
+      },
+      {
+        number: '04',
+        name: 'Deliver',
+        description:
+          'Coordinated delivery across the relevant disciplines, with human judgment at every approval and exception point. Automation assists; accountable people decide.',
+        outputs: [
+          'Coordinated delivery',
+          'Human-reviewed checkpoints',
+          'Progress reporting',
+          'Quality assurance',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'prove',
+    name: 'Prove',
+    headline: 'Documented evidence at close — and an honest review after it',
+    description:
+      'Every engagement closes with verified outcomes and decision records that separate what was done from what was intended. Then we review the engagement against the standard we set.',
+    stages: [
+      {
+        number: '05',
+        name: 'Validate',
+        description:
+          'Engagements close with documented outcomes: verified results, decision records, confirmed quality controls and maintained evidence logs — distinguishing fact from aspiration.',
+        outputs: [
+          'Verified outcome documentation',
+          'Evidence and decision logs',
+          'Quality control confirmation',
+          'Lessons recorded',
+        ],
+      },
+      {
+        number: '06',
+        name: 'Evolve',
+        description:
+          'We review each engagement against defined standards, update service capacity, and identify how the operating relationship can responsibly extend.',
+        outputs: [
+          'Engagement review',
+          'Improvement recommendations',
+          'Expanded scope options',
+          'Ongoing relationship governance',
+        ],
+      },
+    ],
+  },
+]
+
+/* ── Operating commitments ──────────────────────────────────────────────
+   These are commitments we hold ourselves to, NOT measured results.
+   They are labelled as such wherever they appear near a call to action.
+   Numerical outcome claims belong in `engagements` once verified.
+   ──────────────────────────────────────────────────────────────────── */
+
+export const commitments = [
+  {
+    mark: 'C',
+    title: 'Connected capabilities',
+    detail: 'One coordinated scope across all six disciplines.',
+  },
+  {
+    mark: 'H',
+    title: 'Human-reviewed',
+    detail: 'A named person approves before release. Accountability stays visible.',
+  },
+  {
+    mark: 'G',
+    title: 'Governance built in',
+    detail: 'Authorisation is documented before action, not after.',
+  },
+  {
+    mark: 'E',
+    title: 'Evidence at close',
+    detail: 'Proof of what was done, not a vague summary.',
+  },
+]
+
+/* ── Engagement examples ────────────────────────────────────────────────
+   Illustrative composites of the shape of our work. They are labelled as
+   examples, not case studies, and carry no client names or metrics until
+   a client approves publication and the numbers are verified.
+   ──────────────────────────────────────────────────────────────────── */
+
+export type Engagement = {
+  slug: string
+  capability: string
+  title: string
+  context: string
+  scope: string[]
+  controls: string[]
+  artefacts: string[]
+  outcome: string
+}
+
+export const engagements: Engagement[] = [
+  {
+    slug: 'diocesan-publishing-consolidation',
+    capability: 'Publishing',
+    title: 'Consolidating a fragmented diocesan publishing pipeline',
+    context:
+      'A diocesan communications office running print, web and newsletter production through three disconnected vendors, with no single approval record.',
+    scope: [
+      'Map the existing production path end to end',
+      'Establish one editorial calendar and approval gate',
+      'Migrate the asset archive with retained version history',
+    ],
+    controls: [
+      'Named editor approves every proof before release',
+      'Version history retained for the full retention term',
+      'Vendor handover documented in writing',
+    ],
+    artefacts: [
+      'Production runbook',
+      'Approval log with named approvers',
+      'Migrated archive with integrity check record',
+    ],
+    outcome:
+      'One approval path replaced three. Every published item now traces to a named approver and a dated proof.',
+  },
+  {
+    slug: 'ai-content-governance-policy',
+    capability: 'Digital + AI',
+    title: 'Writing an AI use policy before the tools were deployed',
+    context:
+      'A mission-led publisher under pressure to adopt AI drafting tools, with no stated position on where machine output was permitted.',
+    scope: [
+      'Inventory the proposed AI uses across content workflows',
+      'Classify each use as permitted, review-gated or prohibited',
+      'Define the human review queue and its owner',
+    ],
+    controls: [
+      'AI-assisted drafts enter a review queue before publication',
+      'Prohibited uses documented with the reasoning behind them',
+      'Policy reviewed on a stated cadence',
+    ],
+    artefacts: [
+      'AI use policy',
+      'Review queue definition with named owner',
+      'Staff briefing record',
+    ],
+    outcome:
+      'The organisation adopted the tooling with a written position on machine judgment, rather than discovering its position after an incident.',
+  },
+  {
+    slug: 'authorised-evidence-preservation',
+    capability: 'Digital forensics',
+    title: 'Preserving evidence under written authorisation',
+    context:
+      'An institution facing an internal matter that required digital evidence to be preserved before any analysis or interpretation began.',
+    scope: [
+      'Obtain and document authorisation and its limits',
+      'Preserve identified artefacts under chain of custody',
+      'Reconstruct a timeline strictly from preserved evidence',
+    ],
+    controls: [
+      'No acquisition before written authorisation',
+      'Chain-of-custody log maintained from acquisition to release',
+      'Report separates established findings from inference',
+    ],
+    artefacts: [
+      'Authorisation and scope statement',
+      'Chain-of-custody log',
+      'Timeline report with evidentiary basis per entry',
+    ],
+    outcome:
+      'Decision-makers received a report that stated plainly what the evidence established and what it could not.',
+  },
+]
+
+/* ── Insights ───────────────────────────────────────────────────────── */
+
+export type Article = {
+  slug: string
+  capability: string
+  title: string
+  excerpt: string
+  readTime: string
+  date: string
+  isoDate: string
+  image: string
+  featured?: boolean
+  body: string[]
+}
+
+export const articles: Article[] = [
+  {
+    slug: 'governing-editorial-workflows',
+    capability: 'Publishing',
+    title: 'Governing editorial workflows for Catholic institutions in the digital age',
+    excerpt:
+      'How mission-led publishers can establish disciplined production pipelines that preserve institutional voice while scaling output across digital and print channels.',
+    readTime: '8 min',
+    date: 'July 2026',
+    isoDate: '2026-07-14',
+    image: '/images/publishing-ops.png',
+    featured: true,
+    body: [
+      'Most institutional publishing problems are not writing problems. They are approval problems. Work moves faster than the people responsible for it can review, and the gap fills with improvisation.',
+      'A governed editorial workflow makes three things explicit: who may approve at each stage, what evidence of approval is retained, and what happens when an exception arrives late. None of this slows a well-run publishing operation. It is what allows one to scale without losing its voice.',
+      'Start with the approval gate rather than the tooling. Name the approver for each publication type, record their decision against a dated proof, and retain that record for the same period you retain the publication itself. Tooling choices become straightforward once the gates are settled.',
+      'The failure mode to watch for is the silent exception: an item that skipped review because someone was travelling and the deadline was fixed. Design an explicit path for that case, or the exception becomes the process.',
+    ],
+  },
+  {
+    slug: 'four-controls-before-incident-response',
+    capability: 'Cybersecurity',
+    title: 'The four controls every mission-led organization must establish before incident response',
+    excerpt:
+      'Before incident response training, these baseline protective controls reduce exposure for organizations managing sensitive mission data and institutional archives.',
+    readTime: '6 min',
+    date: 'June 2026',
+    isoDate: '2026-06-23',
+    image: '/images/cybersecurity-ops.png',
+    body: [
+      'Incident response training is valuable, but it is frequently purchased before the controls that would have prevented the incident. Four baseline controls do more for a mission-led organisation than a tabletop exercise.',
+      'First, a current access register. You cannot respond to unauthorised access if you cannot state who was authorised. Second, tested backups — tested meaning restored, not merely scheduled.',
+      'Third, a written classification of the data you hold, so that responders know within minutes whether an affected system contained sensitive personal or pastoral records. Fourth, a contact tree that names who decides, not only who is informed.',
+      'These four are unglamorous and durable. Incident response built on top of them is a plan; incident response without them is a hope.',
+    ],
+  },
+  {
+    slug: 'human-judgment-in-ai-assisted-content',
+    capability: 'Digital + AI',
+    title: 'Human judgment in AI-assisted content: a governance framework for mission media',
+    excerpt:
+      'A structured approach to integrating AI tools into content workflows while maintaining human oversight at every approval and publication point.',
+    readTime: '10 min',
+    date: 'June 2026',
+    isoDate: '2026-06-04',
+    image: '/images/insights-editorial.png',
+    body: [
+      'The governance question is not whether to use AI in content operations. It is where machine output is permitted to reach a reader without a person having looked at it.',
+      'A workable framework classifies every proposed use into three states: permitted, review-gated and prohibited. Permitted uses are those where an error is trivially reversible and carries no doctrinal or pastoral weight — internal formatting, for instance.',
+      'Review-gated uses are the large middle: drafting, summarising, translating. These require a named reviewer and a queue that cannot be bypassed under deadline pressure. Prohibited uses should be written down with the reasoning attached, because the reasoning is what lets a future colleague revisit the decision honestly.',
+      'Write the policy before deploying the tools. An organisation that adopts first and governs later ends up defining its position in the middle of an incident, which is the worst possible moment to think clearly.',
+    ],
+  },
+  {
+    slug: 'evidence-preservation-authorization-first',
+    capability: 'Digital forensics',
+    title: 'Evidence preservation for institutional investigations: authorization comes first',
+    excerpt:
+      'The sequence of decisions an organization must make — before any forensic analysis begins — to ensure evidence remains sound and chain of custody is maintained.',
+    readTime: '7 min',
+    date: 'May 2026',
+    isoDate: '2026-05-19',
+    image: '/images/insights-editorial.png',
+    body: [
+      'The most common error in institutional investigations is not technical. It is sequence: analysis begins before authorisation is documented, and the resulting findings carry an asterisk that cannot be removed afterwards.',
+      'Authorisation should state who granted it, what it covers, what it explicitly does not cover, and when it expires. That last element is routinely omitted and routinely matters.',
+      'Preservation follows authorisation. Every artefact is logged at acquisition with who acquired it, from where, and under what hash. The log continues through every transfer until release.',
+      'Finally, the report must separate what the evidence establishes from what a reasonable person might infer from it. Decision-makers are entitled to both, clearly labelled, and never blended together.',
+    ],
+  },
+]
+
+export function getArticle(slug: string) {
+  return articles.find((a) => a.slug === slug)
+}
+
+/* ── Contact intent paths (review p.3: keep, but shorten the labels) ── */
+
+export const contactPaths = [
+  {
+    id: 'project',
+    label: 'Start a project',
+    desc: 'You have a defined scope and are ready to engage.',
+    responseChannel:
+      'A named owner replies by email within 2 business days with a scoping call proposal.',
+  },
+  {
+    id: 'briefing',
+    label: 'Capability briefing',
+    desc: 'You want to understand what we do before committing to anything.',
+    responseChannel:
+      'We send a written capability summary for your route, then offer a 30-minute call.',
+  },
+  {
+    id: 'sensitive',
+    label: 'Sensitive matter',
+    desc: 'Your inquiry involves confidential, security or forensic dimensions.',
+    responseChannel:
+      'Acknowledged the same business day. We reply with secure-channel instructions before you send any detail.',
+  },
+] as const
+
+export type ContactPathId = (typeof contactPaths)[number]['id']
+
+/* ── Organisation facts ─────────────────────────────────────────────────
+   Every identifier here must be verified before publication. Fields that
+   are not yet verified are omitted rather than guessed — the review flagged
+   the placeholder 'CIN: Bangalore, India' as a credibility defect.
+   ──────────────────────────────────────────────────────────────────── */
+
+export const org = {
+  legalName: 'Six Jars Global (OPC) Private Limited',
+  address:
+    'Cumins Genesis, Flat D-411, Silver Cloud Layout, 2nd Main Rd, Horamavu, Bangalore — 560043',
+  phone: '+91 96329 88066',
+  phoneHref: '+919632988066',
+  email: 'info@sixjarsglobal.com',
+  gstin: '29ABUCS1730R1ZC',
+  /** Set once verified against the incorporation certificate, then it renders. */
+  cin: null as string | null,
+  linkedin: 'https://www.linkedin.com/company/six-jars-global',
+}
