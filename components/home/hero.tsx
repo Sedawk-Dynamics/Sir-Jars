@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import WebGLShader from '@/components/ui/web-gl-shader'
-import CapabilityOrbit from '@/components/capability-orbit'
+import OrbitHero from '@/components/home/orbit-hero'
+import { FlyingDoves } from '@/components/brand/dove'
 import { commitments } from '@/lib/content'
 
 /**
  * Hero: audience, outcome, operating advantage, one primary CTA.
  *
- * This is a server component and the copy is plain static markup — nothing in
- * the first screen waits on JavaScript, on the shader compiling, or on an
- * entrance animation. Motion enhances visible content; it never gates it.
+ * The banner is the jar orbit — six jars in continuous circular motion around
+ * a central dove, over a perspective grid and two soft colour blooms, with
+ * doves crossing the sky behind it. This replaced the WebGL wave shader: the
+ * shader was atmosphere with nothing to say, where the orbit carries the six
+ * capabilities and doubles as navigation.
+ *
+ * The section itself stays a server component and the copy is plain static
+ * markup — nothing in the first screen waits on JavaScript or on an entrance
+ * animation. Motion enhances visible content; it never gates it.
  */
 export default function Hero() {
   return (
@@ -17,17 +23,21 @@ export default function Hero() {
       className="on-dark relative overflow-hidden"
       style={{ background: 'var(--color-plum)' }}
     >
-      {/* Decorative shader canvas. Absent WebGL, the plum ground shows through. */}
-      <WebGLShader className="absolute inset-0 w-full h-full" />
+      {/* Decorative ground: colour blooms, then the perspective grid. */}
+      <div className="hero-bloom absolute inset-0" aria-hidden="true" />
+      <div className="hero-grid absolute inset-0" aria-hidden="true" />
+
+      {/* Doves crossing the scene, every few seconds. */}
+      <FlyingDoves />
 
       {/* Readability scrim: the headline column must clear AA contrast
-          regardless of where the shader's gold crests happen to land. */}
+          wherever the blooms happen to land. */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
           background:
-            'linear-gradient(100deg, rgba(43,7,21,0.90) 0%, rgba(43,7,21,0.74) 44%, rgba(43,7,21,0.24) 100%)',
+            'linear-gradient(100deg, rgba(43,7,21,0.92) 0%, rgba(43,7,21,0.72) 44%, rgba(43,7,21,0.18) 100%)',
         }}
       />
 
@@ -104,7 +114,8 @@ export default function Hero() {
             >
               Select a capability
             </p>
-            <CapabilityOrbit variant="dark" />
+            {/* Switch to jars="mixed" for the multi-colour jar set. */}
+            <OrbitHero jars="uniform" />
           </div>
         </div>
       </div>

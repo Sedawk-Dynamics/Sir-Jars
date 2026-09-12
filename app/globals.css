@@ -213,3 +213,108 @@ html {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Hero orbit — six jars in continuous circular motion, background doves
+   ───────────────────────────────────────────────────────────────────── */
+
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbit-spin-rev {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* The ring carries the jars around; each jar counter-rotates at the same
+   rate so it stays upright. Same duration on both, or the jars tumble. */
+.orbit-spin {
+  animation: orbit-spin 46s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.orbit-spin-rev {
+  animation: orbit-spin-rev 46s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* The outer dashed ring drifts the other way — depth, not a single flat spin. */
+.orbit-ring-dashed {
+  animation: orbit-spin-rev 120s linear infinite;
+}
+
+/* A jar drifting away from the pointer is not a control. Hover or focus
+   anywhere in the stage freezes the orbit so it can be used. */
+.orbit-stage:hover .orbit-spin,
+.orbit-stage:hover .orbit-spin-rev,
+.orbit-stage:focus-within .orbit-spin,
+.orbit-stage:focus-within .orbit-spin-rev {
+  animation-play-state: paused;
+}
+
+/* Centre hub — slow breathing glow behind the dove. */
+@keyframes orbit-core-pulse {
+  0%, 100% { box-shadow: 0 0 44px rgba(241,181,59,0.20), inset 0 0 28px rgba(241,181,59,0.10); }
+  50%      { box-shadow: 0 0 68px rgba(241,181,59,0.34), inset 0 0 34px rgba(241,181,59,0.16); }
+}
+.orbit-core {
+  background: radial-gradient(circle at 50% 42%, rgba(135,33,67,0.55), rgba(20,3,10,0.85));
+  border: 1px solid rgba(241,181,59,0.32);
+  animation: orbit-core-pulse 6s ease-in-out infinite;
+}
+
+/* Wing flap. Scaled on the wing group only, so the body holds still and the
+   motion reads as flight rather than the whole glyph pulsing. */
+@keyframes dove-flap {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.55); }
+}
+.dove-wings {
+  animation: dove-flap 0.9s ease-in-out infinite;
+}
+
+/* Background flight paths. Long, offset loops: the sky is never empty for
+   more than a couple of seconds and never crowded either. */
+@keyframes dove-cross-a {
+  0%       { transform: translate3d(-14vw, 26vh, 0) scale(0.9); opacity: 0; }
+  8%       { opacity: 1; }
+  82%      { opacity: 1; }
+  100%     { transform: translate3d(112vw, 4vh, 0) scale(1.12); opacity: 0; }
+}
+@keyframes dove-cross-b {
+  0%       { transform: translate3d(108vw, 8vh, 0) scaleX(-1) scale(0.8); opacity: 0; }
+  12%      { opacity: 1; }
+  78%      { opacity: 1; }
+  100%     { transform: translate3d(-12vw, 34vh, 0) scaleX(-1) scale(1); opacity: 0; }
+}
+.dove-flight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+.dove-flight--a {
+  animation: dove-cross-a 17s linear infinite;
+}
+.dove-flight--b {
+  animation: dove-cross-b 23s linear infinite 6s;
+}
+
+/* Futuristic ground for the hero: a faint perspective grid over deep plum,
+   with two soft colour blooms. Decorative, painted behind all hero content. */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(241,181,59,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(241,181,59,0.055) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 38%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 38%, #000 35%, transparent 100%);
+}
+.hero-bloom {
+  background:
+    radial-gradient(52rem 32rem at 78% 18%, rgba(135,33,67,0.55), transparent 62%),
+    radial-gradient(40rem 28rem at 8% 78%, rgba(112,13,44,0.5), transparent 62%),
+    radial-gradient(24rem 18rem at 68% 62%, rgba(241,181,59,0.12), transparent 66%);
+}
