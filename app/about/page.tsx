@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import PageHeader from '@/components/page-header'
 import ClosingCta from '@/components/home/closing-cta'
+import FounderSection from '@/components/founder-section'
 import { org } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -121,6 +122,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <FounderSection />
 
       <section
         className="on-dark py-16 lg:py-24"

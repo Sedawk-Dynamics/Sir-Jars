@@ -1,86 +1,75 @@
-/**
- * The dove, in the secular reading the brief asks for: body, head and two
- * swept wings, and deliberately no olive leaf. It keeps the silhouette the
- * logo concept is built on while staying legible to a non-Catholic audience,
- * which is the whole point of dropping the leaf.
- *
- * The wings sit in their own <g> so a flap can be animated on that group
- * alone — the body stays put, which is what makes the motion read as flight
- * rather than as the whole glyph pulsing.
- */
-export function Dove({
-  size = 40,
-  tone = 'currentColor',
-  className,
-  flap = false,
-}: {
-  size?: number
-  tone?: string
-  className?: string
-  /** Animate the wings. Ignored under prefers-reduced-motion (see globals.css). */
-  flap?: boolean
-}) {
-  return (
-    <svg
-      width={size}
-      height={(size * 48) / 64}
-      viewBox="0 0 64 48"
-      fill="none"
-      className={className}
-      aria-hidden="true"
-      focusable="false"
-    >
-      {/* Body, head and beak in one sweep — tail at the left, beak at the right. */}
-      <path
-        d="M6 33.5c8.5 4.2 21.5 3.8 31.5-3.2 4.8-3.4 8.2-7.8 9.8-11.8l8-1.6-7.6-3.1c-3-1.2-6.1 0-7.7 2.5C34.6 24 22.2 28.8 9 27.8Z"
-        fill={tone}
-      />
-      {/* Eye — punched out of the head so it reads at 28px. */}
-      <circle cx="46.6" cy="16.4" r="1.15" fill="var(--color-plum, #4B0D24)" />
+import Image from 'next/image'
 
-      <g
-        style={{ transformOrigin: '28px 29px' }}
-        className={flap ? 'dove-wings' : undefined}
-      >
-        {/* Upper wing */}
-        <path
-          d="M25.4 27.6c.9-8 4.9-16.6 12.2-23-4.1 9.3-5.6 17.6-4.4 25.1Z"
-          fill={tone}
-          fillOpacity="0.92"
-        />
-        {/* Lower wing */}
-        <path
-          d="M21.6 30.2c-1.9 4.3-6 9.2-12.1 13.4 6.1-2.8 11.2-6.4 14.8-10.6Z"
-          fill={tone}
-          fillOpacity="0.7"
-        />
-      </g>
-    </svg>
+/**
+ * Background flying doves — the brand's gold dove artwork, animated so it
+ * genuinely flaps.
+ *
+ * A still image cannot read as flight by squashing or bobbing it, because the
+ * wings never move relative to the body. So the one PNG is layered three
+ * times and clipped into body, left wing and right wing. The wings then swing
+ * down from their own shoulders (with foreshortening, as a wing does when it
+ * sweeps towards you) while the body lifts on each downstroke.
+ *
+ * Clip polygons are in percentages of the 1549×1400 artwork. Each wing's clip
+ * overlaps the body by a few pixels, so no seam opens up mid-stroke.
+ *
+ * Decorative and pointer-transparent. Under prefers-reduced-motion the
+ * animations collapse and the doves stay off-stage.
+ */
+
+export const DOVE_SRC = '/images/dove-gold.png'
+export const DOVE_W = 1549
+export const DOVE_H = 1400
+
+const CLIP_LEFT_WING = 'polygon(0 0, 50.1% 0, 50.1% 38.6%, 48.5% 45.7%, 44% 56.4%, 0 57.2%)'
+const CLIP_RIGHT_WING =
+  'polygon(59% 0, 100% 0, 100% 59.3%, 57.9% 57.5%, 56.9% 45.7%, 57.4% 40.4%, 61% 36.8%, 62.6% 36.1%, 59.4% 31.4%)'
+const CLIP_BODY =
+  'polygon(49% 0, 60% 0, 60.4% 31.4%, 63.6% 36.1%, 62% 36.8%, 58.4% 40.4%, 57.9% 45.7%, 58.9% 57.5%, 100% 59.3%, 100% 100%, 0 100%, 0 57.1%, 42.9% 56.4%, 47.5% 45.7%, 49.1% 38.6%)'
+
+function Layer({ clip, className, width }: { clip: string; className?: string; width: number }) {
+  return (
+    <Image
+      src={DOVE_SRC}
+      alt=""
+      width={DOVE_W}
+      height={DOVE_H}
+      sizes={`${width}px`}
+      className={`absolute inset-0 w-full h-full ${className ?? ''}`}
+      style={{ clipPath: clip, WebkitClipPath: clip }}
+    />
   )
 }
 
-/**
- * Background flight layer.
- *
- * Two doves cross the scene on long, offset loops so the sky is never empty
- * for more than a couple of seconds and never crowded either. Entirely
- * decorative and pointer-transparent; under prefers-reduced-motion the
- * animations collapse and the doves simply sit off-stage.
- */
+export function FlappingDove({ width, className }: { width: number; className?: string }) {
+  return (
+    <span
+      className={`dove-flap relative block dove-soft-glow ${className ?? ''}`}
+      style={{ width, aspectRatio: `${DOVE_W} / ${DOVE_H}` }}
+    >
+      <span className="dove-flap-body absolute inset-0 block">
+        <Layer clip={CLIP_BODY} width={width} />
+        <Layer clip={CLIP_LEFT_WING} width={width} className="dove-flap-wing--left" />
+        <Layer clip={CLIP_RIGHT_WING} width={width} className="dove-flap-wing--right" />
+      </span>
+    </span>
+  )
+}
+
 export function FlyingDoves({ className }: { className?: string }) {
   return (
     <div
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className ?? ''}`}
       aria-hidden="true"
     >
-      <div className="dove-flight dove-flight--a">
-        <Dove size={54} tone="rgba(241,181,59,0.30)" flap />
+      <div className="dove-flight dove-flight--a" style={{ opacity: 0.9 }}>
+        <FlappingDove width={140} />
       </div>
-      <div className="dove-flight dove-flight--b">
-        <Dove size={34} tone="rgba(252,251,248,0.18)" flap />
+      <div className="dove-flight dove-flight--b" style={{ opacity: 0.6 }}>
+        <FlappingDove width={90} className="dove-flap--slow" />
       </div>
     </div>
   )
 }
 
-export default Dove
+export default FlyingDoves

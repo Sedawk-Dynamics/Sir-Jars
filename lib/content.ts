@@ -559,3 +559,185 @@ export const org = {
   cin: null as string | null,
   linkedin: 'https://www.linkedin.com/company/six-jars-global',
 }
+
+/* ───────────────────────────────────────────────────────────────────────
+   Founder
+   ───────────────────────────────────────────────────────────────────── */
+
+export type FounderTab = {
+  id: string
+  label: string
+  /** Prose tabs render paragraphs; grid tabs render a labelled item grid. */
+  kind: 'prose' | 'grid'
+  body?: string[]
+  items?: { name: string; detail: string }[]
+}
+
+/**
+ * Six Jars Global is a One Person Company, so the founder is the accountable
+ * owner the whole site keeps promising. This block is what the About page
+ * renders.
+ *
+ * ⚠ PLACEHOLDER IDENTITY — name, role, photo, email, phone and LinkedIn below
+ * are stand-ins so the section is complete and reviewable. Replace all six
+ * before this ships; nothing else in the component needs touching.
+ */
+export const founder = {
+  name: 'Founder name',
+  role: 'Founder & Principal',
+  company: org.legalName,
+  location: 'Bangalore, India',
+  email: org.email,
+  phone: org.phone,
+  phoneHref: org.phoneHref,
+  linkedin: org.linkedin,
+  /** 4:5 portrait. Swap for the real headshot at 2x (min 720×900). */
+  photo: '/images/mission-editorial.png',
+  photoAlt: 'Portrait of the founder of Six Jars Global.',
+  /** Sits under the portrait as a pull-quote. */
+  quote:
+    'Mission-led work fails quietly — in the gap between what was promised and what can be proved. We close that gap in writing.',
+  /** Short credential chips shown beside the name. */
+  credentials: ['Catholic-sector fluency', 'Governed AI delivery', 'Evidence-first close'],
+  tabs: [
+    {
+      id: 'profile',
+      label: 'Profile',
+      kind: 'prose',
+      body: [
+        'Six Jars Global was founded to give Catholic and mission-led institutions one accountable partner across six connected disciplines — instead of six vendors, six invoices and no single owner when something goes wrong.',
+        'The operating model came out of a simple observation: mission-led organizations rarely lack effort. They lack a documented path from brief to evidence, and a named person answerable at every gate along it.',
+      ],
+    },
+    {
+      id: 'expertise',
+      label: 'Expertise',
+      kind: 'grid',
+      items: [
+        {
+          name: 'Governed delivery',
+          detail: 'Scope, authorisation and close-out evidence defined before work starts.',
+        },
+        {
+          name: 'AI with human review',
+          detail: 'Automation assists; named people hold review, approval and exceptions.',
+        },
+        {
+          name: 'Institutional publishing',
+          detail: 'Editorial standards and institutional voice held across print and digital.',
+        },
+        {
+          name: 'Security & forensics',
+          detail: 'Authorisation-first evidence handling under documented chain of custody.',
+        },
+      ],
+    },
+    {
+      id: 'sectors',
+      label: 'Sectors',
+      kind: 'grid',
+      items: [
+        {
+          name: 'Dioceses & parishes',
+          detail: 'Communications, records and digital platform operations.',
+        },
+        {
+          name: 'Religious congregations',
+          detail: 'Archives, publishing and institutional memory.',
+        },
+        {
+          name: 'Catholic education',
+          detail: 'Schools and colleges — platforms, content and data governance.',
+        },
+        {
+          name: 'Healthcare & social mission',
+          detail: 'Sensitive data handling and operational resilience.',
+        },
+        {
+          name: 'Mission-led nonprofits',
+          detail: 'Campaign operations, reporting and donor-facing content.',
+        },
+      ],
+    },
+  ] satisfies FounderTab[],
+}
+
+/* ───────────────────────────────────────────────────────────────────────
+   Gallery
+   ───────────────────────────────────────────────────────────────────── */
+
+export type GalleryItem = {
+  slug: string
+  title: string
+  caption: string
+  /** Must match a GALLERY_CATEGORIES entry. */
+  category: string
+  src: string
+  alt: string
+  /** Drives the masonry span — 'tall' items take two rows. */
+  shape?: 'wide' | 'tall' | 'square'
+}
+
+export const galleryCategories = [
+  'Publishing',
+  'Media',
+  'Digital + AI',
+  'Cybersecurity',
+  'Place',
+] as const
+
+/**
+ * Gallery source of truth. Everything on /gallery is derived from here, so a
+ * tile cannot exist without a real image, a category and an alt text behind it.
+ *
+ * ⚠ These five reuse existing site imagery so the page is complete and
+ * reviewable. Drop real engagement and studio photography into /public/images
+ * and extend this array — no component changes needed.
+ */
+export const galleryItems: GalleryItem[] = [
+  {
+    slug: 'publishing-floor',
+    title: 'Publishing operations',
+    caption: 'Proof gates and version history, held by a named editor at every stage.',
+    category: 'Publishing',
+    src: '/images/publishing-ops.png',
+    alt: 'Editorial production work in progress across print and digital proofs.',
+    shape: 'tall',
+  },
+  {
+    slug: 'editorial-desk',
+    title: 'Editorial desk',
+    caption: 'Institutional voice held across every channel a story travels through.',
+    category: 'Media',
+    src: '/images/insights-editorial.png',
+    alt: 'An editorial desk with manuscripts and reference material laid out.',
+    shape: 'wide',
+  },
+  {
+    slug: 'security-operations',
+    title: 'Security operations',
+    caption: 'Authorisation-first response, logged under chain of custody.',
+    category: 'Cybersecurity',
+    src: '/images/cybersecurity-ops.png',
+    alt: 'A security operations workspace with monitoring displays.',
+    shape: 'wide',
+  },
+  {
+    slug: 'mission-work',
+    title: 'Mission work',
+    caption: 'The institutions the six capabilities exist to serve.',
+    category: 'Digital + AI',
+    src: '/images/mission-editorial.png',
+    alt: 'Mission-led institutional work being carried out.',
+    shape: 'square',
+  },
+  {
+    slug: 'bangalore-hub',
+    title: 'The Bangalore hub',
+    caption: 'Where coordination across all six capabilities is run from.',
+    category: 'Place',
+    src: '/images/about-bangalore.png',
+    alt: 'Bangalore, where the Six Jars Global coordination hub is based.',
+    shape: 'tall',
+  },
+]

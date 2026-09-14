@@ -1,17 +1,16 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import OrbitHero from '@/components/home/orbit-hero'
+import { ArrowRight, ShieldCheck } from 'lucide-react'
+import JarConstellation from '@/components/home/jar-constellation'
 import { FlyingDoves } from '@/components/brand/dove'
 import { commitments } from '@/lib/content'
 
 /**
  * Hero: audience, outcome, operating advantage, one primary CTA.
  *
- * The banner is the jar orbit — six jars in continuous circular motion around
- * a central dove, over a perspective grid and two soft colour blooms, with
- * doves crossing the sky behind it. This replaced the WebGL wave shader: the
- * shader was atmosphere with nothing to say, where the orbit carries the six
- * capabilities and doubles as navigation.
+ * The banner is the founder's sketch made real: the golden dove at the centre,
+ * six wobbling jars joined to it, over a perspective grid and soft colour
+ * blooms, with doves crossing the sky behind. Every jar links to its
+ * capability, so the picture doubles as navigation.
  *
  * The section itself stays a server component and the copy is plain static
  * markup — nothing in the first screen waits on JavaScript or on an entrance
@@ -42,7 +41,7 @@ export default function Hero() {
       />
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-14 pb-16 lg:pt-24 lg:pb-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-10 lg:gap-12 items-center">
           <div>
             <p
               className="inline-flex items-center gap-3 text-[11px] sm:text-xs font-bold tracking-[0.18em] uppercase"
@@ -58,7 +57,7 @@ export default function Hero() {
 
             <h1
               className="mt-6 font-extrabold tracking-tight leading-[1.05]"
-              style={{ fontSize: 'clamp(2.5rem, 6.5vw, 4.5rem)' }}
+              style={{ fontSize: 'clamp(2.5rem, 4.6vw, 4rem)' }}
             >
               <span style={{ color: 'var(--color-ivory)' }}>Mission-critical work.</span>
               <br />
@@ -105,17 +104,33 @@ export default function Hero() {
                 Explore six capabilities
               </Link>
             </div>
+
+            <p
+              className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm"
+              style={{ color: 'rgba(252,251,248,0.66)' }}
+            >
+              <ShieldCheck size={16} aria-hidden="true" style={{ color: 'var(--color-gold)' }} />
+              Sensitive matter?{' '}
+              <Link
+                href="/contact?path=sensitive"
+                className="font-semibold underline underline-offset-4"
+                style={{ color: 'var(--color-gold)' }}
+              >
+                Get secure-channel guidance first
+              </Link>
+            </p>
           </div>
 
           <div>
+            {/* jars="logo" — each jar in its own logo colour (option 2).
+                jars="uniform" — every jar in the logo gold (option 1). */}
+            <JarConstellation jars="logo" />
             <p
-              className="text-center text-xs font-bold tracking-[0.18em] uppercase mb-5"
+              className="mt-2 text-center text-xs font-bold tracking-[0.18em] uppercase"
               style={{ color: 'rgba(252,251,248,0.55)' }}
             >
-              Select a capability
+              Select a jar to explore a capability
             </p>
-            {/* Switch to jars="mixed" for the multi-colour jar set. */}
-            <OrbitHero jars="uniform" />
           </div>
         </div>
       </div>

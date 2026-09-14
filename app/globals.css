@@ -215,79 +215,152 @@ html {
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   Hero orbit — six jars in continuous circular motion, background doves
+   Hero — the golden dove and six wobbling jars
    ───────────────────────────────────────────────────────────────────── */
 
-@keyframes orbit-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+/* Jars rock on their foot. Starts and ends upright, so reduced-motion users
+   (whose animations collapse to the final frame) see a level jar. */
+@keyframes jar-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-5deg); }
+  75%      { transform: rotate(5deg); }
 }
-@keyframes orbit-spin-rev {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
-}
-
-/* The ring carries the jars around; each jar counter-rotates at the same
-   rate so it stays upright. Same duration on both, or the jars tumble. */
-.orbit-spin {
-  animation: orbit-spin 46s linear infinite;
-  transform-origin: 50% 50%;
-  will-change: transform;
-}
-.orbit-spin-rev {
-  animation: orbit-spin-rev 46s linear infinite;
-  transform-origin: 50% 50%;
+.jar-wobble {
+  transform-origin: 50% 96%;
+  animation: jar-wobble 3.2s ease-in-out infinite;
   will-change: transform;
 }
 
-/* The outer dashed ring drifts the other way — depth, not a single flat spin. */
-.orbit-ring-dashed {
-  animation: orbit-spin-rev 120s linear infinite;
+/* The ground shadow shifts under the rock, which is what sells the weight. */
+@keyframes jar-shadow {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.9; }
+  25%      { transform: translateX(-56%) scaleX(0.88); opacity: 0.7; }
+  75%      { transform: translateX(-44%) scaleX(0.88); opacity: 0.7; }
+}
+.jar-shadow {
+  animation: jar-shadow 3.2s ease-in-out infinite;
 }
 
-/* A jar drifting away from the pointer is not a control. Hover or focus
-   anywhere in the stage freezes the orbit so it can be used. */
-.orbit-stage:hover .orbit-spin,
-.orbit-stage:hover .orbit-spin-rev,
-.orbit-stage:focus-within .orbit-spin,
-.orbit-stage:focus-within .orbit-spin-rev {
+/* A jar is a link: reaching for it steadies it and lifts it into the light. */
+.jar-lift {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), filter 0.35s ease;
+}
+.jar-link:hover .jar-wobble,
+.jar-link:focus-visible .jar-wobble,
+.jar-link:hover .jar-shadow,
+.jar-link:focus-visible .jar-shadow {
+  animation-play-state: paused;
+}
+.jar-link:hover .jar-lift,
+.jar-link:focus-visible .jar-lift {
+  transform: translateY(-8px) scale(1.07);
+  filter: drop-shadow(0 0 18px rgba(241,181,59,0.55));
+}
+
+/* The ring of jars orbits the dove. Jars counter-rotate at the same rate so
+   they stay upright — same duration on both, or they tumble. */
+@keyframes jar-orbit {
+  to { transform: rotate(360deg); }
+}
+@keyframes jar-orbit-counter {
+  to { transform: rotate(-360deg); }
+}
+.jar-orbit {
+  animation: jar-orbit 60s linear infinite;
+  will-change: transform;
+}
+.jar-orbit-counter {
+  animation: jar-orbit-counter 60s linear infinite;
+  will-change: transform;
+}
+/* A jar sliding away from the pointer is not a link. Reaching into the scene
+   holds the orbit still until the pointer or focus leaves. */
+.jar-scene:hover .jar-orbit,
+.jar-scene:hover .jar-orbit-counter,
+.jar-scene:focus-within .jar-orbit,
+.jar-scene:focus-within .jar-orbit-counter {
   animation-play-state: paused;
 }
 
-/* Centre hub — slow breathing glow behind the dove. */
-@keyframes orbit-core-pulse {
-  0%, 100% { box-shadow: 0 0 44px rgba(241,181,59,0.20), inset 0 0 28px rgba(241,181,59,0.10); }
-  50%      { box-shadow: 0 0 68px rgba(241,181,59,0.34), inset 0 0 34px rgba(241,181,59,0.16); }
+/* The dove hovers in place. */
+@keyframes dove-hover {
+  0%, 100% { transform: translate(-50%, -52%); }
+  50%      { transform: translate(-50%, -47%); }
 }
-.orbit-core {
-  background: radial-gradient(circle at 50% 42%, rgba(135,33,67,0.55), rgba(20,3,10,0.85));
-  border: 1px solid rgba(241,181,59,0.32);
-  animation: orbit-core-pulse 6s ease-in-out infinite;
+.dove-hover {
+  transform: translate(-50%, -50%);
+  animation: dove-hover 5.5s ease-in-out infinite;
+}
+.dove-glow {
+  filter: drop-shadow(0 0 26px rgba(241,181,59,0.45)) drop-shadow(0 8px 30px rgba(20,3,10,0.5));
 }
 
-/* Wing flap. Scaled on the wing group only, so the body holds still and the
-   motion reads as flight rather than the whole glyph pulsing. */
-@keyframes dove-flap {
-  0%, 100% { transform: scaleY(1); }
-  50%      { transform: scaleY(0.55); }
+/* Background dove wingbeat. The artwork's wings are raised; each wing swings
+   down from its own shoulder and foreshortens (scaleY) as it sweeps towards
+   the viewer, then snaps back up. The body lifts on the downstroke — the
+   push — and sinks as the wings recover. */
+.dove-flap-wing--left,
+.dove-flap-wing--right,
+.dove-flap-body {
+  animation-duration: 0.62s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.3, 1);
 }
-.dove-wings {
-  animation: dove-flap 0.9s ease-in-out infinite;
+.dove-flap-wing--left {
+  transform-origin: 47.5% 44%; /* left shoulder */
+  animation-name: dove-wing-left;
+}
+.dove-flap-wing--right {
+  transform-origin: 58.2% 44%; /* right shoulder */
+  animation-name: dove-wing-right;
+}
+.dove-flap-body {
+  animation-name: dove-body-lift;
+}
+@keyframes dove-wing-left {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  50%      { transform: rotate(-50deg) scaleY(0.5); }
+}
+@keyframes dove-wing-right {
+  0%, 100% { transform: rotate(0deg) scaleY(1); }
+  50%      { transform: rotate(50deg) scaleY(0.5); }
+}
+@keyframes dove-body-lift {
+  0%, 100% { transform: translateY(4%); }
+  50%      { transform: translateY(-5%); }
+}
+/* The smaller, farther dove beats a little slower. */
+.dove-flap--slow .dove-flap-wing--left,
+.dove-flap--slow .dove-flap-wing--right,
+.dove-flap--slow .dove-flap-body {
+  animation-duration: 0.8s;
+}
+
+.dove-soft-glow {
+  filter: drop-shadow(0 0 10px rgba(241,181,59,0.35)) drop-shadow(0 6px 10px rgba(20,3,10,0.35));
+}
+
+/* Light travelling outward along each line, dove to jar. */
+@keyframes jar-line-flow {
+  to { stroke-dashoffset: -60; }
+}
+.jar-line-flow {
+  animation: jar-line-flow 1.6s linear infinite;
 }
 
 /* Background flight paths. Long, offset loops: the sky is never empty for
-   more than a couple of seconds and never crowded either. */
+   more than a few seconds and never crowded either. */
 @keyframes dove-cross-a {
-  0%       { transform: translate3d(-14vw, 26vh, 0) scale(0.9); opacity: 0; }
-  8%       { opacity: 1; }
-  82%      { opacity: 1; }
-  100%     { transform: translate3d(112vw, 4vh, 0) scale(1.12); opacity: 0; }
+  0%   { transform: translate3d(-14vw, 26vh, 0) scale(0.9); opacity: 0; }
+  8%   { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { transform: translate3d(112vw, 4vh, 0) scale(1.12); opacity: 0; }
 }
 @keyframes dove-cross-b {
-  0%       { transform: translate3d(108vw, 8vh, 0) scaleX(-1) scale(0.8); opacity: 0; }
-  12%      { opacity: 1; }
-  78%      { opacity: 1; }
-  100%     { transform: translate3d(-12vw, 34vh, 0) scaleX(-1) scale(1); opacity: 0; }
+  0%   { transform: translate3d(108vw, 8vh, 0) scaleX(-1) scale(0.8); opacity: 0; }
+  12%  { opacity: 1; }
+  78%  { opacity: 1; }
+  100% { transform: translate3d(-12vw, 34vh, 0) scaleX(-1) scale(1); opacity: 0; }
 }
 .dove-flight {
   position: absolute;
@@ -295,15 +368,11 @@ html {
   left: 0;
   will-change: transform, opacity;
 }
-.dove-flight--a {
-  animation: dove-cross-a 17s linear infinite;
-}
-.dove-flight--b {
-  animation: dove-cross-b 23s linear infinite 6s;
-}
+.dove-flight--a { animation: dove-cross-a 17s linear infinite; }
+.dove-flight--b { animation: dove-cross-b 23s linear infinite 6s; }
 
-/* Futuristic ground for the hero: a faint perspective grid over deep plum,
-   with two soft colour blooms. Decorative, painted behind all hero content. */
+/* Futuristic ground: a faint perspective grid over deep plum, with soft
+   colour blooms. Decorative, painted behind all hero content. */
 .hero-grid {
   background-image:
     linear-gradient(rgba(241,181,59,0.055) 1px, transparent 1px),
@@ -317,4 +386,46 @@ html {
     radial-gradient(52rem 32rem at 78% 18%, rgba(135,33,67,0.55), transparent 62%),
     radial-gradient(40rem 28rem at 8% 78%, rgba(112,13,44,0.5), transparent 62%),
     radial-gradient(24rem 18rem at 68% 62%, rgba(241,181,59,0.12), transparent 66%);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Founder tabs + gallery
+   ───────────────────────────────────────────────────────────────────── */
+
+/* Panels swap in place. The transform is tiny on purpose — a big slide on a
+   tab change reads as a page navigation, which this is not. */
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.founder-panel:not([hidden]) {
+  animation: panel-in 0.28s ease-out;
+}
+
+/* Gallery tiles lift and warm on hover; the image itself scales inside the
+   fixed frame so the grid never reflows. */
+.gallery-tile img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gallery-tile:hover img,
+.gallery-tile:focus-visible img {
+  transform: scale(1.06);
+}
+.gallery-tile .gallery-caption {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.gallery-tile:hover .gallery-caption,
+.gallery-tile:focus-visible .gallery-caption,
+.gallery-tile:focus-within .gallery-caption {
+  transform: none;
+  opacity: 1;
+}
+/* Touch has no hover — the caption is simply always shown there. */
+@media (hover: none) {
+  .gallery-tile .gallery-caption {
+    transform: none;
+    opacity: 1;
+  }
 }
