@@ -45,7 +45,7 @@ const UNIFORM_GLAZE: [string, string] = ['#FBD983', '#C98B18']
  * forensics. Every jar sits on one true circle, so the orbit is a clean
  * rotation rather than jars drifting in and out.
  */
-const RING_RADIUS = 37 // percent of the scene, from centre
+const RING_RADIUS = 35 // percent of the scene, from centre
 
 const LAYOUT: Record<string, { slot: number; label: [string, string?] }> = {
   publishing: { slot: 0, label: ['Publishing'] },
@@ -148,7 +148,7 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
               style={{
                 left: `${j.x}%`,
                 top: `${j.y}%`,
-                width: 'clamp(62px, 18.5%, 118px)',
+                width: 'clamp(56px, 16.5%, 106px)',
                 transform: 'translate(-50%, -50%)',
               }}
             >
@@ -162,7 +162,7 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
                 {/* Ground shadow squashes as the jar rocks. */}
                 <span
                   aria-hidden="true"
-                  className="jar-shadow absolute left-1/2 -bottom-[6%] w-[70%] h-[9%] rounded-[50%]"
+                  className="jar-shadow absolute left-1/2 -bottom-[3%] w-[62%] h-[6%] rounded-[50%]"
                   style={{
                     background: 'radial-gradient(closest-side, rgba(10,1,5,0.65), transparent)',
                     animationDuration: `${3 + (j.i % 3) * 0.45}s`,
@@ -182,16 +182,16 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
                       id={`jar-${j.slug}`}
                       top={top}
                       bottom={bottom}
-                      className="block w-full h-auto drop-shadow-[0_10px_18px_rgba(10,1,5,0.45)]"
+                      className="block w-full h-auto jar-halo"
                     />
                     {/* Label on the belly, set in HTML so it stays crisp and
                         legible at every size the jar renders at. */}
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-[10%] top-[47%] bottom-[16%] flex flex-col items-center justify-center text-center font-bold leading-[1.1] tracking-tight"
+                      className="absolute inset-x-[6%] top-[38%] bottom-[20%] flex flex-col items-center justify-center text-center font-bold leading-[1.1] tracking-tight"
                       style={{
                         color: ink,
-                        fontSize: 'clamp(8.5px, 1.35vw, 13px)',
+                        fontSize: 'clamp(8.5px, 1.3vw, 13px)',
                         textShadow:
                           jars === 'uniform' ? 'none' : '0 1px 3px rgba(20,3,10,0.6)',
                       }}
@@ -209,9 +209,10 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
       </ul>
       </div>
 
-      {/* The golden dove — fixed at the centre, above the ring. */}
+      {/* The golden dove — fixed at the centre, above the ring. Sized so the
+          six jars share the stage with it rather than orbiting a centrepiece. */}
       <div
-        className="dove-hover absolute left-1/2 top-1/2 w-[62%]"
+        className="dove-hover absolute left-1/2 top-1/2 w-[44%]"
         aria-hidden="true"
       >
         <div className="dove-glow">
@@ -222,7 +223,7 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
             width={1549}
             height={1400}
             priority
-            sizes="(max-width: 1024px) 60vw, 340px"
+            sizes="(max-width: 1024px) 44vw, 280px"
             className="block w-full h-auto"
           />
         </div>

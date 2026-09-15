@@ -291,6 +291,12 @@ html {
   transform: translate(-50%, -50%);
   animation: dove-hover 5.5s ease-in-out infinite;
 }
+/* Borderless jars on a dark ground: a faint warm halo keeps each silhouette
+   distinct without drawing an outline. */
+.jar-halo {
+  filter: drop-shadow(0 0 12px rgba(241,181,59,0.16)) drop-shadow(0 10px 16px rgba(10,1,5,0.5));
+}
+
 .dove-glow {
   filter: drop-shadow(0 0 26px rgba(241,181,59,0.45)) drop-shadow(0 8px 30px rgba(20,3,10,0.5));
 }
@@ -302,7 +308,7 @@ html {
 .dove-flap-wing--left,
 .dove-flap-wing--right,
 .dove-flap-body {
-  animation-duration: 0.62s;
+  animation-duration: 0.95s;
   animation-iteration-count: infinite;
   animation-timing-function: cubic-bezier(0.45, 0, 0.3, 1);
 }
@@ -333,7 +339,7 @@ html {
 .dove-flap--slow .dove-flap-wing--left,
 .dove-flap--slow .dove-flap-wing--right,
 .dove-flap--slow .dove-flap-body {
-  animation-duration: 0.8s;
+  animation-duration: 1.15s;
 }
 
 .dove-soft-glow {
@@ -348,28 +354,27 @@ html {
   animation: jar-line-flow 1.6s linear infinite;
 }
 
-/* Background flight paths. Long, offset loops: the sky is never empty for
-   more than a few seconds and never crowded either. */
-@keyframes dove-cross-a {
-  0%   { transform: translate3d(-14vw, 26vh, 0) scale(0.9); opacity: 0; }
-  8%   { opacity: 1; }
-  82%  { opacity: 1; }
-  100% { transform: translate3d(112vw, 4vh, 0) scale(1.12); opacity: 0; }
-}
-@keyframes dove-cross-b {
-  0%   { transform: translate3d(108vw, 8vh, 0) scaleX(-1) scale(0.8); opacity: 0; }
-  12%  { opacity: 1; }
-  78%  { opacity: 1; }
-  100% { transform: translate3d(-12vw, 34vh, 0) scaleX(-1) scale(1); opacity: 0; }
+/* Background flight paths. Both doves fly the same way, in their own
+   altitude bands, on one shared 34s loop offset by half a cycle — so only one
+   is ever on screen and their paths can never cross. Each crossing takes
+   ~17s at a constant, unhurried speed with a gentle rise and fall. */
+@keyframes dove-cross {
+  0%        { transform: translate3d(-14vw, 0, 0) scale(0.94); opacity: 0; }
+  4%        { opacity: 1; }
+  15%       { transform: translate3d(22vw, -1.5vh, 0) scale(0.98); }
+  32%       { transform: translate3d(70vw, 1.2vh, 0) scale(1.02); }
+  46%       { opacity: 1; }
+  50%       { transform: translate3d(114vw, -1vh, 0) scale(1.05); opacity: 0; }
+  50.01%, 100% { transform: translate3d(114vw, -1vh, 0); opacity: 0; }
 }
 .dove-flight {
   position: absolute;
-  top: 0;
   left: 0;
   will-change: transform, opacity;
+  animation: dove-cross 34s linear infinite;
 }
-.dove-flight--a { animation: dove-cross-a 17s linear infinite; }
-.dove-flight--b { animation: dove-cross-b 23s linear infinite 6s; }
+.dove-flight--a { top: 5%; }
+.dove-flight--b { top: 15%; animation-delay: 17s; opacity: 0; }
 
 /* Futuristic ground: a faint perspective grid over deep plum, with soft
    colour blooms. Decorative, painted behind all hero content. */

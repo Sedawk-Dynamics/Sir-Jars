@@ -41,11 +41,21 @@ function Layer({ clip, className, width }: { clip: string; className?: string; w
   )
 }
 
-export function FlappingDove({ width, className }: { width: number; className?: string }) {
+export function FlappingDove({
+  width,
+  intensity = 1,
+  className,
+}: {
+  width: number
+  /** Final opacity. Set here, not on the flight wrapper, whose opacity the
+      flight animation owns for its fade in and out. */
+  intensity?: number
+  className?: string
+}) {
   return (
     <span
       className={`dove-flap relative block dove-soft-glow ${className ?? ''}`}
-      style={{ width, aspectRatio: `${DOVE_W} / ${DOVE_H}` }}
+      style={{ width, aspectRatio: `${DOVE_W} / ${DOVE_H}`, opacity: intensity }}
     >
       <span className="dove-flap-body absolute inset-0 block">
         <Layer clip={CLIP_BODY} width={width} />
@@ -62,11 +72,13 @@ export function FlyingDoves({ className }: { className?: string }) {
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className ?? ''}`}
       aria-hidden="true"
     >
-      <div className="dove-flight dove-flight--a" style={{ opacity: 0.9 }}>
-        <FlappingDove width={140} />
+      {/* Same direction, separate altitude bands, half a loop apart — the two
+          are never on screen together, so they cannot cross. */}
+      <div className="dove-flight dove-flight--a">
+        <FlappingDove width={130} intensity={0.9} />
       </div>
-      <div className="dove-flight dove-flight--b" style={{ opacity: 0.6 }}>
-        <FlappingDove width={90} className="dove-flap--slow" />
+      <div className="dove-flight dove-flight--b">
+        <FlappingDove width={92} intensity={0.65} className="dove-flap--slow" />
       </div>
     </div>
   )

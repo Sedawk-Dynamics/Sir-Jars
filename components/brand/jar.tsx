@@ -1,16 +1,16 @@
 /**
- * One jar, in the logo's amphora silhouette: flared lip, narrow neck, broad
- * shoulders, a belly that tapers to a small foot.
- *
- * Lit like glazed ceramic — a vertical colour gradient, a soft gloss streak on
- * the left of the belly, a gold rim at the lip and a thin gold outline so the
- * darker logo colours still separate from a dark plum ground.
+ * One jar, drawn as the jars in the logo are: a tall, slender vase with a
+ * small flared lip, a narrow neck, broad rounded shoulders and a long taper
+ * to a small foot — and no outline, rim or band. The form is carried by the
+ * glaze alone: a smooth gradient with soft side shading for roundness.
  */
 
+export const JAR_VIEWBOX = { w: 100, h: 190 }
+
 export const JAR_PATH =
-  'M36 6H84Q86 6 86 9Q86 13 80 15Q74 18 74 28Q74 40 92 52Q112 66 110 96' +
-  'Q108 128 86 150L84 154H36L34 150Q12 128 10 96Q8 66 28 52Q46 40 46 28' +
-  'Q46 18 40 15Q34 13 34 9Q34 6 36 6Z'
+  'M36 4H64Q67 4 66 8Q64 14 60 17Q57 22 60 30Q66 38 80 48Q98 62 97 92' +
+  'Q96 130 80 168L76 184H24L20 168Q4 130 3 92Q2 62 20 48Q34 38 40 30' +
+  'Q43 22 40 17Q36 14 34 8Q33 4 36 4Z'
 
 export default function Jar({
   id,
@@ -26,50 +26,28 @@ export default function Jar({
 }) {
   return (
     <svg
-      viewBox="0 0 120 160"
+      viewBox={`0 0 ${JAR_VIEWBOX.w} ${JAR_VIEWBOX.h}`}
       className={className}
       aria-hidden="true"
       focusable="false"
-      style={{ overflow: 'visible' }}
     >
       <defs>
-        <linearGradient id={`${id}-glaze`} x1="0" y1="0" x2="0.35" y2="1">
+        {/* The logo's glaze: lighter at the shoulder, deepening to the foot. */}
+        <linearGradient id={`${id}-glaze`} x1="0.2" y1="0" x2="0.55" y2="1">
           <stop offset="0" stopColor={top} />
           <stop offset="1" stopColor={bottom} />
         </linearGradient>
-        <radialGradient id={`${id}-gloss`} cx="0.3" cy="0.55" r="0.5">
-          <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.32" />
-          <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
-        </radialGradient>
+        {/* Soft side shading — rounds the body without drawing an edge. */}
+        <linearGradient id={`${id}-round`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#000000" stopOpacity="0.22" />
+          <stop offset="0.38" stopColor="#FFFFFF" stopOpacity="0.1" />
+          <stop offset="0.62" stopColor="#FFFFFF" stopOpacity="0" />
+          <stop offset="1" stopColor="#000000" stopOpacity="0.28" />
+        </linearGradient>
       </defs>
 
-      <path
-        d={JAR_PATH}
-        fill={`url(#${id}-glaze)`}
-        stroke="rgba(241,181,59,0.62)"
-        strokeWidth="1.6"
-        vectorEffect="non-scaling-stroke"
-      />
-      {/* Gloss across the left of the belly. */}
-      <path d={JAR_PATH} fill={`url(#${id}-gloss)`} />
-      <ellipse
-        cx="33"
-        cy="92"
-        rx="5"
-        ry="24"
-        fill="#FFFFFF"
-        fillOpacity="0.16"
-        transform="rotate(12 33 92)"
-      />
-      {/* Gold rim at the lip and a band at the shoulder. */}
-      <path d="M36 7H84" stroke="#F1B53B" strokeWidth="2.4" strokeLinecap="round" />
-      <path
-        d="M24 57Q60 66 96 57"
-        stroke="#F1B53B"
-        strokeOpacity="0.55"
-        strokeWidth="1.4"
-        fill="none"
-      />
+      <path d={JAR_PATH} fill={`url(#${id}-glaze)`} />
+      <path d={JAR_PATH} fill={`url(#${id}-round)`} />
     </svg>
   )
 }

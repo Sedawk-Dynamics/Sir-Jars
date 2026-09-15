@@ -68,9 +68,10 @@ export default function Hero() {
               className="mt-6 text-base sm:text-lg leading-relaxed max-w-xl"
               style={{ color: 'rgba(252,251,248,0.78)' }}
             >
-              Six Jars connects publishing, media, digital, data, cybersecurity and
-              forensics — so your organization can move faster without losing judgment,
-              discretion or control.
+              Six connected capabilities — publishing, media, digital + AI, data
+              operations, cybersecurity and digital forensics — coordinated by one
+              accountable partner, so your organization can move faster without losing
+              judgment, discretion or control.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -129,7 +130,13 @@ export default function Hero() {
               className="mt-2 text-center text-xs font-bold tracking-[0.18em] uppercase"
               style={{ color: 'rgba(252,251,248,0.55)' }}
             >
-              Select a jar to explore a capability
+              Six jars · six connected capabilities
+            </p>
+            <p
+              className="mt-1.5 text-center text-xs"
+              style={{ color: 'rgba(252,251,248,0.5)' }}
+            >
+              Hover to pause the orbit — select any jar to explore that capability.
             </p>
           </div>
         </div>
