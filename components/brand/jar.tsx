@@ -1,16 +1,18 @@
 /**
- * One jar, drawn as the jars in the logo are: a tall, slender vase with a
- * small flared lip, a narrow neck, broad rounded shoulders and a long taper
- * to a small foot — and no outline, rim or band. The form is carried by the
- * glaze alone: a smooth gradient with soft side shading for roundness.
+ * One jar, matching the reference artwork: a wide, rounded pot with a flat
+ * flared lip, a short neck, a full belly and a small foot — no outline, no
+ * rim, no band. The form is carried by the glaze alone: a smooth gradient
+ * with soft side shading for roundness.
+ *
+ * The belly is left clear for the capability's icon and name, which the
+ * scene lays over it in HTML so the type stays crisp at any size.
  */
 
-export const JAR_VIEWBOX = { w: 100, h: 190 }
+export const JAR_VIEWBOX = { w: 120, h: 138 }
 
 export const JAR_PATH =
-  'M36 4H64Q67 4 66 8Q64 14 60 17Q57 22 60 30Q66 38 80 48Q98 62 97 92' +
-  'Q96 130 80 168L76 184H24L20 168Q4 130 3 92Q2 62 20 48Q34 38 40 30' +
-  'Q43 22 40 17Q36 14 34 8Q33 4 36 4Z'
+  'M40 6H80Q84 6 84 10Q84 15 78 17Q76 22 82 28Q104 40 110 68Q114 100 92 124' +
+  'L88 132H32L28 124Q6 100 10 68Q16 40 38 28Q44 22 42 17Q36 15 36 10Q36 6 40 6Z'
 
 export default function Jar({
   id,
@@ -39,10 +41,10 @@ export default function Jar({
         </linearGradient>
         {/* Soft side shading — rounds the body without drawing an edge. */}
         <linearGradient id={`${id}-round`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#000000" stopOpacity="0.22" />
-          <stop offset="0.38" stopColor="#FFFFFF" stopOpacity="0.1" />
-          <stop offset="0.62" stopColor="#FFFFFF" stopOpacity="0" />
-          <stop offset="1" stopColor="#000000" stopOpacity="0.28" />
+          <stop offset="0" stopColor="#000000" stopOpacity="0.24" />
+          <stop offset="0.36" stopColor="#FFFFFF" stopOpacity="0.1" />
+          <stop offset="0.64" stopColor="#FFFFFF" stopOpacity="0" />
+          <stop offset="1" stopColor="#000000" stopOpacity="0.3" />
         </linearGradient>
       </defs>
 

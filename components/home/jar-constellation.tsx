@@ -1,4 +1,12 @@
 import Link from 'next/link'
+import {
+  BookOpen,
+  Clapperboard,
+  Database,
+  Fingerprint,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react'
 import Jar from '@/components/brand/jar'
 import Image from 'next/image'
 import { capabilities } from '@/lib/content'
@@ -47,13 +55,16 @@ const UNIFORM_GLAZE: [string, string] = ['#FBD983', '#C98B18']
  */
 const RING_RADIUS = 35 // percent of the scene, from centre
 
-const LAYOUT: Record<string, { slot: number; label: [string, string?] }> = {
-  publishing: { slot: 0, label: ['Publishing'] },
-  media: { slot: 1, label: ['Media'] },
-  'digital-ai': { slot: 2, label: ['Digital', '+ AI'] },
-  'data-operations': { slot: 3, label: ['Data', 'Operations'] },
-  cybersecurity: { slot: 4, label: ['Cyber', 'Security'] },
-  'digital-forensics': { slot: 5, label: ['Digital', 'Forensics'] },
+const LAYOUT: Record<
+  string,
+  { slot: number; label: string; Icon: typeof BookOpen }
+> = {
+  publishing: { slot: 0, label: 'Publishing & Print Operations', Icon: BookOpen },
+  media: { slot: 1, label: 'Media', Icon: Clapperboard },
+  'digital-ai': { slot: 2, label: 'Digital + AI', Icon: Sparkles },
+  'data-operations': { slot: 3, label: 'Data Operations', Icon: Database },
+  cybersecurity: { slot: 4, label: 'Cybersecurity', Icon: ShieldCheck },
+  'digital-forensics': { slot: 5, label: 'Digital Forensics', Icon: Fingerprint },
 }
 
 function slotPosition(slot: number) {
@@ -148,7 +159,7 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
               style={{
                 left: `${j.x}%`,
                 top: `${j.y}%`,
-                width: 'clamp(56px, 16.5%, 106px)',
+                width: 'clamp(74px, 21.5%, 136px)',
                 transform: 'translate(-50%, -50%)',
               }}
             >
@@ -184,20 +195,33 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
                       bottom={bottom}
                       className="block w-full h-auto jar-halo"
                     />
-                    {/* Label on the belly, set in HTML so it stays crisp and
-                        legible at every size the jar renders at. */}
+                    {/* Icon and name on the belly, set in HTML so both stay
+                        crisp at every size the jar renders at. */}
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-[6%] top-[38%] bottom-[20%] flex flex-col items-center justify-center text-center font-bold leading-[1.1] tracking-tight"
+                      className="absolute inset-x-[15%] top-[30%] bottom-[13%] flex flex-col items-center justify-center gap-[6%] text-center"
                       style={{
                         color: ink,
-                        fontSize: 'clamp(8.5px, 1.3vw, 13px)',
-                        textShadow:
-                          jars === 'uniform' ? 'none' : '0 1px 3px rgba(20,3,10,0.6)',
+                        filter:
+                          jars === 'uniform'
+                            ? 'none'
+                            : 'drop-shadow(0 1px 2px rgba(20,3,10,0.55))',
                       }}
                     >
-                      <span>{j.label[0]}</span>
-                      {j.label[1] && <span>{j.label[1]}</span>}
+                      <j.Icon
+                        strokeWidth={1.6}
+                        className="w-[30%] h-auto shrink-0"
+                        style={{ aspectRatio: '1 / 1' }}
+                      />
+                      <span
+                        className="font-bold uppercase leading-[1.25]"
+                        style={{
+                          fontSize: 'clamp(5.6px, 0.8vw, 8px)',
+                          letterSpacing: '0.06em',
+                        }}
+                      >
+                        {j.label}
+                      </span>
                     </span>
                   </span>
                 </span>
