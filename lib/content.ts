@@ -741,3 +741,71 @@ export const galleryItems: GalleryItem[] = [
     shape: 'tall',
   },
 ]
+
+/* ───────────────────────────────────────────────────────────────────────
+   Careers
+   ───────────────────────────────────────────────────────────────────── */
+
+export type Role = {
+  slug: string
+  title: string
+  /** Must match a capability slug, so the role files under a real discipline. */
+  capability: string
+  location: string
+  type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship'
+  summary: string
+}
+
+/**
+ * Careers source of truth. /careers renders every role listed here; when the
+ * list is empty it shows a general-application path instead, so the page is
+ * never a dead end and never advertises a vacancy that does not exist.
+ *
+ * To publish a vacancy, add an entry to `roles` — nothing else changes.
+ */
+export const careers = {
+  /** Applications go to the main inbox, tagged so they can be routed. */
+  email: org.email,
+  subject: 'Careers — application',
+  roles: [] as Role[],
+  reasons: [
+    {
+      title: 'Work that serves a mission',
+      detail:
+        'Everything we deliver supports Catholic and mission-led institutions. The work is meant to outlast the engagement.',
+    },
+    {
+      title: 'Your judgment stays in the loop',
+      detail:
+        'Automation assists; people review, approve and handle exceptions. You are hired for your judgment, not replaced by a tool.',
+    },
+    {
+      title: 'Six disciplines, one team',
+      detail:
+        'Editorial, creative, technical, operational and forensic work sit side by side, so you learn across the whole path from brief to evidence.',
+    },
+    {
+      title: 'Named ownership',
+      detail:
+        'Every piece of work has a named owner and a documented close. You will always know what you are accountable for — and get credit for it.',
+    },
+  ],
+  process: [
+    {
+      title: 'Apply',
+      detail: 'Send a short note and your CV or portfolio. Tell us which capability you are drawn to.',
+    },
+    {
+      title: 'Acknowledgement',
+      detail: 'Every application is acknowledged, with a named person as your point of contact.',
+    },
+    {
+      title: 'Conversation',
+      detail: 'A discussion about the work you have done and the work you want to do — no trick questions.',
+    },
+    {
+      title: 'Decision',
+      detail: 'A clear answer either way, with the reasoning, and a written offer if it is a yes.',
+    },
+  ],
+}

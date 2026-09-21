@@ -376,22 +376,6 @@ html {
 .dove-flight--a { top: 5%; }
 .dove-flight--b { top: 15%; animation-delay: 17s; opacity: 0; }
 
-/* Futuristic ground: a faint perspective grid over deep plum, with soft
-   colour blooms. Decorative, painted behind all hero content. */
-.hero-grid {
-  background-image:
-    linear-gradient(rgba(241,181,59,0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(241,181,59,0.055) 1px, transparent 1px);
-  background-size: 58px 58px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 38%, #000 35%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 38%, #000 35%, transparent 100%);
-}
-.hero-bloom {
-  background:
-    radial-gradient(52rem 32rem at 78% 18%, rgba(135,33,67,0.55), transparent 62%),
-    radial-gradient(40rem 28rem at 8% 78%, rgba(112,13,44,0.5), transparent 62%),
-    radial-gradient(24rem 18rem at 68% 62%, rgba(241,181,59,0.12), transparent 66%);
-}
 
 /* ─────────────────────────────────────────────────────────────────────
    Founder tabs + gallery

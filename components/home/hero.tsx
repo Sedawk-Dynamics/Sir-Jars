@@ -2,14 +2,15 @@ import Link from 'next/link'
 import { ArrowRight, ShieldCheck } from 'lucide-react'
 import JarConstellation from '@/components/home/jar-constellation'
 import { FlyingDoves } from '@/components/brand/dove'
+import HeroPattern, { HERO_BASE } from '@/components/home/hero-pattern'
 import { commitments } from '@/lib/content'
 
 /**
  * Hero: audience, outcome, operating advantage, one primary CTA.
  *
  * The banner is the founder's sketch made real: the golden dove at the centre,
- * six wobbling jars joined to it, over a perspective grid and soft colour
- * blooms, with doves crossing the sky behind. Every jar links to its
+ * six wobbling jars joined to it, on a dusty-rose ground patterned with
+ * tone-on-tone ring swirls, with doves crossing the sky behind. Every jar links to its
  * capability, so the picture doubles as navigation.
  *
  * The section itself stays a server component and the copy is plain static
@@ -20,23 +21,30 @@ export default function Hero() {
   return (
     <section
       className="on-dark relative overflow-hidden"
-      style={{ background: 'var(--color-plum)' }}
+      style={{ background: HERO_BASE }}
     >
-      {/* Decorative ground: colour blooms, then the perspective grid. */}
-      <div className="hero-bloom absolute inset-0" aria-hidden="true" />
-      <div className="hero-grid absolute inset-0" aria-hidden="true" />
+      {/* Decorative ground: dusty rose with tone-on-tone ring swirls. */}
+      <HeroPattern className="absolute inset-0 w-full h-full" />
 
       {/* Doves crossing the scene, every few seconds. */}
       <FlyingDoves />
 
-      {/* Readability scrim: the headline column must clear AA contrast
-          wherever the blooms happen to land. */}
+      {/* Readability wash. On the lighter rose, ivory body text and the gold
+          headline fall below AA contrast, so a plum wash sits behind the
+          text only: a left-to-right fade on desktop (the jar scene keeps the
+          pure rose), an even tint on mobile where text spans the full width.
+          With it, gold clears ~5:1 and ivory body text ~7:1. */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none lg:hidden"
+        aria-hidden="true"
+        style={{ background: 'rgba(60,10,30,0.46)' }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none hidden lg:block"
         aria-hidden="true"
         style={{
           background:
-            'linear-gradient(100deg, rgba(43,7,21,0.92) 0%, rgba(43,7,21,0.72) 44%, rgba(43,7,21,0.18) 100%)',
+            'linear-gradient(100deg, rgba(60,10,30,0.62) 0%, rgba(60,10,30,0.46) 40%, rgba(60,10,30,0) 66%)',
         }}
       />
 
@@ -74,10 +82,10 @@ export default function Hero() {
               judgment, discretion or control.
             </p>
 
-            <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className="mt-9 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5"
                 style={{
                   background: 'var(--color-gold)',
                   color: 'var(--color-plum)',
@@ -94,7 +102,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/capabilities"
-                className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold transition-colors duration-200"
+                className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold whitespace-nowrap transition-colors duration-200"
                 style={{
                   background: 'rgba(252,251,248,0.08)',
                   border: '1px solid rgba(252,251,248,0.28)',
@@ -128,13 +136,13 @@ export default function Hero() {
             <JarConstellation jars="logo" />
             <p
               className="mt-2 text-center text-xs font-bold tracking-[0.18em] uppercase"
-              style={{ color: 'rgba(252,251,248,0.55)' }}
+              style={{ color: 'rgba(252,251,248,0.94)' }}
             >
               Six jars · six connected capabilities
             </p>
             <p
               className="mt-1.5 text-center text-xs"
-              style={{ color: 'rgba(252,251,248,0.5)' }}
+              style={{ color: 'rgba(252,251,248,0.9)' }}
             >
               Hover to pause the orbit — select any jar to explore that capability.
             </p>

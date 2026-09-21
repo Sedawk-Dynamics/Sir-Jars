@@ -116,6 +116,19 @@ export default function SiteHeader() {
 
           <div className="flex items-center gap-2">
             <Link
+              href="/careers"
+              aria-current={isActive('/careers') ? 'page' : undefined}
+              className="hidden md:inline-flex items-center justify-center px-5 rounded-full text-sm font-semibold tap-target transition-colors duration-200"
+              style={{
+                lineHeight: '42px',
+                color: 'var(--color-wine)',
+                border: '1.5px solid var(--color-wine)',
+                background: isActive('/careers') ? 'rgba(112,13,44,0.07)' : 'transparent',
+              }}
+            >
+              Careers
+            </Link>
+            <Link
               href="/contact"
               className="hidden sm:inline-flex items-center justify-center px-5 rounded-full text-sm font-semibold tap-target transition-transform duration-200 hover:-translate-y-0.5"
               style={{
@@ -179,8 +192,20 @@ export default function SiteHeader() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/careers"
+                aria-current={isActive('/careers') ? 'page' : undefined}
                 className="mt-6 flex items-center justify-center rounded-full text-base font-semibold"
+                style={{
+                  minHeight: 56,
+                  color: 'var(--color-wine)',
+                  border: '1.5px solid var(--color-wine)',
+                }}
+              >
+                Careers
+              </Link>
+              <Link
+                href="/contact"
+                className="mt-3 flex items-center justify-center rounded-full text-base font-semibold"
                 style={{
                   minHeight: 56,
                   background: 'var(--color-gold)',

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Mail, Phone } from 'lucide-react'
+import { ArrowRight, Mail, Phone } from 'lucide-react'
 import { capabilities, org } from '@/lib/content'
 import { LOGO_SRC, LOGO_W, LOGO_H } from './site-header'
 
@@ -95,6 +95,23 @@ export default function SiteFooter() {
                 </a>
               </li>
             </ul>
+
+            <Link
+              href="/careers"
+              className="group mt-6 inline-flex items-center gap-2 px-5 rounded-full text-sm font-bold transition-transform duration-200 hover:-translate-y-0.5"
+              style={{
+                minHeight: 44,
+                background: 'var(--color-gold)',
+                color: 'var(--color-plum)',
+              }}
+            >
+              Careers at Six Jars
+              <ArrowRight
+                size={15}
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              />
+            </Link>
           </div>
 
           <nav className="md:col-span-3" aria-label="Capabilities">
@@ -125,6 +142,7 @@ export default function SiteFooter() {
                 { label: 'How it works', href: '/how-it-works' },
                 { label: 'Proof', href: '/proof' },
                 { label: 'Insights', href: '/insights' },
+                { label: 'Careers', href: '/careers' },
                 { label: 'Contact', href: '/contact' },
               ].map((l) => (
                 <li key={l.href}>
