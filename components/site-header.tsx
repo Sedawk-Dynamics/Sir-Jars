@@ -92,7 +92,7 @@ export default function SiteHeader() {
               height={LOGO_H}
               // Intrinsic ratio is 2.912:1, so a 40px cap renders ~116px wide
               // and still clears the 44px row comfortably on a 360px screen.
-              className="h-9 sm:h-10 lg:h-12 w-auto object-contain"
+              className="h-12 sm:h-14 lg:h-[68px] w-auto object-contain"
               priority
             />
           </Link>

@@ -51,7 +51,7 @@ export default function SiteFooter() {
                 alt="Six Jars Global"
                 width={LOGO_W}
                 height={LOGO_H}
-                className="h-11 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </span>
             <p className="text-sm leading-relaxed max-w-xs text-ivory/70">

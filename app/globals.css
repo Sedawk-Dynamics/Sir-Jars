@@ -102,11 +102,11 @@
   --sidebar-ring: #700D2C;
 
   /* Sticky header height — drives every anchor offset. */
-  --header-h: 4.5rem;
+  --header-h: 5rem;
 }
 
 @media (min-width: 1024px) {
-  :root { --header-h: 5.5rem; }
+  :root { --header-h: 6.5rem; }
 }
 
 @layer base {
