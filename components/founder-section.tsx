@@ -105,13 +105,40 @@ export default function FounderSection() {
             }}
           >
             <div className="relative aspect-[4/5] w-full">
-              <Image
-                src={founder.photo}
-                alt={founder.photoAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 38vw"
-                className="object-cover"
-              />
+              {founder.photo ? (
+                <Image
+                  src={founder.photo}
+                  alt={founder.photoAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                  className="object-cover"
+                />
+              ) : (
+                // No portrait supplied yet: a monogram, never a stand-in photo.
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{
+                    background:
+                      'radial-gradient(circle at 50% 38%, #872143 0%, #4B0D24 72%)',
+                  }}
+                >
+                  <span
+                    className="font-extrabold tracking-tight"
+                    style={{
+                      color: 'var(--color-gold)',
+                      fontSize: 'clamp(4rem, 12vw, 7rem)',
+                      fontFamily: 'var(--font-serif)',
+                    }}
+                  >
+                    {founder.name
+                      .split(/\s+/)
+                      .map((w) => w[0])
+                      .join('')
+                      .slice(0, 2)}
+                  </span>
+                </div>
+              )}
               {/* Bottom scrim so the badge and any light photo still separate. */}
               <div
                 aria-hidden="true"
@@ -121,17 +148,19 @@ export default function FounderSection() {
                     'linear-gradient(to top, rgba(43,7,21,0.55) 0%, transparent 42%)',
                 }}
               />
-              <span
-                aria-hidden="true"
-                className="absolute top-4 right-4 w-11 h-11 rounded-full flex items-center justify-center"
-                style={{
-                  background: 'var(--color-gold)',
-                  color: 'var(--color-plum)',
-                  boxShadow: '0 6px 20px rgba(241,181,59,0.4)',
-                }}
-              >
-                <Quote size={18} />
-              </span>
+              {founder.quote && (
+                <span
+                  aria-hidden="true"
+                  className="absolute top-4 right-4 w-11 h-11 rounded-full flex items-center justify-center"
+                  style={{
+                    background: 'var(--color-gold)',
+                    color: 'var(--color-plum)',
+                    boxShadow: '0 6px 20px rgba(241,181,59,0.4)',
+                  }}
+                >
+                  <Quote size={18} />
+                </span>
+              )}
             </div>
 
             <div className="p-6 lg:p-7">
@@ -151,16 +180,18 @@ export default function FounderSection() {
                 {founder.company}
               </p>
 
-              <blockquote
-                className="mt-5 pl-4 text-[15px] leading-relaxed italic"
-                style={{
-                  borderLeft: '3px solid var(--color-gold)',
-                  color: 'rgba(75,13,36,0.8)',
-                  fontFamily: 'var(--font-serif)',
-                }}
-              >
-                {founder.quote}
-              </blockquote>
+              {founder.quote && (
+                <blockquote
+                  className="mt-5 pl-4 text-[15px] leading-relaxed italic"
+                  style={{
+                    borderLeft: '3px solid var(--color-gold)',
+                    color: 'rgba(75,13,36,0.8)',
+                    fontFamily: 'var(--font-serif)',
+                  }}
+                >
+                  {founder.quote}
+                </blockquote>
+              )}
 
               <ul
                 className="mt-6 space-y-3 pt-5"

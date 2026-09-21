@@ -6,11 +6,11 @@ import {
   Briefcase,
   Clapperboard,
   Database,
-  Fingerprint,
+  GraduationCap,
   MapPin,
   Send,
   ShieldCheck,
-  Sparkles,
+  Workflow,
 } from 'lucide-react'
 import PageHeader from '@/components/page-header'
 import { capabilities, careers } from '@/lib/content'
@@ -26,10 +26,10 @@ export const metadata: Metadata = {
 const ICONS: Record<string, typeof BookOpen> = {
   publishing: BookOpen,
   media: Clapperboard,
-  'digital-ai': Sparkles,
+  'digital-platforms': Workflow,
   'data-operations': Database,
-  cybersecurity: ShieldCheck,
-  'digital-forensics': Fingerprint,
+  'ai-academy': GraduationCap,
+  'cybersecurity-forensics': ShieldCheck,
 }
 
 const applyHref = (subject: string) =>

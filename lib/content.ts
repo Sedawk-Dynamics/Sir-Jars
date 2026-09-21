@@ -21,10 +21,19 @@ export type Capability = {
   deliverables: string[]
   /** Where human review sits in this discipline. */
   humanReview: string
+  /** "Choose this when" — the situation this vertical is for. */
+  chooseWhen: string
+  /** A boundary the vertical must state publicly (vertical 06). */
+  boundary?: string
   /** Single-letter mark used in the orbit and card chips. */
   mark: string
 }
 
+/**
+ * The six verticals, as defined in "Data for specific pages" (Aug 2026).
+ * `capabilities` is the published Scope and `deliverables` the Typical
+ * outputs; `chooseWhen` is the "Choose this when" line.
+ */
 export const capabilities: Capability[] = [
   {
     slug: 'publishing',
@@ -33,22 +42,27 @@ export const capabilities: Capability[] = [
     number: '01',
     cue: 'Form',
     mark: 'P',
-    summary: 'Editorial production, conversion, print coordination and distribution.',
+    summary:
+      'Editorial development, copyediting, design, typesetting, print coordination and distribution.',
     intro:
-      'We coordinate the full path from manuscript to distributed publication — holding editorial standards, institutional voice and production schedules together across print and digital channels.',
+      'We take a report, book, guide or campaign from draft to an approved and controlled release — holding editorial standards, institutional voice and production schedules together across print and digital.',
     capabilities: [
-      'Editorial production coordination',
-      'Print layout, typesetting and conversion',
-      'Distribution workflow management',
-      'Asset archival and rights tracking',
-      'Multilingual publishing support',
+      'Editorial development',
+      'Copyediting and proofreading',
+      'Design and typesetting',
+      'Conversion',
+      'Print coordination',
+      'Distribution workflow',
+      'Asset management',
     ],
     deliverables: [
-      'Production schedule with named owners at each gate',
-      'Approved proofs and version history',
-      'Distribution manifest and delivery confirmation',
-      'Archived source assets with retention terms',
+      'Manuscript-to-release workflow',
+      'Approved print and digital masters',
+      'Version history',
+      'Distribution handover',
     ],
+    chooseWhen:
+      'A report, book, guide or campaign must move from draft to an approved and controlled release.',
     humanReview:
       'An accountable editor signs off every proof before release. Automation handles conversion and formatting; it never approves content.',
   },
@@ -59,128 +73,165 @@ export const capabilities: Capability[] = [
     number: '02',
     cue: 'Voice',
     mark: 'M',
-    summary: 'Video, podcast, social and content repurposing with human review.',
+    summary:
+      'Video, podcast, social, livestream, captions, transcripts and content repurposing.',
     intro:
-      'Your institutional voice is the asset. We run the production and repurposing pipeline around it — with review points that keep tone, doctrine and context intact at every stage.',
+      'Your institutional voice is the asset. We run production and repurposing across every channel around it — with clear approval ownership at each step.',
     capabilities: [
-      'Video production coordination',
-      'Podcast and audio operations',
-      'Social channel operations',
-      'Livestream production support',
-      'Content repurposing workflows',
+      'Video',
+      'Podcast',
+      'Social content',
+      'Livestream support',
+      'Editorial calendars',
+      'Captions and transcripts',
+      'Channel operations',
+      'Content repurposing',
     ],
     deliverables: [
-      'Content calendar with approval checkpoints',
-      'Master assets plus channel-ready derivatives',
-      'Caption, transcript and accessibility files',
-      'Publication log with approver of record',
+      'Approved media packages',
+      'Channel-ready derivatives',
+      'Accessibility files',
+      'Content calendar and review record',
     ],
+    chooseWhen:
+      'Several channels need consistent content, faster production and clear approval ownership.',
     humanReview:
       'Nothing publishes on your channels without a named reviewer approving the cut, the caption and the context.',
   },
   {
-    slug: 'digital-ai',
-    shortName: 'Digital + AI',
-    fullName: 'Digital Platforms & AI Governance',
+    slug: 'digital-platforms',
+    shortName: 'Digital Platforms',
+    fullName: 'Digital Platforms & Intelligent Automation',
     number: '03',
     cue: 'Connect',
     mark: 'D',
-    summary: 'Websites, CRM, LMS, cloud migration and governed AI integration.',
+    summary:
+      'Websites, CRM, LMS, cloud workflows, mobile apps, integration and governed automation.',
     intro:
-      'Modern platform capability without erasing institutional identity. We coordinate the build, the migration and the governance framework that decides where AI is allowed to act and where it is not.',
+      'We connect the systems your people depend on — and automate the handoffs between them — with governance controls that decide where automation and AI may act, and where a person must.',
     capabilities: [
-      'Website and platform management',
-      'CRM and LMS implementation',
-      'Cloud migration governance',
-      'AI integration oversight and policy',
-      'Security coordination with your IT function',
+      'Websites',
+      'CRM and LMS',
+      'Cloud workflows',
+      'Mobile applications',
+      'System integration',
+      'No-code / low-code automation',
+      'AI-enabled workflows',
+      'Governance controls',
     ],
     deliverables: [
-      'Platform architecture and migration runbook',
-      'AI use policy stating permitted and prohibited uses',
-      'Access model and administrative handover',
-      'Post-migration verification record',
+      'Configured platform',
+      'Documented integration',
+      'Automation runbook',
+      'Access model',
+      'Quality and human-review controls',
     ],
+    chooseWhen:
+      'Disconnected systems or manual handoffs are slowing service, learning, sales or delivery.',
     humanReview:
-      'AI-assisted output enters a review queue before it reaches a member, a donor or the public. The policy names who holds that queue.',
+      'AI-assisted output enters a review queue before it reaches a member, a donor or the public. The governance controls name who holds that queue.',
   },
   {
     slug: 'data-operations',
-    shortName: 'Data operations',
-    fullName: 'Data & Administrative Operations',
+    shortName: 'Data & Business Ops',
+    fullName: 'Data & Business Operations',
     number: '04',
     cue: 'Order',
     mark: 'O',
-    summary: 'Records, donor, registration, research and administrative workflows.',
+    summary:
+      'Data cleanup, records, archives, research, reporting, intake, registration and back-office workflows.',
     intro:
-      'Systematic order for the operational work that keeps an institution running — records, registrations, donor data and research support, handled with defined retention and access discipline.',
+      'Systematic order for the recurring work that keeps an institution running — so it no longer depends on scattered files, manual follow-up or unclear ownership.',
     capabilities: [
-      'Data management and archival',
-      'Donor and supporter database operations',
-      'Research workflow support',
-      'Registration and enrolment coordination',
-      'Administrative scheduling',
+      'Data cleanup',
+      'Records and archives',
+      'Research',
+      'Reporting',
+      'Scheduling',
+      'Intake and registration',
+      'Customer and member support',
+      'Recurring back-office workflows',
     ],
     deliverables: [
-      'Data map with classification and retention terms',
-      'Documented processing procedures',
-      'Access register naming every authorised handler',
-      'Reconciliation and exception reports',
+      'Structured data',
+      'Documented operating process',
+      'Dashboards',
+      'Ownership map',
+      'Exception and escalation path',
     ],
+    chooseWhen:
+      'Important recurring work depends on scattered files, manual follow-up or unclear ownership.',
     humanReview:
       'Exceptions never auto-resolve. They route to a named handler with the authority to decide and a record of what was decided.',
   },
   {
-    slug: 'cybersecurity',
-    shortName: 'Cybersecurity',
-    fullName: 'Cybersecurity',
+    slug: 'ai-academy',
+    shortName: 'AI Academy',
+    fullName: 'AI & Future Skills Academy',
     number: '05',
-    cue: 'Protect',
-    mark: 'C',
-    summary: 'Risk identification, protective controls, incident readiness and remediation.',
+    cue: 'Grow',
+    mark: 'A',
+    summary:
+      'AI literacy, workflow design, Lean Six Sigma, Train the Trainer and soft-skills programs.',
     intro:
-      'Protective coordination for mission-critical systems, scoped precisely and overseen by qualified people. We state clearly what falls inside our coordination and what requires a specialist practice.',
+      'Practical programs for students, teachers, professionals and teams — built so that what people learn can be applied safely and measured in real work.',
     capabilities: [
-      'Risk identification and assessment',
-      'Protective control coordination',
-      'Incident readiness planning',
-      'Remediation governance',
-      'Security compliance support',
+      'AI literacy and responsible use',
+      'Prompt and workflow design',
+      'Lean Six Sigma',
+      'Process automation',
+      'Train the Trainer',
+      'Soft skills and communication',
+      'Teamwork and interpersonal effectiveness',
+      'Educator and student programs',
     ],
     deliverables: [
-      'Risk register ranked by mission impact',
-      'Control implementation plan with owners',
-      'Incident response runbook and contact tree',
-      'Remediation verification record',
+      'Role-based curriculum',
+      'Workshops and practice labs',
+      'Assessments',
+      'Capstone projects',
+      'Trainer guides',
+      'Completion evidence and improvement plan',
     ],
+    chooseWhen:
+      'Students, teachers, professionals or teams need practical skills they can apply safely and measure in real work.',
     humanReview:
-      'Scope boundaries are written down before work starts. Anything outside them is escalated, not improvised.',
+      'Every program ends in assessed, real-work evidence reviewed by a facilitator — not in attendance alone.',
   },
   {
-    slug: 'digital-forensics',
-    shortName: 'Digital forensics',
-    fullName: 'Digital Forensics',
+    slug: 'cybersecurity-forensics',
+    shortName: 'Cyber & Forensics',
+    fullName: 'Cybersecurity & Digital Forensics',
     number: '06',
-    cue: 'Establish',
-    mark: 'F',
-    summary: 'Authorised analysis, evidence preservation and decision-ready reporting.',
+    cue: 'Protect & Establish',
+    mark: 'S',
+    summary:
+      'Risk assessment, protective controls, incident readiness and authorized evidence preservation.',
     intro:
-      'Authorised forensic work under chain-of-custody discipline. Authorisation comes first, scope is stated in writing, and the report distinguishes what the evidence establishes from what it does not.',
+      'Reduce exposure, prepare for an incident, or understand an authorized event without compromising evidence — two separate workstreams under one accountable vertical.',
     capabilities: [
-      'Authorised forensic analysis',
-      'Evidence preservation protocols',
+      'Risk assessment',
+      'Protective-control coordination',
+      'Incident readiness',
+      'Remediation governance',
+      'Authorized evidence preservation',
       'Timeline reconstruction',
-      'Chain-of-custody management',
       'Decision-ready reporting',
     ],
     deliverables: [
-      'Written authorisation and scope statement',
-      'Chain-of-custody log for every artefact',
-      'Reconstructed timeline with evidentiary basis',
-      'Report separating findings from inference',
+      'Risk register',
+      'Control plan',
+      'Incident playbook',
+      'Evidence log',
+      'Findings report',
+      'Limitations and escalation record',
     ],
+    chooseWhen:
+      'The organization must reduce exposure, prepare for an incident or understand an authorized event without compromising evidence.',
+    boundary:
+      'Cybersecurity and digital forensics share one vertical but remain separate workstreams. Every forensic engagement requires explicit authorization, jurisdiction, qualified personnel, evidence-handling rules, chain-of-custody ownership, limitations and an escalation path.',
     humanReview:
-      'No analysis begins without documented authorisation. Every artefact is logged from acquisition to release.',
+      'No forensic analysis begins without documented authorization. Scope boundaries are written down first; anything outside them is escalated, not improvised.',
   },
 ]
 
@@ -374,7 +425,7 @@ export const engagements: Engagement[] = [
   },
   {
     slug: 'ai-content-governance-policy',
-    capability: 'Digital + AI',
+    capability: 'Digital Platforms',
     title: 'Writing an AI use policy before the tools were deployed',
     context:
       'A mission-led publisher under pressure to adopt AI drafting tools, with no stated position on where machine output was permitted.',
@@ -398,7 +449,7 @@ export const engagements: Engagement[] = [
   },
   {
     slug: 'authorised-evidence-preservation',
-    capability: 'Digital forensics',
+    capability: 'Cyber & Forensics',
     title: 'Preserving evidence under written authorisation',
     context:
       'An institution facing an internal matter that required digital evidence to be preserved before any analysis or interpretation began.',
@@ -458,7 +509,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'four-controls-before-incident-response',
-    capability: 'Cybersecurity',
+    capability: 'Cyber & Forensics',
     title: 'The four controls every mission-led organization must establish before incident response',
     excerpt:
       'Before incident response training, these baseline protective controls reduce exposure for organizations managing sensitive mission data and institutional archives.',
@@ -475,7 +526,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'human-judgment-in-ai-assisted-content',
-    capability: 'Digital + AI',
+    capability: 'Digital Platforms',
     title: 'Human judgment in AI-assisted content: a governance framework for mission media',
     excerpt:
       'A structured approach to integrating AI tools into content workflows while maintaining human oversight at every approval and publication point.',
@@ -492,7 +543,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'evidence-preservation-authorization-first',
-    capability: 'Digital forensics',
+    capability: 'Cyber & Forensics',
     title: 'Evidence preservation for institutional investigations: authorization comes first',
     excerpt:
       'The sequence of decisions an organization must make — before any forensic analysis begins — to ensure evidence remains sound and chain of custody is maintained.',
@@ -550,13 +601,17 @@ export type ContactPathId = (typeof contactPaths)[number]['id']
 export const org = {
   legalName: 'Six Jars Global (OPC) Private Limited',
   address:
-    'Cumins Genesis, Flat D-411, Silver Cloud Layout, 2nd Main Rd, Horamavu, Bangalore — 560043',
+    'Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India',
   phone: '+91 96329 88066',
   phoneHref: '+919632988066',
-  email: 'info@sixjarsglobal.com',
+  /** Customer care. */
+  email: 'hello@sixjarsglobal.com',
+  /** Privacy requests, grievances and security reports. */
+  privacyEmail: 'sreejith.s@sixjarsglobal.com',
+  hours: 'Monday–Friday, 09:00–18:00 IST, excluding Indian public holidays',
+  grievanceOfficer: 'Sreejith S, Founder',
   gstin: '29ABUCS1730R1ZC',
-  /** Set once verified against the incorporation certificate, then it renders. */
-  cin: null as string | null,
+  cin: 'U62020KA2026OPC223063' as string | null,
   linkedin: 'https://www.linkedin.com/company/six-jars-global',
 }
 
@@ -578,25 +633,24 @@ export type FounderTab = {
  * owner the whole site keeps promising. This block is what the About page
  * renders.
  *
- * ⚠ PLACEHOLDER IDENTITY — name, role, photo, email, phone and LinkedIn below
- * are stand-ins so the section is complete and reviewable. Replace all six
- * before this ships; nothing else in the component needs touching.
+ * Name and role are from the company's legal pack. The portrait and the
+ * pull-quote render only once the founder supplies them — until then the card
+ * shows a monogram and no quote, rather than a stand-in.
  */
 export const founder = {
-  name: 'Founder name',
-  role: 'Founder & Principal',
+  name: 'Sreejith S',
+  role: 'Founder',
   company: org.legalName,
-  location: 'Bangalore, India',
-  email: org.email,
+  location: 'Bengaluru, India',
+  email: org.privacyEmail,
   phone: org.phone,
   phoneHref: org.phoneHref,
   linkedin: org.linkedin,
-  /** 4:5 portrait. Swap for the real headshot at 2x (min 720×900). */
-  photo: '/images/mission-editorial.png',
+  /** 4:5 portrait at 2x (min 720×900). Until supplied, a monogram renders. */
+  photo: null as string | null,
   photoAlt: 'Portrait of the founder of Six Jars Global.',
-  /** Sits under the portrait as a pull-quote. */
-  quote:
-    'Mission-led work fails quietly — in the gap between what was promised and what can be proved. We close that gap in writing.',
+  /** Pull-quote under the portrait — renders only once the founder supplies one. */
+  quote: null as string | null,
   /** Short credential chips shown beside the name. */
   credentials: ['Catholic-sector fluency', 'Governed AI delivery', 'Evidence-first close'],
   tabs: [

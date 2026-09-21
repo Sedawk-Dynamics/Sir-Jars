@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight, Check, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Check, Compass, Scale, ShieldCheck } from 'lucide-react'
 import PageHeader from '@/components/page-header'
 import EvidenceDrawer from '@/components/evidence-drawer'
 import { capabilities, engagements, getCapability } from '@/lib/content'
@@ -54,13 +54,41 @@ export default async function CapabilityPage({ params }: Params) {
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          {/* "Choose this when" — the fastest way to know you are in the
+              right place, so it comes before the detail. */}
+          <div
+            className="mb-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+            style={{ background: 'var(--color-plum)' }}
+          >
+            <Compass
+              size={28}
+              aria-hidden="true"
+              className="shrink-0"
+              style={{ color: 'var(--color-gold)' }}
+            />
+            <div>
+              <h2
+                className="text-xs font-bold tracking-[0.18em] uppercase"
+                style={{ color: 'var(--color-gold)' }}
+              >
+                Choose this when
+              </h2>
+              <p
+                className="mt-2 text-lg lg:text-xl leading-relaxed font-semibold"
+                style={{ color: 'var(--color-ivory)' }}
+              >
+                {capability.chooseWhen}
+              </p>
+            </div>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <div>
               <h2
                 className="text-2xl font-bold tracking-tight"
                 style={{ color: 'var(--color-plum)' }}
               >
-                What this covers
+                Scope
               </h2>
               <ul className="mt-6 space-y-3">
                 {capability.capabilities.map((item) => (
@@ -87,7 +115,7 @@ export default async function CapabilityPage({ params }: Params) {
                 className="text-2xl font-bold tracking-tight"
                 style={{ color: 'var(--color-plum)' }}
               >
-                What you receive at close
+                Typical outputs
               </h2>
               <ul className="mt-6 space-y-3">
                 {capability.deliverables.map((item) => (
@@ -135,6 +163,35 @@ export default async function CapabilityPage({ params }: Params) {
               </p>
             </div>
           </div>
+
+          {capability.boundary && (
+            <div
+              className="mt-6 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid var(--color-line)',
+                borderLeft: '4px solid var(--color-wine)',
+              }}
+            >
+              <Scale
+                size={26}
+                aria-hidden="true"
+                className="shrink-0"
+                style={{ color: 'var(--color-wine)' }}
+              />
+              <div>
+                <h2 className="text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
+                  Boundary for this vertical
+                </h2>
+                <p
+                  className="text-base leading-relaxed mt-2"
+                  style={{ color: 'rgba(75,13,36,0.78)' }}
+                >
+                  {capability.boundary}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

@@ -29,13 +29,14 @@ export const metadata: Metadata = {
     template: '%s | Six Jars Global',
   },
   description:
-    'Six Jars connects publishing, media, digital, data, cybersecurity and forensics for Catholic and mission-led organizations — governed, human-reviewed and proved at close.',
+    'Six Jars connects publishing, media, digital platforms, data and business operations, AI and future-skills training, and cybersecurity and forensics for Catholic and mission-led organizations — governed, human-reviewed and proved at close.',
   keywords: [
     'mission-led operations',
     'Catholic organizations',
     'publishing operations',
     'AI governance',
     'cybersecurity',
+    'AI skills training',
     'digital forensics',
     'Bangalore',
   ],

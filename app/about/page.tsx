@@ -93,7 +93,7 @@ export default function AboutPage() {
                   style={{ color: 'rgba(75,13,36,0.78)' }}
                 >
                   To strengthen Catholic and mission-led organizations with trusted
-                  publishing, media, digital, operational, cybersecurity and forensic
+                  publishing, media, digital, operational, learning, cybersecurity and forensic
                   capacity — coordinating people, systems and evidence so their mission can
                   serve further, safer and longer.
                 </p>
@@ -229,6 +229,9 @@ export default function AboutPage() {
               { term: 'Legal name', detail: org.legalName },
               { term: 'Registered office', detail: org.address },
               { term: 'GSTIN', detail: org.gstin },
+              ...(org.cin ? [{ term: 'CIN', detail: org.cin }] : []),
+              { term: 'Customer care', detail: `${org.email} · ${org.phone}` },
+              { term: 'Grievance officer', detail: `${org.grievanceOfficer} · ${org.privacyEmail}` },
             ].map((row) => (
               <div
                 key={row.term}

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { articles, capabilities } from '@/lib/content'
+import { legalOrder } from '@/lib/legal'
 import { SITE_URL } from './layout'
 
 /** Derived from the content library, so a new page cannot be left out. */
@@ -13,9 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/contact',
     '/careers',
-    '/legal/privacy',
-    '/legal/terms',
-    '/legal/confidentiality',
+    ...legalOrder.map((slug) => `/legal/${slug}`),
   ]
 
   return [

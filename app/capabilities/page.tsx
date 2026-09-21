@@ -7,7 +7,7 @@ import ClosingCta from '@/components/home/closing-cta'
 export const metadata: Metadata = {
   title: 'Capabilities — six routes into the work',
   description:
-    'Publishing, media, digital and AI, data operations, cybersecurity and digital forensics — six connected capabilities coordinated by one accountable partner.',
+    'Publishing, media, digital platforms, data and business operations, the AI & Future Skills Academy, and cybersecurity and digital forensics — six connected capabilities coordinated by one accountable partner.',
   alternates: { canonical: '/capabilities' },
 }
 

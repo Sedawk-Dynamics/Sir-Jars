@@ -3,9 +3,9 @@ import {
   BookOpen,
   Clapperboard,
   Database,
-  Fingerprint,
+  GraduationCap,
   ShieldCheck,
-  Sparkles,
+  Workflow,
 } from 'lucide-react'
 import Jar from '@/components/brand/jar'
 import Image from 'next/image'
@@ -38,10 +38,10 @@ type JarStyle = 'logo' | 'uniform'
 const LOGO_GLAZES: Record<string, [string, string]> = {
   publishing: ['#8E2A36', '#5E0F1D'], // centre-left deep red-brown
   media: ['#A3386F', '#5C1440'], // orchid
-  'digital-ai': ['#B0204A', '#6A0418'], // crimson
+  'digital-platforms': ['#B0204A', '#6A0418'], // crimson
   'data-operations': ['#B03A52', '#7A1E33'], // rose red
-  cybersecurity: ['#7B2F5E', '#35102A'], // aubergine
-  'digital-forensics': ['#94275F', '#4F0E30'], // plum magenta
+  'ai-academy': ['#94275F', '#4F0E30'], // plum magenta
+  'cybersecurity-forensics': ['#7B2F5E', '#35102A'], // aubergine
 }
 
 /** "All jars in one logo colour" — the gold from the logo's arc. */
@@ -60,11 +60,11 @@ const LAYOUT: Record<
   { slot: number; label: string; Icon: typeof BookOpen }
 > = {
   publishing: { slot: 0, label: 'Publishing & Print Operations', Icon: BookOpen },
-  media: { slot: 1, label: 'Media', Icon: Clapperboard },
-  'digital-ai': { slot: 2, label: 'Digital + AI', Icon: Sparkles },
-  'data-operations': { slot: 3, label: 'Data Operations', Icon: Database },
-  cybersecurity: { slot: 4, label: 'Cybersecurity', Icon: ShieldCheck },
-  'digital-forensics': { slot: 5, label: 'Digital Forensics', Icon: Fingerprint },
+  media: { slot: 1, label: 'Media & Content Operations', Icon: Clapperboard },
+  'digital-platforms': { slot: 2, label: 'Digital Platforms & Automation', Icon: Workflow },
+  'data-operations': { slot: 3, label: 'Data & Business Operations', Icon: Database },
+  'ai-academy': { slot: 4, label: 'AI & Future Skills Academy', Icon: GraduationCap },
+  'cybersecurity-forensics': { slot: 5, label: 'Cybersecurity & Forensics', Icon: ShieldCheck },
 }
 
 function slotPosition(slot: number) {

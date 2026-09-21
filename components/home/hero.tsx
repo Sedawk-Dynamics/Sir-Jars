@@ -76,10 +76,11 @@ export default function Hero() {
               className="mt-6 text-base sm:text-lg leading-relaxed max-w-xl"
               style={{ color: 'rgba(252,251,248,0.78)' }}
             >
-              Six connected capabilities — publishing, media, digital + AI, data
-              operations, cybersecurity and digital forensics — coordinated by one
-              accountable partner, so your organization can move faster without losing
-              judgment, discretion or control.
+              Six connected capabilities — publishing, media, digital platforms,
+              data and business operations, an AI and future-skills academy, and
+              cybersecurity and digital forensics — coordinated by one accountable
+              partner, so your organization can move faster without losing judgment,
+              discretion or control.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">

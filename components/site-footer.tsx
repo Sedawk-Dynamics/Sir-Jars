@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Mail, Phone } from 'lucide-react'
 import { capabilities, org } from '@/lib/content'
+import { legalDocs, legalOrder } from '@/lib/legal'
 import { LOGO_SRC, LOGO_W, LOGO_H } from './site-header'
 
 /** Brand marks were dropped from lucide v1, so LinkedIn ships inline. */
@@ -162,11 +163,10 @@ export default function SiteFooter() {
               Legal
             </h2>
             <ul className="space-y-3">
-              {[
-                { label: 'Privacy policy', href: '/legal/privacy' },
-                { label: 'Terms of engagement', href: '/legal/terms' },
-                { label: 'Confidentiality policy', href: '/legal/confidentiality' },
-              ].map((l) => (
+              {legalOrder.map((slug) => ({
+                label: legalDocs[slug].title,
+                href: `/legal/${slug}`,
+              })).map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
@@ -194,7 +194,22 @@ export default function SiteFooter() {
               >
                 {org.email}
               </a>
+              <br />
+              <span className="text-ivory/45">{org.hours}</span>
             </address>
+
+            {/* Grievance officer — required to be published under the
+                Consumer Protection (E-Commerce) Rules, 2020. */}
+            <p className="mt-4 text-sm leading-relaxed text-ivory/55">
+              Grievance officer: {org.grievanceOfficer}
+              <br />
+              <a
+                href={`mailto:${org.privacyEmail}`}
+                className="hover:text-gold transition-colors"
+              >
+                {org.privacyEmail}
+              </a>
+            </p>
           </nav>
         </div>
 
