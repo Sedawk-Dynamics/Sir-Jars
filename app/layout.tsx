@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Manrope, Source_Serif_4 } from 'next/font/google'
 import SiteHeader from '@/components/site-header'
 import SiteFooter from '@/components/site-footer'
+import ScrollBattery from '@/components/scroll-battery'
 import './globals.css'
 
 const manrope = Manrope({
@@ -78,6 +79,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <ScrollBattery />
       </body>
     </html>
   )

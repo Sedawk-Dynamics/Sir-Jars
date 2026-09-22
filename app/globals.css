@@ -418,3 +418,24 @@ html {
     opacity: 1;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Scroll battery — idle bob
+   Runs only while the reader is not scrolling (data-scrolling="false"),
+   so the battery sits still under the thumb and drifts gently at rest.
+   Reduced-motion users get no bob (global rule above collapses it).
+   ───────────────────────────────────────────────────────────────────── */
+@keyframes battery-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.scroll-battery .scroll-battery__pill {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-battery[data-scrolling="false"] .scroll-battery__pill {
+  animation: battery-bob 3.2s ease-in-out infinite;
+}
+.scroll-battery[data-scrolling="true"] .scroll-battery__pill {
+  animation: none;
+  transform: translateY(0) scale(1.04);
+}
