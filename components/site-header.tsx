@@ -141,7 +141,7 @@ export default function SiteHeader() {
           boxShadow: scrolled ? '0 6px 24px rgba(75,13,36,0.06)' : 'none',
         }}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-center gap-4 lg:gap-6">
           <Link
             href="/"
             className="flex items-center shrink-0"
@@ -285,7 +285,7 @@ export default function SiteHeader() {
               ))}
           </nav>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 ml-auto lg:ml-0">
             <Link
               href="/contact"
               className="hidden sm:inline-flex items-center justify-center px-6 h-11 rounded-full text-sm font-bold whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5"
