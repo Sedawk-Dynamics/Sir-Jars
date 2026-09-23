@@ -157,8 +157,8 @@ export default function SiteHeader() {
             />
           </Link>
 
-          {/* One nav row, every item on the same baseline. */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main">
+          {/* Nav and the CTA travel together, pushed to the right of the row. */}
+          <nav className="hidden lg:flex items-center gap-1 lg:ml-auto" aria-label="Main">
             <Link
               href="/"
               aria-current={isActive('/') ? 'page' : undefined}
