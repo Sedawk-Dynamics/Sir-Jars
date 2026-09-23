@@ -58,55 +58,54 @@ export default function CapabilityCards({
             <li key={c.slug}>
               <Link
                 href={`/capabilities/${c.slug}`}
-                className="group relative flex flex-col h-full rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                className="capability-card group relative flex flex-col h-full rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1"
                 style={{
                   background: '#FFFFFF',
                   border: '1px solid var(--color-line)',
                   boxShadow: '0 1px 3px rgba(75,13,36,0.04)',
                 }}
               >
+                {/* Warm wash that lifts in on hover. */}
                 <span
                   aria-hidden="true"
-                  className="absolute top-4 right-5 text-5xl font-black select-none"
-                  style={{ color: 'rgba(112,13,44,0.07)' }}
-                >
-                  {c.number}
-                </span>
-
-                <span
-                  aria-hidden="true"
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold mb-5"
+                  className="capability-card__wash absolute inset-0"
                   style={{
-                    background: 'var(--color-wine)',
-                    color: 'var(--color-ivory)',
+                    background:
+                      'radial-gradient(22rem 14rem at 100% 0%, rgba(241,181,59,0.16), transparent 70%)',
                   }}
-                >
-                  {c.mark}
+                />
+
+                <span className="relative flex items-center justify-between gap-3">
+                  {/* The number, plainly legible — a filled chip, not a ghost. */}
+                  <span
+                    aria-hidden="true"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-base font-extrabold tracking-tight"
+                    style={{
+                      background: 'var(--color-plum)',
+                      color: 'var(--color-gold)',
+                    }}
+                  >
+                    {c.number}
+                  </span>
+                  <span
+                    className="text-[10px] font-bold tracking-[0.18em] uppercase"
+                    style={{ color: 'var(--color-rose)' }}
+                  >
+                    {c.cue}
+                  </span>
                 </span>
 
                 <span
-                  className="text-[10px] font-bold tracking-[0.16em] uppercase mb-1.5"
-                  style={{ color: 'var(--color-rose)' }}
-                >
-                  {c.cue}
-                </span>
-
-                <span
-                  className="text-lg font-bold leading-tight"
+                  className="relative block text-xl font-extrabold leading-tight tracking-tight mt-5"
                   style={{ color: 'var(--color-plum)' }}
                 >
                   {c.shortName}
                 </span>
 
-                <span
-                  className="text-sm leading-relaxed mt-2 flex-1"
-                  style={{ color: 'rgba(75,13,36,0.68)' }}
-                >
-                  {c.summary}
-                </span>
+                <span className="relative flex-1" />
 
                 <span
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold mt-5"
+                  className="relative inline-flex items-center gap-1.5 text-sm font-bold mt-6"
                   style={{ color: 'var(--color-wine)' }}
                 >
                   See capability

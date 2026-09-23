@@ -1,49 +1,80 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import { capabilities } from '@/lib/content'
 
 /**
- * Every entry is a real route. The review found a single anchor element in the
- * live DOM with navigation rendered as buttons, which cost the site copyable
- * URLs, deep links, back/forward behaviour and crawlable destinations.
+ * Site header.
+ *
+ * Structure: Home, a Capabilities mega-menu holding the six verticals, then
+ * Insights, About and Careers at equal weight, and one primary call to
+ * action — "Discuss your project".
+ *
+ * Behaviour
+ *  - The bar hides when the reader scrolls down and returns the moment they
+ *    scroll up, so long pages read without a band across the top. It always
+ *    returns at the top of the page, and never hides while a menu is open.
+ *    Driven by a Framer Motion value, so scrolling causes no re-render.
+ *  - The mega-menu opens on hover and on focus, closes on Escape, on a route
+ *    change and on click-away, and is a real button/panel pair with
+ *    aria-expanded and aria-controls.
+ *
+ * Every entry is a real link, so URLs are copyable, crawlable and work with
+ * back/forward.
  */
+
 const navLinks = [
-  { label: 'Capabilities', href: '/capabilities' },
-  { label: 'How it works', href: '/how-it-works' },
-  { label: 'Proof', href: '/proof' },
+  { label: 'Home', href: '/' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/about' },
+  { label: 'Careers', href: '/careers' },
 ]
 
 /**
- * Local brand asset, 1878 x 645 (2.912:1). Served from /public rather than the
- * old remote blob URL, so the logo is not a third-party request on first paint
- * and cannot break if that bucket goes away.
+ * Local brand asset, 1878 x 645 (2.912:1). Served from /public rather than a
+ * remote blob, so the logo is not a third-party request on first paint.
  */
 export const LOGO_SRC = '/six-jars-global-logo-horizontal.png'
 export const LOGO_W = 1878
 export const LOGO_H = 645
 
 export default function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [megaOpen, setMegaOpen] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const megaRef = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const { scrollY } = useScroll()
+  const lastY = useRef(0)
 
-  // A route change must always close the overlay, including on back/forward.
+  // Hide on the way down, reveal on the way up. State flips only when the
+  // direction actually changes, so this is a handful of renders per page.
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const previous = lastY.current
+    lastY.current = y
+    setScrolled(y > 24)
+    if (megaOpen || mobileOpen) return
+    if (y < 120) {
+      setHidden(false)
+      return
+    }
+    if (y > previous + 6) setHidden(true)
+    else if (y < previous - 6) setHidden(false)
+  })
+
+  // A route change closes everything, including on back/forward.
   useEffect(() => {
     setMobileOpen(false)
+    setMegaOpen(false)
+    setHidden(false)
   }, [pathname])
 
   // While the full-screen menu is open the page behind it must not scroll.
@@ -56,14 +87,42 @@ export default function SiteHeader() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMobileOpen(false)
+      if (e.key === 'Escape') {
+        setMobileOpen(false)
+        setMegaOpen(false)
+      }
+    }
+    const onClick = (e: MouseEvent) => {
+      if (megaRef.current && !megaRef.current.contains(e.target as Node)) {
+        setMegaOpen(false)
+      }
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    document.addEventListener('click', onClick)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.removeEventListener('click', onClick)
+    }
   }, [])
 
   const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + '/')
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
+
+  const inCapabilities = pathname.startsWith('/capabilities')
+
+  const openMega = () => {
+    clearTimeout(closeTimer.current)
+    setMegaOpen(true)
+  }
+  const closeMegaSoon = () => {
+    clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setMegaOpen(false), 120)
+  }
+
+  const linkStyle = (active: boolean) => ({
+    color: active ? 'var(--color-wine)' : 'rgba(75,13,36,0.78)',
+    background: active ? 'rgba(112,13,44,0.07)' : 'transparent',
+  })
 
   return (
     <>
@@ -71,15 +130,18 @@ export default function SiteHeader() {
         Skip to main content
       </a>
 
-      <header
-        className="fixed top-0 left-0 right-0 z-50 glass-ivory transition-shadow duration-300"
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50 glass-ivory"
+        initial={false}
+        animate={{ y: hidden ? '-110%' : '0%' }}
+        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
         style={{
           height: 'var(--header-h)',
           borderBottom: `1px solid ${scrolled ? 'rgba(75,13,36,0.14)' : 'rgba(228,217,206,0.7)'}`,
           boxShadow: scrolled ? '0 6px 24px rgba(75,13,36,0.06)' : 'none',
         }}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-6">
           <Link
             href="/"
             className="flex items-center shrink-0"
@@ -90,54 +152,146 @@ export default function SiteHeader() {
               alt="Six Jars Global"
               width={LOGO_W}
               height={LOGO_H}
-              // Intrinsic ratio is 2.912:1, so a 40px cap renders ~116px wide
-              // and still clears the 44px row comfortably on a 360px screen.
               className="h-12 sm:h-14 lg:h-[68px] w-auto object-contain"
               priority
             />
           </Link>
 
+          {/* One nav row, every item on the same baseline. */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={isActive(link.href) ? 'page' : undefined}
-                className="px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
-                style={{
-                  color: isActive(link.href) ? 'var(--color-wine)' : 'rgba(75,13,36,0.72)',
-                  background: isActive(link.href) ? 'rgba(112,13,44,0.07)' : 'transparent',
-                }}
+            <Link
+              href="/"
+              aria-current={isActive('/') ? 'page' : undefined}
+              className="px-3 h-10 inline-flex items-center rounded-lg text-sm font-medium transition-colors duration-200"
+              style={linkStyle(isActive('/'))}
+            >
+              Home
+            </Link>
+
+            {/* Capabilities mega-menu */}
+            <div
+              ref={megaRef}
+              className="relative"
+              onMouseEnter={openMega}
+              onMouseLeave={closeMegaSoon}
+              onFocus={openMega}
+              onBlur={closeMegaSoon}
+            >
+              <button
+                type="button"
+                aria-expanded={megaOpen}
+                aria-controls="capabilities-mega"
+                aria-current={inCapabilities ? 'page' : undefined}
+                onClick={() => setMegaOpen((v) => !v)}
+                className="px-3 h-10 inline-flex items-center gap-1.5 rounded-lg text-sm font-medium transition-colors duration-200"
+                style={linkStyle(inCapabilities)}
               >
-                {link.label}
-              </Link>
-            ))}
+                Capabilities
+                <ChevronDown
+                  size={15}
+                  aria-hidden="true"
+                  className="transition-transform duration-200"
+                  style={{ transform: megaOpen ? 'rotate(180deg)' : 'none' }}
+                />
+              </button>
+
+              <AnimatePresence>
+                {megaOpen && (
+                  <motion.div
+                    id="capabilities-mega"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 4 }}
+                    transition={{ duration: 0.18, ease: 'easeOut' }}
+                    className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-[min(92vw,860px)] rounded-2xl p-3 overflow-hidden"
+                    style={{
+                      background: 'var(--color-ivory)',
+                      border: '1px solid var(--color-line)',
+                      boxShadow: '0 28px 60px -28px rgba(75,13,36,0.45)',
+                    }}
+                  >
+                    <ul className="grid sm:grid-cols-2 gap-1">
+                      {capabilities.map((c) => (
+                        <li key={c.slug}>
+                          <Link
+                            href={`/capabilities/${c.slug}`}
+                            className="group flex gap-3 rounded-xl p-3 transition-colors duration-150 hover:bg-[color:var(--color-parchment)]"
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-[11px] font-extrabold"
+                              style={{
+                                background: 'var(--color-plum)',
+                                color: 'var(--color-gold)',
+                              }}
+                            >
+                              {c.number}
+                            </span>
+                            <span className="min-w-0">
+                              <span
+                                className="block text-sm font-bold"
+                                style={{ color: 'var(--color-plum)' }}
+                              >
+                                {c.fullName}
+                              </span>
+                              <span
+                                className="block text-xs leading-relaxed mt-0.5"
+                                style={{ color: 'rgba(75,13,36,0.66)' }}
+                              >
+                                {c.summary}
+                              </span>
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div
+                      className="mt-2 pt-3 px-3 pb-1 flex flex-wrap items-center gap-x-6 gap-y-2"
+                      style={{ borderTop: '1px solid var(--color-line)' }}
+                    >
+                      <Link
+                        href="/capabilities"
+                        className="text-sm font-bold"
+                        style={{ color: 'var(--color-wine)' }}
+                      >
+                        All six capabilities →
+                      </Link>
+                      <Link
+                        href="/how-it-works"
+                        className="text-sm font-semibold"
+                        style={{ color: 'rgba(75,13,36,0.7)' }}
+                      >
+                        How it works
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {navLinks
+              .filter((l) => l.href !== '/')
+              .map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                  className="px-3 h-10 inline-flex items-center rounded-lg text-sm font-medium transition-colors duration-200"
+                  style={linkStyle(isActive(link.href))}
+                >
+                  {link.label}
+                </Link>
+              ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Link
-              href="/careers"
-              aria-current={isActive('/careers') ? 'page' : undefined}
-              className="hidden md:inline-flex items-center justify-center px-5 rounded-full text-sm font-semibold tap-target transition-colors duration-200"
-              style={{
-                lineHeight: '42px',
-                color: 'var(--color-wine)',
-                border: '1.5px solid var(--color-wine)',
-                background: isActive('/careers') ? 'rgba(112,13,44,0.07)' : 'transparent',
-              }}
-            >
-              Careers
-            </Link>
+          <div className="flex items-center gap-2 shrink-0">
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center justify-center px-5 rounded-full text-sm font-semibold tap-target transition-transform duration-200 hover:-translate-y-0.5"
-              style={{
-                background: 'var(--color-wine)',
-                color: 'var(--color-ivory)',
-                lineHeight: '44px',
-              }}
+              className="hidden sm:inline-flex items-center justify-center px-6 h-11 rounded-full text-sm font-bold whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5"
+              style={{ background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
             >
-              Start a conversation
+              Discuss your project
             </Link>
 
             <button
@@ -153,7 +307,7 @@ export default function SiteHeader() {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {mobileOpen && (
@@ -167,52 +321,81 @@ export default function SiteHeader() {
             style={{
               background: 'var(--color-ivory)',
               paddingTop: 'calc(var(--header-h) + 1rem)',
-              // Respect the notch and the home indicator on iOS.
               paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)',
             }}
           >
-            <nav
-              className="flex flex-col px-6 gap-1"
-              aria-label="Mobile"
-            >
-              {navLinks.map((link) => (
+            <nav className="flex flex-col px-6 gap-1" aria-label="Mobile">
+              <Link
+                href="/"
+                aria-current={isActive('/') ? 'page' : undefined}
+                className="flex items-center text-xl font-semibold rounded-xl px-4"
+                style={{
+                  minHeight: 56,
+                  ...linkStyle(isActive('/')),
+                  borderBottom: '1px solid rgba(228,217,206,0.9)',
+                }}
+              >
+                Home
+              </Link>
+
+              <p
+                className="mt-4 mb-1 px-4 text-[11px] font-bold tracking-[0.16em] uppercase"
+                style={{ color: 'rgba(75,13,36,0.5)' }}
+              >
+                Capabilities
+              </p>
+              {capabilities.map((c) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={isActive(link.href) ? 'page' : undefined}
-                  className="flex items-center text-xl font-semibold rounded-xl px-4"
+                  key={c.slug}
+                  href={`/capabilities/${c.slug}`}
+                  className="flex items-center gap-3 rounded-xl px-4 text-base font-semibold"
                   style={{
-                    minHeight: 56,
-                    color: isActive(link.href) ? 'var(--color-wine)' : 'rgba(75,13,36,0.82)',
-                    background: isActive(link.href) ? 'rgba(112,13,44,0.07)' : 'transparent',
+                    minHeight: 52,
+                    color: 'rgba(75,13,36,0.82)',
                     borderBottom: '1px solid rgba(228,217,206,0.9)',
                   }}
                 >
-                  {link.label}
+                  <span
+                    aria-hidden="true"
+                    className="text-xs font-extrabold"
+                    style={{ color: 'var(--color-wine)' }}
+                  >
+                    {c.number}
+                  </span>
+                  {c.fullName}
                 </Link>
               ))}
-              <Link
-                href="/careers"
-                aria-current={isActive('/careers') ? 'page' : undefined}
-                className="mt-6 flex items-center justify-center rounded-full text-base font-semibold"
-                style={{
-                  minHeight: 56,
-                  color: 'var(--color-wine)',
-                  border: '1.5px solid var(--color-wine)',
-                }}
-              >
-                Careers
-              </Link>
+
+              <div className="mt-4 flex flex-col gap-1">
+                {navLinks
+                  .filter((l) => l.href !== '/')
+                  .map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      aria-current={isActive(link.href) ? 'page' : undefined}
+                      className="flex items-center text-xl font-semibold rounded-xl px-4"
+                      style={{
+                        minHeight: 56,
+                        ...linkStyle(isActive(link.href)),
+                        borderBottom: '1px solid rgba(228,217,206,0.9)',
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+              </div>
+
               <Link
                 href="/contact"
-                className="mt-3 flex items-center justify-center rounded-full text-base font-semibold"
+                className="mt-6 flex items-center justify-center rounded-full text-base font-bold"
                 style={{
                   minHeight: 56,
-                  background: 'var(--color-gold)',
-                  color: 'var(--color-plum)',
+                  background: 'var(--color-wine)',
+                  color: 'var(--color-ivory)',
                 }}
               >
-                Start a conversation
+                Discuss your project
               </Link>
             </nav>
           </motion.div>

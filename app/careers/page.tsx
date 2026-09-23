@@ -18,7 +18,7 @@ import { capabilities, careers } from '@/lib/content'
 export const metadata: Metadata = {
   title: 'Careers',
   description:
-    'Work across six connected capabilities for Catholic and mission-led organizations — with human judgment in the loop and named ownership of every piece of work.',
+    'Work across six connected capabilities on complex, high-stakes delivery — with human judgment in the loop and named ownership of every piece of work.',
   alternates: { canonical: '/careers' },
 }
 
@@ -43,7 +43,7 @@ export default function CareersPage() {
       <PageHeader
         eyebrow="Careers"
         title="Do work that matters — and own it."
-        intro="Join a team that connects six disciplines for Catholic and mission-led organizations, where people stay accountable and judgment is never automated away."
+        intro="Join a team that connects six disciplines on complex, high-stakes work, where people stay accountable and judgment is never automated away."
         breadcrumbs={[{ label: 'Careers', href: '/careers' }]}
       />
 

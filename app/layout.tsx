@@ -25,19 +25,20 @@ export const SITE_URL = 'https://sixjarsglobal.com'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Six Jars Global — Mission-critical work. One accountable partner.',
+    default: 'Six Jars Global — Complex work. One accountable partner.',
     // Every page supplies its own title; this frames it consistently.
     template: '%s | Six Jars Global',
   },
   description:
-    'Six Jars connects publishing, media, digital platforms, data and business operations, AI and future-skills training, and cybersecurity and forensics for Catholic and mission-led organizations — governed, human-reviewed and proved at close.',
+    'Six Jars connects publishing, media, digital platforms, data and business operations, AI and future-skills training, and cybersecurity and forensics under one accountable partner — governed, human-reviewed and proved at close.',
   keywords: [
-    'mission-led operations',
-    'Catholic organizations',
+    'governed operations',
+    'accountable delivery partner',
     'publishing operations',
     'AI governance',
     'cybersecurity',
     'AI skills training',
+    'business process operations',
     'digital forensics',
     'Bangalore',
   ],
@@ -49,13 +50,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: 'Six Jars Global',
-    title: 'Six Jars Global — Mission-critical work. One accountable partner.',
+    title: 'Six Jars Global — Complex work. One accountable partner.',
     description:
       'Six connected capabilities for work that must be governed, human-reviewed and proved at close.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Six Jars Global — Mission-critical work. One accountable partner.',
+    title: 'Six Jars Global — Complex work. One accountable partner.',
     description:
       'Six connected capabilities for work that must be governed, human-reviewed and proved at close.',
   },

@@ -8,7 +8,7 @@ import { org } from '@/lib/content'
 export const metadata: Metadata = {
   title: 'About — the mission-aligned operating partner',
   description:
-    'Six Jars Global is a Bangalore-based coordination hub for Catholic and mission-led organizations. Our mission, vision, values and brand promise.',
+    'Six Jars Global is a Bengaluru-based coordination hub for organizations with complex, high-stakes work. Our mission, vision, values and brand promise.',
   alternates: { canonical: '/about' },
 }
 
@@ -36,7 +36,7 @@ const values = [
   },
   {
     name: 'Responsible adaptation',
-    desc: 'Modernize without erasing Catholic identity, mission purpose, governance or institutional memory.',
+    desc: 'Modernize without erasing organizational identity, purpose, governance or institutional memory.',
   },
   {
     name: 'Proof',
@@ -50,7 +50,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="The mission-aligned operating partner."
-        intro="A Bangalore-based coordination hub giving Catholic and mission-led organizations access to disciplined delivery across six connected capabilities."
+        intro="A Bengaluru-based coordination hub giving organizations access to disciplined delivery across six connected capabilities."
         breadcrumbs={[{ label: 'About', href: '/about' }]}
       />
 
@@ -92,10 +92,10 @@ export default function AboutPage() {
                   className="text-base leading-relaxed"
                   style={{ color: 'rgba(75,13,36,0.78)' }}
                 >
-                  To strengthen Catholic and mission-led organizations with trusted
-                  publishing, media, digital, operational, learning, cybersecurity and forensic
-                  capacity — coordinating people, systems and evidence so their mission can
-                  serve further, safer and longer.
+                  To strengthen organizations with trusted publishing, media, digital,
+                  operational, learning, cybersecurity and forensic capacity —
+                  coordinating people, systems and evidence so their work can go further,
+                  safer and longer.
                 </p>
               </div>
 
@@ -113,9 +113,9 @@ export default function AboutPage() {
                   className="text-base leading-relaxed"
                   style={{ color: 'rgba(75,13,36,0.78)' }}
                 >
-                  A world in which every mission-led institution can access the accountable
-                  systems, creative capability, digital resilience and human judgment it
-                  needs to remain relevant, secure and effective across generations.
+                  A world in which every organization can access the accountable systems,
+                  creative capability, digital resilience and human judgment it needs to
+                  remain relevant, secure and effective across generations.
                 </p>
               </div>
             </div>
@@ -198,10 +198,10 @@ export default function AboutPage() {
                 fontFamily: 'var(--font-source-serif)',
               }}
             >
-              &ldquo;When a mission-led organization faces work that matters, Six Jars
-              Global connects the right discipline, people, process and technology — with
-              Catholic fluency, human judgment, discretion, and one accountable path from
-              brief to evidence.&rdquo;
+              &ldquo;When an organization faces work that matters, Six Jars Global
+              connects the right discipline, people, process and technology — with sector
+              fluency, human judgment, discretion, and one accountable path from brief to
+              evidence.&rdquo;
             </p>
             <footer
               className="text-xs font-bold tracking-[0.16em] uppercase mt-5"

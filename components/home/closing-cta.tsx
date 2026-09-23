@@ -53,7 +53,7 @@ export default function ClosingCta() {
             />
           </Link>
           <Link
-            href="/proof"
+            href="/capabilities"
             className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold transition-colors duration-200"
             style={{
               background: 'transparent',
@@ -62,7 +62,7 @@ export default function ClosingCta() {
               minHeight: 56,
             }}
           >
-            See the evidence first
+            Explore six capabilities
           </Link>
         </div>
       </div>

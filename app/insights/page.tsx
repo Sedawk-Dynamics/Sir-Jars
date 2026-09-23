@@ -6,7 +6,7 @@ import ClosingCta from '@/components/home/closing-cta'
 export const metadata: Metadata = {
   title: 'Insights',
   description:
-    'Practical insight on governed publishing, security baselines, AI oversight and evidence discipline for Catholic and mission-led organizations.',
+    'Practical insight on governed publishing, security baselines, AI oversight and evidence discipline for organizations with complex, high-stakes work.',
   alternates: { canonical: '/insights' },
 }
 

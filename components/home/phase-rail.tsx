@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { phases } from '@/lib/content'
 
 /**
@@ -79,73 +79,87 @@ export default function PhaseRail() {
                 ref={(el) => {
                   itemRefs.current[i] = el
                 }}
-                className="rounded-2xl p-6 lg:p-7 transition-all duration-500"
+                className="phase-card relative flex flex-col rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500"
                 style={{
-                  background: isActive ? 'var(--color-plum)' : '#FFFFFF',
-                  border: `1px solid ${isActive ? 'var(--color-plum)' : 'var(--color-line)'}`,
+                  background: isActive
+                    ? 'linear-gradient(155deg, #6A1633 0%, #4B0D24 60%, #3A0A1C 100%)'
+                    : '#FFFFFF',
+                  border: `1px solid ${isActive ? 'transparent' : 'var(--color-line)'}`,
                   boxShadow: isActive
-                    ? '0 18px 48px rgba(75,13,36,0.18)'
+                    ? '0 24px 60px -24px rgba(75,13,36,0.5)'
                     : '0 1px 3px rgba(75,13,36,0.04)',
+                  transform: isActive ? 'translateY(-6px)' : 'none',
                 }}
               >
-                <div className="flex items-baseline gap-3">
-                  <span
-                    className="text-3xl font-black leading-none"
-                    style={{
-                      color: isActive ? 'var(--color-gold)' : 'rgba(112,13,44,0.22)',
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3
-                    className="text-xl font-bold"
-                    style={{
-                      color: isActive ? 'var(--color-ivory)' : 'var(--color-plum)',
-                    }}
-                  >
-                    {phase.name}
-                  </h3>
-                </div>
+                {/* Gold rule across the top of the phase in focus. */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-1 transition-opacity duration-500"
+                  style={{
+                    opacity: isActive ? 1 : 0,
+                    background:
+                      'linear-gradient(90deg, transparent, var(--color-gold), transparent)',
+                  }}
+                />
+
+                {/* Oversized numeral, set as a watermark that stays legible. */}
+                <span
+                  aria-hidden="true"
+                  className="absolute -top-3 right-4 text-[5.5rem] font-black leading-none select-none transition-colors duration-500"
+                  style={{
+                    color: isActive ? 'rgba(241,181,59,0.22)' : 'rgba(112,13,44,0.09)',
+                  }}
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                <span
+                  className="relative text-[11px] font-bold tracking-[0.18em] uppercase"
+                  style={{ color: isActive ? 'var(--color-gold)' : 'var(--color-rose)' }}
+                >
+                  Phase {String(i + 1).padStart(2, '0')}
+                </span>
+
+                <h3
+                  className="relative text-2xl lg:text-[1.75rem] font-extrabold tracking-tight mt-1.5"
+                  style={{ color: isActive ? 'var(--color-ivory)' : 'var(--color-plum)' }}
+                >
+                  {phase.name}
+                </h3>
 
                 <p
-                  className="text-sm font-semibold mt-4 leading-snug"
-                  style={{
-                    color: isActive ? 'var(--color-gold)' : 'var(--color-wine)',
-                  }}
+                  className="relative text-base font-semibold leading-snug mt-4"
+                  style={{ color: isActive ? 'var(--color-gold)' : 'var(--color-wine)' }}
                 >
                   {phase.headline}
                 </p>
 
                 <p
-                  className="text-sm leading-relaxed mt-3"
+                  className="relative text-sm leading-relaxed mt-3"
                   style={{
-                    color: isActive ? 'rgba(252,251,248,0.7)' : 'rgba(75,13,36,0.68)',
+                    color: isActive ? 'rgba(252,251,248,0.76)' : 'rgba(75,13,36,0.7)',
                   }}
                 >
                   {phase.description}
                 </p>
 
-                <ul className="mt-5 space-y-2">
+                {/* Stages as pills — lighter than a tick list, and scannable. */}
+                <ul className="relative flex flex-wrap gap-2 mt-6 pt-5" style={{
+                  borderTop: `1px solid ${isActive ? 'rgba(252,251,248,0.16)' : 'var(--color-line)'}`,
+                }}>
                   {phase.stages.map((stage) => (
-                    <li key={stage.number} className="flex items-center gap-2">
-                      <Check
-                        size={14}
-                        aria-hidden="true"
-                        className="flex-shrink-0"
-                        style={{
-                          color: isActive ? 'var(--color-gold)' : 'var(--color-rose)',
-                        }}
-                      />
-                      <span
-                        className="text-xs font-medium"
-                        style={{
-                          color: isActive
-                            ? 'rgba(252,251,248,0.8)'
-                            : 'rgba(75,13,36,0.7)',
-                        }}
-                      >
-                        Stage {stage.number} — {stage.name}
-                      </span>
+                    <li
+                      key={stage.number}
+                      className="text-[11px] font-bold tracking-wide px-3 py-1.5 rounded-full"
+                      style={{
+                        background: isActive
+                          ? 'rgba(241,181,59,0.14)'
+                          : 'var(--color-parchment)',
+                        color: isActive ? 'var(--color-gold)' : 'var(--color-wine)',
+                        border: `1px solid ${isActive ? 'rgba(241,181,59,0.32)' : 'var(--color-line)'}`,
+                      }}
+                    >
+                      {stage.number} · {stage.name}
                     </li>
                   ))}
                 </ul>

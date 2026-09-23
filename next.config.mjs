@@ -11,6 +11,7 @@ const nextConfig = {
   // Forensics merged into one vertical. Old URLs redirect permanently.
   async redirects() {
     return [
+      { source: '/proof', destination: '/capabilities', permanent: true },
       { source: '/capabilities/digital-ai', destination: '/capabilities/digital-platforms', permanent: true },
       { source: '/capabilities/cybersecurity', destination: '/capabilities/cybersecurity-forensics', permanent: true },
       { source: '/capabilities/digital-forensics', destination: '/capabilities/cybersecurity-forensics', permanent: true },

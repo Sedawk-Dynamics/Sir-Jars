@@ -400,11 +400,11 @@ export type Engagement = {
 
 export const engagements: Engagement[] = [
   {
-    slug: 'diocesan-publishing-consolidation',
+    slug: 'publishing-consolidation',
     capability: 'Publishing',
-    title: 'Consolidating a fragmented diocesan publishing pipeline',
+    title: 'Consolidating a fragmented publishing pipeline',
     context:
-      'A diocesan communications office running print, web and newsletter production through three disconnected vendors, with no single approval record.',
+      'A communications office running print, web and newsletter production through three disconnected vendors, with no single approval record.',
     scope: [
       'Map the existing production path end to end',
       'Establish one editorial calendar and approval gate',
@@ -428,7 +428,7 @@ export const engagements: Engagement[] = [
     capability: 'Digital Platforms',
     title: 'Writing an AI use policy before the tools were deployed',
     context:
-      'A mission-led publisher under pressure to adopt AI drafting tools, with no stated position on where machine output was permitted.',
+      'A publisher under pressure to adopt AI drafting tools, with no stated position on where machine output was permitted.',
     scope: [
       'Inventory the proposed AI uses across content workflows',
       'Classify each use as permitted, review-gated or prohibited',
@@ -492,9 +492,9 @@ export const articles: Article[] = [
   {
     slug: 'governing-editorial-workflows',
     capability: 'Publishing',
-    title: 'Governing editorial workflows for Catholic institutions in the digital age',
+    title: 'Governing editorial workflows in the digital age',
     excerpt:
-      'How mission-led publishers can establish disciplined production pipelines that preserve institutional voice while scaling output across digital and print channels.',
+      'How publishers can establish disciplined production pipelines that preserve institutional voice while scaling output across digital and print channels.',
     readTime: '8 min',
     date: 'July 2026',
     isoDate: '2026-07-14',
@@ -510,17 +510,17 @@ export const articles: Article[] = [
   {
     slug: 'four-controls-before-incident-response',
     capability: 'Cyber & Forensics',
-    title: 'The four controls every mission-led organization must establish before incident response',
+    title: 'The four controls every organization must establish before incident response',
     excerpt:
-      'Before incident response training, these baseline protective controls reduce exposure for organizations managing sensitive mission data and institutional archives.',
+      'Before incident response training, these baseline protective controls reduce exposure for organizations managing sensitive data and institutional archives.',
     readTime: '6 min',
     date: 'June 2026',
     isoDate: '2026-06-23',
     image: '/images/cybersecurity-ops.png',
     body: [
-      'Incident response training is valuable, but it is frequently purchased before the controls that would have prevented the incident. Four baseline controls do more for a mission-led organisation than a tabletop exercise.',
+      'Incident response training is valuable, but it is frequently purchased before the controls that would have prevented the incident. Four baseline controls do more for an organisation than a tabletop exercise.',
       'First, a current access register. You cannot respond to unauthorised access if you cannot state who was authorised. Second, tested backups — tested meaning restored, not merely scheduled.',
-      'Third, a written classification of the data you hold, so that responders know within minutes whether an affected system contained sensitive personal or pastoral records. Fourth, a contact tree that names who decides, not only who is informed.',
+      'Third, a written classification of the data you hold, so that responders know within minutes whether an affected system contained sensitive personal or confidential records. Fourth, a contact tree that names who decides, not only who is informed.',
       'These four are unglamorous and durable. Incident response built on top of them is a plan; incident response without them is a hope.',
     ],
   },
@@ -536,7 +536,7 @@ export const articles: Article[] = [
     image: '/images/insights-editorial.png',
     body: [
       'The governance question is not whether to use AI in content operations. It is where machine output is permitted to reach a reader without a person having looked at it.',
-      'A workable framework classifies every proposed use into three states: permitted, review-gated and prohibited. Permitted uses are those where an error is trivially reversible and carries no doctrinal or pastoral weight — internal formatting, for instance.',
+      'A workable framework classifies every proposed use into three states: permitted, review-gated and prohibited. Permitted uses are those where an error is trivially reversible and carries no reputational or regulatory weight — internal formatting, for instance.',
       'Review-gated uses are the large middle: drafting, summarising, translating. These require a named reviewer and a queue that cannot be bypassed under deadline pressure. Prohibited uses should be written down with the reasoning attached, because the reasoning is what lets a future colleague revisit the decision honestly.',
       'Write the policy before deploying the tools. An organisation that adopts first and governs later ends up defining its position in the middle of an incident, which is the worst possible moment to think clearly.',
     ],
@@ -652,15 +652,15 @@ export const founder = {
   /** Pull-quote under the portrait — renders only once the founder supplies one. */
   quote: null as string | null,
   /** Short credential chips shown beside the name. */
-  credentials: ['Catholic-sector fluency', 'Governed AI delivery', 'Evidence-first close'],
+  credentials: ['Governed delivery', 'AI with human review', 'Evidence-first close'],
   tabs: [
     {
       id: 'profile',
       label: 'Profile',
       kind: 'prose',
       body: [
-        'Six Jars Global was founded to give Catholic and mission-led institutions one accountable partner across six connected disciplines — instead of six vendors, six invoices and no single owner when something goes wrong.',
-        'The operating model came out of a simple observation: mission-led organizations rarely lack effort. They lack a documented path from brief to evidence, and a named person answerable at every gate along it.',
+        'Six Jars Global was founded to give organizations one accountable partner across six connected disciplines — instead of six vendors, six invoices and no single owner when something goes wrong.',
+        'The operating model came out of a simple observation: organizations rarely lack effort. They lack a documented path from brief to evidence, and a named person answerable at every gate along it.',
       ],
     },
     {
@@ -692,24 +692,24 @@ export const founder = {
       kind: 'grid',
       items: [
         {
-          name: 'Dioceses & parishes',
-          detail: 'Communications, records and digital platform operations.',
+          name: 'Publishing & media',
+          detail: 'Editorial production, channel operations and rights-aware archives.',
         },
         {
-          name: 'Religious congregations',
-          detail: 'Archives, publishing and institutional memory.',
+          name: 'Education & training',
+          detail: 'Schools, colleges and training providers — platforms, content and data governance.',
         },
         {
-          name: 'Catholic education',
-          detail: 'Schools and colleges — platforms, content and data governance.',
-        },
-        {
-          name: 'Healthcare & social mission',
+          name: 'Healthcare & social care',
           detail: 'Sensitive data handling and operational resilience.',
         },
         {
-          name: 'Mission-led nonprofits',
-          detail: 'Campaign operations, reporting and donor-facing content.',
+          name: 'Nonprofits & foundations',
+          detail: 'Campaign operations, reporting and supporter-facing content.',
+        },
+        {
+          name: 'Professional services',
+          detail: 'Records, reporting and back-office workflows that must hold up to audit.',
         },
       ],
     },
@@ -779,10 +779,10 @@ export const galleryItems: GalleryItem[] = [
   {
     slug: 'mission-work',
     title: 'Mission work',
-    caption: 'The institutions the six capabilities exist to serve.',
+    caption: 'The organizations the six capabilities exist to serve.',
     category: 'Digital + AI',
     src: '/images/mission-editorial.png',
-    alt: 'Mission-led institutional work being carried out.',
+    alt: 'Operational work being carried out in an office.',
     shape: 'square',
   },
   {
@@ -824,9 +824,9 @@ export const careers = {
   roles: [] as Role[],
   reasons: [
     {
-      title: 'Work that serves a mission',
+      title: 'Work that outlasts the engagement',
       detail:
-        'Everything we deliver supports Catholic and mission-led institutions. The work is meant to outlast the engagement.',
+        'Everything we deliver is meant to outlast the engagement — work that keeps serving the organization long after close.',
     },
     {
       title: 'Your judgment stays in the loop',

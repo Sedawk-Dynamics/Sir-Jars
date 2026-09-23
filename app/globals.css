@@ -439,3 +439,18 @@ html {
   animation: none;
   transform: translateY(0) scale(1.04);
 }
+
+/* Capability cards: a warm wash that lifts in on hover or keyboard focus. */
+.capability-card__wash {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.capability-card:hover .capability-card__wash,
+.capability-card:focus-visible .capability-card__wash {
+  opacity: 1;
+}
+.capability-card:hover,
+.capability-card:focus-visible {
+  border-color: rgba(241, 181, 59, 0.55) !important;
+  box-shadow: 0 20px 44px -22px rgba(75, 13, 36, 0.4) !important;
+}

@@ -141,7 +141,6 @@ export default function SiteFooter() {
               {[
                 { label: 'About', href: '/about' },
                 { label: 'How it works', href: '/how-it-works' },
-                { label: 'Proof', href: '/proof' },
                 { label: 'Insights', href: '/insights' },
                 { label: 'Careers', href: '/careers' },
                 { label: 'Contact', href: '/contact' },

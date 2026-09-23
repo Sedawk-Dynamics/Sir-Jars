@@ -17,7 +17,6 @@ export default function NotFound() {
               { label: 'Home', href: '/' },
               { label: 'Capabilities', href: '/capabilities' },
               { label: 'How it works', href: '/how-it-works' },
-              { label: 'Proof', href: '/proof' },
               { label: 'Insights', href: '/insights' },
               { label: 'About', href: '/about' },
               { label: 'Contact', href: '/contact' },

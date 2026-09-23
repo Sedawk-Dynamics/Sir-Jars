@@ -60,14 +60,14 @@ export default function Hero() {
                 className="inline-block h-px w-8"
                 style={{ background: 'var(--color-gold)' }}
               />
-              For Catholic and mission-led organizations
+              For organizations with complex, high-stakes work
             </p>
 
             <h1
               className="mt-6 font-extrabold tracking-tight leading-[1.05]"
               style={{ fontSize: 'clamp(2.5rem, 4.6vw, 4rem)' }}
             >
-              <span style={{ color: 'var(--color-ivory)' }}>Mission-critical work.</span>
+              <span style={{ color: 'var(--color-ivory)' }}>Complex work.</span>
               <br />
               <span className="text-gold-gradient">One accountable partner.</span>
             </h1>
@@ -194,16 +194,7 @@ export default function Hero() {
             ))}
           </ul>
           <p className="mt-6 text-xs" style={{ color: 'rgba(252,251,248,0.42)' }}>
-            These are operating commitments we hold ourselves to. Verified engagement
-            outcomes are documented under{' '}
-            <Link
-              href="/proof"
-              className="underline underline-offset-2"
-              style={{ color: 'rgba(252,251,248,0.7)' }}
-            >
-              Proof
-            </Link>
-            .
+            These are operating commitments we hold ourselves to.
           </p>
         </div>
       </div>

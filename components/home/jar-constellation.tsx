@@ -1,12 +1,4 @@
 import Link from 'next/link'
-import {
-  BookOpen,
-  Clapperboard,
-  Database,
-  GraduationCap,
-  ShieldCheck,
-  Workflow,
-} from 'lucide-react'
 import Jar from '@/components/brand/jar'
 import Image from 'next/image'
 import { capabilities } from '@/lib/content'
@@ -55,16 +47,13 @@ const UNIFORM_GLAZE: [string, string] = ['#FBD983', '#C98B18']
  */
 const RING_RADIUS = 35 // percent of the scene, from centre
 
-const LAYOUT: Record<
-  string,
-  { slot: number; label: string; Icon: typeof BookOpen }
-> = {
-  publishing: { slot: 0, label: 'Publishing & Print Operations', Icon: BookOpen },
-  media: { slot: 1, label: 'Media & Content Operations', Icon: Clapperboard },
-  'digital-platforms': { slot: 2, label: 'Digital Platforms & Automation', Icon: Workflow },
-  'data-operations': { slot: 3, label: 'Data & Business Operations', Icon: Database },
-  'ai-academy': { slot: 4, label: 'AI & Future Skills Academy', Icon: GraduationCap },
-  'cybersecurity-forensics': { slot: 5, label: 'Cybersecurity & Forensics', Icon: ShieldCheck },
+const LAYOUT: Record<string, { slot: number; label: string }> = {
+  publishing: { slot: 0, label: 'Publishing & Print Operations' },
+  media: { slot: 1, label: 'Media & Content Operations' },
+  'digital-platforms': { slot: 2, label: 'Digital Platforms & Automation' },
+  'data-operations': { slot: 3, label: 'Data & Business Operations' },
+  'ai-academy': { slot: 4, label: 'AI & Future Skills Academy' },
+  'cybersecurity-forensics': { slot: 5, label: 'Cybersecurity & Forensics' },
 }
 
 function slotPosition(slot: number) {
@@ -195,29 +184,24 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
                       bottom={bottom}
                       className="block w-full h-auto jar-halo"
                     />
-                    {/* Icon and name on the belly, set in HTML so both stay
-                        crisp at every size the jar renders at. */}
+                    {/* Name on the belly — no icon, set large and bold so it
+                        carries the jar on its own. */}
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-[15%] top-[30%] bottom-[13%] flex flex-col items-center justify-center gap-[6%] text-center"
+                      className="absolute inset-x-[11%] top-[30%] bottom-[12%] flex items-center justify-center text-center"
                       style={{
                         color: ink,
                         filter:
                           jars === 'uniform'
                             ? 'none'
-                            : 'drop-shadow(0 1px 2px rgba(20,3,10,0.55))',
+                            : 'drop-shadow(0 1px 3px rgba(20,3,10,0.65))',
                       }}
                     >
-                      <j.Icon
-                        strokeWidth={1.6}
-                        className="w-[30%] h-auto shrink-0"
-                        style={{ aspectRatio: '1 / 1' }}
-                      />
                       <span
-                        className="font-bold uppercase leading-[1.25]"
+                        className="font-extrabold uppercase leading-[1.2]"
                         style={{
-                          fontSize: 'clamp(5.6px, 0.8vw, 8px)',
-                          letterSpacing: '0.06em',
+                          fontSize: 'clamp(8px, 1.18vw, 12px)',
+                          letterSpacing: '0.02em',
                         }}
                       >
                         {j.label}
