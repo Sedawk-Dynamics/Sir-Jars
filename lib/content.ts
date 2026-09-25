@@ -246,6 +246,8 @@ export type Phase = {
   slug: string
   number: string
   name: string
+  /** Two-to-three word caption for the timeline. */
+  short: string
   headline: string
   description: string
   /** The named role accountable for the stage. */
@@ -258,6 +260,7 @@ export type Phase = {
 export const phases: Phase[] = [
   {
     slug: 'understand',
+    short: 'Scope + owner',
     number: '01',
     name: 'Understand',
     headline: 'Context, scope and authorisation before any work begins',
@@ -274,6 +277,7 @@ export const phases: Phase[] = [
   },
   {
     slug: 'plan',
+    short: 'Plan + gate',
     number: '02',
     name: 'Plan',
     headline: 'Boundaries, risks and review points agreed in writing',
@@ -290,6 +294,7 @@ export const phases: Phase[] = [
   },
   {
     slug: 'execute',
+    short: 'Controlled work',
     number: '03',
     name: 'Execute',
     headline: 'Coordinated delivery with accountable people at every decision',
@@ -306,6 +311,7 @@ export const phases: Phase[] = [
   },
   {
     slug: 'review',
+    short: 'Human review',
     number: '04',
     name: 'Review',
     headline: 'Human review against the standard agreed at the start',
@@ -322,6 +328,7 @@ export const phases: Phase[] = [
   },
   {
     slug: 'validate',
+    short: 'Evidence check',
     number: '05',
     name: 'Validate',
     headline: 'Documented evidence at close that separates fact from intent',
@@ -338,6 +345,7 @@ export const phases: Phase[] = [
   },
   {
     slug: 'improve',
+    short: 'Close + learn',
     number: '06',
     name: 'Improve',
     headline: 'An honest review after close — and what changes next time',
