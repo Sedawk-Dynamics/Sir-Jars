@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, Check, Compass, Scale, ShieldCheck } from 'lucide-react'
 import PageHeader, { verticalVisuals } from '@/components/page-header'
 import EvidenceDrawer from '@/components/evidence-drawer'
+import AcademyPathways from '@/components/academy-pathways'
 import { capabilities, engagements, getCapability } from '@/lib/content'
 
 type Params = { params: Promise<{ slug: string }> }
@@ -197,6 +198,8 @@ export default async function CapabilityPage({ params }: Params) {
           )}
         </div>
       </section>
+
+      {capability.slug === 'ai-academy' && <AcademyPathways />}
 
       {related.length > 0 && (
         <section

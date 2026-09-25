@@ -3,6 +3,7 @@ import Image from 'next/image'
 import PageHeader from '@/components/page-header'
 import ClosingCta from '@/components/home/closing-cta'
 import FounderSection from '@/components/founder-section'
+import MissionValues from '@/components/mission-values'
 import { org } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -12,38 +13,6 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about' },
 }
 
-/**
- * Full mission and vision text lives here rather than on the homepage — the
- * review found the same ideas recurring across many homepage sections, which
- * delayed the outcome story.
- */
-const values = [
-  {
-    name: 'Stewardship',
-    desc: 'Treat money, data, content, systems and relationships as entrusted work.',
-  },
-  {
-    name: 'Human judgment',
-    desc: 'Use automation to assist; keep accountable people in review, approval and exception handling.',
-  },
-  {
-    name: 'Discretion',
-    desc: 'Protect sensitive content, institutional context, personal data and digital evidence.',
-  },
-  {
-    name: 'Connected craft',
-    desc: 'Coordinate editorial, creative, technical, operational and forensic disciplines without seams.',
-  },
-  {
-    name: 'Responsible adaptation',
-    desc: 'Modernize without erasing organizational identity, purpose, governance or institutional memory.',
-  },
-  {
-    name: 'Proof',
-    desc: 'Document scope, decisions, controls, evidence and outcomes; distinguish verified facts from ambition.',
-  },
-]
-
 const statements = [
   {
     label: 'Positioning',
@@ -51,14 +20,9 @@ const statements = [
     text: 'Six Jars Global brings six connected capabilities under one accountable delivery model for organizations, educators and communities.',
   },
   {
-    label: 'Mission',
+    label: 'Brand promise',
     accent: 'var(--color-gold)',
-    text: 'To turn complex work into clear, secure and measurable outcomes through coordinated expertise, practical technology and responsible execution.',
-  },
-  {
-    label: 'Vision',
-    accent: 'var(--color-rose)',
-    text: 'A world where every organization and learner can access the skills, systems and safeguards needed to adapt, grow and create lasting value.',
+    text: 'One named owner connects specialists, approvals, delivery and close-out evidence from brief to completion.',
   },
 ]
 
@@ -82,6 +46,9 @@ export default function AboutPage() {
         imageAlt="Bengaluru, where Six Jars Global is based."
         pattern="circuit"
       />
+
+      {/* Purpose near the hero; values become observable behaviours. */}
+      <MissionValues />
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -129,12 +96,12 @@ export default function AboutPage() {
         style={{ background: 'var(--color-plum)' }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl">
             <p
               className="text-xs font-bold tracking-[0.18em] uppercase"
               style={{ color: 'var(--color-gold)' }}
             >
-              Brand values
+              How we say it
             </p>
             <h2
               className="mt-3 font-extrabold tracking-tight leading-tight"
@@ -143,78 +110,11 @@ export default function AboutPage() {
                 fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
               }}
             >
-              The principles that govern every engagement
+              Six capabilities. One accountable partner.
             </h2>
           </div>
 
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map((value, i) => (
-              <li
-                key={value.name}
-                className="rounded-2xl p-6"
-                style={{
-                  background: 'rgba(252,251,248,0.05)',
-                  border: '1px solid rgba(252,251,248,0.1)',
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  className="inline-flex w-9 h-9 rounded-lg items-center justify-center text-sm font-bold mb-4"
-                  style={{
-                    background: 'rgba(241,181,59,0.14)',
-                    color: 'var(--color-gold)',
-                  }}
-                >
-                  {i + 1}
-                </span>
-                <h3
-                  className="text-base font-bold"
-                  style={{ color: 'var(--color-ivory)' }}
-                >
-                  {value.name}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed mt-2"
-                  style={{ color: 'rgba(252,251,248,0.62)' }}
-                >
-                  {value.desc}
-                </p>
-              </li>
-            ))}
-          </ul>
-
-          <blockquote
-            className="mt-12 rounded-2xl p-7 lg:p-10 max-w-4xl"
-            style={{
-              background: 'rgba(241,181,59,0.08)',
-              border: '1px solid rgba(241,181,59,0.24)',
-            }}
-          >
-            <p
-              className="text-lg lg:text-xl leading-relaxed italic"
-              style={{
-                color: 'var(--color-ivory)',
-                fontFamily: 'var(--font-source-serif)',
-              }}
-            >
-              &ldquo;One named owner connects specialists, approvals, delivery and
-              close-out evidence from brief to completion.&rdquo;
-            </p>
-            <footer
-              className="text-xs font-bold tracking-[0.16em] uppercase mt-5"
-              style={{ color: 'var(--color-gold)' }}
-            >
-              Our brand promise
-            </footer>
-          </blockquote>
-
-          <h2
-            className="mt-14 text-xs font-bold tracking-[0.18em] uppercase"
-            style={{ color: 'var(--color-gold)' }}
-          >
-            How we say it
-          </h2>
-          <dl className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <dl className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {brandLines.map((line) => (
               <div
                 key={line.label}
