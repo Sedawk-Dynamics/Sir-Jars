@@ -44,6 +44,9 @@ export default async function LegalPage({ params }: Params) {
         title={doc.title}
         intro={doc.intro}
         breadcrumbs={[{ label: doc.title, href: `/legal/${slug}` }]}
+        image="/images/about-bangalore.png"
+        imageAlt=""
+        pattern="weave"
       />
 
       <section className="py-14 lg:py-20" style={{ background: 'var(--color-ivory)' }}>

@@ -19,6 +19,9 @@ export default function CapabilitiesPage() {
         title="Six routes into the work."
         intro="Each jar is a distinct service promise. Together they form one governed operating system — six routes into the work, one accountable relationship across all of it."
         breadcrumbs={[{ label: 'Capabilities', href: '/capabilities' }]}
+        image="/images/hero-cinematic.png"
+        imageAlt="Specialists at work across connected disciplines."
+        pattern="hatch"
       />
 
       <CapabilityCards

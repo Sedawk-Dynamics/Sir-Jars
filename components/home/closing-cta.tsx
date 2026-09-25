@@ -16,7 +16,7 @@ export default function ClosingCta() {
           className="text-xs font-bold tracking-[0.18em] uppercase"
           style={{ color: 'var(--color-wine)' }}
         >
-          Mission, Made Capable.
+          Capability, made accountable.
         </p>
         <h2
           className="mt-4 font-extrabold tracking-tight leading-tight"

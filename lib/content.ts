@@ -239,115 +239,117 @@ export function getCapability(slug: string) {
   return capabilities.find((c) => c.slug === slug)
 }
 
-/* ── Three-phase homepage method. The six operational stages sit underneath. ── */
+/* ── Six-stage method: Understand → Plan → Execute → Review → Validate → Improve.
+   Every stage names an accountable owner and the evidence that lets it exit. ── */
 
 export type Phase = {
   slug: string
+  number: string
   name: string
   headline: string
   description: string
-  /** The detailed stages this homepage phase rolls up. */
-  stages: { number: string; name: string; description: string; outputs: string[] }[]
+  /** The named role accountable for the stage. */
+  owner: string
+  /** What must exist before the stage can close. */
+  exitEvidence: string
+  outputs: string[]
 }
 
 export const phases: Phase[] = [
   {
     slug: 'understand',
+    number: '01',
     name: 'Understand',
     headline: 'Context, scope and authorisation before any work begins',
     description:
-      'We learn your institutional context, then write down what is in scope, who may authorise what, and where confidentiality applies — before a single task is executed.',
-    stages: [
-      {
-        number: '01',
-        name: 'Discover',
-        description:
-          'A structured discovery conversation covering institutional context, governance requirements, service needs, authorisation levels and confidentiality requirements.',
-        outputs: [
-          'Mission context brief',
-          'Service route identification',
-          'Authorisation and governance mapping',
-          'Initial scope definition',
-        ],
-      },
-      {
-        number: '02',
-        name: 'Assess',
-        description:
-          'We define service boundaries, identify the human review points, map risk and sensitivity, and clarify what falls within our coordination versus a specialist practice.',
-        outputs: [
-          'Scope and boundary document',
-          'Risk and sensitivity assessment',
-          'Human review point mapping',
-          'Engagement proposal',
-        ],
-      },
+      'We learn your context, then write down what is in scope, who may authorise what, and where confidentiality applies — before a single task is executed.',
+    owner: 'Engagement owner',
+    exitEvidence: 'Signed scope brief and authorisation map',
+    outputs: [
+      'Context brief',
+      'Service route identification',
+      'Authorisation and governance mapping',
+      'Initial scope definition',
+    ],
+  },
+  {
+    slug: 'plan',
+    number: '02',
+    name: 'Plan',
+    headline: 'Boundaries, risks and review points agreed in writing',
+    description:
+      'We define service boundaries, map risk and sensitivity, fix the human review points and agree approvals, reporting cadence and escalation paths.',
+    owner: 'Engagement owner with capability lead',
+    exitEvidence: 'Approved delivery plan and governance framework',
+    outputs: [
+      'Scope and boundary document',
+      'Risk and sensitivity assessment',
+      'Human review point mapping',
+      'Escalation pathway',
     ],
   },
   {
     slug: 'execute',
+    number: '03',
     name: 'Execute',
-    headline: 'Governed delivery with accountable people at every decision',
+    headline: 'Coordinated delivery with accountable people at every decision',
     description:
-      'The governance framework is established first — approvals, confidentiality protocols, reporting cadence, escalation paths — and only then does coordinated delivery begin.',
-    stages: [
-      {
-        number: '03',
-        name: 'Govern',
-        description:
-          'Before execution begins we establish authorisation approvals, approval pathways, confidentiality protocols, reporting cadence and escalation paths.',
-        outputs: [
-          'Authorisation documentation',
-          'Governance framework',
-          'Confidentiality protocols',
-          'Escalation pathway',
-        ],
-      },
-      {
-        number: '04',
-        name: 'Deliver',
-        description:
-          'Coordinated delivery across the relevant disciplines, with human judgment at every approval and exception point. Automation assists; accountable people decide.',
-        outputs: [
-          'Coordinated delivery',
-          'Human-reviewed checkpoints',
-          'Progress reporting',
-          'Quality assurance',
-        ],
-      },
+      'Delivery runs across the relevant disciplines against the approved plan. Automation assists; accountable people decide at every approval and exception point.',
+    owner: 'Capability lead',
+    exitEvidence: 'Delivered work with a dated progress and exception log',
+    outputs: [
+      'Coordinated delivery',
+      'Progress reporting',
+      'Exception log',
+      'Working-file control',
     ],
   },
   {
-    slug: 'prove',
-    name: 'Prove',
-    headline: 'Documented evidence at close — and an honest review after it',
+    slug: 'review',
+    number: '04',
+    name: 'Review',
+    headline: 'Human review against the standard agreed at the start',
     description:
-      'Every engagement closes with verified outcomes and decision records that separate what was done from what was intended. Then we review the engagement against the standard we set.',
-    stages: [
-      {
-        number: '05',
-        name: 'Validate',
-        description:
-          'Engagements close with documented outcomes: verified results, decision records, confirmed quality controls and maintained evidence logs — distinguishing fact from aspiration.',
-        outputs: [
-          'Verified outcome documentation',
-          'Evidence and decision logs',
-          'Quality control confirmation',
-          'Lessons recorded',
-        ],
-      },
-      {
-        number: '06',
-        name: 'Evolve',
-        description:
-          'We review each engagement against defined standards, update service capacity, and identify how the operating relationship can responsibly extend.',
-        outputs: [
-          'Engagement review',
-          'Improvement recommendations',
-          'Expanded scope options',
-          'Ongoing relationship governance',
-        ],
-      },
+      'Named reviewers check the work against the approved scope and quality criteria. Findings are recorded, corrected and signed off — not waved through under deadline.',
+    owner: 'Named reviewer',
+    exitEvidence: 'Review record with findings and sign-off',
+    outputs: [
+      'Human-reviewed checkpoints',
+      'Quality assurance findings',
+      'Correction record',
+      'Reviewer sign-off',
+    ],
+  },
+  {
+    slug: 'validate',
+    number: '05',
+    name: 'Validate',
+    headline: 'Documented evidence at close that separates fact from intent',
+    description:
+      'The engagement closes with verified outcomes, decision records and maintained evidence logs — distinguishing what was done from what was intended.',
+    owner: 'Engagement owner',
+    exitEvidence: 'Close-out evidence pack accepted by the client',
+    outputs: [
+      'Verified outcome documentation',
+      'Evidence and decision logs',
+      'Quality control confirmation',
+      'Client acceptance',
+    ],
+  },
+  {
+    slug: 'improve',
+    number: '06',
+    name: 'Improve',
+    headline: 'An honest review after close — and what changes next time',
+    description:
+      'We review the engagement against the standard we set, record lessons, and identify how the working relationship can responsibly extend.',
+    owner: 'Founder',
+    exitEvidence: 'Engagement review with recorded improvements',
+    outputs: [
+      'Engagement review',
+      'Lessons recorded',
+      'Improvement recommendations',
+      'Next-scope options',
     ],
   },
 ]
@@ -477,10 +479,18 @@ export const engagements: Engagement[] = [
 
 export type Article = {
   slug: string
+  /** Related vertical — must match a capability slug. */
+  vertical: string
+  /** Display label for the vertical (the capability short name). */
   capability: string
   title: string
   excerpt: string
-  readTime: string
+  author: { name: string; role: string }
+  reviewer: { name: string; role: string }
+  /** One practical thing a reader can act on. */
+  takeaway: string
+  /** What the article does and does not establish. */
+  evidenceBoundary: string
   date: string
   isoDate: string
   image: string
@@ -488,20 +498,27 @@ export type Article = {
   body: string[]
 }
 
-export const articles: Article[] = [
+const FOUNDER = { name: 'Sreejith S', role: 'Founder' }
+
+const articleData: Omit<Article, 'capability'>[] = [
   {
     slug: 'governing-editorial-workflows',
-    capability: 'Publishing',
-    title: 'Governing editorial workflows in the digital age',
+    vertical: 'publishing',
+    title: 'Governing editorial workflows without slowing publication',
     excerpt:
-      'How publishers can establish disciplined production pipelines that preserve institutional voice while scaling output across digital and print channels.',
-    readTime: '8 min',
+      'How publishers can set clear approval gates that protect house voice and quality while output scales across print and digital channels.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Name one approver per publication type and keep their dated decision for as long as you keep the publication.',
+    evidenceBoundary:
+      'Practitioner guidance drawn from publishing operations practice. It is not a benchmark study and makes no measured performance claim.',
     date: 'July 2026',
     isoDate: '2026-07-14',
     image: '/images/publishing-ops.png',
     featured: true,
     body: [
-      'Most institutional publishing problems are not writing problems. They are approval problems. Work moves faster than the people responsible for it can review, and the gap fills with improvisation.',
+      'Most publishing problems are not writing problems. They are approval problems. Work moves faster than the people responsible for it can review, and the gap fills with improvisation.',
       'A governed editorial workflow makes three things explicit: who may approve at each stage, what evidence of approval is retained, and what happens when an exception arrives late. None of this slows a well-run publishing operation. It is what allows one to scale without losing its voice.',
       'Start with the approval gate rather than the tooling. Name the approver for each publication type, record their decision against a dated proof, and retain that record for the same period you retain the publication itself. Tooling choices become straightforward once the gates are settled.',
       'The failure mode to watch for is the silent exception: an item that skipped review because someone was travelling and the deadline was fixed. Design an explicit path for that case, or the exception becomes the process.',
@@ -509,11 +526,16 @@ export const articles: Article[] = [
   },
   {
     slug: 'four-controls-before-incident-response',
-    capability: 'Cyber & Forensics',
-    title: 'The four controls every organization must establish before incident response',
+    vertical: 'cybersecurity-forensics',
+    title: 'Four controls to put in place before incident response',
     excerpt:
-      'Before incident response training, these baseline protective controls reduce exposure for organizations managing sensitive data and institutional archives.',
-    readTime: '6 min',
+      'Before buying incident response training, these four baseline controls reduce exposure for any organization that holds sensitive data or records.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Restore one backup this month and write down who is authorised to decide during an incident — not just who is informed.',
+    evidenceBoundary:
+      'Baseline guidance only. It is not a security assessment of any organization and does not replace a tailored risk review.',
     date: 'June 2026',
     isoDate: '2026-06-23',
     image: '/images/cybersecurity-ops.png',
@@ -526,11 +548,16 @@ export const articles: Article[] = [
   },
   {
     slug: 'human-judgment-in-ai-assisted-content',
-    capability: 'Digital Platforms',
-    title: 'Human judgment in AI-assisted content: a governance framework for mission media',
+    vertical: 'digital-platforms',
+    title: 'Human judgment in AI-assisted content: a practical governance framework',
     excerpt:
-      'A structured approach to integrating AI tools into content workflows while maintaining human oversight at every approval and publication point.',
-    readTime: '10 min',
+      'A structured way to bring AI tools into content workflows while keeping a named person accountable at every approval and publication point.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Sort every proposed AI use into permitted, review-gated or prohibited — and write the reasoning down before any tool is deployed.',
+    evidenceBoundary:
+      'A governance framework, not legal advice. Regulatory obligations vary by jurisdiction and sector and should be confirmed separately.',
     date: 'June 2026',
     isoDate: '2026-06-04',
     image: '/images/insights-editorial.png',
@@ -543,16 +570,21 @@ export const articles: Article[] = [
   },
   {
     slug: 'evidence-preservation-authorization-first',
-    capability: 'Cyber & Forensics',
-    title: 'Evidence preservation for institutional investigations: authorization comes first',
+    vertical: 'cybersecurity-forensics',
+    title: 'Evidence preservation in internal investigations: authorisation comes first',
     excerpt:
-      'The sequence of decisions an organization must make — before any forensic analysis begins — to ensure evidence remains sound and chain of custody is maintained.',
-    readTime: '7 min',
+      'The decisions an organization must make before any forensic analysis begins, so that evidence stays sound and chain of custody holds.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Before anyone touches a device, record who authorised the work, what it covers, what it excludes and when it expires.',
+    evidenceBoundary:
+      'General process guidance, not legal advice. Admissibility and procedure depend on jurisdiction and should be confirmed with counsel.',
     date: 'May 2026',
     isoDate: '2026-05-19',
     image: '/images/insights-editorial.png',
     body: [
-      'The most common error in institutional investigations is not technical. It is sequence: analysis begins before authorisation is documented, and the resulting findings carry an asterisk that cannot be removed afterwards.',
+      'The most common error in internal investigations is not technical. It is sequence: analysis begins before authorisation is documented, and the resulting findings carry an asterisk that cannot be removed afterwards.',
       'Authorisation should state who granted it, what it covers, what it explicitly does not cover, and when it expires. That last element is routinely omitted and routinely matters.',
       'Preservation follows authorisation. Every artefact is logged at acquisition with who acquired it, from where, and under what hash. The log continues through every transfer until release.',
       'Finally, the report must separate what the evidence establishes from what a reasonable person might infer from it. Decision-makers are entitled to both, clearly labelled, and never blended together.',
@@ -560,26 +592,40 @@ export const articles: Article[] = [
   },
 ]
 
+/** Read time derived from the final published copy at ~200 words a minute. */
+export function readTime(article: Pick<Article, 'excerpt' | 'takeaway' | 'body'>) {
+  const words = [article.excerpt, article.takeaway, ...article.body]
+    .join(' ')
+    .split(/\s+/)
+    .filter(Boolean).length
+  return `${Math.max(1, Math.ceil(words / 200))} min`
+}
+
+export const articles: Article[] = articleData.map((a) => ({
+  ...a,
+  capability: capabilities.find((c) => c.slug === a.vertical)?.shortName ?? a.vertical,
+}))
+
 export function getArticle(slug: string) {
   return articles.find((a) => a.slug === slug)
 }
 
-/* ── Contact intent paths (review p.3: keep, but shorten the labels) ── */
+/* ── Contact intent paths ─────────────────────────────────────────────── */
 
 export const contactPaths = [
   {
     id: 'project',
-    label: 'Start a project',
-    desc: 'You have a defined scope and are ready to engage.',
+    label: 'Discuss a project',
+    desc: 'You have work in mind and want to scope it with us.',
     responseChannel:
       'A named owner replies by email within 2 business days with a scoping call proposal.',
   },
   {
-    id: 'briefing',
-    label: 'Capability briefing',
-    desc: 'You want to understand what we do before committing to anything.',
+    id: 'support',
+    label: 'Request support',
+    desc: 'You are a client and need help with work we delivered.',
     responseChannel:
-      'We send a written capability summary for your route, then offer a 30-minute call.',
+      'Acknowledged within 1 business day and routed to the named owner of your engagement.',
   },
   {
     id: 'sensitive',

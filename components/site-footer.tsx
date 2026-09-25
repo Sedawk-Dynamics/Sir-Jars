@@ -4,6 +4,8 @@ import { ArrowRight, Mail, Phone } from 'lucide-react'
 import { capabilities, org } from '@/lib/content'
 import { legalDocs, legalOrder } from '@/lib/legal'
 import { LOGO_SRC, LOGO_W, LOGO_H } from './site-header'
+import BackToTop from './back-to-top'
+import { CookieSettingsButton } from './cookie-manager'
 
 /** Brand marks were dropped from lucide v1, so LinkedIn ships inline. */
 function LinkedInMark() {
@@ -36,7 +38,7 @@ export default function SiteFooter() {
       style={{ background: 'var(--color-plum)', color: 'var(--color-ivory)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-12 mb-14">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10 mb-12">
           <div className="col-span-2 md:col-span-4">
             {/* The wordmark and jars are burgundy and gold on transparency, so
                 they would disappear against the plum footer. Rather than
@@ -55,11 +57,11 @@ export default function SiteFooter() {
               />
             </span>
             <p className="text-sm leading-relaxed max-w-xs text-ivory/70">
-              Mission, Made Capable.
+              Capability, made accountable.
             </p>
             <p className="text-sm leading-relaxed max-w-xs mt-2 text-ivory/55">
-              Six connected capabilities, one accountable partner, for work that must be
-              governed, human-reviewed and proved at close.
+              Six capabilities. One accountable partner. Clear scope, coordinated
+              delivery and evidence at close.
             </p>
 
             <ul className="flex items-center gap-3 mt-6">
@@ -157,40 +159,18 @@ export default function SiteFooter() {
             </ul>
           </nav>
 
-          <nav className="md:col-span-3" aria-label="Legal and contact">
+          <div className="col-span-2 md:col-span-3">
             <h2 className="text-xs font-bold tracking-widest uppercase mb-4 text-ivory/45">
-              Legal
+              Contact
             </h2>
-            <ul className="space-y-3">
-              {legalOrder.map((slug) => ({
-                label: legalDocs[slug].title,
-                href: `/legal/${slug}`,
-              })).map((l) => (
-                <li key={l.href}>
-                  <Link
-                    href={l.href}
-                    className="text-sm text-ivory/70 hover:text-gold transition-colors"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <address className="not-italic mt-6 text-sm leading-relaxed text-ivory/55">
+            <address className="not-italic text-sm leading-relaxed text-ivory/65">
               {org.address}
               <br />
-              <a
-                href={`tel:${org.phoneHref}`}
-                className="hover:text-gold transition-colors"
-              >
+              <a href={`tel:${org.phoneHref}`} className="hover:text-gold transition-colors">
                 {org.phone}
               </a>
               <br />
-              <a
-                href={`mailto:${org.email}`}
-                className="hover:text-gold transition-colors"
-              >
+              <a href={`mailto:${org.email}`} className="hover:text-gold transition-colors">
                 {org.email}
               </a>
               <br />
@@ -209,22 +189,52 @@ export default function SiteFooter() {
                 {org.privacyEmail}
               </a>
             </p>
-          </nav>
+          </div>
         </div>
 
-        <div
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-6"
+        {/* Legal links as one horizontal, divider-separated bar. */}
+        <nav
+          aria-label="Legal"
+          className="py-5"
           style={{ borderTop: '1px solid rgba(252,251,248,0.12)' }}
         >
-          <p className="text-xs text-ivory/45">
-            &copy; {year} {org.legalName}. All rights reserved.
-          </p>
-          <p className="text-xs text-ivory/40">
-            GSTIN: {org.gstin}
-            {/* CIN renders only once verified against the incorporation
-                certificate. An unverified identifier is worse than none. */}
-            {org.cin ? <> &middot; CIN: {org.cin}</> : null}
-          </p>
+          <ul className="flex flex-wrap justify-center gap-y-2 text-xs">
+            {legalOrder.map((slug, i) => (
+              <li
+                key={slug}
+                className="px-3"
+                style={
+                  i === 0 ? undefined : { borderLeft: '1px solid rgba(252,251,248,0.2)' }
+                }
+              >
+                <Link
+                  href={`/legal/${slug}`}
+                  className="text-ivory/70 hover:text-gold transition-colors"
+                >
+                  {legalDocs[slug].title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div
+          className="flex flex-col md:flex-row items-center justify-between gap-4 pt-5 text-center md:text-left"
+          style={{ borderTop: '1px solid rgba(252,251,248,0.12)' }}
+        >
+          <div>
+            <p className="text-xs text-ivory/45">
+              &copy; {year} {org.legalName}. All rights reserved.
+            </p>
+            <p className="text-xs text-ivory/40 mt-1">
+              GSTIN: {org.gstin}
+              {org.cin ? <> &middot; CIN: {org.cin}</> : null}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <CookieSettingsButton className="inline-flex items-center px-4 rounded-full text-xs font-semibold text-ivory/80 hover:text-gold border border-ivory/20 transition-colors min-h-10" />
+            <BackToTop className="inline-flex items-center gap-1.5 px-4 rounded-full text-xs font-bold min-h-10 bg-gold text-plum transition-transform hover:-translate-y-0.5" />
+          </div>
         </div>
       </div>
     </footer>

@@ -6,9 +6,9 @@ import FounderSection from '@/components/founder-section'
 import { org } from '@/lib/content'
 
 export const metadata: Metadata = {
-  title: 'About — the mission-aligned operating partner',
+  title: 'About — Capability, made accountable',
   description:
-    'Six Jars Global is a Bengaluru-based coordination hub for organizations with complex, high-stakes work. Our mission, vision, values and brand promise.',
+    'Six Jars Global brings six connected capabilities under one accountable delivery model for organizations, educators and communities. Our positioning, mission, vision and brand promise.',
   alternates: { canonical: '/about' },
 }
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const values = [
   {
     name: 'Stewardship',
-    desc: 'Treat mission, money, data, content, systems and relationships as entrusted work.',
+    desc: 'Treat money, data, content, systems and relationships as entrusted work.',
   },
   {
     name: 'Human judgment',
@@ -44,14 +44,43 @@ const values = [
   },
 ]
 
+const statements = [
+  {
+    label: 'Positioning',
+    accent: 'var(--color-wine)',
+    text: 'Six Jars Global brings six connected capabilities under one accountable delivery model for organizations, educators and communities.',
+  },
+  {
+    label: 'Mission',
+    accent: 'var(--color-gold)',
+    text: 'To turn complex work into clear, secure and measurable outcomes through coordinated expertise, practical technology and responsible execution.',
+  },
+  {
+    label: 'Vision',
+    accent: 'var(--color-rose)',
+    text: 'A world where every organization and learner can access the skills, systems and safeguards needed to adapt, grow and create lasting value.',
+  },
+]
+
+const brandLines = [
+  { label: 'Master line', text: 'Capability, made accountable.' },
+  { label: 'Service line', text: 'Six capabilities. One accountable partner.' },
+  { label: 'Hero line', text: 'Complex work. One accountable partner.' },
+  { label: 'Operational line', text: 'Clear scope. Coordinated delivery. Evidence at close.' },
+  { label: 'Security line', text: 'Protect systems. Preserve evidence. Respond with clarity.' },
+]
+
 export default function AboutPage() {
   return (
     <>
       <PageHeader
         eyebrow="About"
-        title="The mission-aligned operating partner."
-        intro="A Bengaluru-based coordination hub giving organizations access to disciplined delivery across six connected capabilities."
+        title="Capability, made accountable."
+        intro="Six Jars Global brings six connected capabilities under one accountable delivery model for organizations, educators and communities."
         breadcrumbs={[{ label: 'About', href: '/about' }]}
+        image="/images/about-bangalore.png"
+        imageAlt="Bengaluru, where Six Jars Global is based."
+        pattern="circuit"
       />
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
@@ -67,57 +96,27 @@ export default function AboutPage() {
               />
             </div>
 
-            <div>
-              <p
-                className="text-base leading-relaxed"
-                style={{ color: 'rgba(75,13,36,0.8)' }}
-              >
-                We are not a generic outsourcing firm. The strategic advantage we offer is
-                culturally literate, human-reviewed, governed execution — connecting the
-                right discipline, people, process and technology with one accountable path
-                from brief to evidence.
-              </p>
-
-              <div
-                className="mt-8 pl-5"
-                style={{ borderLeft: '3px solid var(--color-gold)' }}
-              >
-                <h2
-                  className="text-xs font-bold tracking-[0.18em] uppercase mb-2"
-                  style={{ color: 'var(--color-wine)' }}
+            <div className="space-y-6">
+              {statements.map((item) => (
+                <div
+                  key={item.label}
+                  className="pl-5"
+                  style={{ borderLeft: `3px solid ${item.accent}` }}
                 >
-                  Mission
-                </h2>
-                <p
-                  className="text-base leading-relaxed"
-                  style={{ color: 'rgba(75,13,36,0.78)' }}
-                >
-                  To strengthen organizations with trusted publishing, media, digital,
-                  operational, learning, cybersecurity and forensic capacity —
-                  coordinating people, systems and evidence so their work can go further,
-                  safer and longer.
-                </p>
-              </div>
-
-              <div
-                className="mt-6 pl-5"
-                style={{ borderLeft: '3px solid var(--color-rose)' }}
-              >
-                <h2
-                  className="text-xs font-bold tracking-[0.18em] uppercase mb-2"
-                  style={{ color: 'var(--color-wine)' }}
-                >
-                  Vision
-                </h2>
-                <p
-                  className="text-base leading-relaxed"
-                  style={{ color: 'rgba(75,13,36,0.78)' }}
-                >
-                  A world in which every organization can access the accountable systems,
-                  creative capability, digital resilience and human judgment it needs to
-                  remain relevant, secure and effective across generations.
-                </p>
-              </div>
+                  <h2
+                    className="text-xs font-bold tracking-[0.18em] uppercase mb-2"
+                    style={{ color: 'var(--color-wine)' }}
+                  >
+                    {item.label}
+                  </h2>
+                  <p
+                    className="text-base leading-relaxed"
+                    style={{ color: 'rgba(75,13,36,0.8)' }}
+                  >
+                    {item.text}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -198,10 +197,8 @@ export default function AboutPage() {
                 fontFamily: 'var(--font-source-serif)',
               }}
             >
-              &ldquo;When an organization faces work that matters, Six Jars Global
-              connects the right discipline, people, process and technology — with sector
-              fluency, human judgment, discretion, and one accountable path from brief to
-              evidence.&rdquo;
+              &ldquo;One named owner connects specialists, approvals, delivery and
+              close-out evidence from brief to completion.&rdquo;
             </p>
             <footer
               className="text-xs font-bold tracking-[0.16em] uppercase mt-5"
@@ -210,6 +207,38 @@ export default function AboutPage() {
               Our brand promise
             </footer>
           </blockquote>
+
+          <h2
+            className="mt-14 text-xs font-bold tracking-[0.18em] uppercase"
+            style={{ color: 'var(--color-gold)' }}
+          >
+            How we say it
+          </h2>
+          <dl className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {brandLines.map((line) => (
+              <div
+                key={line.label}
+                className="rounded-2xl p-5"
+                style={{
+                  background: 'rgba(252,251,248,0.05)',
+                  border: '1px solid rgba(252,251,248,0.1)',
+                }}
+              >
+                <dt
+                  className="text-[11px] font-bold tracking-[0.16em] uppercase"
+                  style={{ color: 'rgba(252,251,248,0.55)' }}
+                >
+                  {line.label}
+                </dt>
+                <dd
+                  className="text-base font-bold mt-2 leading-snug"
+                  style={{ color: 'var(--color-ivory)' }}
+                >
+                  {line.text}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

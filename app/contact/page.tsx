@@ -30,6 +30,9 @@ export default async function ContactPage({ searchParams }: Search) {
         title="Tell us what must work — and what cannot be compromised."
         intro="You will receive a structured next step, not a generic sales reply."
         breadcrumbs={[{ label: 'Contact', href: '/contact' }]}
+        image="/images/about-bangalore.png"
+        imageAlt="Bengaluru, where Six Jars Global is based."
+        pattern="diagonal"
       />
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>

@@ -3,8 +3,8 @@ import { ArrowRight } from 'lucide-react'
 
 const reasons = [
   {
-    title: 'Mission-aware, not merely low-cost',
-    body: 'Sector fluency, discretion and stewardship shape how the work is scoped — not just how cheaply it can be delivered.',
+    title: 'Context-aware, not merely low-cost',
+    body: 'Sector fluency, discretion and care shape how the work is scoped — not just how cheaply it can be delivered.',
   },
   {
     title: 'Accountable, with names attached',

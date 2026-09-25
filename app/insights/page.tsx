@@ -18,6 +18,9 @@ export default function InsightsPage() {
         title="Practical insight across the six routes."
         intro="Written for the people who have to make these decisions inside an institution — not for a search engine."
         breadcrumbs={[{ label: 'Insights', href: '/insights' }]}
+        image="/images/insights-editorial.png"
+        imageAlt="An editor reading through research material."
+        pattern="waves"
       />
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>

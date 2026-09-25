@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Check, Compass, Scale, ShieldCheck } from 'lucide-react'
-import PageHeader from '@/components/page-header'
+import PageHeader, { verticalVisuals } from '@/components/page-header'
 import EvidenceDrawer from '@/components/evidence-drawer'
 import { capabilities, engagements, getCapability } from '@/lib/content'
 
@@ -50,6 +50,9 @@ export default async function CapabilityPage({ params }: Params) {
           { label: 'Capabilities', href: '/capabilities' },
           { label: capability.shortName, href: `/capabilities/${capability.slug}` },
         ]}
+        image={verticalVisuals[capability.slug]?.image}
+        imageAlt={verticalVisuals[capability.slug]?.alt}
+        pattern={verticalVisuals[capability.slug]?.pattern}
       />
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>

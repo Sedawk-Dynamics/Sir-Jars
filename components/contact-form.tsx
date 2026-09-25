@@ -1,8 +1,50 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Send, CheckCircle, AlertCircle } from 'lucide-react'
-import { capabilities, contactPaths, type ContactPathId } from '@/lib/content'
+import { Send, CheckCircle, AlertCircle, ShieldAlert } from 'lucide-react'
+import { capabilities, contactPaths, org, type ContactPathId } from '@/lib/content'
+
+/** Whether the desk is staffed right now: Monday–Friday, 09:00–18:00 IST. */
+function isStaffedNow(now = new Date()) {
+  const ist = new Date(now.getTime() + (now.getTimezoneOffset() + 330) * 60_000)
+  const day = ist.getDay()
+  const minutes = ist.getHours() * 60 + ist.getMinutes()
+  return day >= 1 && day <= 5 && minutes >= 9 * 60 && minutes < 18 * 60
+}
+
+function StaffedState() {
+  // Rendered only after mount so server and client never disagree on the time.
+  const [staffed, setStaffed] = useState<boolean | null>(null)
+  useEffect(() => {
+    const tick = () => setStaffed(isStaffedNow())
+    tick()
+    const id = setInterval(tick, 60_000)
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <p
+      className="mt-3 flex items-start gap-2.5 text-sm leading-relaxed rounded-xl p-3.5"
+      style={{ background: '#FFFFFF', border: '1px solid var(--color-line)', color: 'rgba(75,13,36,0.78)' }}
+    >
+      <span
+        aria-hidden="true"
+        className="w-2.5 h-2.5 rounded-full shrink-0 mt-1.5"
+        style={{
+          background: staffed === null ? 'var(--color-line)' : staffed ? '#2E7D4F' : 'var(--color-gold-deep)',
+        }}
+      />
+      <span>
+        <span className="font-semibold" style={{ color: 'var(--color-plum)' }}>
+          {staffed === null ? 'Checking desk status…' : staffed ? 'Staffed now.' : 'Offline right now.'}
+        </span>{' '}
+        {staffed === false
+          ? `Your inquiry is queued and picked up at the start of the next working window (${org.hours}).`
+          : `Hours: ${org.hours}.`}
+      </span>
+    </p>
+  )
+}
 
 /**
  * Contact form.
@@ -187,6 +229,35 @@ export default function ContactForm({
           <span className="font-semibold">What happens next: </span>
           {activePath.responseChannel}
         </p>
+
+        <StaffedState />
+
+        {path === 'sensitive' && (
+          <div
+            role="note"
+            className="mt-3 flex gap-3 rounded-xl p-4"
+            style={{
+              background: 'rgba(154,46,79,0.08)',
+              border: '1px solid var(--color-rose)',
+            }}
+          >
+            <ShieldAlert
+              size={18}
+              aria-hidden="true"
+              className="shrink-0 mt-0.5"
+              style={{ color: 'var(--color-rose)' }}
+            />
+            <div className="text-sm leading-relaxed" style={{ color: 'var(--color-plum)' }}>
+              <p className="font-bold">Secure-routing boundary — read before you write</p>
+              <ul className="mt-1.5 space-y-1 list-disc pl-4" style={{ color: 'rgba(75,13,36,0.8)' }}>
+                <li>This form is not a secure channel. Share only your name, organization and a one-line, non-identifying description.</li>
+                <li>Do not send names of individuals, evidence, credentials, documents or incident details here.</li>
+                <li>We reply with secure-channel instructions first; detail is shared only after that channel is confirmed.</li>
+                <li>If there is an immediate risk to life or safety, contact local emergency services — this is not an emergency line.</li>
+              </ul>
+            </div>
+          </div>
+        )}
       </fieldset>
 
       {errorList.length > 0 && (

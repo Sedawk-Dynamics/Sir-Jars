@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight, Clock } from 'lucide-react'
-import PageHeader from '@/components/page-header'
-import { articles, getArticle } from '@/lib/content'
+import { ArrowRight, Clock, Lightbulb, ShieldCheck, UserCheck } from 'lucide-react'
+import PageHeader, { verticalVisuals } from '@/components/page-header'
+import { articles, getArticle, readTime } from '@/lib/content'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -44,8 +44,11 @@ export default async function ArticlePage({ params }: Params) {
         title={article.title}
         breadcrumbs={[
           { label: 'Insights', href: '/insights' },
-          { label: article.capability, href: `/insights/${article.slug}` },
+          { label: article.title, href: `/insights/${article.slug}` },
         ]}
+        intro={article.excerpt}
+        image={article.image}
+        pattern={verticalVisuals[article.vertical]?.pattern ?? 'hatch'}
       />
 
       <article className="py-14 lg:py-20" style={{ background: 'var(--color-ivory)' }}>
@@ -59,9 +62,21 @@ export default async function ArticlePage({ params }: Params) {
           >
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} aria-hidden="true" />
-              {article.readTime} read
+              {readTime(article)} read
             </span>
             <time dateTime={article.isoDate}>{article.date}</time>
+            <span className="inline-flex items-center gap-1.5">
+              <UserCheck size={14} aria-hidden="true" />
+              By {article.author.name}, {article.author.role} · Reviewed by{' '}
+              {article.reviewer.name}, {article.reviewer.role}
+            </span>
+            <Link
+              href={`/capabilities/${article.vertical}`}
+              className="underline underline-offset-2"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              Related vertical: {article.capability}
+            </Link>
           </div>
 
           <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden my-8">
@@ -94,6 +109,35 @@ export default async function ArticlePage({ params }: Params) {
               </p>
             ))}
           </div>
+
+          <aside
+            className="mt-10 grid sm:grid-cols-2 gap-4"
+            aria-label="Takeaway and evidence boundary"
+          >
+            {[
+              { icon: Lightbulb, label: 'Practical takeaway', text: article.takeaway },
+              { icon: ShieldCheck, label: 'Evidence boundary', text: article.evidenceBoundary },
+            ].map(({ icon: Icon, label, text }) => (
+              <div
+                key={label}
+                className="rounded-2xl p-5"
+                style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
+              >
+                <p
+                  className="flex items-center gap-2 text-[11px] font-bold tracking-[0.16em] uppercase"
+                  style={{ color: 'var(--color-wine)' }}
+                >
+                  <Icon size={14} aria-hidden="true" /> {label}
+                </p>
+                <p
+                  className="text-sm leading-relaxed mt-2"
+                  style={{ color: 'rgba(75,13,36,0.8)' }}
+                >
+                  {text}
+                </p>
+              </div>
+            ))}
+          </aside>
 
           <div
             className="mt-10 rounded-2xl p-6"
@@ -159,7 +203,7 @@ export default async function ArticlePage({ params }: Params) {
                     className="text-xs mt-4"
                     style={{ color: 'rgba(75,13,36,0.5)' }}
                   >
-                    {a.readTime} read · <time dateTime={a.isoDate}>{a.date}</time>
+                    {readTime(a)} read · <time dateTime={a.isoDate}>{a.date}</time>
                   </span>
                 </Link>
               </li>

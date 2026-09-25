@@ -45,6 +45,9 @@ export default function CareersPage() {
         title="Do work that matters — and own it."
         intro="Join a team that connects six disciplines on complex, high-stakes work, where people stay accountable and judgment is never automated away."
         breadcrumbs={[{ label: 'Careers', href: '/careers' }]}
+        image="/images/mission-editorial.png"
+        imageAlt="A colleague reviewing work at a desk."
+        pattern="dots"
       />
 
       {/* ── Why work here ─────────────────────────────────────────────── */}
