@@ -5,6 +5,7 @@ import ClosingCta from '@/components/home/closing-cta'
 import FounderSection from '@/components/founder-section'
 import MissionValues from '@/components/mission-values'
 import { org } from '@/lib/content'
+import { patternVars } from '@/lib/patterns'
 
 export const metadata: Metadata = {
   title: 'About — Capability, made accountable',
@@ -92,8 +93,8 @@ export default function AboutPage() {
       <FounderSection />
 
       <section
-        className="on-dark py-16 lg:py-24"
-        style={{ background: 'var(--color-plum)' }}
+        className="on-dark patterned py-16 lg:py-24"
+        style={{ background: 'var(--color-plum)', ...patternVars('dots', 'gold') }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">

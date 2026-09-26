@@ -1,63 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
+import { patternVars, type PatternName } from '@/lib/patterns'
 
-/**
- * Background textures for the masthead. Each page picks its own so the site
- * reads as a family without every header looking identical. All are drawn in
- * ivory at low opacity over the plum field.
- */
-const stroke = 'rgba(252,251,248,0.09)'
-
-/** Short parallel strokes in blocks at varied angles — a woven, hand-hatched texture. */
-function hatchTile() {
-  const blocks: [number, number, number][] = [
-    [20, 20, 0], [70, 15, 60], [120, 25, -30], [165, 20, 90],
-    [25, 75, 120], [75, 70, 20], [125, 80, 80], [170, 70, -60],
-    [20, 125, 45], [70, 130, -15], [120, 120, 100], [170, 125, 30],
-    [25, 175, -45], [75, 170, 75], [125, 175, 10], [170, 180, 135],
-  ]
-  const lines = blocks
-    .map(([cx, cy, a]) => {
-      const strokes = Array.from({ length: 7 }, (_, i) => {
-        const x = -14 + i * 4.5
-        return `<line x1="${x}" y1="-18" x2="${x}" y2="18"/>`
-      }).join('')
-      return `<g transform="translate(${cx} ${cy}) rotate(${a})">${strokes}</g>`
-    })
-    .join('')
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="none" stroke="${stroke}" stroke-width="1">${lines}</svg>`
-}
-
-const PATTERNS = {
-  hatch: { svg: hatchTile(), size: '200px 200px' },
-  grid: {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" stroke="${stroke}"><path d="M48 0H0V48"/><circle cx="0" cy="0" r="2" fill="${stroke}"/></svg>`,
-    size: '48px 48px',
-  },
-  dots: {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"><circle cx="2" cy="2" r="1.4" fill="rgba(252,251,248,0.13)"/></svg>`,
-    size: '22px 22px',
-  },
-  diagonal: {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="${stroke}"><path d="M-4 4l8-8M0 16L16 0M12 20l8-8"/></svg>`,
-    size: '16px 16px',
-  },
-  waves: {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" fill="none" stroke="${stroke}"><path d="M0 12c10-10 30-10 40 0s30 10 40 0"/></svg>`,
-    size: '80px 24px',
-  },
-  circuit: {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="none" stroke="${stroke}"><path d="M0 24h30l12 12v30M96 72H60L48 60V0M24 96V78h18"/><circle cx="42" cy="66" r="3"/><circle cx="48" cy="60" r="0"/><circle cx="60" cy="72" r="3"/><circle cx="30" cy="24" r="3"/></svg>`,
-    size: '96px 96px',
-  },
-  weave: {
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" stroke="${stroke}"><path d="M0 10h20M20 30h20M10 0v20M30 20v20"/></svg>`,
-    size: '40px 40px',
-  },
-} as const
-
-export type HeaderPattern = keyof typeof PATTERNS
+export type HeaderPattern = PatternName
 
 /** Image and texture for each vertical, shared by capability and insight pages. */
 export const verticalVisuals: Record<string, { image: string; alt: string; pattern: HeaderPattern }> = {
@@ -67,14 +13,6 @@ export const verticalVisuals: Record<string, { image: string; alt: string; patte
   'data-operations': { image: '/images/hero-cinematic.png', alt: 'An operations team coordinating work.', pattern: 'grid' },
   'ai-academy': { image: '/images/mission-editorial.png', alt: 'A learner working through a training module.', pattern: 'dots' },
   'cybersecurity-forensics': { image: '/images/cybersecurity-ops.png', alt: 'A security operations room monitoring systems.', pattern: 'diagonal' },
-}
-
-function patternStyle(name: HeaderPattern): React.CSSProperties {
-  const p = PATTERNS[name]
-  return {
-    backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(p.svg)}")`,
-    backgroundSize: p.size,
-  }
 }
 
 /**
@@ -100,10 +38,9 @@ export default function PageHeader({
 }) {
   return (
     <header
-      className="on-dark relative overflow-hidden pt-10 pb-14 lg:pt-14 lg:pb-20"
-      style={{ background: 'var(--color-plum)' }}
+      className="on-dark patterned overflow-hidden pt-10 pb-14 lg:pt-14 lg:pb-20"
+      style={{ background: 'var(--color-plum)', ...patternVars(pattern) }}
     >
-      <div aria-hidden="true" className="absolute inset-0" style={patternStyle(pattern)} />
       {/* Soft vignette so the texture never competes with the heading. */}
       <div
         aria-hidden="true"

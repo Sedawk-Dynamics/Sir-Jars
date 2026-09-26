@@ -91,14 +91,7 @@ export default async function ArticlePage({ params }: Params) {
             />
           </div>
 
-          <p
-            className="text-lg leading-relaxed font-medium"
-            style={{ color: 'var(--color-plum)' }}
-          >
-            {article.excerpt}
-          </p>
-
-          <div className="mt-6 space-y-5">
+          <div className="space-y-5">
             {article.body.map((paragraph, i) => (
               <p
                 key={i}
@@ -112,11 +105,11 @@ export default async function ArticlePage({ params }: Params) {
 
           <aside
             className="mt-10 grid sm:grid-cols-2 gap-4"
-            aria-label="Takeaway and evidence boundary"
+            aria-label="Takeaway and scope note"
           >
             {[
               { icon: Lightbulb, label: 'Practical takeaway', text: article.takeaway },
-              { icon: ShieldCheck, label: 'Evidence boundary', text: article.evidenceBoundary },
+              { icon: ShieldCheck, label: 'Scope note', text: article.evidenceBoundary },
             ].map(({ icon: Icon, label, text }) => (
               <div
                 key={label}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { patternVars } from '@/lib/patterns'
 
 /**
  * Mission, vision and values — purpose near the hero, and every value turned
@@ -57,8 +58,8 @@ export default function MissionValues() {
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-12 items-start">
           {/* Mission and vision */}
           <div
-            className="on-dark rounded-3xl p-8 lg:p-10 flex flex-col justify-between lg:min-h-full lg:self-stretch"
-            style={{ background: '#3A0A24' }}
+            className="on-dark patterned rounded-3xl p-8 lg:p-10 flex flex-col justify-between lg:min-h-full lg:self-stretch"
+            style={{ background: '#3A0A24', ...patternVars('hatch', 'gold') }}
           >
             <div>
               <h2

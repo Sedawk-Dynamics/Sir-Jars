@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import PageHeader from '@/components/page-header'
 import { capabilities, careers } from '@/lib/content'
+import { patternVars } from '@/lib/patterns'
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -255,7 +256,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── How we hire ──────────────────────────────────────────────── */}
-      <section className="on-dark py-16 lg:py-24" style={{ background: 'var(--color-plum)' }}>
+      <section className="on-dark patterned py-16 lg:py-24" style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p

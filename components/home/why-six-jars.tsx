@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { patternVars } from '@/lib/patterns'
 
 const reasons = [
   {
@@ -21,8 +22,8 @@ const reasons = [
 export default function WhySixJars() {
   return (
     <section
-      className="on-dark py-20 lg:py-28"
-      style={{ background: 'var(--color-plum)' }}
+      className="on-dark patterned py-20 lg:py-28"
+      style={{ background: 'var(--color-plum)', ...patternVars('weave', 'gold') }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="max-w-3xl">

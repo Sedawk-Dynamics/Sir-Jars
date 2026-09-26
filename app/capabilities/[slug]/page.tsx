@@ -6,6 +6,7 @@ import PageHeader, { verticalVisuals } from '@/components/page-header'
 import EvidenceDrawer from '@/components/evidence-drawer'
 import AcademyPathways from '@/components/academy-pathways'
 import { capabilities, engagements, getCapability } from '@/lib/content'
+import { patternVars } from '@/lib/patterns'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -61,8 +62,8 @@ export default async function CapabilityPage({ params }: Params) {
           {/* "Choose this when" — the fastest way to know you are in the
               right place, so it comes before the detail. */}
           <div
-            className="mb-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
-            style={{ background: 'var(--color-plum)' }}
+            className="patterned mb-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+            style={{ background: 'var(--color-plum)', ...patternVars('diagonal') }}
           >
             <Compass
               size={28}
@@ -230,8 +231,8 @@ export default async function CapabilityPage({ params }: Params) {
       )}
 
       <section
-        className="on-dark py-16 lg:py-20"
-        style={{ background: 'var(--color-plum)' }}
+        className="on-dark patterned py-16 lg:py-20"
+        style={{ background: 'var(--color-plum)', ...patternVars('grid', 'gold') }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div>

@@ -3,6 +3,7 @@ import PageHeader from '@/components/page-header'
 import CapabilityCards from '@/components/capability-cards'
 import CapabilityOrbit from '@/components/capability-orbit'
 import ClosingCta from '@/components/home/closing-cta'
+import { patternVars } from '@/lib/patterns'
 
 export const metadata: Metadata = {
   title: 'Capabilities — six routes into the work',
@@ -31,8 +32,8 @@ export default function CapabilitiesPage() {
       />
 
       <section
-        className="on-dark py-20 lg:py-28"
-        style={{ background: 'var(--color-plum)' }}
+        className="on-dark patterned py-20 lg:py-28"
+        style={{ background: 'var(--color-plum)', ...patternVars('diagonal') }}
       >
         <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="text-center mb-10">

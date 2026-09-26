@@ -489,19 +489,22 @@ export type Article = {
   slug: string
   /** Related vertical — must match a capability slug. */
   vertical: string
-  /** Display label for the vertical (the capability short name). */
+  /** Service label shown on cards (the capability short name). */
   capability: string
   title: string
+  /** Short summary — shown on the card and as the article standfirst. */
   excerpt: string
   author: { name: string; role: string }
   reviewer: { name: string; role: string }
-  /** One practical thing a reader can act on. */
+  /** One practical starting point, shown inside the article only. */
   takeaway: string
-  /** What the article does and does not establish. */
+  /** Short scope note, shown inside the article only. */
   evidenceBoundary: string
   date: string
   isoDate: string
   image: string
+  /** Direction for the photograph this article should eventually carry. */
+  imageNote?: string
   featured?: boolean
   body: string[]
 }
@@ -512,95 +515,167 @@ const articleData: Omit<Article, 'capability'>[] = [
   {
     slug: 'governing-editorial-workflows',
     vertical: 'publishing',
-    title: 'Governing editorial workflows without slowing publication',
+    title: 'Who signs off the final proof',
     excerpt:
-      'How publishers can set clear approval gates that protect house voice and quality while output scales across print and digital channels.',
+      'A clear final review helps a publication move forward without confusion over versions or last-minute changes.',
     author: FOUNDER,
     reviewer: FOUNDER,
     takeaway:
-      'Name one approver per publication type and keep their dated decision for as long as you keep the publication.',
-    evidenceBoundary:
-      'Practitioner guidance drawn from publishing operations practice. It is not a benchmark study and makes no measured performance claim.',
+      'Before your next release, identify the final approver and the exact proof they will approve.',
+    evidenceBoundary: 'Practical publishing guidance; no claim of measured performance improvement.',
     date: 'July 2026',
     isoDate: '2026-07-14',
     image: '/images/publishing-ops.png',
+    imageNote: 'A close-up of a proof being checked, with the version and date visible on a fictional document.',
     featured: true,
     body: [
-      'Most publishing problems are not writing problems. They are approval problems. Work moves faster than the people responsible for it can review, and the gap fills with improvisation.',
-      'A governed editorial workflow makes three things explicit: who may approve at each stage, what evidence of approval is retained, and what happens when an exception arrives late. None of this slows a well-run publishing operation. It is what allows one to scale without losing its voice.',
-      'Start with the approval gate rather than the tooling. Name the approver for each publication type, record their decision against a dated proof, and retain that record for the same period you retain the publication itself. Tooling choices become straightforward once the gates are settled.',
-      'The failure mode to watch for is the silent exception: an item that skipped review because someone was travelling and the deadline was fixed. Design an explicit path for that case, or the exception becomes the process.',
+      'A report is ready for print, but two versions are still circulating. One contains the latest corrections; the other has the approval email. Before anyone sends a file to the printer, the team has to work out which copy is final.',
+      'Give each publication one person responsible for final approval. Record that approval against a dated proof, and keep the proof and decision together. Editors, designers and production colleagues should be able to find the same file.',
+      'Agree what happens if the approver is unavailable or a correction arrives after sign-off. A deputy and a clear way to reopen review can prevent a deadline from turning into an unrecorded decision.',
+      'The aim is a review process people can follow during a busy week. Start with one upcoming publication, check how its final version will be identified and resolve any uncertainty before production begins.',
     ],
   },
   {
-    slug: 'four-controls-before-incident-response',
-    vertical: 'cybersecurity-forensics',
-    title: 'Four controls to put in place before incident response',
+    slug: 'interview-more-than-one-video',
+    vertical: 'media',
+    title: 'An interview can do more than fill one video',
     excerpt:
-      'Before buying incident response training, these four baseline controls reduce exposure for any organization that holds sensitive data or records.',
+      'Plan the useful moments in a conversation so you can adapt them for other channels without losing their meaning.',
     author: FOUNDER,
     reviewer: FOUNDER,
     takeaway:
-      'Restore one backup this month and write down who is authorised to decide during an incident — not just who is informed.',
+      'Choose one existing interview and identify a short passage that remains useful and accurate on its own.',
     evidenceBoundary:
-      'Baseline guidance only. It is not a security assessment of any organization and does not replace a tailored risk review.',
-    date: 'June 2026',
-    isoDate: '2026-06-23',
-    image: '/images/cybersecurity-ops.png',
+      'Editorial guidance; audience reach and engagement will depend on the content and channel.',
+    date: 'September 2026',
+    isoDate: '2026-09-26',
+    image: '/images/insights-editorial.png',
+    imageNote: 'The interview setup from the Media service image, cropped around the speaker and microphone.',
     body: [
-      'Incident response training is valuable, but it is frequently purchased before the controls that would have prevented the incident. Four baseline controls do more for an organisation than a tabletop exercise.',
-      'First, a current access register. You cannot respond to unauthorised access if you cannot state who was authorised. Second, tested backups — tested meaning restored, not merely scheduled.',
-      'Third, a written classification of the data you hold, so that responders know within minutes whether an affected system contained sensitive personal or confidential records. Fourth, a contact tree that names who decides, not only who is informed.',
-      'These four are unglamorous and durable. Incident response built on top of them is a plan; incident response without them is a hope.',
+      'A recorded interview may contain an explanation, a personal story and an answer to a question your audience often asks. Each could be useful beyond the full recording. Finding those moments is easier when the team has agreed what the interview should help people understand.',
+      'Before recording, write down the audience and the main questions. Afterwards, review the conversation for passages that make sense on their own. A short clip should still represent what the speaker meant; a striking sentence may need the explanation that came before it.',
+      'Prepare captions and a transcript alongside the edit. These help people follow the material and give your team a reference when writing accompanying posts.',
+      'Keep the full recording and adapted versions together, with a clear review record. The value comes from choosing useful material for each channel, rather than producing more versions than the team can maintain.',
     ],
   },
   {
     slug: 'human-judgment-in-ai-assisted-content',
     vertical: 'digital-platforms',
-    title: 'Human judgment in AI-assisted content: a practical governance framework',
+    title: 'Decide who checks AI-assisted content before you use it',
     excerpt:
-      'A structured way to bring AI tools into content workflows while keeping a named person accountable at every approval and publication point.',
+      'Agree which tasks can use AI and who will review the result before it reaches your audience.',
     author: FOUNDER,
     reviewer: FOUNDER,
     takeaway:
-      'Sort every proposed AI use into permitted, review-gated or prohibited — and write the reasoning down before any tool is deployed.',
+      'Take one proposed AI task and write down the permitted inputs, the reviewer and the release decision.',
     evidenceBoundary:
-      'A governance framework, not legal advice. Regulatory obligations vary by jurisdiction and sector and should be confirmed separately.',
+      'General workflow guidance. Legal and regulatory requirements need separate review for the relevant context.',
     date: 'June 2026',
     isoDate: '2026-06-04',
-    image: '/images/insights-editorial.png',
+    image: '/images/mission-editorial.png',
+    imageNote: 'A colleague checking a draft against a source document, with no chatbot branding.',
     body: [
-      'The governance question is not whether to use AI in content operations. It is where machine output is permitted to reach a reader without a person having looked at it.',
-      'A workable framework classifies every proposed use into three states: permitted, review-gated and prohibited. Permitted uses are those where an error is trivially reversible and carries no reputational or regulatory weight — internal formatting, for instance.',
-      'Review-gated uses are the large middle: drafting, summarising, translating. These require a named reviewer and a queue that cannot be bypassed under deadline pressure. Prohibited uses should be written down with the reasoning attached, because the reasoning is what lets a future colleague revisit the decision honestly.',
-      'Write the policy before deploying the tools. An organisation that adopts first and governs later ends up defining its position in the middle of an incident, which is the worst possible moment to think clearly.',
+      'A draft can read smoothly and still contain a wrong name, an unsupported claim or a change in meaning. If your team uses AI to help write, summarise or translate content, decide who will check those details before the work is shared.',
+      'Begin with the tasks, rather than a list of tools. Record which uses are allowed, which need review and which are out of bounds. The decision should reflect the information involved and the consequences of an error. Even a routine task needs an approved way to handle confidential material.',
+      'For content that reaches members, customers or the public, name the reviewer and explain what they must check. Build that step into the workflow so a deadline does not quietly remove it.',
+      'Keep the reasons for your choices with the policy. When the work changes, the team can revisit an informed decision instead of trying to remember an unwritten rule.',
+    ],
+  },
+  {
+    slug: 'can-someone-else-pick-up-the-work',
+    vertical: 'data-operations',
+    title: 'Can someone else pick up the work tomorrow?',
+    excerpt:
+      'A recurring task is easier to manage when its files, status and unresolved questions are visible to the next person.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Test whether a colleague can locate the current file, status and next action for one recurring task.',
+    evidenceBoundary:
+      'Operational guidance; adapt the process to the organisation and its information requirements.',
+    date: 'September 2026',
+    isoDate: '2026-09-26',
+    image: '/images/hero-cinematic.png',
+    imageNote: 'Two colleagues handing over a task using a fictional checklist and shared record.',
+    body: [
+      'A colleague is away and a routine request stalls. The instructions are in one inbox, the latest spreadsheet is on another computer and nobody knows whether the customer has received a reply.',
+      'Choose one recurring task and follow it from arrival to completion. Identify where the request is recorded, which information is needed and who takes the next step. Record the status somewhere the people doing the work can access.',
+      'Pay attention to incomplete cases. A missing document or unanswered question should have an owner and a next action, rather than disappearing into a general list of pending work. Keep access appropriate to the information involved.',
+      'Then ask a colleague to walk through the process using the instructions. Their questions will show where the process still depends on memory. Update those points and repeat the check when the task changes.',
+    ],
+  },
+  {
+    slug: 'what-someone-should-do-after-training',
+    vertical: 'ai-academy',
+    title: 'What someone should be able to do after training',
+    excerpt:
+      'Start with a task the learner needs to perform, then build practice and feedback around it.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Define one useful task and the criteria for doing it well before choosing the course content.',
+    evidenceBoundary:
+      'Learning design guidance; participation alone does not establish workplace proficiency or accreditation.',
+    date: 'September 2026',
+    isoDate: '2026-09-26',
+    image: '/images/mission-editorial.png',
+    imageNote: 'A learner explaining a completed exercise to a facilitator, rather than posing with a certificate.',
+    body: [
+      'A participant can enjoy a workshop and still struggle to apply the material the next day. Before choosing a programme, identify a task that would show the learning has become useful.',
+      'For a teacher, that might be preparing a lesson activity and checking the supporting material. For a professional, it might be improving a recurring report or explaining a process more clearly. The exercise should fit the participant’s role and use information appropriate for a learning environment.',
+      'Give learners time to attempt the task, receive feedback and try again. If AI is involved, assessment should include how they checked the output and handled mistakes, as well as the finished result.',
+      'An applied project gives the learner and facilitator a shared basis for discussing progress. Keep the assessment criteria clear, record what the participant demonstrated and identify what still needs practice.',
+    ],
+  },
+  {
+    slug: 'four-controls-before-incident-response',
+    vertical: 'cybersecurity-forensics',
+    title: 'Four questions to ask about incident readiness',
+    excerpt:
+      'Check access, backups, sensitive records and decision-making responsibilities as part of preparing for a security incident.',
+    author: FOUNDER,
+    reviewer: FOUNDER,
+    takeaway:
+      'Review the latest backup restoration test and confirm who can make decisions during an incident.',
+    evidenceBoundary:
+      'General readiness guidance; this does not replace an organisation-specific security assessment.',
+    date: 'June 2026',
+    isoDate: '2026-06-23',
+    image: '/images/cybersecurity-ops.png',
+    imageNote: 'An IT lead and colleague reviewing a plain incident checklist in a normal office.',
+    body: [
+      'An incident plan is easier to use when the basic information behind it is current. Start a readiness discussion with four questions.',
+      'Who should have access to your important systems, and is that record up to date? Can your team restore the information it backs up, and has that been tested through an agreed process? Do you know where sensitive or confidential records are held? Who has authority to make decisions during an incident?',
+      'The answers may reveal gaps that need an owner and a follow-up date. A scheduled backup, for example, is different from a documented test showing that the required information could be restored.',
+      'Use these questions alongside your wider security work and incident exercises. They are a starting point for discussion with the people responsible for your systems, rather than a complete assessment of your organisation’s risks.',
     ],
   },
   {
     slug: 'evidence-preservation-authorization-first',
     vertical: 'cybersecurity-forensics',
-    title: 'Evidence preservation in internal investigations: authorisation comes first',
+    title: 'Before examining a device, agree who has authorised the work',
     excerpt:
-      'The decisions an organization must make before any forensic analysis begins, so that evidence stays sound and chain of custody holds.',
+      'A clear written scope helps the responsible specialists preserve evidence and report findings within agreed boundaries.',
     author: FOUNDER,
     reviewer: FOUNDER,
     takeaway:
-      'Before anyone touches a device, record who authorised the work, what it covers, what it excludes and when it expires.',
+      'Confirm written authority, scope and responsibility for evidence handling before an examination begins.',
     evidenceBoundary:
-      'General process guidance, not legal advice. Admissibility and procedure depend on jurisdiction and should be confirmed with counsel.',
+      'General process guidance, not legal advice. Procedure and admissibility depend on the relevant jurisdiction.',
     date: 'May 2026',
     isoDate: '2026-05-19',
-    image: '/images/insights-editorial.png',
+    image: '/images/cybersecurity-ops.png',
+    imageNote: 'An evidence log and a sealed demonstration device pouch, with no real case details.',
     body: [
-      'The most common error in internal investigations is not technical. It is sequence: analysis begins before authorisation is documented, and the resulting findings carry an asterisk that cannot be removed afterwards.',
-      'Authorisation should state who granted it, what it covers, what it explicitly does not cover, and when it expires. That last element is routinely omitted and routinely matters.',
-      'Preservation follows authorisation. Every artefact is logged at acquisition with who acquired it, from where, and under what hash. The log continues through every transfer until release.',
-      'Finally, the report must separate what the evidence establishes from what a reasonable person might infer from it. Decision-makers are entitled to both, clearly labelled, and never blended together.',
+      'When a concern involves a device or digital records, people may feel pressure to start looking immediately. The first step is to establish who has authority to commission the work and what the examination may cover.',
+      'The written scope should identify the authorising party, relevant systems or material, exclusions and duration. It also needs to address the applicable jurisdiction and who is qualified to carry out the work. Questions about authority or legal requirements should be resolved with the appropriate advisers.',
+      'Authorised specialists then need to preserve the relevant material and maintain a record of its collection, handling and transfers. This record helps explain how the evidence reached the examiner and what happened to it along the way.',
+      'The final report should distinguish observed facts from interpretations and state any limitations. Decision-makers need to understand both the findings and the questions the examination could not answer.',
     ],
   },
 ]
 
-/** Read time derived from the final published copy at ~200 words a minute. */
+/** Read time derived from the final published text at ~200 words a minute. */
 export function readTime(article: Pick<Article, 'excerpt' | 'takeaway' | 'body'>) {
   const words = [article.excerpt, article.takeaway, ...article.body]
     .join(' ')
@@ -609,10 +684,13 @@ export function readTime(article: Pick<Article, 'excerpt' | 'takeaway' | 'body'>
   return `${Math.max(1, Math.ceil(words / 200))} min`
 }
 
-export const articles: Article[] = articleData.map((a) => ({
-  ...a,
-  capability: capabilities.find((c) => c.slug === a.vertical)?.shortName ?? a.vertical,
-}))
+/** Newest first. */
+export const articles: Article[] = articleData
+  .map((a) => ({
+    ...a,
+    capability: capabilities.find((c) => c.slug === a.vertical)?.shortName ?? a.vertical,
+  }))
+  .sort((a, b) => b.isoDate.localeCompare(a.isoDate))
 
 export function getArticle(slug: string) {
   return articles.find((a) => a.slug === slug)
@@ -655,7 +733,7 @@ export type ContactPathId = (typeof contactPaths)[number]['id']
 export const org = {
   legalName: 'Six Jars Global (OPC) Private Limited',
   address:
-    'Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India',
+    'Cumins Genesis, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India',
   phone: '+91 96329 88066',
   phoneHref: '+919632988066',
   /** Customer care. */
@@ -667,6 +745,9 @@ export const org = {
   gstin: '29ABUCS1730R1ZC',
   cin: 'U62020KA2026OPC223063' as string | null,
   linkedin: 'https://www.linkedin.com/company/six-jars-global',
+  /** Google Maps pin for Cumins Estates – Genesis, Horamavu. */
+  mapUrl: 'https://maps.app.goo.gl/2jPfGFdGNLjiFsPs7',
+  mapEmbed: 'https://www.google.com/maps?q=13.0289617,77.6687345&z=17&output=embed',
 }
 
 /* ───────────────────────────────────────────────────────────────────────
@@ -701,8 +782,8 @@ export const founder = {
   phoneHref: org.phoneHref,
   linkedin: org.linkedin,
   /** 4:5 portrait at 2x (min 720×900). Until supplied, a monogram renders. */
-  photo: null as string | null,
-  photoAlt: 'Portrait of the founder of Six Jars Global.',
+  photo: '/founder.jpeg' as string | null,
+  photoAlt: 'Sreejith S, founder of Six Jars Global.',
   /** Pull-quote under the portrait — renders only once the founder supplies one. */
   quote: null as string | null,
   /** Short credential chips shown beside the name. */

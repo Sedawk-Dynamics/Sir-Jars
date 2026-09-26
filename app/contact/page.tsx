@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { MapPin, Phone, Mail } from 'lucide-react'
 import PageHeader from '@/components/page-header'
+import { patternVars } from '@/lib/patterns'
 import ContactForm from '@/components/contact-form'
 import { contactPaths, org, type ContactPathId } from '@/lib/content'
 
@@ -44,8 +45,8 @@ export default async function ContactPage({ searchParams }: Search) {
 
             <aside className="flex flex-col gap-5">
               <div
-                className="on-dark rounded-2xl p-7"
-                style={{ background: 'var(--color-plum)' }}
+                className="on-dark patterned rounded-2xl p-7"
+                style={{ background: 'var(--color-plum)', ...patternVars('circuit', 'gold') }}
               >
                 <h2
                   className="text-lg font-bold mb-6"
@@ -66,6 +67,17 @@ export default async function ContactPage({ searchParams }: Search) {
                       style={{ color: 'rgba(252,251,248,0.78)' }}
                     >
                       {org.address}
+                      <br />
+                      <a
+                        href={org.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-1 font-semibold underline underline-offset-2"
+                        style={{ color: 'var(--color-gold)' }}
+                      >
+                        Open in Google Maps
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
                     </address>
                   </li>
                   <li className="flex items-start gap-4">
@@ -147,6 +159,39 @@ export default async function ContactPage({ searchParams }: Search) {
                 </p>
               </div>
             </aside>
+          </div>
+
+          {/* Office location */}
+          <div className="mt-14">
+            <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
+              <h2 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--color-plum)' }}>
+                Find us
+              </h2>
+              <a
+                href={org.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold underline underline-offset-2"
+                style={{ color: 'var(--color-wine)' }}
+              >
+                Get directions in Google Maps
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </div>
+            <div
+              className="relative w-full h-[320px] sm:h-[400px] rounded-2xl overflow-hidden"
+              style={{ border: '1px solid var(--color-line)' }}
+            >
+              <iframe
+                src={org.mapEmbed}
+                title={`Map showing the Six Jars Global office: ${org.address}`}
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
           </div>
         </div>
       </section>

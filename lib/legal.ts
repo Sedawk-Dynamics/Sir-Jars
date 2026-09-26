@@ -39,7 +39,7 @@ export const legalDocs: Record<string, LegalDoc> = {
         heading: '1. Who we are',
         body: [
           'SIX JARS GLOBAL (OPC) PRIVATE LIMITED, trading as Six Jars Global, is a One Person Company incorporated in India. Our CIN is U62020KA2026OPC223063 and our GSTIN is 29ABUCS1730R1ZC.',
-          'Registered address: Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India.',
+          'Registered address: Cumins Genesis, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India.',
           'Privacy contact: sreejith.s@sixjarsglobal.com. Customer care: hello@sixjarsglobal.com or +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays.',
         ],
       },
@@ -326,7 +326,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '1. Seller and application',
         body: [
-          'These Terms of Sale apply to goods, digital content and services purchased directly from SIX JARS GLOBAL (OPC) PRIVATE LIMITED, trading as Six Jars Global. CIN: U62020KA2026OPC223063. GSTIN: 29ABUCS1730R1ZC. Registered address: Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India.',
+          'These Terms of Sale apply to goods, digital content and services purchased directly from SIX JARS GLOBAL (OPC) PRIVATE LIMITED, trading as Six Jars Global. CIN: U62020KA2026OPC223063. GSTIN: 29ABUCS1730R1ZC. Registered address: Cumins Genesis, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India.',
           'By placing an order, accepting a proposal or signing an order form, you agree to these Terms and the linked Privacy Notice, Return, Refund and Cancellation Policy, Shipping and Delivery Policy and Customer Support and Grievance Redressal page. Mandatory consumer rights remain unaffected.',
         ],
       },
@@ -432,7 +432,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '1. Operator and scope',
         body: [
-          'This website is operated by SIX JARS GLOBAL (OPC) PRIVATE LIMITED, trading as Six Jars Global, from Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India. These Terms govern access to and use of the website, public content, inquiry forms and related features.',
+          'This website is operated by SIX JARS GLOBAL (OPC) PRIVATE LIMITED, trading as Six Jars Global, from Cumins Genesis, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India. These Terms govern access to and use of the website, public content, inquiry forms and related features.',
         ],
       },
       {
@@ -661,7 +661,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '11. Records and contact',
         body: [
-          'We retain complaint records for resolution, quality, legal, accounting, security and audit purposes under the Privacy Notice. Customer care: hello@sixjarsglobal.com or +91 9632988066. Registered address: Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India.',
+          'We retain complaint records for resolution, quality, legal, accounting, security and audit purposes under the Privacy Notice. Customer care: hello@sixjarsglobal.com or +91 9632988066. Registered address: Cumins Genesis, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India.',
         ],
       },
     ],

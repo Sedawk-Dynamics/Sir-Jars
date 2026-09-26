@@ -6,7 +6,7 @@ import ClosingCta from '@/components/home/closing-cta'
 export const metadata: Metadata = {
   title: 'Insights',
   description:
-    'Practical insight on governed publishing, security baselines, AI oversight and evidence discipline for organizations with complex, high-stakes work.',
+    'Short articles on publishing, media, digital systems, business operations, skills and security — each with a practical place to start.',
   alternates: { canonical: '/insights' },
 }
 
@@ -15,11 +15,11 @@ export default function InsightsPage() {
     <>
       <PageHeader
         eyebrow="Insights"
-        title="Practical insight across the six routes."
-        intro="Written for the people who have to make these decisions inside an institution — not for a search engine."
+        title="Useful ideas for the work in front of you."
+        intro="Short articles on publishing, media, digital systems, business operations, skills and security. Each one looks at a familiar problem and gives you a practical place to start."
         breadcrumbs={[{ label: 'Insights', href: '/insights' }]}
         image="/images/insights-editorial.png"
-        imageAlt="An editor reading through research material."
+        imageAlt="A colleague reviewing research material at a desk."
         pattern="waves"
       />
 

@@ -454,3 +454,21 @@ html {
   border-color: rgba(241, 181, 59, 0.55) !important;
   box-shadow: 0 20px 44px -22px rgba(75, 13, 36, 0.4) !important;
 }
+
+/* ── Patterned dark bands ────────────────────────────────────────────────
+   Texture sits on a ::before layer between the element's own background and
+   its content. Set --pattern / --pattern-size via patternVars() in lib/patterns. */
+.patterned {
+  position: relative;
+  isolation: isolate;
+}
+.patterned::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: var(--pattern);
+  background-size: var(--pattern-size);
+}

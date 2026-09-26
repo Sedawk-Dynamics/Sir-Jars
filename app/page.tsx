@@ -44,7 +44,7 @@ export default function HomePage() {
                   fontSize: 'clamp(2rem, 4.5vw, 3rem)',
                 }}
               >
-                Practical insight across the six routes.
+                Useful ideas for the work in front of you.
               </h2>
             </div>
             <Link
@@ -57,7 +57,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <InsightList filterable={false} />
+          <InsightList filterable={false} limit={3} />
         </div>
       </section>
 

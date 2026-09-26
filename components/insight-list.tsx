@@ -3,22 +3,30 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Clock, Lightbulb, ShieldCheck } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { articles, capabilities, readTime } from '@/lib/content'
 
 /**
- * Insight cards. Every card is a real URL with title, summary, date and
- * reading time, so an article can be linked, shared and indexed.
+ * Insight cards: service label, plain-language title, short summary, then
+ * author, date and reading time. The takeaway and scope note live inside the
+ * article, not on the card.
  *
  * The capability filter is client state on top of a fully-rendered list; the
  * cards themselves are anchors, not JavaScript-only handlers.
  */
-export default function InsightList({ filterable = true }: { filterable?: boolean }) {
+export default function InsightList({
+  filterable = true,
+  limit,
+}: {
+  filterable?: boolean
+  limit?: number
+}) {
   const [filter, setFilter] = useState<string>('All')
 
   const routes = ['All', ...capabilities.map((c) => c.shortName)]
-  const visible =
+  const filtered =
     filter === 'All' ? articles : articles.filter((a) => a.capability === filter)
+  const visible = limit ? filtered.slice(0, limit) : filtered
 
   return (
     <div>
@@ -94,7 +102,7 @@ export default function InsightList({ filterable = true }: { filterable?: boolea
                   className="text-[10px] font-bold tracking-[0.16em] uppercase"
                   style={{ color: 'var(--color-rose)' }}
                 >
-                  Related vertical · {article.capability}
+                  {article.capability}
                 </span>
                 <span
                   className="text-base font-bold leading-snug mt-2"
@@ -103,41 +111,20 @@ export default function InsightList({ filterable = true }: { filterable?: boolea
                   {article.title}
                 </span>
                 <span
-                  className="text-sm leading-relaxed mt-2"
+                  className="text-sm leading-relaxed mt-2 flex-1"
                   style={{ color: 'rgba(75,13,36,0.66)' }}
                 >
                   {article.excerpt}
                 </span>
                 <span
-                  className="flex gap-2 mt-4 rounded-xl p-3 text-xs leading-relaxed"
-                  style={{ background: 'var(--color-parchment)', color: 'rgba(75,13,36,0.8)' }}
+                  className="block mt-4 pt-3 text-xs font-semibold"
+                  style={{ color: 'rgba(75,13,36,0.75)', borderTop: '1px solid var(--color-line)' }}
                 >
-                  <Lightbulb size={14} aria-hidden="true" className="shrink-0 mt-0.5" style={{ color: 'var(--color-gold-deep)' }} />
-                  <span>
-                    <span className="font-bold">Takeaway: </span>
-                    {article.takeaway}
-                  </span>
+                  {article.author.name}, {article.author.role}
                 </span>
                 <span
-                  className="flex gap-2 mt-2 text-[11px] leading-relaxed flex-1"
-                  style={{ color: 'rgba(75,13,36,0.6)' }}
-                >
-                  <ShieldCheck size={13} aria-hidden="true" className="shrink-0 mt-0.5" />
-                  <span>
-                    <span className="font-semibold">Evidence boundary: </span>
-                    {article.evidenceBoundary}
-                  </span>
-                </span>
-                <span
-                  className="block mt-4 pt-3 text-xs"
-                  style={{ color: 'rgba(75,13,36,0.7)', borderTop: '1px solid var(--color-line)' }}
-                >
-                  By {article.author.name}, {article.author.role} · Reviewed by{' '}
-                  {article.reviewer.name}
-                </span>
-                <span
-                  className="flex items-center gap-3 mt-2 text-xs"
-                  style={{ color: 'rgba(75,13,36,0.5)' }}
+                  className="flex items-center gap-3 mt-1 text-xs"
+                  style={{ color: 'rgba(75,13,36,0.55)' }}
                 >
                   <span className="inline-flex items-center gap-1">
                     <Clock size={11} aria-hidden="true" />

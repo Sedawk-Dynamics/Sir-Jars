@@ -6,6 +6,7 @@ import { legalDocs, legalOrder } from '@/lib/legal'
 import { LOGO_SRC, LOGO_W, LOGO_H } from './site-header'
 import BackToTop from './back-to-top'
 import { CookieSettingsButton } from './cookie-manager'
+import { patternVars } from '@/lib/patterns'
 
 /** Brand marks were dropped from lucide v1, so LinkedIn ships inline. */
 function LinkedInMark() {
@@ -34,8 +35,8 @@ export default function SiteFooter() {
 
   return (
     <footer
-      className="on-dark pt-16 pb-8"
-      style={{ background: 'var(--color-plum)', color: 'var(--color-ivory)' }}
+      className="on-dark patterned pt-16 pb-8"
+      style={{ background: 'var(--color-plum)', color: 'var(--color-ivory)', ...patternVars('hatch', 'gold') }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10 mb-12">
@@ -165,6 +166,16 @@ export default function SiteFooter() {
             </h2>
             <address className="not-italic text-sm leading-relaxed text-ivory/65">
               {org.address}
+              <br />
+              <a
+                href={org.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold/90 hover:text-gold underline underline-offset-2"
+              >
+                View on Google Maps
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
               <br />
               <a href={`tel:${org.phoneHref}`} className="hover:text-gold transition-colors">
                 {org.phone}
