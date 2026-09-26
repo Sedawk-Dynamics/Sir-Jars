@@ -20,7 +20,7 @@ export default function HowItWorksPage() {
     <>
       <PageHeader
         eyebrow="How it works"
-        title="Clear scope. Coordinated delivery. Evidence at close."
+        title="A visible delivery path with named ownership."
         intro="Understand → Plan → Execute → Review → Validate → Improve. Every stage has a named owner and cannot close until its exit evidence exists."
         breadcrumbs={[{ label: 'How it works', href: '/how-it-works' }]}
         image="/images/publishing-ops.png"

@@ -61,8 +61,8 @@ export default function SiteFooter() {
               Capability, made accountable.
             </p>
             <p className="text-sm leading-relaxed max-w-xs mt-2 text-ivory/55">
-              Six capabilities. One accountable partner. Clear scope, coordinated
-              delivery and evidence at close.
+              Six services. One contact coordinating the work, with clear
+              approvals and a handover your team can use.
             </p>
 
             <ul className="flex items-center gap-3 mt-6">

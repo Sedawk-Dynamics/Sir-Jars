@@ -21,11 +21,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!capability) return {}
   return {
     title: capability.fullName,
-    description: capability.summary,
+    description: capability.intro,
     alternates: { canonical: `/capabilities/${capability.slug}` },
     openGraph: {
       title: `${capability.fullName} | Six Jars Global`,
-      description: capability.summary,
+      description: capability.intro,
       url: `/capabilities/${capability.slug}`,
     },
   }
@@ -45,8 +45,8 @@ export default async function CapabilityPage({ params }: Params) {
   return (
     <>
       <PageHeader
-        eyebrow={`${capability.number} · ${capability.cue}`}
-        title={capability.fullName}
+        eyebrow={`${capability.number} · ${capability.fullName}`}
+        title={capability.headline}
         intro={capability.intro}
         breadcrumbs={[
           { label: 'Capabilities', href: '/capabilities' },
@@ -59,60 +59,20 @@ export default async function CapabilityPage({ params }: Params) {
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          {/* "Choose this when" — the fastest way to know you are in the
-              right place, so it comes before the detail. */}
-          <div
-            className="patterned mb-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
-            style={{ background: 'var(--color-plum)', ...patternVars('diagonal') }}
-          >
-            <Compass
-              size={28}
-              aria-hidden="true"
-              className="shrink-0"
-              style={{ color: 'var(--color-gold)' }}
-            />
-            <div>
-              <h2
-                className="text-xs font-bold tracking-[0.18em] uppercase"
-                style={{ color: 'var(--color-gold)' }}
-              >
-                Choose this when
-              </h2>
-              <p
-                className="mt-2 text-lg lg:text-xl leading-relaxed font-semibold"
-                style={{ color: 'var(--color-ivory)' }}
-              >
-                {capability.chooseWhen}
-              </p>
-            </div>
-          </div>
-
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <div>
               <h2
                 className="text-2xl font-bold tracking-tight"
                 style={{ color: 'var(--color-plum)' }}
               >
-                Scope
+                What we do
               </h2>
-              <ul className="mt-6 space-y-3">
-                {capability.capabilities.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <Check
-                      size={17}
-                      aria-hidden="true"
-                      className="mt-0.5 shrink-0"
-                      style={{ color: 'var(--color-wine)' }}
-                    />
-                    <span
-                      className="text-base leading-relaxed"
-                      style={{ color: 'rgba(75,13,36,0.78)' }}
-                    >
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <p
+                className="mt-6 text-base leading-[1.8]"
+                style={{ color: 'rgba(75,13,36,0.8)' }}
+              >
+                {capability.overview}
+              </p>
             </div>
 
             <div>
@@ -120,7 +80,7 @@ export default async function CapabilityPage({ params }: Params) {
                 className="text-2xl font-bold tracking-tight"
                 style={{ color: 'var(--color-plum)' }}
               >
-                Typical outputs
+                What you receive
               </h2>
               <ul className="mt-6 space-y-3">
                 {capability.deliverables.map((item) => (
@@ -140,8 +100,35 @@ export default async function CapabilityPage({ params }: Params) {
             </div>
           </div>
 
+          {/* Why choose this service — the customer reason, after what we do. */}
           <div
-            className="mt-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+            className="patterned mt-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+            style={{ background: 'var(--color-plum)', ...patternVars('diagonal') }}
+          >
+            <Compass
+              size={28}
+              aria-hidden="true"
+              className="shrink-0"
+              style={{ color: 'var(--color-gold)' }}
+            />
+            <div>
+              <h2
+                className="text-xs font-bold tracking-[0.18em] uppercase"
+                style={{ color: 'var(--color-gold)' }}
+              >
+                Why choose this service
+              </h2>
+              <p
+                className="mt-2 text-base lg:text-lg leading-relaxed font-semibold"
+                style={{ color: 'var(--color-ivory)' }}
+              >
+                {capability.chooseWhen}
+              </p>
+            </div>
+          </div>
+
+          <div
+            className="mt-6 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
             style={{
               background: 'var(--color-parchment)',
               border: '1px solid var(--color-line)',
@@ -158,7 +145,7 @@ export default async function CapabilityPage({ params }: Params) {
                 className="text-lg font-bold"
                 style={{ color: 'var(--color-plum)' }}
               >
-                Where human review sits
+                Who reviews the work
               </h2>
               <p
                 className="text-base leading-relaxed mt-2"
@@ -186,7 +173,7 @@ export default async function CapabilityPage({ params }: Params) {
               />
               <div>
                 <h2 className="text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
-                  Boundary for this vertical
+                  Forensic work boundary
                 </h2>
                 <p
                   className="text-base leading-relaxed mt-2"

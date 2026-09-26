@@ -7,22 +7,29 @@
 
 export type Capability = {
   slug: string
-  /** Short label — navigation, cards, filters. (Review p.7) */
+  /** Short label — navigation, cards, filters. */
   shortName: string
-  /** Full name — detail page H1 and metadata only. */
+  /** Full vertical name — eyebrow on the detail page and metadata. */
   fullName: string
   number: string
-  /** One-word brand cue from the jar system. */
+  /** Secondary brand cue from the jar system. Never carries the explanation. */
   cue: string
+  /** Descriptive page headline, paired with the short menu label. */
+  headline: string
+  /** One-line summary — menus and the capability orbit. */
   summary: string
+  /** Homepage card copy — also the detail page intro. */
   intro: string
+  /** Service page body copy. */
+  overview: string
+  /** Scope list (kept for reference; the page shows `deliverables`). */
   capabilities: string[]
-  /** What the client actually receives at close. */
+  /** What the customer receives. */
   deliverables: string[]
-  /** Where human review sits in this discipline. */
-  humanReview: string
-  /** "Choose this when" — the situation this vertical is for. */
+  /** Why choose this service. */
   chooseWhen: string
+  /** Who reviews the work. */
+  humanReview: string
   /** A boundary the vertical must state publicly (vertical 06). */
   boundary?: string
   /** Single-letter mark used in the orbit and card chips. */
@@ -30,9 +37,9 @@ export type Capability = {
 }
 
 /**
- * The six verticals, as defined in "Data for specific pages" (Aug 2026).
- * `capabilities` is the published Scope and `deliverables` the Typical
- * outputs; `chooseWhen` is the "Choose this when" line.
+ * The six verticals. Copy from the "Six Jars website content review"
+ * (25 Sep 2026): each service starts with the customer's work, says what Six
+ * Jars provides and gives a practical reason to choose it.
  */
 export const capabilities: Capability[] = [
   {
@@ -42,10 +49,12 @@ export const capabilities: Capability[] = [
     number: '01',
     cue: 'Form',
     mark: 'P',
-    summary:
-      'Editorial development, copyediting, design, typesetting, print coordination and distribution.',
+    headline: 'Bring your next publication from draft to finished copy.',
+    summary: 'Editorial, design and production support for books, reports and guides.',
     intro:
-      'We take a report, book, guide or campaign from draft to an approved and controlled release — holding editorial standards, institutional voice and production schedules together across print and digital.',
+      'Editorial, design and production support for books, reports and guides. We keep the text, layout and approvals together so your publication is ready for print and digital release.',
+    overview:
+      'A publication involves many decisions: what to say, how it should read, how it should look and which version is ready to go. We help you work through those decisions, from developing the manuscript to checking the final proof. Your organisation’s voice stays central throughout. Whether you are producing a book, an annual report or a series of guides, we coordinate the editorial and production work so your team has a clear view of what is ready and what still needs attention.',
     capabilities: [
       'Editorial development',
       'Copyediting and proofreading',
@@ -56,15 +65,15 @@ export const capabilities: Capability[] = [
       'Asset management',
     ],
     deliverables: [
-      'Manuscript-to-release workflow',
-      'Approved print and digital masters',
-      'Version history',
-      'Distribution handover',
+      'Editorial development, copyediting and proofreading.',
+      'Design, typesetting and conversion for print and digital formats.',
+      'Print coordination, distribution handover and organised publication assets.',
+      'Approved master files, a version history and a record of release approval.',
     ],
     chooseWhen:
-      'A report, book, guide or campaign must move from draft to an approved and controlled release.',
+      'Choose this service when your team is spending too much time passing files between writers, designers and printers. Six Jars connects those steps, giving you one coordinated route to a finished publication while keeping final approval clear.',
     humanReview:
-      'An accountable editor signs off every proof before release. Automation handles conversion and formatting; it never approves content.',
+      'An accountable editor reviews each proof before release. Your organisation’s approval responsibilities are agreed at the start.',
   },
   {
     slug: 'media',
@@ -73,10 +82,12 @@ export const capabilities: Capability[] = [
     number: '02',
     cue: 'Voice',
     mark: 'M',
-    summary:
-      'Video, podcast, social, livestream, captions, transcripts and content repurposing.',
+    headline: 'Make more of the stories your organisation has to tell.',
+    summary: 'Video, podcasts and social content built around your message.',
     intro:
-      'Your institutional voice is the asset. We run production and repurposing across every channel around it — with clear approval ownership at each step.',
+      'Video, podcasts and social content built around your message. We help you plan, produce and adapt material for each channel, with review before anything goes live.',
+    overview:
+      'Your team may have a useful interview, a worthwhile event or a story people should hear. Turning it into a finished video, podcast or set of social posts takes time and care. We support that work from the content calendar through production and review. We also adapt longer material into shorter pieces for different channels, so you can use it again without losing the meaning. Captions and transcripts are part of the work, helping more people follow what you have to say.',
     capabilities: [
       'Video',
       'Podcast',
@@ -88,15 +99,15 @@ export const capabilities: Capability[] = [
       'Content repurposing',
     ],
     deliverables: [
-      'Approved media packages',
-      'Channel-ready derivatives',
-      'Accessibility files',
-      'Content calendar and review record',
+      'Video, podcast and social content production.',
+      'Livestream support and day-to-day channel operations.',
+      'Editorial calendars and adaptation of existing content.',
+      'Approved media files, channel versions, captions, transcripts and review records.',
     ],
     chooseWhen:
-      'Several channels need consistent content, faster production and clear approval ownership.',
+      'Choose this service when you have stories worth sharing but limited time to produce content for every channel. Coordinating production and adaptation helps your team use its existing material more effectively and keep the message consistent.',
     humanReview:
-      'Nothing publishes on your channels without a named reviewer approving the cut, the caption and the context.',
+      'A named reviewer checks the edit, captions and context before content is published on your channels.',
   },
   {
     slug: 'digital-platforms',
@@ -105,10 +116,12 @@ export const capabilities: Capability[] = [
     number: '03',
     cue: 'Connect',
     mark: 'D',
-    summary:
-      'Websites, CRM, LMS, cloud workflows, mobile apps, integration and governed automation.',
+    headline: 'Help your systems work together and your people get on with the job.',
+    summary: 'Websites, applications and connected workflows that support everyday work.',
     intro:
-      'We connect the systems your people depend on — and automate the handoffs between them — with governance controls that decide where automation and AI may act, and where a person must.',
+      'Websites, applications and connected workflows that support everyday work. We help reduce repeated data entry and organise handovers between the systems your team uses.',
+    overview:
+      'When information sits in separate systems, people often become the link between them: copying details, chasing updates and checking whether a task moved forward. We help you build or connect the platforms behind that work. This can include a website, customer relationship management system, learning platform or mobile application. We agree which routine steps can be automated and which decisions need a person. Your team receives documentation for the connections, access and day-to-day operation, so it can understand how the system works.',
     capabilities: [
       'Websites',
       'CRM and LMS',
@@ -117,19 +130,17 @@ export const capabilities: Capability[] = [
       'System integration',
       'No-code / low-code automation',
       'AI-enabled workflows',
-      'Governance controls',
     ],
     deliverables: [
-      'Configured platform',
-      'Documented integration',
-      'Automation runbook',
-      'Access model',
-      'Quality and human-review controls',
+      'Websites, mobile applications, CRM and learning management systems.',
+      'System integration and cloud workflows.',
+      'No-code, low-code and AI-assisted workflows where appropriate.',
+      'Configured platforms, integration documentation, operating instructions and access rules.',
     ],
     chooseWhen:
-      'Disconnected systems or manual handoffs are slowing service, learning, sales or delivery.',
+      'Choose this service when staff keep re-entering information or moving work manually between systems. Six Jars looks at the whole handover, helping you connect the work as well as the software.',
     humanReview:
-      'AI-assisted output enters a review queue before it reaches a member, a donor or the public. The governance controls name who holds that queue.',
+      'AI-assisted content is reviewed by a named person before it reaches members, donors or the public. Review responsibilities form part of the workflow.',
   },
   {
     slug: 'data-operations',
@@ -138,10 +149,12 @@ export const capabilities: Capability[] = [
     number: '04',
     cue: 'Order',
     mark: 'O',
-    summary:
-      'Data cleanup, records, archives, research, reporting, intake, registration and back-office workflows.',
+    headline: 'Keep everyday work organised and easier to follow.',
+    summary: 'Support for records, reporting, registrations and recurring administration.',
     intro:
-      'Systematic order for the recurring work that keeps an institution running — so it no longer depends on scattered files, manual follow-up or unclear ownership.',
+      'Support for records, reporting, registrations and recurring administration. We bring scattered information into order and make it clear who handles each step and unresolved issue.',
+    overview:
+      'The work that keeps an organisation running is easy to overlook until something goes missing. A registration is incomplete, a report draws on an old file or a customer is waiting for a reply. We help organise the information and recurring tasks behind those moments. That may mean cleaning a dataset, arranging records, preparing reports or supporting intake and member enquiries. We document how the work should move and who deals with exceptions, giving your team a clearer way to manage what is open and what is complete.',
     capabilities: [
       'Data cleanup',
       'Records and archives',
@@ -153,16 +166,15 @@ export const capabilities: Capability[] = [
       'Recurring back-office workflows',
     ],
     deliverables: [
-      'Structured data',
-      'Documented operating process',
-      'Dashboards',
-      'Ownership map',
-      'Exception and escalation path',
+      'Data cleanup, records management and archives.',
+      'Research, reporting, dashboards and scheduling.',
+      'Intake, registration, customer support and member support.',
+      'Structured data, documented procedures, responsibilities and escalation routes.',
     ],
     chooseWhen:
-      'Important recurring work depends on scattered files, manual follow-up or unclear ownership.',
+      'Choose this service when recurring administration depends on scattered spreadsheets, inboxes or one person’s memory. A shared process makes outstanding work visible and gives colleagues a practical basis for taking over when needed.',
     humanReview:
-      'Exceptions never auto-resolve. They route to a named handler with the authority to decide and a record of what was decided.',
+      'Unusual or unresolved cases go to a person with the authority to decide. The decision is recorded rather than silently treated as complete.',
   },
   {
     slug: 'ai-academy',
@@ -171,10 +183,12 @@ export const capabilities: Capability[] = [
     number: '05',
     cue: 'Grow',
     mark: 'A',
-    summary:
-      'AI literacy, workflow design, Lean Six Sigma, Train the Trainer and soft-skills programs.',
+    headline: 'Learn skills you can put to work.',
+    summary: 'Practical learning for students, educators, professionals and teams.',
     intro:
-      'Practical programs for students, teachers, professionals and teams — built so that what people learn can be applied safely and measured in real work.',
+      'Practical learning for students, educators, professionals and teams. Workshops, guided practice and assessed projects help participants use new skills in tasks that matter to them.',
+    overview:
+      'Learning becomes useful when people can apply it beyond the session. Our programmes give participants time to practise, ask questions and receive feedback on their work. Topics include responsible AI use, workflow design, process improvement, automation and communication. Students, educators, professionals and organisations can choose the learning route that fits their role. Each programme sets out what participants will practise and how their work will be assessed, so completion means more than being present at a workshop.',
     capabilities: [
       'AI literacy and responsible use',
       'Prompt and workflow design',
@@ -186,17 +200,15 @@ export const capabilities: Capability[] = [
       'Educator and student programs',
     ],
     deliverables: [
-      'Role-based curriculum',
-      'Workshops and practice labs',
-      'Assessments',
-      'Capstone projects',
-      'Trainer guides',
-      'Completion evidence and improvement plan',
+      'AI literacy, responsible use, prompt writing and workflow design.',
+      'Lean Six Sigma, process automation and Train the Trainer programmes.',
+      'Communication, teamwork and interpersonal skills.',
+      'Role-based curricula, practice labs, assessments, capstone projects and trainer guides.',
     ],
     chooseWhen:
-      'Students, teachers, professionals or teams need practical skills they can apply safely and measure in real work.',
+      'Choose the Academy when people need guided practice and feedback to use new skills confidently. Role-based exercises and facilitator-reviewed projects give learners and team leaders something concrete to assess after the programme.',
     humanReview:
-      'Every program ends in assessed, real-work evidence reviewed by a facilitator — not in attendance alone.',
+      'A facilitator reviews the participant’s applied work. Completion evidence and an improvement plan form part of the programme outputs.',
   },
   {
     slug: 'cybersecurity-forensics',
@@ -205,33 +217,33 @@ export const capabilities: Capability[] = [
     number: '06',
     cue: 'Protect & Establish',
     mark: 'S',
-    summary:
-      'Risk assessment, protective controls, incident readiness and authorized evidence preservation.',
+    headline: 'Prepare for security problems and establish what happened.',
+    summary: 'Support for security risks, incident readiness and authorised digital investigations.',
     intro:
-      'Reduce exposure, prepare for an incident, or understand an authorized event without compromising evidence — two separate workstreams under one accountable vertical.',
+      'Support for security risks, incident readiness and authorised digital investigations. We keep prevention and forensic work clearly scoped, with careful handling of sensitive information and evidence.',
+    overview:
+      'A security concern can leave your organisation facing difficult questions about its systems, information and next steps. Our cybersecurity work helps you assess risks, plan protective measures and prepare for an incident. Digital forensics is a separate service for authorised matters where evidence must be preserved and events examined. We agree the scope and responsibilities before work begins. Findings distinguish what the evidence shows, what remains uncertain and what needs further attention, helping the responsible people make informed decisions.',
     capabilities: [
       'Risk assessment',
       'Protective-control coordination',
       'Incident readiness',
-      'Remediation governance',
-      'Authorized evidence preservation',
+      'Remediation oversight',
+      'Authorised evidence preservation',
       'Timeline reconstruction',
-      'Decision-ready reporting',
+      'Findings reporting',
     ],
     deliverables: [
-      'Risk register',
-      'Control plan',
-      'Incident playbook',
-      'Evidence log',
-      'Findings report',
-      'Limitations and escalation record',
+      'Security risk assessment and coordination of protective controls.',
+      'Incident preparation and oversight of corrective actions.',
+      'Authorised evidence preservation and event timeline reconstruction.',
+      'Risk registers, control plans, incident playbooks, evidence logs and findings reports.',
     ],
     chooseWhen:
-      'The organization must reduce exposure, prepare for an incident or understand an authorized event without compromising evidence.',
+      'Choose this service when you need a clear plan for security risks or a carefully bounded examination of a digital event. Separate workstreams help you get the appropriate support without confusing prevention, investigation and conclusions.',
     boundary:
-      'Cybersecurity and digital forensics share one vertical but remain separate workstreams. Every forensic engagement requires explicit authorization, jurisdiction, qualified personnel, evidence-handling rules, chain-of-custody ownership, limitations and an escalation path.',
+      'Forensic work requires written authorisation, agreed jurisdiction, qualified personnel and evidence-handling rules. Responsibility for the chain of custody, limitations and escalation must be explicit.',
     humanReview:
-      'No forensic analysis begins without documented authorization. Scope boundaries are written down first; anything outside them is escalated, not improvised.',
+      'Cybersecurity and digital forensics are separate workstreams. No forensic examination begins until the scope and responsibilities are agreed in writing.',
   },
 ]
 
@@ -331,13 +343,13 @@ export const phases: Phase[] = [
     short: 'Evidence check',
     number: '05',
     name: 'Validate',
-    headline: 'Documented evidence at close that separates fact from intent',
+    headline: 'A clear handover of what was done and what was agreed',
     description:
-      'The engagement closes with verified outcomes, decision records and maintained evidence logs — distinguishing what was done from what was intended.',
+      'You receive the finished work with the records behind it: what was delivered, which decisions were made and what, if anything, is still open.',
     owner: 'Engagement owner',
     exitEvidence: 'Close-out evidence pack accepted by the client',
     outputs: [
-      'Verified outcome documentation',
+      'Handover of finished work',
       'Evidence and decision logs',
       'Quality control confirmation',
       'Client acceptance',
@@ -381,13 +393,13 @@ export const commitments = [
   },
   {
     mark: 'G',
-    title: 'Governance built in',
-    detail: 'Authorisation is documented before action, not after.',
+    title: 'Agreed approvals',
+    detail: 'Who approves what is agreed before work starts, not after.',
   },
   {
     mark: 'E',
-    title: 'Evidence at close',
-    detail: 'Proof of what was done, not a vague summary.',
+    title: 'Clear handover',
+    detail: 'You receive the files, records and documentation your team can use.',
   },
 ]
 

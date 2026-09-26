@@ -4,16 +4,16 @@ import { patternVars } from '@/lib/patterns'
 
 const reasons = [
   {
-    title: 'Context-aware, not merely low-cost',
-    body: 'Sector fluency, discretion and care shape how the work is scoped — not just how cheaply it can be delivered.',
+    title: 'Who handles the work',
+    body: 'One contact brings in the right specialists and keeps the whole job moving, so you are not managing six suppliers yourself.',
   },
   {
-    title: 'Accountable, with names attached',
-    body: 'One coordinating partner across six disciplines. Every approval, exception and handover has a person behind it, and you can see who.',
+    title: 'Who approves it',
+    body: 'Your team stays involved in the decisions that affect your content, customers and information. Approvals are agreed before work starts.',
   },
   {
-    title: 'Evidence-led at close',
-    body: 'Engagements end with documented scope, controls, artefacts and outcomes — separating what was done from what was intended.',
+    title: 'What you receive',
+    body: 'Finished work your team can use, with the files, documentation and records that explain what was delivered.',
   },
 ]
 
@@ -40,8 +40,17 @@ export default function WhySixJars() {
               fontSize: 'clamp(2rem, 4.5vw, 3rem)',
             }}
           >
-            The advantage is governed execution, not cheap capacity.
+            Someone keeps the whole job moving.
           </h2>
+          <p
+            className="mt-5 text-base sm:text-lg leading-relaxed"
+            style={{ color: 'rgba(252,251,248,0.75)' }}
+          >
+            When a project involves several specialists, someone still needs to keep the
+            whole job moving. Six Jars coordinates that work, keeps responsibilities clear
+            and makes sure you know what you are receiving. Your team stays involved in the
+            decisions that affect your content, customers and information.
+          </p>
         </div>
 
         <ul className="grid md:grid-cols-3 gap-5 mt-12">

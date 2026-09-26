@@ -60,27 +60,26 @@ export default function Hero() {
                 className="inline-block h-px w-8"
                 style={{ background: 'var(--color-gold)' }}
               />
-              For organizations with complex, high-stakes work
+              Complex work. One accountable partner.
             </p>
 
             <h1
               className="mt-6 font-extrabold tracking-tight leading-[1.05]"
-              style={{ fontSize: 'clamp(2.5rem, 4.6vw, 4rem)' }}
+              style={{ fontSize: 'clamp(2.25rem, 4vw, 3.5rem)' }}
             >
-              <span style={{ color: 'var(--color-ivory)' }}>Complex work.</span>
-              <br />
-              <span className="text-gold-gradient">One accountable partner.</span>
+              <span style={{ color: 'var(--color-ivory)' }}>Practical support for the work </span>
+              <span className="text-gold-gradient">your organisation needs to get done.</span>
             </h1>
 
             <p
               className="mt-6 text-base sm:text-lg leading-relaxed max-w-xl"
               style={{ color: 'rgba(252,251,248,0.78)' }}
             >
-              Six connected capabilities — publishing, media, digital platforms,
-              data and business operations, an AI and future-skills academy, and
-              cybersecurity and digital forensics — coordinated by one accountable
-              partner, so your organization can move faster without losing judgment,
-              discretion or control.
+              You may need to publish a book, produce a video, connect your systems,
+              organise your records, train your team or prepare for a security
+              incident. Six Jars brings the people for that work together, with one
+              contact coordinating delivery. We agree what you need, keep you involved
+              in key decisions and hand over work your team can use.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">

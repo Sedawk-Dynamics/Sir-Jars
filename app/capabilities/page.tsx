@@ -6,7 +6,7 @@ import ClosingCta from '@/components/home/closing-cta'
 import { patternVars } from '@/lib/patterns'
 
 export const metadata: Metadata = {
-  title: 'Capabilities — six routes into the work',
+  title: 'Services — what do you need help with?',
   description:
     'Publishing, media, digital platforms, data and business operations, the AI & Future Skills Academy, and cybersecurity and digital forensics — six connected capabilities coordinated by one accountable partner.',
   alternates: { canonical: '/capabilities' },
@@ -17,19 +17,15 @@ export default function CapabilitiesPage() {
     <>
       <PageHeader
         eyebrow="Capabilities"
-        title="Six routes into the work."
-        intro="Each jar is a distinct service promise. Together they form one governed operating system — six routes into the work, one accountable relationship across all of it."
+        title="Six services. One contact coordinating the work."
+        intro="Publishing, media, digital systems, business operations, skills and security. Choose the service that fits your need — if the work crosses several areas, we plan it with you as one job."
         breadcrumbs={[{ label: 'Capabilities', href: '/capabilities' }]}
         image="/images/hero-cinematic.png"
         imageAlt="Specialists at work across connected disciplines."
         pattern="hatch"
       />
 
-      <CapabilityCards
-        eyebrow="Choose the capability"
-        heading="Start with the problem you need solved."
-        intro="Six Jars assembles the right specialists and keeps one accountable line from brief to verified outcome. Cross-capability engagements are the norm, not an exception."
-      />
+      <CapabilityCards />
 
       <section
         className="on-dark patterned py-20 lg:py-28"

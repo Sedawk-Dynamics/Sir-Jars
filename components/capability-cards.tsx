@@ -10,9 +10,9 @@ import { capabilities } from '@/lib/content'
  * The whole card is one anchor: a real, copyable, deep-linkable URL.
  */
 export default function CapabilityCards({
-  heading = 'Six routes into the work.',
-  intro = 'Start with the problem you need solved. Six Jars assembles the right specialists and keeps one accountable line from brief to verified outcome.',
-  eyebrow = 'Choose the capability',
+  heading = 'What do you need help with?',
+  intro = 'Choose the service that fits your immediate need. If the work crosses several areas, we will help you plan it together.',
+  eyebrow = 'Our services',
   headingLevel: Heading = 'h2',
 }: {
   heading?: string
@@ -102,13 +102,18 @@ export default function CapabilityCards({
                   {c.shortName}
                 </span>
 
-                <span className="relative flex-1" />
+                <span
+                  className="relative block text-sm leading-relaxed mt-2 flex-1"
+                  style={{ color: 'rgba(75,13,36,0.72)' }}
+                >
+                  {c.intro}
+                </span>
 
                 <span
                   className="relative inline-flex items-center gap-1.5 text-sm font-bold mt-6"
                   style={{ color: 'var(--color-wine)' }}
                 >
-                  See capability
+                  See service
                   <ArrowRight
                     size={14}
                     aria-hidden="true"
