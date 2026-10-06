@@ -7,7 +7,7 @@ export type HeaderPattern = PatternName
 
 /** Image and texture for each vertical, shared by capability and insight pages. */
 export const verticalVisuals: Record<string, { image: string; alt: string; pattern: HeaderPattern }> = {
-  publishing: { image: '/images/publishing-ops.png', alt: 'A publishing production floor with proofs under review.', pattern: 'hatch' },
+  publishing: { image: '/Allimages/sixjars-home-publishing.png', alt: 'An editor and an author reviewing a book and a marked-up manuscript together.', pattern: 'hatch' },
   media: { image: '/images/insights-editorial.png', alt: 'An editorial desk preparing media content.', pattern: 'waves' },
   'digital-platforms': { image: '/images/mission-editorial.png', alt: 'A specialist working on a digital platform.', pattern: 'circuit' },
   'data-operations': { image: '/images/hero-cinematic.png', alt: 'An operations team coordinating work.', pattern: 'grid' },

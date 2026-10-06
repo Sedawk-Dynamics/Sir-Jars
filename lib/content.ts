@@ -52,7 +52,7 @@ export const capabilities: Capability[] = [
     headline: 'Bring your next publication from draft to finished copy.',
     summary: 'Editorial, design and production support for books, reports and guides.',
     intro:
-      'Editorial, design and production support for books, reports and guides. We keep the text, layout and approvals together so your publication is ready for print and digital release.',
+      'Have a manuscript, report or guide to publish? We help edit the words, design the pages and prepare the files for print or digital release, with you involved in the final decisions.',
     overview:
       'A publication involves many decisions: what to say, how it should read, how it should look and which version is ready to go. We help you work through those decisions, from developing the manuscript to checking the final proof. Your organisation’s voice stays central throughout. Whether you are producing a book, an annual report or a series of guides, we coordinate the editorial and production work so your team has a clear view of what is ready and what still needs attention.',
     capabilities: [

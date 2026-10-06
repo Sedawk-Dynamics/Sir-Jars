@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Lets the dev server be opened from other devices on the local network.
+  allowedDevOrigins: ['192.168.1.6'],
   typescript: {
     ignoreBuildErrors: true,
   },

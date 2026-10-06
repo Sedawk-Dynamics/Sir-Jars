@@ -11,7 +11,7 @@ import { capabilities } from '@/lib/content'
  */
 export default function CapabilityCards({
   heading = 'What do you need help with?',
-  intro = 'Choose the service that fits your immediate need. If the work crosses several areas, we will help you plan it together.',
+  intro = 'Start with what you need help with. If your project needs more than one service, we will help you plan the work together.',
   eyebrow = 'Our services',
   headingLevel: Heading = 'h2',
 }: {
