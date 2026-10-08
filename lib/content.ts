@@ -85,7 +85,7 @@ export const capabilities: Capability[] = [
     headline: 'Make more of the stories your organisation has to tell.',
     summary: 'Video, podcasts and social content built around your message.',
     intro:
-      'Video, podcasts and social content built around your message. We help you plan, produce and adapt material for each channel, with review before anything goes live.',
+      'Bring us the story you want to tell. We help plan and produce videos, podcasts and social content, then prepare the versions you need and review them with you before release.',
     overview:
       'Your team may have a useful interview, a worthwhile event or a story people should hear. Turning it into a finished video, podcast or set of social posts takes time and care. We support that work from the content calendar through production and review. We also adapt longer material into shorter pieces for different channels, so you can use it again without losing the meaning. Captions and transcripts are part of the work, helping more people follow what you have to say.',
     capabilities: [
@@ -119,7 +119,7 @@ export const capabilities: Capability[] = [
     headline: 'Help your systems work together and your people get on with the job.',
     summary: 'Websites, applications and connected workflows that support everyday work.',
     intro:
-      'Websites, applications and connected workflows that support everyday work. We help reduce repeated data entry and organise handovers between the systems your team uses.',
+      'Build a website, application or workflow around the way you work. We help connect your tools and information so everyday tasks are easier to manage.',
     overview:
       'When information sits in separate systems, people often become the link between them: copying details, chasing updates and checking whether a task moved forward. We help you build or connect the platforms behind that work. This can include a website, customer relationship management system, learning platform or mobile application. We agree which routine steps can be automated and which decisions need a person. Your team receives documentation for the connections, access and day-to-day operation, so it can understand how the system works.',
     capabilities: [
@@ -152,7 +152,7 @@ export const capabilities: Capability[] = [
     headline: 'Keep everyday work organised and easier to follow.',
     summary: 'Support for records, reporting, registrations and recurring administration.',
     intro:
-      'Support for records, reporting, registrations and recurring administration. We bring scattered information into order and make it clear who handles each step and unresolved issue.',
+      'Keep records, reports and recurring tasks in order. We help organise the information, track what needs attention and make handovers easier.',
     overview:
       'The work that keeps an organisation running is easy to overlook until something goes missing. A registration is incomplete, a report draws on an old file or a customer is waiting for a reply. We help organise the information and recurring tasks behind those moments. That may mean cleaning a dataset, arranging records, preparing reports or supporting intake and member enquiries. We document how the work should move and who deals with exceptions, giving your team a clearer way to manage what is open and what is complete.',
     capabilities: [
@@ -186,7 +186,7 @@ export const capabilities: Capability[] = [
     headline: 'Learn skills you can put to work.',
     summary: 'Practical learning for students, educators, professionals and teams.',
     intro:
-      'Practical learning for students, educators, professionals and teams. Workshops, guided practice and assessed projects help participants use new skills in tasks that matter to them.',
+      'Learn by working on tasks you recognise. Our workshops give students, educators, professionals and teams time to practise, ask questions and improve their work with feedback.',
     overview:
       'Learning becomes useful when people can apply it beyond the session. Our programmes give participants time to practise, ask questions and receive feedback on their work. Topics include responsible AI use, workflow design, process improvement, automation and communication. Students, educators, professionals and organisations can choose the learning route that fits their role. Each programme sets out what participants will practise and how their work will be assessed, so completion means more than being present at a workshop.',
     capabilities: [

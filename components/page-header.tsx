@@ -8,11 +8,11 @@ export type HeaderPattern = PatternName
 /** Image and texture for each vertical, shared by capability and insight pages. */
 export const verticalVisuals: Record<string, { image: string; alt: string; pattern: HeaderPattern }> = {
   publishing: { image: '/Allimages/sixjars-home-publishing.png', alt: 'An editor and an author reviewing a book and a marked-up manuscript together.', pattern: 'hatch' },
-  media: { image: '/images/insights-editorial.png', alt: 'An editorial desk preparing media content.', pattern: 'waves' },
-  'digital-platforms': { image: '/images/mission-editorial.png', alt: 'A specialist working on a digital platform.', pattern: 'circuit' },
-  'data-operations': { image: '/images/hero-cinematic.png', alt: 'An operations team coordinating work.', pattern: 'grid' },
-  'ai-academy': { image: '/images/mission-editorial.png', alt: 'A learner working through a training module.', pattern: 'dots' },
-  'cybersecurity-forensics': { image: '/images/cybersecurity-ops.png', alt: 'A security operations room monitoring systems.', pattern: 'diagonal' },
+  media: { image: '/Allimages/sixjars-home-media.png', alt: 'A camera operator filming an interview while a colleague fits a microphone.', pattern: 'waves' },
+  'digital-platforms': { image: '/Allimages/sixjars-home-digital.png', alt: 'A small business owner managing bookings on a phone and laptop.', pattern: 'circuit' },
+  'data-operations': { image: '/Allimages/sixjars-home-data.png', alt: 'An administrator sorting records into labelled trays beside a reporting dashboard.', pattern: 'grid' },
+  'ai-academy': { image: '/Allimages/sixjars-home-academy.png', alt: 'A facilitator reviewing a worked exercise with two learners.', pattern: 'dots' },
+  'cybersecurity-forensics': { image: '/Allimages/sixjars-home-security.png', alt: 'Two colleagues reviewing access settings on a laptop.', pattern: 'diagonal' },
 }
 
 /**
