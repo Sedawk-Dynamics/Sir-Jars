@@ -561,7 +561,7 @@ const articleData: Omit<Article, 'capability'>[] = [
       'Editorial guidance; audience reach and engagement will depend on the content and channel.',
     date: 'September 2026',
     isoDate: '2026-09-26',
-    image: '/images/insights-editorial.png',
+    image: '/Allimages/sixjars-home-insight-interview.png',
     imageNote: 'The interview setup from the Media service image, cropped around the speaker and microphone.',
     body: [
       'A recorded interview may contain an explanation, a personal story and an answer to a question your audience often asks. Each could be useful beyond the full recording. Finding those moments is easier when the team has agreed what the interview should help people understand.',
@@ -607,7 +607,7 @@ const articleData: Omit<Article, 'capability'>[] = [
       'Operational guidance; adapt the process to the organisation and its information requirements.',
     date: 'September 2026',
     isoDate: '2026-09-26',
-    image: '/images/hero-cinematic.png',
+    image: '/Allimages/sixjars-home-insight-handover.png',
     imageNote: 'Two colleagues handing over a task using a fictional checklist and shared record.',
     body: [
       'A colleague is away and a routine request stalls. The instructions are in one inbox, the latest spreadsheet is on another computer and nobody knows whether the customer has received a reply.',
@@ -630,7 +630,7 @@ const articleData: Omit<Article, 'capability'>[] = [
       'Learning design guidance; participation alone does not establish workplace proficiency or accreditation.',
     date: 'September 2026',
     isoDate: '2026-09-26',
-    image: '/images/mission-editorial.png',
+    image: '/Allimages/sixjars-home-insight-learning.png',
     imageNote: 'A learner explaining a completed exercise to a facilitator, rather than posing with a certificate.',
     body: [
       'A participant can enjoy a workshop and still struggle to apply the material the next day. Before choosing a programme, identify a task that would show the learning has become useful.',

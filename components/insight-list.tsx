@@ -86,7 +86,7 @@ export default function InsightList({
                 border: '1px solid var(--color-line)',
               }}
             >
-              <span className="relative block h-44 overflow-hidden">
+              <span className="relative block aspect-[3/2] overflow-hidden">
                 <Image
                   src={article.image}
                   // Decorative relative to the headline that follows it —

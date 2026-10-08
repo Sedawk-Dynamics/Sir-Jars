@@ -79,7 +79,7 @@ export default async function ArticlePage({ params }: Params) {
             </Link>
           </div>
 
-          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden my-8">
+          <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden my-8">
             <Image
               src={article.image}
               // Illustrative, not informative — the article text carries the meaning.
