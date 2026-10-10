@@ -6,15 +6,6 @@ import WhySixJars from '@/components/home/why-six-jars'
 import PhaseRail from '@/components/home/phase-rail'
 import ClosingCta from '@/components/home/closing-cta'
 import InsightList from '@/components/insight-list'
-
-/**
- * Homepage order, per the review:
- *   hero → commitments rail → six capability routes → why → three-phase
- *   model → insights → short contact CTA.
- *
- * Full mission and vision text lives on /about; the six operational stages on
- * /how-it-works.
- */
 export default function HomePage() {
   return (
     <>
