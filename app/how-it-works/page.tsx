@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Check, FileCheck2, UserRound } from 'lucide-react'
 import PageHeader from '@/components/page-header'
-import ClosingCta from '@/components/home/closing-cta'
+import EnquiryBlock from '@/components/enquiry-block'
+import BackToHome from '@/components/back-to-home'
 import { phases } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -20,11 +21,10 @@ export default function HowItWorksPage() {
     <>
       <PageHeader
         eyebrow="How it works"
-        title="A visible delivery path with named ownership."
-        intro="Understand → Plan → Execute → Review → Validate → Improve. Every stage has a named owner and cannot close until its exit evidence exists."
+        title="A clear plan from first conversation to handover."
+        intro="Understand → Plan → Execute → Review → Validate → Improve. At each stage, you know who is responsible, what happens next and what you will receive."
         breadcrumbs={[{ label: 'How it works', href: '/how-it-works' }]}
-        image="/images/publishing-ops.png"
-        imageAlt="A team reviewing work together at a shared desk."
+        image={null}
         pattern="grid"
       />
 
@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
                   <span
                     aria-hidden="true"
                     className="text-5xl font-black leading-none tabular-nums"
-                    style={{ color: 'rgba(112,13,44,0.14)' }}
+                    style={{ color: 'rgba(107,21,63,0.14)' }}
                   >
                     {phase.number}
                   </span>
@@ -70,14 +70,14 @@ export default function HowItWorksPage() {
                 </p>
                 <p
                   className="mt-3 text-sm leading-relaxed"
-                  style={{ color: 'rgba(75,13,36,0.72)' }}
+                  style={{ color: 'rgba(0,0,0,0.72)' }}
                 >
                   {phase.description}
                 </p>
 
                 <dl
                   className="mt-5 grid sm:grid-cols-2 gap-3 text-sm"
-                  style={{ color: 'rgba(75,13,36,0.8)' }}
+                  style={{ color: 'rgba(0,0,0,0.8)' }}
                 >
                   <div className="rounded-xl p-3.5" style={{ background: 'var(--color-parchment)' }}>
                     <dt
@@ -116,7 +116,7 @@ export default function HowItWorksPage() {
                       />
                       <span
                         className="text-sm leading-relaxed"
-                        style={{ color: 'rgba(75,13,36,0.75)' }}
+                        style={{ color: 'rgba(0,0,0,0.75)' }}
                       >
                         {output}
                       </span>
@@ -129,7 +129,9 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      <ClosingCta />
+      <EnquiryBlock />
+
+      <BackToHome />
     </>
   )
 }

@@ -5,15 +5,15 @@ import { patternVars } from '@/lib/patterns'
 const reasons = [
   {
     title: 'Who handles the work',
-    body: 'One contact brings in the right specialists and keeps the whole job moving, so you are not managing six suppliers yourself.',
+    body: 'One contact brings in the right specialists and keeps the work moving.',
   },
   {
     title: 'Who approves it',
-    body: 'Your team stays involved in the decisions that affect your content, customers and information. Approvals are agreed before work starts.',
+    body: 'You stay involved in the decisions that affect your work. Approvals are agreed before work starts.',
   },
   {
     title: 'What you receive',
-    body: 'Finished work your team can use, with the files, documentation and records that explain what was delivered.',
+    body: 'Finished work you can use, with the files, documentation and records that explain what was delivered.',
   },
 ]
 
@@ -40,16 +40,15 @@ export default function WhySixJars() {
               fontSize: 'clamp(2rem, 4.5vw, 3rem)',
             }}
           >
-            Someone keeps the whole job moving.
+            Know who to contact and what happens next.
           </h2>
           <p
             className="mt-5 text-base sm:text-lg leading-relaxed"
-            style={{ color: 'rgba(252,251,248,0.75)' }}
+            style={{ color: 'rgba(255,255,255,0.75)' }}
           >
-            When a project involves several specialists, someone still needs to keep the
-            whole job moving. Six Jars coordinates that work, keeps responsibilities clear
-            and makes sure you know what you are receiving. Your team stays involved in the
-            decisions that affect your content, customers and information.
+            Start with your goal. We bring in the right specialists, agree the work with you
+            and keep each step clear. You stay involved in the decisions, from the first
+            conversation to the final handover.
           </p>
         </div>
 
@@ -59,8 +58,8 @@ export default function WhySixJars() {
               key={r.title}
               className="rounded-2xl p-6"
               style={{
-                background: 'rgba(252,251,248,0.05)',
-                border: '1px solid rgba(252,251,248,0.1)',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
               }}
             >
               <span
@@ -76,7 +75,7 @@ export default function WhySixJars() {
               </h3>
               <p
                 className="text-sm leading-relaxed mt-2"
-                style={{ color: 'rgba(252,251,248,0.65)' }}
+                style={{ color: 'rgba(255,255,255,0.65)' }}
               >
                 {r.body}
               </p>

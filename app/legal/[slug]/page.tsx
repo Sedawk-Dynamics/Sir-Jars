@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import PageHeader from '@/components/page-header'
+import BackToHome from '@/components/back-to-home'
 import { org } from '@/lib/content'
 import { legalDocs, legalOrder } from '@/lib/legal'
 
@@ -68,7 +69,7 @@ export default async function LegalPage({ params }: Params) {
                   >
                     {row.term}
                   </dt>
-                  <dd className="text-sm mt-1" style={{ color: 'rgba(75,13,36,0.8)' }}>
+                  <dd className="text-sm mt-1" style={{ color: 'rgba(0,0,0,0.8)' }}>
                     {row.detail}
                   </dd>
                 </div>
@@ -84,7 +85,7 @@ export default async function LegalPage({ params }: Params) {
                 border: '1px solid var(--color-line)',
               }}
             >
-              <p className="text-sm leading-relaxed" style={{ color: 'rgba(75,13,36,0.78)' }}>
+              <p className="text-sm leading-relaxed" style={{ color: 'rgba(0,0,0,0.78)' }}>
                 <span className="font-bold">Under review. </span>
                 This document states our operating practice and is pending sign-off by
                 counsel. For anything contractual, the terms in your signed engagement
@@ -116,7 +117,7 @@ export default async function LegalPage({ params }: Params) {
                       <p
                         key={i}
                         className="text-base leading-[1.8]"
-                        style={{ color: 'rgba(75,13,36,0.8)' }}
+                        style={{ color: 'rgba(0,0,0,0.8)' }}
                       >
                         {block}
                       </p>
@@ -126,7 +127,7 @@ export default async function LegalPage({ params }: Params) {
                           <li
                             key={item}
                             className="text-base leading-[1.75]"
-                            style={{ color: 'rgba(75,13,36,0.8)' }}
+                            style={{ color: 'rgba(0,0,0,0.8)' }}
                           >
                             {item}
                           </li>
@@ -171,6 +172,8 @@ export default async function LegalPage({ params }: Params) {
           </nav>
         </div>
       </section>
+
+      <BackToHome />
     </>
   )
 }

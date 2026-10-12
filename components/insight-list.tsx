@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Clock } from 'lucide-react'
+import { ArrowRight, Clock } from 'lucide-react'
 import { articles, capabilities, readTime } from '@/lib/content'
 
 /**
@@ -13,13 +13,18 @@ import { articles, capabilities, readTime } from '@/lib/content'
  *
  * The capability filter is client state on top of a fully-rendered list; the
  * cards themselves are anchors, not JavaScript-only handlers.
+ *
+ * `layout="rows"` is the /insights index: image left, text right, stacked on
+ * mobile, with a visible result count and a "Read article" action.
  */
 export default function InsightList({
   filterable = true,
   limit,
+  layout = 'cards',
 }: {
   filterable?: boolean
   limit?: number
+  layout?: 'cards' | 'rows'
 }) {
   const [filter, setFilter] = useState<string>('All')
 
@@ -48,12 +53,11 @@ export default function InsightList({
                 type="button"
                 onClick={() => setFilter(route)}
                 aria-pressed={isActive}
-                disabled={count === 0}
-                className="inline-flex items-center gap-2 px-4 rounded-full text-sm font-semibold transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-2 px-4 rounded-full text-sm font-semibold transition-colors duration-200"
                 style={{
                   minHeight: 44,
                   background: isActive ? 'var(--color-wine)' : '#FFFFFF',
-                  color: isActive ? 'var(--color-ivory)' : 'rgba(75,13,36,0.75)',
+                  color: isActive ? 'var(--color-ivory)' : 'rgba(0,0,0,0.75)',
                   border: `1px solid ${isActive ? 'var(--color-wine)' : 'var(--color-line)'}`,
                 }}
               >
@@ -70,11 +74,85 @@ export default function InsightList({
         </div>
       )}
 
-      <p className="sr-only" role="status">
-        Showing {visible.length} {visible.length === 1 ? 'article' : 'articles'}
-        {filter !== 'All' ? ` in ${filter}` : ''}.
+      <p
+        className={layout === 'rows' ? 'mb-6 text-sm font-semibold' : 'sr-only'}
+        role="status"
+        style={{ color: 'rgba(0,0,0,0.7)' }}
+      >
+        {visible.length === 0
+          ? 'No articles in this category yet.'
+          : `Showing ${visible.length} ${visible.length === 1 ? 'article' : 'articles'}.`}
       </p>
 
+      {layout === 'rows' ? (
+        <ul className="space-y-6">
+          {visible.map((article) => {
+            const image = article.listImage ?? { src: article.image, alt: '' }
+            return (
+              <li key={article.slug}>
+                <article
+                  className="grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] rounded-2xl overflow-hidden"
+                  style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
+                >
+                  <div className="relative aspect-[3/2] md:aspect-auto md:min-h-full">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col p-6 lg:p-8">
+                    <p
+                      className="text-[11px] font-bold tracking-[0.16em] uppercase"
+                      style={{ color: 'var(--color-rose)' }}
+                    >
+                      {article.capability}
+                    </p>
+                    <h2
+                      className="text-xl font-bold leading-snug mt-2"
+                      style={{ color: 'var(--color-plum)' }}
+                    >
+                      {article.title}
+                    </h2>
+                    <p
+                      className="text-base leading-relaxed mt-2"
+                      style={{ color: 'rgba(0,0,0,0.7)' }}
+                    >
+                      {article.excerpt}
+                    </p>
+                    <p
+                      className="mt-4 text-sm"
+                      style={{ color: 'rgba(0,0,0,0.65)' }}
+                    >
+                      {article.author.name}, {article.author.role} · {readTime(article)} read ·{' '}
+                      <time dateTime={article.isoDate}>{article.date}</time>
+                    </p>
+                    <Link
+                      href={`/insights/${article.slug}`}
+                      className="group mt-5 self-start inline-flex items-center gap-2 px-5 rounded-full text-sm font-bold"
+                      style={{
+                        minHeight: 44,
+                        background: 'var(--color-wine)',
+                        color: 'var(--color-ivory)',
+                      }}
+                    >
+                      Read article
+                      <span className="sr-only">: {article.title}</span>
+                      <ArrowRight
+                        size={15}
+                        aria-hidden="true"
+                        className="transition-transform duration-200 group-hover:translate-x-1"
+                      />
+                    </Link>
+                  </div>
+                </article>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
       <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {visible.map((article) => (
           <li key={article.slug}>
@@ -89,9 +167,7 @@ export default function InsightList({
               <span className="relative block aspect-[3/2] overflow-hidden">
                 <Image
                   src={article.image}
-                  // Decorative relative to the headline that follows it —
-                  // the card's meaning is fully carried by its text.
-                  alt=""
+                  alt={article.imageAlt ?? ''}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -112,19 +188,19 @@ export default function InsightList({
                 </span>
                 <span
                   className="text-sm leading-relaxed mt-2 flex-1"
-                  style={{ color: 'rgba(75,13,36,0.66)' }}
+                  style={{ color: 'rgba(0,0,0,0.66)' }}
                 >
                   {article.excerpt}
                 </span>
                 <span
                   className="block mt-4 pt-3 text-xs font-semibold"
-                  style={{ color: 'rgba(75,13,36,0.75)', borderTop: '1px solid var(--color-line)' }}
+                  style={{ color: 'rgba(0,0,0,0.75)', borderTop: '1px solid var(--color-line)' }}
                 >
                   {article.author.name}, {article.author.role}
                 </span>
                 <span
                   className="flex items-center gap-3 mt-1 text-xs"
-                  style={{ color: 'rgba(75,13,36,0.55)' }}
+                  style={{ color: 'rgba(0,0,0,0.65)' }}
                 >
                   <span className="inline-flex items-center gap-1">
                     <Clock size={11} aria-hidden="true" />
@@ -132,11 +208,23 @@ export default function InsightList({
                   </span>
                   <time dateTime={article.isoDate}>{article.date}</time>
                 </span>
+                <span
+                  className="inline-flex items-center gap-1.5 mt-4 text-sm font-bold"
+                  style={{ color: 'var(--color-wine)' }}
+                >
+                  Read article
+                  <ArrowRight
+                    size={14}
+                    aria-hidden="true"
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                  />
+                </span>
               </span>
             </Link>
           </li>
         ))}
       </ul>
+      )}
     </div>
   )
 }

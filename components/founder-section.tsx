@@ -3,12 +3,10 @@ import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { founder } from '@/lib/content'
 
 /**
- * Founder section — one compact card: portrait on the left, name, a short
- * profile, focus areas and direct contact on the right.
+ * Cofounder & CEO section — one compact card: portrait on the left, name, a
+ * short profile and direct contact on the right.
  */
 export default function FounderSection() {
-  const profile = founder.tabs.find((t) => t.id === 'profile')?.body?.[0]
-  const expertise = founder.tabs.find((t) => t.id === 'expertise')?.items ?? []
 
   return (
     <section
@@ -22,7 +20,7 @@ export default function FounderSection() {
           style={{
             background: '#FFFFFF',
             border: '1px solid var(--color-line)',
-            boxShadow: '0 14px 40px -26px rgba(75,13,36,0.35)',
+            boxShadow: '0 14px 40px -26px rgba(58,13,39,0.35)',
           }}
         >
           <div className="relative aspect-[4/3] sm:aspect-auto sm:min-h-full">
@@ -40,7 +38,7 @@ export default function FounderSection() {
                 aria-hidden="true"
                 className="absolute inset-0 flex items-center justify-center text-6xl font-extrabold"
                 style={{
-                  background: 'radial-gradient(circle at 50% 38%, #872143 0%, #4B0D24 72%)',
+                  background: 'radial-gradient(circle at 50% 38%, #872143 0%, #3A0D27 72%)',
                   color: 'var(--color-gold)',
                 }}
               >
@@ -58,7 +56,7 @@ export default function FounderSection() {
               className="text-xs font-bold tracking-[0.18em] uppercase"
               style={{ color: 'var(--color-wine)' }}
             >
-              The founder
+              The cofounder &amp; CEO
             </p>
             <h2
               id="founder-heading"
@@ -71,36 +69,19 @@ export default function FounderSection() {
               {founder.role}, {founder.company}
             </p>
 
-            {profile && (
-              <p
-                className="mt-4 text-sm leading-relaxed"
-                style={{ color: 'rgba(75,13,36,0.78)' }}
-              >
-                {profile} The person who scopes your engagement is the person answerable
-                for it at close.
-              </p>
-            )}
-
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {expertise.map((item) => (
-                <li
-                  key={item.name}
-                  className="text-[11px] font-bold tracking-[0.06em] px-3 py-1.5 rounded-full"
-                  style={{
-                    background: 'rgba(241,181,59,0.16)',
-                    color: 'var(--color-gold-deep)',
-                    border: '1px solid rgba(241,181,59,0.4)',
-                  }}
-                  title={item.detail}
-                >
-                  {item.name}
-                </li>
-              ))}
-            </ul>
+            <p
+              className="mt-4 text-sm leading-relaxed"
+              style={{ color: 'rgba(0,0,0,0.78)' }}
+            >
+              We started Six Jars to make it easier for people to find the right support for
+              their work. Whether you come to us with a publication, a digital project or a
+              learning need, we agree the work with you, bring in the right specialists and
+              stay responsible for the handover.
+            </p>
 
             <div
               className="mt-5 pt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm"
-              style={{ borderTop: '1px solid var(--color-line)', color: 'rgba(75,13,36,0.78)' }}
+              style={{ borderTop: '1px solid var(--color-line)', color: 'rgba(0,0,0,0.78)' }}
             >
               <span className="inline-flex items-center gap-1.5">
                 <MapPin size={14} aria-hidden="true" style={{ color: 'var(--color-wine)' }} />

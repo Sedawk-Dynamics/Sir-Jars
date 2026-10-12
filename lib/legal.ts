@@ -141,7 +141,7 @@ export const legalDocs: Record<string, LegalDoc> = {
         heading: '14. Changes and contact',
         body: [
           'We may update this Notice when our services, systems or legal obligations change. The current version and effective date appear at the top of the page. Material changes will be highlighted through an appropriate website or direct notice where required.',
-          'Privacy questions and requests: sreejith.s@sixjarsglobal.com. General customer care: hello@sixjarsglobal.com or +91 9632988066. Grievance contact: Sreejith S, Founder, sreejith.s@sixjarsglobal.com, +91 9632988066.',
+          'Privacy questions and requests: sreejith.s@sixjarsglobal.com. General customer care: hello@sixjarsglobal.com or +91 9632988066. Grievance contact: Sreejith S, Cofounder & CEO, sreejith.s@sixjarsglobal.com, +91 9632988066.',
         ],
       },
     ],
@@ -218,7 +218,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '11. How to request a cancellation, return or refund',
         body: [
-          'Email hello@sixjarsglobal.com or call +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays. Provide the order or invoice number, item or service, reason, requested remedy and supporting evidence. Do not send payment-card details, passwords or confidential evidence. Grievances may be escalated to Sreejith S, Founder, at sreejith.s@sixjarsglobal.com or +91 9632988066.',
+          'Email hello@sixjarsglobal.com or call +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays. Provide the order or invoice number, item or service, reason, requested remedy and supporting evidence. Do not send payment-card details, passwords or confidential evidence. Grievances may be escalated to Sreejith S, Cofounder & CEO, at sreejith.s@sixjarsglobal.com or +91 9632988066.',
         ],
       },
     ],
@@ -311,7 +311,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '14. Contact',
         body: [
-          'Shipping support: hello@sixjarsglobal.com or +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays. Provide the order number, recipient name and issue. Do not send full payment-card details, passwords or confidential evidence. Grievances may be escalated to Sreejith S, Founder, at sreejith.s@sixjarsglobal.com or +91 9632988066.',
+          'Shipping support: hello@sixjarsglobal.com or +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays. Provide the order number, recipient name and issue. Do not send full payment-card details, passwords or confidential evidence. Grievances may be escalated to Sreejith S, Cofounder & CEO, at sreejith.s@sixjarsglobal.com or +91 9632988066.',
         ],
       },
     ],
@@ -417,7 +417,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '16. Complaints, governing law and jurisdiction',
         body: [
-          'Contact hello@sixjarsglobal.com or +91 9632988066 for support. Grievances may be escalated to Sreejith S, Founder, at sreejith.s@sixjarsglobal.com or +91 9632988066. These Terms are governed by the laws of India. Courts in Bengaluru, Karnataka have jurisdiction, subject to any mandatory consumer forum, local jurisdiction or other right that applicable law preserves.',
+          'Contact hello@sixjarsglobal.com or +91 9632988066 for support. Grievances may be escalated to Sreejith S, Cofounder & CEO, at sreejith.s@sixjarsglobal.com or +91 9632988066. These Terms are governed by the laws of India. Courts in Bengaluru, Karnataka have jurisdiction, subject to any mandatory consumer forum, local jurisdiction or other right that applicable law preserves.',
         ],
       },
     ],
@@ -513,7 +513,7 @@ export const legalDocs: Record<string, LegalDoc> = {
         heading: '13. Changes, law and contact',
         body: [
           'We may update these Terms prospectively. The current effective date and version appear at the top. These Terms are governed by the laws of India. Courts in Bengaluru, Karnataka have jurisdiction, subject to mandatory consumer or local rights.',
-          'Contact: hello@sixjarsglobal.com or +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays. Grievance contact: Sreejith S, Founder, sreejith.s@sixjarsglobal.com, +91 9632988066.',
+          'Contact: hello@sixjarsglobal.com or +91 9632988066, Monday-Friday, 09:00-18:00 IST, excluding Indian public holidays. Grievance contact: Sreejith S, Cofounder & CEO, sreejith.s@sixjarsglobal.com, +91 9632988066.',
         ],
       },
     ],
@@ -637,7 +637,7 @@ export const legalDocs: Record<string, LegalDoc> = {
       {
         heading: '7. Grievance escalation',
         body: [
-          'Grievance contact: Sreejith S, Founder. Email: sreejith.s@sixjarsglobal.com. Phone: +91 9632988066. Include the earlier support reference, issue summary, material dates, prior response and requested resolution. The grievance route is for unresolved complaints and regulated escalation; it is not a marketing contact.',
+          'Grievance contact: Sreejith S, Cofounder & CEO. Email: sreejith.s@sixjarsglobal.com. Phone: +91 9632988066. Include the earlier support reference, issue summary, material dates, prior response and requested resolution. The grievance route is for unresolved complaints and regulated escalation; it is not a marketing contact.',
         ],
       },
       {

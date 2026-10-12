@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
@@ -27,15 +28,26 @@ export default function PageHeader({
   image = '/images/hero-cinematic.png',
   imageAlt = '',
   pattern = 'hatch',
+  note,
+  imageSide = 'left',
+  action,
 }: {
   eyebrow: string
   title: string
   intro?: string
   breadcrumbs?: { label: string; href: string }[]
-  image?: string
+  /** Pass null for a text-only masthead. */
+  image?: string | null
   imageAlt?: string
   pattern?: HeaderPattern
+  /** Short supporting line under the intro. */
+  note?: string
+  /** 'right' puts text first on desktop with a 3:2 image beside it. */
+  imageSide?: 'left' | 'right'
+  /** Call to action under the text; on mobile it sits before the image. */
+  action?: ReactNode
 }) {
+  const right = imageSide === 'right'
   return (
     <header
       className="on-dark patterned overflow-hidden pt-10 pb-14 lg:pt-14 lg:pb-20"
@@ -47,7 +59,7 @@ export default function PageHeader({
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 70% 40%, transparent 0%, rgba(75,13,36,0.55) 75%)',
+            'radial-gradient(ellipse at 70% 40%, transparent 0%, rgba(58,13,39,0.55) 75%)',
         }}
       />
 
@@ -59,7 +71,7 @@ export default function PageHeader({
                 <Link
                   href="/"
                   className="hover:underline"
-                  style={{ color: 'rgba(252,251,248,0.6)' }}
+                  style={{ color: 'rgba(255,255,255,0.6)' }}
                 >
                   Home
                 </Link>
@@ -69,7 +81,7 @@ export default function PageHeader({
                   <ChevronRight
                     size={12}
                     aria-hidden="true"
-                    style={{ color: 'rgba(252,251,248,0.35)' }}
+                    style={{ color: 'rgba(255,255,255,0.35)' }}
                   />
                   {i === breadcrumbs.length - 1 ? (
                     <span aria-current="page" style={{ color: 'var(--color-gold)' }}>
@@ -79,7 +91,7 @@ export default function PageHeader({
                     <Link
                       href={crumb.href}
                       className="hover:underline"
-                      style={{ color: 'rgba(252,251,248,0.6)' }}
+                      style={{ color: 'rgba(255,255,255,0.6)' }}
                     >
                       {crumb.label}
                     </Link>
@@ -90,9 +102,21 @@ export default function PageHeader({
           </nav>
         )}
 
-        <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-14 items-center">
-          <div className="order-2 lg:order-1 relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
-            style={{ border: '1px solid rgba(241,181,59,0.28)' }}
+        <div
+          className={
+            !image
+              ? 'max-w-3xl'
+              : right
+                ? 'grid lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-10 lg:gap-14 items-center'
+                : 'grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-14 items-center'
+          }
+        >
+          {image && (
+          <div
+            className={`order-2 relative w-full rounded-2xl overflow-hidden shadow-2xl ${
+              right ? 'aspect-[3/2]' : 'lg:order-1 aspect-[4/3]'
+            }`}
+            style={{ border: '1px solid rgba(239,184,60,0.28)' }}
           >
             <Image
               src={image}
@@ -105,11 +129,12 @@ export default function PageHeader({
             <div
               aria-hidden="true"
               className="absolute inset-0"
-              style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(75,13,36,0.45))' }}
+              style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(58,13,39,0.45))' }}
             />
           </div>
+          )}
 
-          <div className="order-1 lg:order-2">
+          <div className={right ? 'order-1' : 'order-1 lg:order-2'}>
             <p
               className="text-xs font-bold tracking-[0.18em] uppercase"
               style={{ color: 'var(--color-gold)' }}
@@ -128,11 +153,20 @@ export default function PageHeader({
             {intro && (
               <p
                 className="mt-5 text-base sm:text-lg leading-relaxed max-w-2xl"
-                style={{ color: 'rgba(252,251,248,0.76)' }}
+                style={{ color: 'rgba(255,255,255,0.76)' }}
               >
                 {intro}
               </p>
             )}
+            {note && (
+              <p
+                className="mt-4 text-sm sm:text-base font-semibold leading-relaxed max-w-2xl"
+                style={{ color: 'var(--color-gold)' }}
+              >
+                {note}
+              </p>
+            )}
+            {action && <div className="mt-8">{action}</div>}
           </div>
         </div>
       </div>

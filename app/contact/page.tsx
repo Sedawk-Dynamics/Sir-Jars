@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
-import { MapPin, Phone, Mail } from 'lucide-react'
+import { Clock, MapPin, Phone, Mail } from 'lucide-react'
 import PageHeader from '@/components/page-header'
 import { patternVars } from '@/lib/patterns'
 import ContactForm from '@/components/contact-form'
+import BackToHome from '@/components/back-to-home'
 import { contactPaths, org, type ContactPathId } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Tell us what must work and what cannot be compromised. Every inquiry is acknowledged with a named owner and a documented next step.',
+    'Tell us what you want to achieve. We will help you identify the right service and agree the next step — scope and price are agreed with you.',
   alternates: { canonical: '/contact' },
 }
 
@@ -28,11 +29,10 @@ export default async function ContactPage({ searchParams }: Search) {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Tell us what must work — and what cannot be compromised."
-        intro="You will receive a structured next step, not a generic sales reply."
+        title="Tell us what you want to achieve"
+        intro="Share a few details about your goal. We will help you identify the right service and agree the next step. Individuals and organisations are welcome across all six services; scope and price are agreed with you."
         breadcrumbs={[{ label: 'Contact', href: '/contact' }]}
-        image="/images/about-bangalore.png"
-        imageAlt="Bengaluru, where Six Jars Global is based."
+        image={null}
         pattern="diagonal"
       />
 
@@ -64,7 +64,7 @@ export default async function ContactPage({ searchParams }: Search) {
                     />
                     <address
                       className="not-italic text-sm leading-relaxed"
-                      style={{ color: 'rgba(252,251,248,0.78)' }}
+                      style={{ color: 'rgba(255,255,255,0.78)' }}
                     >
                       {org.address}
                       <br />
@@ -90,7 +90,7 @@ export default async function ContactPage({ searchParams }: Search) {
                     <a
                       href={`tel:${org.phoneHref}`}
                       className="text-sm hover:underline"
-                      style={{ color: 'rgba(252,251,248,0.9)' }}
+                      style={{ color: 'rgba(255,255,255,0.9)' }}
                     >
                       {org.phone}
                     </a>
@@ -105,10 +105,21 @@ export default async function ContactPage({ searchParams }: Search) {
                     <a
                       href={`mailto:${org.email}`}
                       className="text-sm hover:underline break-all"
-                      style={{ color: 'rgba(252,251,248,0.9)' }}
+                      style={{ color: 'rgba(255,255,255,0.9)' }}
                     >
                       {org.email}
                     </a>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <Clock
+                      size={18}
+                      aria-hidden="true"
+                      className="mt-0.5 shrink-0"
+                      style={{ color: 'var(--color-gold)' }}
+                    />
+                    <span className="text-sm" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                      {org.hours}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -141,7 +152,7 @@ export default async function ContactPage({ searchParams }: Search) {
                       />
                       <span
                         className="text-sm leading-relaxed"
-                        style={{ color: 'rgba(75,13,36,0.78)' }}
+                        style={{ color: 'rgba(0,0,0,0.78)' }}
                       >
                         {item}
                       </span>
@@ -151,7 +162,7 @@ export default async function ContactPage({ searchParams }: Search) {
                 <p
                   className="text-xs leading-relaxed mt-5 pt-4"
                   style={{
-                    color: 'rgba(75,13,36,0.6)',
+                    color: 'rgba(0,0,0,0.65)',
                     borderTop: '1px solid var(--color-line)',
                   }}
                 >
@@ -195,6 +206,8 @@ export default async function ContactPage({ searchParams }: Search) {
           </div>
         </div>
       </section>
+
+      <BackToHome />
     </>
   )
 }

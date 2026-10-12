@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight, Clock, Lightbulb, ShieldCheck, UserCheck } from 'lucide-react'
 import PageHeader, { verticalVisuals } from '@/components/page-header'
+import BackToHome from '@/components/back-to-home'
 import { articles, getArticle, readTime } from '@/lib/content'
 
 type Params = { params: Promise<{ slug: string }> }
@@ -36,6 +37,7 @@ export default async function ArticlePage({ params }: Params) {
   if (!article) notFound()
 
   const more = articles.filter((a) => a.slug !== article.slug).slice(0, 3)
+  const image = article.articleImage ?? { src: article.image, alt: '' }
 
   return (
     <>
@@ -47,7 +49,7 @@ export default async function ArticlePage({ params }: Params) {
           { label: article.title, href: `/insights/${article.slug}` },
         ]}
         intro={article.excerpt}
-        image={article.image}
+        image={null}
         pattern={verticalVisuals[article.vertical]?.pattern ?? 'hatch'}
       />
 
@@ -56,7 +58,7 @@ export default async function ArticlePage({ params }: Params) {
           <div
             className="flex flex-wrap items-center gap-4 text-sm pb-6"
             style={{
-              color: 'rgba(75,13,36,0.6)',
+              color: 'rgba(0,0,0,0.65)',
               borderBottom: '1px solid var(--color-line)',
             }}
           >
@@ -81,9 +83,8 @@ export default async function ArticlePage({ params }: Params) {
 
           <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden my-8">
             <Image
-              src={article.image}
-              // Illustrative, not informative — the article text carries the meaning.
-              alt=""
+              src={image.src}
+              alt={image.alt}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover"
@@ -96,7 +97,7 @@ export default async function ArticlePage({ params }: Params) {
               <p
                 key={i}
                 className="text-base leading-[1.8]"
-                style={{ color: 'rgba(75,13,36,0.82)' }}
+                style={{ color: 'rgba(0,0,0,0.82)' }}
               >
                 {paragraph}
               </p>
@@ -124,7 +125,7 @@ export default async function ArticlePage({ params }: Params) {
                 </p>
                 <p
                   className="text-sm leading-relaxed mt-2"
-                  style={{ color: 'rgba(75,13,36,0.8)' }}
+                  style={{ color: 'rgba(0,0,0,0.8)' }}
                 >
                   {text}
                 </p>
@@ -141,18 +142,21 @@ export default async function ArticlePage({ params }: Params) {
           >
             <p
               className="text-base leading-relaxed"
-              style={{ color: 'rgba(75,13,36,0.8)' }}
+              style={{ color: 'rgba(0,0,0,0.8)' }}
             >
-              Facing this in your own organization? Tell us what must work and what cannot
-              be compromised.
+              Tell us where you would like help applying this to your work.
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 mt-4 text-sm font-semibold"
-              style={{ color: 'var(--color-wine)' }}
+              className="group inline-flex items-center gap-2 mt-4 px-6 rounded-full text-sm font-bold"
+              style={{ minHeight: 48, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
             >
-              Start a conversation
-              <ArrowRight size={15} aria-hidden="true" />
+              Tell us what you want to achieve
+              <ArrowRight
+                size={15}
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:translate-x-1"
+              />
             </Link>
           </div>
         </div>
@@ -194,7 +198,7 @@ export default async function ArticlePage({ params }: Params) {
                   </span>
                   <span
                     className="text-xs mt-4"
-                    style={{ color: 'rgba(75,13,36,0.5)' }}
+                    style={{ color: 'rgba(0,0,0,0.65)' }}
                   >
                     {readTime(a)} read · <time dateTime={a.isoDate}>{a.date}</time>
                   </span>
@@ -202,8 +206,22 @@ export default async function ArticlePage({ params }: Params) {
               </li>
             ))}
           </ul>
+          <Link
+            href="/insights"
+            className="group inline-flex items-center gap-2 mt-8 text-sm font-bold"
+            style={{ color: 'var(--color-wine)' }}
+          >
+            All articles
+            <ArrowRight
+              size={15}
+              aria-hidden="true"
+              className="transition-transform duration-200 group-hover:translate-x-1"
+            />
+          </Link>
         </div>
       </section>
+
+      <BackToHome />
     </>
   )
 }

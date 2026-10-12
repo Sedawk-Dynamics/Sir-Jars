@@ -4,19 +4,31 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Gotham Medium (brand body face) is a licensed font and is not bundled.
+   This face resolves only to a locally installed copy, so it costs no network
+   request; everyone else gets Manrope. To ship it, add the licensed .woff2
+   files and load them with next/font/local in app/layout.tsx. */
+@font-face {
+  font-family: 'Gotham Brand';
+  src: local('Gotham Medium'), local('Gotham-Medium'), local('GothamMedium');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   /* ─────────────────────────────────────────────────────────────
-     Six Jars Global — Logo-led color system
-     Sampled from the logo asset. See review p.6 "Usage rules".
-     Balance target: 70% warm ivory / 20% plum-wine / 10% gold.
+     Six Jars Global — brand colour system (change guide, 28 Sep 2026)
+     White backgrounds and black body text; plum for major brand areas,
+     wine for primary buttons, gold with black text for highlights.
      ───────────────────────────────────────────────────────────── */
-  --color-plum: #4B0D24;      /* Dark sections / footer            */
-  --color-wine: #700D2C;      /* Primary brand / links             */
+  --color-plum: #3A0D27;      /* Major brand areas / footer        */
+  --color-wine: #6B153F;      /* Primary buttons / links           */
   --color-burgundy: #872143;  /* Cards / hover states              */
   --color-rose: #9A2E4F;      /* Secondary accent                  */
-  --color-gold: #F1B53B;      /* CTA fills / selected state        */
+  --color-gold: #EFB83C;      /* Highlights — always with black text */
   --color-gold-deep: #9A6B05; /* Gold-family text on light (AA)    */
-  --color-ivory: #FCFBF8;     /* Primary background                */
+  --color-ivory: #FFFFFF;     /* Primary background / text on plum */
   --color-parchment: #F4EFE7; /* Alternating band background       */
   --color-line: #E4D9CE;      /* Hairlines on ivory                */
 
@@ -61,45 +73,46 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --font-sans: var(--font-manrope), 'Noto Sans', system-ui, sans-serif;
-  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-sans: 'Gotham Brand', var(--font-manrope), 'Noto Sans', system-ui, sans-serif;
+  --font-heading: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-serif: var(--font-heading);
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 
 :root {
   color-scheme: light;
-  --background: #FCFBF8;
-  --foreground: #4B0D24;
+  --background: #FFFFFF;
+  --foreground: #000000;
   --card: #FFFFFF;
-  --card-foreground: #4B0D24;
+  --card-foreground: #000000;
   --popover: #FFFFFF;
-  --popover-foreground: #4B0D24;
-  --primary: #700D2C;
-  --primary-foreground: #FCFBF8;
+  --popover-foreground: #000000;
+  --primary: #6B153F;
+  --primary-foreground: #FFFFFF;
   --secondary: #F4EFE7;
-  --secondary-foreground: #4B0D24;
+  --secondary-foreground: #000000;
   --muted: #F4EFE7;
   --muted-foreground: #6E5B62;
-  --accent: #F1B53B;
-  --accent-foreground: #4B0D24;
+  --accent: #EFB83C;
+  --accent-foreground: #000000;
   --destructive: #9A2E4F;
   --border: #E4D9CE;
   --input: #E4D9CE;
-  --ring: #700D2C;
-  --chart-1: #4B0D24;
-  --chart-2: #700D2C;
+  --ring: #6B153F;
+  --chart-1: #3A0D27;
+  --chart-2: #6B153F;
   --chart-3: #872143;
   --chart-4: #9A2E4F;
-  --chart-5: #F1B53B;
+  --chart-5: #EFB83C;
   --radius: 0.75rem;
-  --sidebar: #FCFBF8;
-  --sidebar-foreground: #4B0D24;
-  --sidebar-primary: #700D2C;
-  --sidebar-primary-foreground: #FCFBF8;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #6B153F;
+  --sidebar-primary-foreground: #FFFFFF;
   --sidebar-accent: #F4EFE7;
-  --sidebar-accent-foreground: #4B0D24;
+  --sidebar-accent-foreground: #000000;
   --sidebar-border: #E4D9CE;
-  --sidebar-ring: #700D2C;
+  --sidebar-ring: #6B153F;
 
   /* Sticky header height — drives every anchor offset. */
   --header-h: 5rem;
@@ -115,13 +128,15 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    font-weight: 500;
     font-feature-settings: 'kern' 1, 'liga' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  /* Cormorant Garamond for headings; Gotham Medium for body and controls. */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans;
-    letter-spacing: -0.02em;
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
   }
 
   /* WCAG 2.2 — 2.4.11 Focus Not Obscured (Minimum).
@@ -146,7 +161,7 @@
 
 /* Warm ivory glass — for the sticky header only. */
 .glass-ivory {
-  background: rgba(252, 251, 248, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(1.2);
   -webkit-backdrop-filter: blur(20px) saturate(1.2);
 }
@@ -154,7 +169,7 @@
 /* Gold is a FILL, never small text on light. This gradient is only ever
    applied to display-size headings on dark plum surfaces. */
 .text-gold-gradient {
-  background: linear-gradient(96deg, #F1B53B 0%, #FFD37A 45%, #E0A21F 100%);
+  background: linear-gradient(96deg, #EFB83C 0%, #FFD37A 45%, #E0A21F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -179,8 +194,8 @@ html {
 }
 
 ::selection {
-  background: rgba(241, 181, 59, 0.35);
-  color: #4B0D24;
+  background: rgba(239, 184, 60, 0.35);
+  color: #000000;
 }
 
 /* Skip link — first tab stop on every page. */
@@ -419,27 +434,6 @@ html {
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────
-   Scroll battery — idle bob
-   Runs only while the reader is not scrolling (data-scrolling="false"),
-   so the battery sits still under the thumb and drifts gently at rest.
-   Reduced-motion users get no bob (global rule above collapses it).
-   ───────────────────────────────────────────────────────────────────── */
-@keyframes battery-bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-.scroll-battery .scroll-battery__pill {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.scroll-battery[data-scrolling="false"] .scroll-battery__pill {
-  animation: battery-bob 3.2s ease-in-out infinite;
-}
-.scroll-battery[data-scrolling="true"] .scroll-battery__pill {
-  animation: none;
-  transform: translateY(0) scale(1.04);
-}
-
 /* Capability cards: a warm wash that lifts in on hover or keyboard focus. */
 .capability-card__wash {
   opacity: 0;
@@ -451,8 +445,8 @@ html {
 }
 .capability-card:hover,
 .capability-card:focus-visible {
-  border-color: rgba(241, 181, 59, 0.55) !important;
-  box-shadow: 0 20px 44px -22px rgba(75, 13, 36, 0.4) !important;
+  border-color: rgba(239, 184, 60, 0.55) !important;
+  box-shadow: 0 20px 44px -22px rgba(58, 13, 39, 0.4) !important;
 }
 
 /* ── Patterned dark bands ────────────────────────────────────────────────

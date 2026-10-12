@@ -134,7 +134,7 @@ export default function GalleryGrid() {
               style={{
                 minHeight: 44,
                 background: isActive ? 'var(--color-plum)' : '#FFFFFF',
-                color: isActive ? 'var(--color-ivory)' : 'rgba(75,13,36,0.72)',
+                color: isActive ? 'var(--color-ivory)' : 'rgba(0,0,0,0.72)',
                 border: `1px solid ${isActive ? 'var(--color-plum)' : 'var(--color-line)'}`,
               }}
             >
@@ -167,7 +167,7 @@ export default function GalleryGrid() {
               className="gallery-tile group relative w-full h-full rounded-2xl overflow-hidden text-left transition-transform duration-300 hover:-translate-y-1"
               style={{
                 border: '1px solid var(--color-line)',
-                boxShadow: '0 14px 40px -26px rgba(75,13,36,0.5)',
+                boxShadow: '0 14px 40px -26px rgba(58,13,39,0.5)',
               }}
             >
               <Image
@@ -200,7 +200,7 @@ export default function GalleryGrid() {
                 </span>
                 <span
                   className="gallery-caption block text-[13px] leading-relaxed mt-1.5"
-                  style={{ color: 'rgba(252,251,248,0.78)' }}
+                  style={{ color: 'rgba(255,255,255,0.78)' }}
                 >
                   {item.caption}
                 </span>
@@ -233,7 +233,7 @@ export default function GalleryGrid() {
           >
             <div
               className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden"
-              style={{ border: '1px solid rgba(241,181,59,0.28)' }}
+              style={{ border: '1px solid rgba(239,184,60,0.28)' }}
             >
               <Image
                 src={current.src}
@@ -261,7 +261,7 @@ export default function GalleryGrid() {
                 </h2>
                 <p
                   className="text-sm leading-relaxed mt-1.5 max-w-xl"
-                  style={{ color: 'rgba(252,251,248,0.72)' }}
+                  style={{ color: 'rgba(255,255,255,0.72)' }}
                 >
                   {current.caption}
                 </p>
@@ -269,7 +269,7 @@ export default function GalleryGrid() {
 
               <p
                 className="text-xs font-semibold shrink-0"
-                style={{ color: 'rgba(252,251,248,0.55)' }}
+                style={{ color: 'rgba(255,255,255,0.55)' }}
               >
                 {openIndex + 1} of {visible.length}
               </p>
@@ -299,7 +299,7 @@ export default function GalleryGrid() {
                   className="absolute left-2 top-1/2 -translate-y-1/2 tap-target inline-flex items-center justify-center rounded-full"
                   style={{
                     background: 'rgba(20,3,10,0.7)',
-                    border: '1px solid rgba(241,181,59,0.4)',
+                    border: '1px solid rgba(239,184,60,0.4)',
                     color: 'var(--color-ivory)',
                   }}
                   aria-label="Previous image"
@@ -312,7 +312,7 @@ export default function GalleryGrid() {
                   className="absolute right-2 top-1/2 -translate-y-1/2 tap-target inline-flex items-center justify-center rounded-full"
                   style={{
                     background: 'rgba(20,3,10,0.7)',
-                    border: '1px solid rgba(241,181,59,0.4)',
+                    border: '1px solid rgba(239,184,60,0.4)',
                     color: 'var(--color-ivory)',
                   }}
                   aria-label="Next image"

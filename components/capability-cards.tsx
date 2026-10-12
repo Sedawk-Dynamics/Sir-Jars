@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { capabilities } from '@/lib/content'
@@ -14,11 +15,14 @@ export default function CapabilityCards({
   intro = 'Start with what you need help with. If your project needs more than one service, we will help you plan the work together.',
   eyebrow = 'Our services',
   headingLevel: Heading = 'h2',
+  images,
 }: {
   heading?: string
   intro?: string
   eyebrow?: string
   headingLevel?: 'h1' | 'h2'
+  /** Per-slug card image. When given, each card reads image, title, paragraph, button. */
+  images?: Record<string, { src: string; alt: string }>
 }) {
   return (
     <section
@@ -47,14 +51,16 @@ export default function CapabilityCards({
           </div>
           <p
             className="text-base leading-relaxed"
-            style={{ color: 'rgba(75,13,36,0.72)' }}
+            style={{ color: 'rgba(0,0,0,0.72)' }}
           >
             {intro}
           </p>
         </div>
 
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {capabilities.map((c) => (
+          {capabilities.map((c) => {
+            const image = images?.[c.slug]
+            return (
             <li key={c.slug}>
               <Link
                 href={`/capabilities/${c.slug}`}
@@ -62,7 +68,7 @@ export default function CapabilityCards({
                 style={{
                   background: '#FFFFFF',
                   border: '1px solid var(--color-line)',
-                  boxShadow: '0 1px 3px rgba(75,13,36,0.04)',
+                  boxShadow: '0 1px 3px rgba(58,13,39,0.04)',
                 }}
               >
                 {/* Warm wash that lifts in on hover. */}
@@ -71,10 +77,21 @@ export default function CapabilityCards({
                   className="capability-card__wash absolute inset-0"
                   style={{
                     background:
-                      'radial-gradient(22rem 14rem at 100% 0%, rgba(241,181,59,0.16), transparent 70%)',
+                      'radial-gradient(22rem 14rem at 100% 0%, rgba(239,184,60,0.16), transparent 70%)',
                   }}
                 />
 
+                {image ? (
+                  <span className="relative block -mx-6 -mt-6 aspect-[3/2] overflow-hidden">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </span>
+                ) : (
                 <span className="relative flex items-center justify-between gap-3">
                   {/* The number, plainly legible — a filled chip, not a ghost. */}
                   <span
@@ -94,6 +111,7 @@ export default function CapabilityCards({
                     {c.cue}
                   </span>
                 </span>
+                )}
 
                 <span
                   className="relative block text-xl font-extrabold leading-tight tracking-tight mt-5"
@@ -104,7 +122,7 @@ export default function CapabilityCards({
 
                 <span
                   className="relative block text-sm leading-relaxed mt-2 flex-1"
-                  style={{ color: 'rgba(75,13,36,0.72)' }}
+                  style={{ color: 'rgba(0,0,0,0.72)' }}
                 >
                   {c.intro}
                 </span>
@@ -122,7 +140,8 @@ export default function CapabilityCards({
                 </span>
               </Link>
             </li>
-          ))}
+            )
+          })}
         </ul>
       </div>
     </section>

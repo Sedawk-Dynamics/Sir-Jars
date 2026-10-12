@@ -4,7 +4,7 @@ import { ArrowUp } from 'lucide-react'
 
 /**
  * Back to top. Scrolls the page to the top (instantly under reduced motion)
- * and moves keyboard focus to the skip target so screen-reader and keyboard
+ * and moves keyboard focus to the page heading so screen-reader and keyboard
  * users land at the start of the page too — not just sighted mouse users.
  */
 export default function BackToTop({ className }: { className?: string }) {
@@ -14,7 +14,7 @@ export default function BackToTop({ className }: { className?: string }) {
     // Fallback for browsers/containers where window scrolling is a no-op.
     document.scrollingElement?.scrollTo?.({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
 
-    const target = document.body
+    const target = document.querySelector<HTMLElement>('main h1') ?? document.body
     target.setAttribute('tabindex', '-1')
     target.focus({ preventScroll: true })
     target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true })

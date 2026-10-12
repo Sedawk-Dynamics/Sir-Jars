@@ -34,6 +34,10 @@ export type Capability = {
   boundary?: string
   /** Single-letter mark used in the orbit and card chips. */
   mark: string
+  /** "Who this is for" line on the service page. */
+  audience?: string
+  /** Service-page hero image; falls back to the vertical's shared visual. */
+  heroImage?: { src: string; alt: string }
 }
 
 /**
@@ -53,8 +57,14 @@ export const capabilities: Capability[] = [
     summary: 'Editorial, design and production support for books, reports and guides.',
     intro:
       'Have a manuscript, report or guide to publish? We help edit the words, design the pages and prepare the files for print or digital release, with you involved in the final decisions.',
+    audience:
+      'For independent authors and teams preparing a book, report or guide for publication.',
+    heroImage: {
+      src: '/Allimages/sixjars-publishing-service.png',
+      alt: 'Illustration of an Indian author and designer reviewing a printed book proof.',
+    },
     overview:
-      'A publication involves many decisions: what to say, how it should read, how it should look and which version is ready to go. We help you work through those decisions, from developing the manuscript to checking the final proof. Your organisation’s voice stays central throughout. Whether you are producing a book, an annual report or a series of guides, we coordinate the editorial and production work so your team has a clear view of what is ready and what still needs attention.',
+      'Bring us your manuscript, report or idea. We help shape the words, design the pages and prepare the final files for print or digital release. Your voice stays central. Whether you are an independent author or part of a team, you have a clear view of the work and a say in the decisions.',
     capabilities: [
       'Editorial development',
       'Copyediting and proofreading',
@@ -71,9 +81,9 @@ export const capabilities: Capability[] = [
       'Approved master files, a version history and a record of release approval.',
     ],
     chooseWhen:
-      'Choose this service when your team is spending too much time passing files between writers, designers and printers. Six Jars connects those steps, giving you one coordinated route to a finished publication while keeping final approval clear.',
+      'You can work through the edits, page design and production decisions with one coordinated team. You know which proof is current and when your approval is needed.',
     humanReview:
-      'An accountable editor reviews each proof before release. Your organisation’s approval responsibilities are agreed at the start.',
+      'An accountable editor reviews each proof before release. Your approval responsibilities are agreed at the start.',
   },
   {
     slug: 'media',
@@ -82,12 +92,18 @@ export const capabilities: Capability[] = [
     number: '02',
     cue: 'Voice',
     mark: 'M',
-    headline: 'Make more of the stories your organisation has to tell.',
+    headline: 'Make more of the stories you have to tell.',
     summary: 'Video, podcasts and social content built around your message.',
     intro:
       'Bring us the story you want to tell. We help plan and produce videos, podcasts and social content, then prepare the versions you need and review them with you before release.',
+    audience:
+      'For people and teams who want to turn a story, interview or event into useful media.',
+    heroImage: {
+      src: '/Allimages/sixjars-media-service.png',
+      alt: 'Illustration of an Indian host and guest recording a podcast with a producer.',
+    },
     overview:
-      'Your team may have a useful interview, a worthwhile event or a story people should hear. Turning it into a finished video, podcast or set of social posts takes time and care. We support that work from the content calendar through production and review. We also adapt longer material into shorter pieces for different channels, so you can use it again without losing the meaning. Captions and transcripts are part of the work, helping more people follow what you have to say.',
+      'Turn your interview, event or idea into content people can watch, hear and share. We help you plan, produce and adapt videos, podcasts and social posts for the channels you use. Captions, transcripts and a clear review step help your message reach people in a form they can follow.',
     capabilities: [
       'Video',
       'Podcast',
@@ -105,7 +121,7 @@ export const capabilities: Capability[] = [
       'Approved media files, channel versions, captions, transcripts and review records.',
     ],
     chooseWhen:
-      'Choose this service when you have stories worth sharing but limited time to produce content for every channel. Coordinating production and adaptation helps your team use its existing material more effectively and keep the message consistent.',
+      'A good interview may work as a full conversation, a short clip or a written extract. We plan those versions together and check that each one keeps the meaning of the original.',
     humanReview:
       'A named reviewer checks the edit, captions and context before content is published on your channels.',
   },
@@ -116,12 +132,18 @@ export const capabilities: Capability[] = [
     number: '03',
     cue: 'Connect',
     mark: 'D',
-    headline: 'Help your systems work together and your people get on with the job.',
+    headline: 'Build digital tools that work for you.',
     summary: 'Websites, applications and connected workflows that support everyday work.',
     intro:
       'Build a website, application or workflow around the way you work. We help connect your tools and information so everyday tasks are easier to manage.',
+    audience:
+      'For individuals and teams who need a website, application or a better way to connect everyday tasks.',
+    heroImage: {
+      src: '/Allimages/sixjars-digital-service.png',
+      alt: 'Indian professionals reviewing a website, mobile page and workflow.',
+    },
     overview:
-      'When information sits in separate systems, people often become the link between them: copying details, chasing updates and checking whether a task moved forward. We help you build or connect the platforms behind that work. This can include a website, customer relationship management system, learning platform or mobile application. We agree which routine steps can be automated and which decisions need a person. Your team receives documentation for the connections, access and day-to-day operation, so it can understand how the system works.',
+      'Create a website, application or connected workflow around the way you work. We help you choose the right platform, connect useful information and automate suitable routine steps. People stay responsible for key decisions. You receive the setup and guidance needed to use and manage the solution.',
     capabilities: [
       'Websites',
       'CRM and LMS',
@@ -138,9 +160,9 @@ export const capabilities: Capability[] = [
       'Configured platforms, integration documentation, operating instructions and access rules.',
     ],
     chooseWhen:
-      'Choose this service when staff keep re-entering information or moving work manually between systems. Six Jars looks at the whole handover, helping you connect the work as well as the software.',
+      'We look at the task as well as the technology. The setup includes the access rules, handovers and review steps people need to use it day to day.',
     humanReview:
-      'AI-assisted content is reviewed by a named person before it reaches members, donors or the public. Review responsibilities form part of the workflow.',
+      'AI-assisted content is reviewed by a named person before it reaches your audience. Review responsibilities form part of the workflow.',
   },
   {
     slug: 'data-operations',
@@ -153,8 +175,14 @@ export const capabilities: Capability[] = [
     summary: 'Support for records, reporting, registrations and recurring administration.',
     intro:
       'Keep records, reports and recurring tasks in order. We help organise the information, track what needs attention and make handovers easier.',
+    audience:
+      'For people and teams managing records, reports, registrations or recurring administration.',
+    heroImage: {
+      src: '/Allimages/sixjars-data-service.png',
+      alt: 'An Indian specialist checking organised records against a reporting and task dashboard.',
+    },
     overview:
-      'The work that keeps an organisation running is easy to overlook until something goes missing. A registration is incomplete, a report draws on an old file or a customer is waiting for a reply. We help organise the information and recurring tasks behind those moments. That may mean cleaning a dataset, arranging records, preparing reports or supporting intake and member enquiries. We document how the work should move and who deals with exceptions, giving your team a clearer way to manage what is open and what is complete.',
+      'Keep your records, reports and recurring tasks clear and current. We help clean data, organise files, prepare useful reports and support enquiries or registrations. Each process has clear steps, responsibilities and follow-up, so you can see what is complete and what comes next.',
     capabilities: [
       'Data cleanup',
       'Records and archives',
@@ -172,7 +200,7 @@ export const capabilities: Capability[] = [
       'Structured data, documented procedures, responsibilities and escalation routes.',
     ],
     chooseWhen:
-      'Choose this service when recurring administration depends on scattered spreadsheets, inboxes or one person’s memory. A shared process makes outstanding work visible and gives colleagues a practical basis for taking over when needed.',
+      'When files, status and next actions are easy to find, people can follow up and hand work over without starting again. We help put that structure in place.',
     humanReview:
       'Unusual or unresolved cases go to a person with the authority to decide. The decision is recorded rather than silently treated as complete.',
   },
@@ -187,8 +215,14 @@ export const capabilities: Capability[] = [
     summary: 'Practical learning for students, educators, professionals and teams.',
     intro:
       'Learn by working on tasks you recognise. Our workshops give students, educators, professionals and teams time to practise, ask questions and improve their work with feedback.',
+    audience:
+      'For students, educators, professionals and teams who want to practise a skill and use it in their own work.',
+    heroImage: {
+      src: '/Allimages/sixjars-academy-service.png',
+      alt: 'Illustration of Indian adult learners practising tasks with feedback from a facilitator.',
+    },
     overview:
-      'Learning becomes useful when people can apply it beyond the session. Our programmes give participants time to practise, ask questions and receive feedback on their work. Topics include responsible AI use, workflow design, process improvement, automation and communication. Students, educators, professionals and organisations can choose the learning route that fits their role. Each programme sets out what participants will practise and how their work will be assessed, so completion means more than being present at a workshop.',
+      'Learning becomes useful when people can apply it beyond the session. Our programmes give participants time to practise, ask questions and receive feedback on their work. Topics include responsible AI use, workflow design, process improvement, automation and communication. Students, educators, professionals and organisations can choose the learning route that fits their role. Each programme sets out what participants will practise and how their work will be assessed.',
     capabilities: [
       'AI literacy and responsible use',
       'Prompt and workflow design',
@@ -206,7 +240,7 @@ export const capabilities: Capability[] = [
       'Role-based curricula, practice labs, assessments, capstone projects and trainer guides.',
     ],
     chooseWhen:
-      'Choose the Academy when people need guided practice and feedback to use new skills confidently. Role-based exercises and facilitator-reviewed projects give learners and team leaders something concrete to assess after the programme.',
+      'Learners get time to try a task, discuss what worked and improve it. The finished exercise or project gives them and their facilitator a clear way to assess progress.',
     humanReview:
       'A facilitator reviews the participant’s applied work. Completion evidence and an improvement plan form part of the programme outputs.',
   },
@@ -217,12 +251,18 @@ export const capabilities: Capability[] = [
     number: '06',
     cue: 'Protect & Establish',
     mark: 'S',
-    headline: 'Prepare for security problems and establish what happened.',
+    headline: 'Protect what matters. Understand what happened.',
     summary: 'Support for security risks, incident readiness and authorised digital investigations.',
     intro:
-      'Support for security risks, incident readiness and authorised digital investigations. We keep prevention and forensic work clearly scoped, with careful handling of sensitive information and evidence.',
+      'Understand your security risks and prepare for incidents. When a digital event needs examination, we agree a separate, authorised forensic scope and handle information and evidence with care.',
+    audience:
+      'For people and organisations seeking security support or an authorised examination of a digital matter.',
+    heroImage: {
+      src: '/Allimages/sixjars-security-service.png',
+      alt: 'Indian professionals reviewing a security checklist and a device evidence log.',
+    },
     overview:
-      'A security concern can leave your organisation facing difficult questions about its systems, information and next steps. Our cybersecurity work helps you assess risks, plan protective measures and prepare for an incident. Digital forensics is a separate service for authorised matters where evidence must be preserved and events examined. We agree the scope and responsibilities before work begins. Findings distinguish what the evidence shows, what remains uncertain and what needs further attention, helping the responsible people make informed decisions.',
+      'Take a clear, practical approach to protecting your systems and information. Our cybersecurity work supports risk assessment, protective measures and incident readiness. For authorised digital matters, a separate forensic workstream preserves evidence and examines events within an agreed scope. Findings clearly distinguish established facts, uncertainties and next steps.',
     capabilities: [
       'Risk assessment',
       'Protective-control coordination',
@@ -239,7 +279,7 @@ export const capabilities: Capability[] = [
       'Risk registers, control plans, incident playbooks, evidence logs and findings reports.',
     ],
     chooseWhen:
-      'Choose this service when you need a clear plan for security risks or a carefully bounded examination of a digital event. Separate workstreams help you get the appropriate support without confusing prevention, investigation and conclusions.',
+      'Get the right support for your goal: stronger security readiness or an authorised examination of a digital event. Each workstream has a clear scope, responsible specialists and a documented handover.',
     boundary:
       'Forensic work requires written authorisation, agreed jurisdiction, qualified personnel and evidence-handling rules. Responsibility for the chain of custody, limitations and escalation must be explicit.',
     humanReview:
@@ -277,7 +317,7 @@ export const phases: Phase[] = [
     name: 'Understand',
     headline: 'Context, scope and authorisation before any work begins',
     description:
-      'We learn your context, then write down what is in scope, who may authorise what, and where confidentiality applies — before a single task is executed.',
+      'We start by listening to what you need. Together, we record the work to be done, who can approve it and what information needs to stay confidential.',
     owner: 'Engagement owner',
     exitEvidence: 'Signed scope brief and authorisation map',
     outputs: [
@@ -294,7 +334,7 @@ export const phases: Phase[] = [
     name: 'Plan',
     headline: 'Boundaries, risks and review points agreed in writing',
     description:
-      'We define service boundaries, map risk and sensitivity, fix the human review points and agree approvals, reporting cadence and escalation paths.',
+      'We agree what is included, the main risks and when you will review the work. The plan also says how often you will hear from us and who will handle questions or problems.',
     owner: 'Engagement owner with capability lead',
     exitEvidence: 'Approved delivery plan and governance framework',
     outputs: [
@@ -311,7 +351,7 @@ export const phases: Phase[] = [
     name: 'Execute',
     headline: 'Coordinated delivery with accountable people at every decision',
     description:
-      'Delivery runs across the relevant disciplines against the approved plan. Automation assists; accountable people decide at every approval and exception point.',
+      'The specialists carry out the agreed work and keep you informed. Where automation helps, people still make the approval decisions and handle exceptions.',
     owner: 'Capability lead',
     exitEvidence: 'Delivered work with a dated progress and exception log',
     outputs: [
@@ -328,7 +368,7 @@ export const phases: Phase[] = [
     name: 'Review',
     headline: 'Human review against the standard agreed at the start',
     description:
-      'Named reviewers check the work against the approved scope and quality criteria. Findings are recorded, corrected and signed off — not waved through under deadline.',
+      'The agreed reviewers check the work against your brief and quality requirements. We record their feedback, make the corrections and confirm approval.',
     owner: 'Named reviewer',
     exitEvidence: 'Review record with findings and sign-off',
     outputs: [
@@ -360,10 +400,10 @@ export const phases: Phase[] = [
     short: 'Close + learn',
     number: '06',
     name: 'Improve',
-    headline: 'An honest review after close — and what changes next time',
+    headline: 'Review what worked and plan the next step',
     description:
-      'We review the engagement against the standard we set, record lessons, and identify how the working relationship can responsibly extend.',
-    owner: 'Founder',
+      'We discuss what worked, what could be better and whether there is a useful next step. The review records the improvements to carry into future work.',
+    owner: 'Cofounder & CEO',
     exitEvidence: 'Engagement review with recorded improvements',
     outputs: [
       'Engagement review',
@@ -374,10 +414,39 @@ export const phases: Phase[] = [
   },
 ]
 
+/* ── CARE ────────────────────────────────────────────────────────────────
+   Homepage values block (change guide, 28 Sep 2026). Replaces the earlier
+   operating commitments; review and approval responsibilities now live in
+   the service and process copy.
+   ──────────────────────────────────────────────────────────────────── */
+
+export const care = [
+  {
+    letter: 'C',
+    title: 'Clarity',
+    detail: 'Know the scope, the next step and what you will receive.',
+  },
+  {
+    letter: 'A',
+    title: 'Accountability',
+    detail: 'Work with a named owner and agreed approvals.',
+  },
+  {
+    letter: 'R',
+    title: 'Responsible innovation',
+    detail:
+      'Choose technology that helps the work, with people checking the results and protecting information.',
+  },
+  {
+    letter: 'E',
+    title: 'Empowerment',
+    detail: 'Build the skills and confidence to use what we deliver.',
+  },
+]
+
 /* ── Operating commitments ──────────────────────────────────────────────
-   These are commitments we hold ourselves to, NOT measured results.
-   They are labelled as such wherever they appear near a call to action.
-   Numerical outcome claims belong in `engagements` once verified.
+   Shown in the homepage hero strip. These are commitments we hold
+   ourselves to, NOT measured results, and are labelled as such.
    ──────────────────────────────────────────────────────────────────── */
 
 export const commitments = [
@@ -424,9 +493,9 @@ export const engagements: Engagement[] = [
   {
     slug: 'publishing-consolidation',
     capability: 'Publishing',
-    title: 'Consolidating a fragmented publishing pipeline',
+    title: 'Creating one clear publishing workflow',
     context:
-      'A communications office running print, web and newsletter production through three disconnected vendors, with no single approval record.',
+      'An illustrative publishing workflow bringing print, web and newsletter production into one shared plan, with a clear approval record.',
     scope: [
       'Map the existing production path end to end',
       'Establish one editorial calendar and approval gate',
@@ -443,14 +512,14 @@ export const engagements: Engagement[] = [
       'Migrated archive with integrity check record',
     ],
     outcome:
-      'One approval path replaced three. Every published item now traces to a named approver and a dated proof.',
+      'In this illustrative example, each published item has a named approver and a dated proof within one coordinated approval path.',
   },
   {
     slug: 'ai-content-governance-policy',
     capability: 'Digital Platforms',
-    title: 'Writing an AI use policy before the tools were deployed',
+    title: 'Putting responsible AI use into practice',
     context:
-      'A publisher under pressure to adopt AI drafting tools, with no stated position on where machine output was permitted.',
+      'An illustrative publishing team preparing to use AI drafting tools with clear permissions, review responsibilities and release decisions.',
     scope: [
       'Inventory the proposed AI uses across content workflows',
       'Classify each use as permitted, review-gated or prohibited',
@@ -467,14 +536,14 @@ export const engagements: Engagement[] = [
       'Staff briefing record',
     ],
     outcome:
-      'The organisation adopted the tooling with a written position on machine judgment, rather than discovering its position after an incident.',
+      'In this illustrative example, the team has a written AI use policy and a named review owner before adopting the tools.',
   },
   {
     slug: 'authorised-evidence-preservation',
     capability: 'Cyber & Forensics',
     title: 'Preserving evidence under written authorisation',
     context:
-      'An institution facing an internal matter that required digital evidence to be preserved before any analysis or interpretation began.',
+      'An illustrative authorised engagement in which an institution preserves digital evidence before examination and interpretation.',
     scope: [
       'Obtain and document authorisation and its limits',
       'Preserve identified artefacts under chain of custody',
@@ -491,7 +560,7 @@ export const engagements: Engagement[] = [
       'Timeline report with evidentiary basis per entry',
     ],
     outcome:
-      'Decision-makers received a report that stated plainly what the evidence established and what it could not.',
+      'In this illustrative example, the report clearly states what the evidence establishes and the limits of the findings.',
   },
 ]
 
@@ -515,19 +584,25 @@ export type Article = {
   date: string
   isoDate: string
   image: string
+  /** Alt text for `image` where it appears on homepage cards. */
+  imageAlt?: string
+  /** Image and alt text shown inside the article page. */
+  articleImage?: { src: string; alt: string }
+  /** Image and alt text for the row on the /insights index. */
+  listImage?: { src: string; alt: string }
   /** Direction for the photograph this article should eventually carry. */
   imageNote?: string
   featured?: boolean
   body: string[]
 }
 
-const FOUNDER = { name: 'Sreejith S', role: 'Founder' }
+const FOUNDER = { name: 'Sreejith S', role: 'Cofounder & CEO' }
 
 const articleData: Omit<Article, 'capability'>[] = [
   {
     slug: 'governing-editorial-workflows',
     vertical: 'publishing',
-    title: 'Who signs off the final proof',
+    title: 'Move from final proof to publication',
     excerpt:
       'A clear final review helps a publication move forward without confusion over versions or last-minute changes.',
     author: FOUNDER,
@@ -538,10 +613,18 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'July 2026',
     isoDate: '2026-07-14',
     image: '/images/publishing-ops.png',
+    articleImage: {
+      src: '/Allimages/sixjars-article-proof.png',
+      alt: 'Illustration of Indian publishing colleagues checking a final proof and approval record.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-proof.png',
+      alt: 'Illustration of an Indian designer preparing a final book proof for release.',
+    },
     imageNote: 'A close-up of a proof being checked, with the version and date visible on a fictional document.',
     featured: true,
     body: [
-      'A report is ready for print, but two versions are still circulating. One contains the latest corrections; the other has the approval email. Before anyone sends a file to the printer, the team has to work out which copy is final.',
+      'A clear final proof gives everyone confidence to move into production. Keep the latest corrections and approval together, so the author, designer and printer work from the same agreed file.',
       'Give each publication one person responsible for final approval. Record that approval against a dated proof, and keep the proof and decision together. Editors, designers and production colleagues should be able to find the same file.',
       'Agree what happens if the approver is unavailable or a correction arrives after sign-off. A deputy and a clear way to reopen review can prevent a deadline from turning into an unrecorded decision.',
       'The aim is a review process people can follow during a busy week. Start with one upcoming publication, check how its final version will be identified and resolve any uncertainty before production begins.',
@@ -562,6 +645,15 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'September 2026',
     isoDate: '2026-09-26',
     image: '/Allimages/sixjars-home-insight-interview.png',
+    imageAlt: 'Illustration of an interviewer recording a conversation with an Indian guest.',
+    articleImage: {
+      src: '/Allimages/sixjars-article-interview.png',
+      alt: 'Illustration of an Indian editor selecting short clips from a recorded interview.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-interview.png',
+      alt: 'Illustration of an Indian editor selecting a useful passage from an interview transcript.',
+    },
     imageNote: 'The interview setup from the Media service image, cropped around the speaker and microphone.',
     body: [
       'A recorded interview may contain an explanation, a personal story and an answer to a question your audience often asks. Each could be useful beyond the full recording. Finding those moments is easier when the team has agreed what the interview should help people understand.',
@@ -573,7 +665,7 @@ const articleData: Omit<Article, 'capability'>[] = [
   {
     slug: 'human-judgment-in-ai-assisted-content',
     vertical: 'digital-platforms',
-    title: 'Decide who checks AI-assisted content before you use it',
+    title: 'Use AI-assisted content with confidence',
     excerpt:
       'Agree which tasks can use AI and who will review the result before it reaches your audience.',
     author: FOUNDER,
@@ -585,9 +677,17 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'June 2026',
     isoDate: '2026-06-04',
     image: '/images/mission-editorial.png',
+    articleImage: {
+      src: '/Allimages/sixjars-article-ai-review.png',
+      alt: 'An Indian editor checking an AI-assisted draft against source notes.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-ai-review.png',
+      alt: 'An Indian reviewer comparing an AI-assisted draft with source material.',
+    },
     imageNote: 'A colleague checking a draft against a source document, with no chatbot branding.',
     body: [
-      'A draft can read smoothly and still contain a wrong name, an unsupported claim or a change in meaning. If your team uses AI to help write, summarise or translate content, decide who will check those details before the work is shared.',
+      'Use AI-assisted writing with a clear review step. A named person checks facts, meaning and context before a draft, summary or translation reaches its audience.',
       'Begin with the tasks, rather than a list of tools. Record which uses are allowed, which need review and which are out of bounds. The decision should reflect the information involved and the consequences of an error. Even a routine task needs an approved way to handle confidential material.',
       'For content that reaches members, customers or the public, name the reviewer and explain what they must check. Build that step into the workflow so a deadline does not quietly remove it.',
       'Keep the reasons for your choices with the policy. When the work changes, the team can revisit an informed decision instead of trying to remember an unwritten rule.',
@@ -596,7 +696,7 @@ const articleData: Omit<Article, 'capability'>[] = [
   {
     slug: 'can-someone-else-pick-up-the-work',
     vertical: 'data-operations',
-    title: 'Can someone else pick up the work tomorrow?',
+    title: 'Make everyday work easy to hand over',
     excerpt:
       'A recurring task is easier to manage when its files, status and unresolved questions are visible to the next person.',
     author: FOUNDER,
@@ -608,9 +708,18 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'September 2026',
     isoDate: '2026-09-26',
     image: '/Allimages/sixjars-home-insight-handover.png',
+    imageAlt: 'Indian colleagues handing over a folder and task checklist.',
+    articleImage: {
+      src: '/Allimages/sixjars-article-handover.png',
+      alt: 'Indian colleagues handing over a task with a folder and status board.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-handover.png',
+      alt: 'An Indian colleague continuing a task using shared records and instructions.',
+    },
     imageNote: 'Two colleagues handing over a task using a fictional checklist and shared record.',
     body: [
-      'A colleague is away and a routine request stalls. The instructions are in one inbox, the latest spreadsheet is on another computer and nobody knows whether the customer has received a reply.',
+      'A clear handover helps work continue smoothly. Keep the current files, task status and next action together so the next person can pick up with confidence.',
       'Choose one recurring task and follow it from arrival to completion. Identify where the request is recorded, which information is needed and who takes the next step. Record the status somewhere the people doing the work can access.',
       'Pay attention to incomplete cases. A missing document or unanswered question should have an owner and a next action, rather than disappearing into a general list of pending work. Keep access appropriate to the information involved.',
       'Then ask a colleague to walk through the process using the instructions. Their questions will show where the process still depends on memory. Update those points and repeat the check when the task changes.',
@@ -619,7 +728,7 @@ const articleData: Omit<Article, 'capability'>[] = [
   {
     slug: 'what-someone-should-do-after-training',
     vertical: 'ai-academy',
-    title: 'What someone should be able to do after training',
+    title: 'Turn learning into everyday skills',
     excerpt:
       'Start with a task the learner needs to perform, then build practice and feedback around it.',
     author: FOUNDER,
@@ -631,9 +740,18 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'September 2026',
     isoDate: '2026-09-26',
     image: '/Allimages/sixjars-home-insight-learning.png',
+    imageAlt: 'Illustration of an Indian learner improving a practical worksheet with feedback.',
+    articleImage: {
+      src: '/Allimages/sixjars-article-learning.png',
+      alt: 'Illustration of an Indian professional demonstrating an applied workflow to a facilitator.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-learning.png',
+      alt: 'Illustration of an Indian educator demonstrating a completed lesson activity to peers.',
+    },
     imageNote: 'A learner explaining a completed exercise to a facilitator, rather than posing with a certificate.',
     body: [
-      'A participant can enjoy a workshop and still struggle to apply the material the next day. Before choosing a programme, identify a task that would show the learning has become useful.',
+      'Start with a useful task. Choosing what you want to do after a programme gives the learning a clear purpose and makes progress easier to see.',
       'For a teacher, that might be preparing a lesson activity and checking the supporting material. For a professional, it might be improving a recurring report or explaining a process more clearly. The exercise should fit the participant’s role and use information appropriate for a learning environment.',
       'Give learners time to attempt the task, receive feedback and try again. If AI is involved, assessment should include how they checked the output and handled mistakes, as well as the finished result.',
       'An applied project gives the learner and facilitator a shared basis for discussing progress. Keep the assessment criteria clear, record what the participant demonstrated and identify what still needs practice.',
@@ -654,6 +772,14 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'June 2026',
     isoDate: '2026-06-23',
     image: '/images/cybersecurity-ops.png',
+    articleImage: {
+      src: '/Allimages/sixjars-article-readiness.png',
+      alt: 'Indian colleagues reviewing four practical incident-readiness topics.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-readiness.png',
+      alt: 'An Indian IT professional checking access, backups, records and a decision plan.',
+    },
     imageNote: 'An IT lead and colleague reviewing a plain incident checklist in a normal office.',
     body: [
       'An incident plan is easier to use when the basic information behind it is current. Start a readiness discussion with four questions.',
@@ -677,9 +803,17 @@ const articleData: Omit<Article, 'capability'>[] = [
     date: 'May 2026',
     isoDate: '2026-05-19',
     image: '/images/cybersecurity-ops.png',
+    articleImage: {
+      src: '/Allimages/sixjars-article-authorisation.png',
+      alt: 'An Indian examiner checking written authority before accessing a packaged device.',
+    },
+    listImage: {
+      src: '/Allimages/sixjars-index-authorisation.png',
+      alt: 'An Indian client and forensic specialist agreeing a written scope.',
+    },
     imageNote: 'An evidence log and a sealed demonstration device pouch, with no real case details.',
     body: [
-      'When a concern involves a device or digital records, people may feel pressure to start looking immediately. The first step is to establish who has authority to commission the work and what the examination may cover.',
+      'An authorised examination starts with a clear written scope. Establish who can commission the work and what it may cover before accessing a device or digital records.',
       'The written scope should identify the authorising party, relevant systems or material, exclusions and duration. It also needs to address the applicable jurisdiction and who is qualified to carry out the work. Questions about authority or legal requirements should be resolved with the appropriate advisers.',
       'Authorised specialists then need to preserve the relevant material and maintain a record of its collection, handling and transfers. This record helps explain how the evidence reached the examiner and what happened to it along the way.',
       'The final report should distinguish observed facts from interpretations and state any limitations. Decision-makers need to understand both the findings and the questions the examination could not answer.',
@@ -728,7 +862,7 @@ export const contactPaths = [
   {
     id: 'sensitive',
     label: 'Sensitive matter',
-    desc: 'Your inquiry involves confidential, security or forensic dimensions.',
+    desc: 'Your enquiry involves confidential, security or forensic matters.',
     responseChannel:
       'Acknowledged the same business day. We reply with secure-channel instructions before you send any detail.',
   },
@@ -746,6 +880,9 @@ export const org = {
   legalName: 'Six Jars Global (OPC) Private Limited',
   address:
     'Cumins Genesis, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India',
+  /** Full registered office, as shown under About → Company details. */
+  registeredOffice:
+    'Cumins Genesis, Flat D-411, 2nd Main Rd, Silver Cloud Layout, Kalkere Main Rd, Horamavu, Bengaluru, Karnataka 560043, India',
   phone: '+91 96329 88066',
   phoneHref: '+919632988066',
   /** Customer care. */
@@ -753,7 +890,7 @@ export const org = {
   /** Privacy requests, grievances and security reports. */
   privacyEmail: 'sreejith.s@sixjarsglobal.com',
   hours: 'Monday–Friday, 09:00–18:00 IST, excluding Indian public holidays',
-  grievanceOfficer: 'Sreejith S, Founder',
+  grievanceOfficer: 'Sreejith S, Cofounder & CEO',
   gstin: '29ABUCS1730R1ZC',
   cin: 'U62020KA2026OPC223063' as string | null,
   linkedin: 'https://www.linkedin.com/company/six-jars-global',
@@ -786,7 +923,7 @@ export type FounderTab = {
  */
 export const founder = {
   name: 'Sreejith S',
-  role: 'Founder',
+  role: 'Cofounder & CEO',
   company: org.legalName,
   location: 'Bengaluru, India',
   email: org.privacyEmail,
@@ -795,7 +932,7 @@ export const founder = {
   linkedin: org.linkedin,
   /** 4:5 portrait at 2x (min 720×900). Until supplied, a monogram renders. */
   photo: '/founder.jpeg' as string | null,
-  photoAlt: 'Sreejith S, founder of Six Jars Global.',
+  photoAlt: 'Sreejith S, Cofounder & CEO of Six Jars Global.',
   /** Pull-quote under the portrait — renders only once the founder supplies one. */
   quote: null as string | null,
   /** Short credential chips shown beside the name. */
@@ -967,28 +1104,28 @@ export type Role = {
 export const careers = {
   /** Applications go to the main inbox, tagged so they can be routed. */
   email: org.email,
-  subject: 'Careers — application',
+  subject: 'Careers application',
   roles: [] as Role[],
   reasons: [
     {
       title: 'Work that outlasts the engagement',
       detail:
-        'Everything we deliver is meant to outlast the engagement — work that keeps serving the organization long after close.',
+        'Everything we deliver is meant to outlast the engagement — work that keeps serving people and organisations long after close.',
     },
     {
       title: 'Your judgment stays in the loop',
       detail:
-        'Automation assists; people review, approve and handle exceptions. You are hired for your judgment, not replaced by a tool.',
+        'Automation assists; people review, approve and handle exceptions. Your judgment shapes the work.',
     },
     {
       title: 'Six disciplines, one team',
       detail:
-        'Editorial, creative, technical, operational and forensic work sit side by side, so you learn across the whole path from brief to evidence.',
+        'You work alongside people from editorial, creative, technical, operational and forensic disciplines, and see how their work fits together.',
     },
     {
       title: 'Named ownership',
       detail:
-        'Every piece of work has a named owner and a documented close. You will always know what you are accountable for — and get credit for it.',
+        'You know which work you are responsible for, who reviews it and what a completed handover should include.',
     },
   ],
   process: [

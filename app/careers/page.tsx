@@ -13,6 +13,7 @@ import {
   Workflow,
 } from 'lucide-react'
 import PageHeader from '@/components/page-header'
+import BackToHome from '@/components/back-to-home'
 import { capabilities, careers } from '@/lib/content'
 import { patternVars } from '@/lib/patterns'
 
@@ -44,10 +45,9 @@ export default function CareersPage() {
       <PageHeader
         eyebrow="Careers"
         title="Do work that matters — and own it."
-        intro="Join a team that connects six disciplines on complex, high-stakes work, where people stay accountable and judgment is never automated away."
+        intro="Work across six connected disciplines to help people and organisations achieve useful outcomes. Bring your judgment, build your skills and take ownership of work that matters."
         breadcrumbs={[{ label: 'Careers', href: '/careers' }]}
-        image="/images/mission-editorial.png"
-        imageAlt="A colleague reviewing work at a desk."
+        image={null}
         pattern="dots"
       />
 
@@ -79,7 +79,7 @@ export default function CareersPage() {
                 <span
                   aria-hidden="true"
                   className="inline-flex w-9 h-9 rounded-lg items-center justify-center text-sm font-bold"
-                  style={{ background: 'rgba(241,181,59,0.18)', color: 'var(--color-gold-deep)' }}
+                  style={{ background: 'rgba(239,184,60,0.18)', color: 'var(--color-gold-deep)' }}
                 >
                   {i + 1}
                 </span>
@@ -88,7 +88,7 @@ export default function CareersPage() {
                 </h3>
                 <p
                   className="mt-2 text-base leading-relaxed"
-                  style={{ color: 'rgba(75,13,36,0.74)' }}
+                  style={{ color: 'rgba(0,0,0,0.74)' }}
                 >
                   {r.detail}
                 </p>
@@ -114,7 +114,7 @@ export default function CareersPage() {
             >
               Where you could work
             </h2>
-            <p className="mt-4 text-base leading-relaxed" style={{ color: 'rgba(75,13,36,0.72)' }}>
+            <p className="mt-4 text-base leading-relaxed" style={{ color: 'rgba(0,0,0,0.72)' }}>
               We hire into the same six capabilities we deliver. Read about each one
               before you apply — it tells you what the work involves day to day.
             </p>
@@ -143,7 +143,7 @@ export default function CareersPage() {
                       </span>
                       <span
                         className="block text-sm leading-relaxed mt-1"
-                        style={{ color: 'rgba(75,13,36,0.68)' }}
+                        style={{ color: 'rgba(0,0,0,0.68)' }}
                       >
                         {c.summary}
                       </span>
@@ -190,12 +190,12 @@ export default function CareersPage() {
                       <h3 className="mt-1.5 text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
                         {role.title}
                       </h3>
-                      <p className="mt-1.5 text-sm leading-relaxed" style={{ color: 'rgba(75,13,36,0.72)' }}>
+                      <p className="mt-1.5 text-sm leading-relaxed" style={{ color: 'rgba(0,0,0,0.72)' }}>
                         {role.summary}
                       </p>
                       <p
                         className="mt-2 inline-flex items-center gap-1.5 text-sm"
-                        style={{ color: 'rgba(75,13,36,0.6)' }}
+                        style={{ color: 'rgba(0,0,0,0.65)' }}
                       >
                         <MapPin size={14} aria-hidden="true" />
                         {role.location}
@@ -224,7 +224,7 @@ export default function CareersPage() {
                 <span
                   aria-hidden="true"
                   className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ background: 'rgba(241,181,59,0.18)', color: 'var(--color-gold-deep)' }}
+                  style={{ background: 'rgba(239,184,60,0.18)', color: 'var(--color-gold-deep)' }}
                 >
                   <Briefcase size={22} />
                 </span>
@@ -234,7 +234,7 @@ export default function CareersPage() {
                   </h3>
                   <p
                     className="mt-1.5 text-base leading-relaxed max-w-xl"
-                    style={{ color: 'rgba(75,13,36,0.72)' }}
+                    style={{ color: 'rgba(0,0,0,0.72)' }}
                   >
                     We still want to hear from people who fit how we work. Send a general
                     application and we will keep it on file for the next opening in your
@@ -243,7 +243,7 @@ export default function CareersPage() {
                 </div>
               </div>
               <a
-                href={applyHref(`${careers.subject}: general`)}
+                href={applyHref(careers.subject)}
                 className="shrink-0 inline-flex items-center justify-center gap-2 px-7 rounded-full text-sm font-bold"
                 style={{ minHeight: 52, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
               >
@@ -279,8 +279,8 @@ export default function CareersPage() {
                 key={step.title}
                 className="rounded-2xl p-6"
                 style={{
-                  background: 'rgba(252,251,248,0.05)',
-                  border: '1px solid rgba(252,251,248,0.12)',
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid rgba(255,255,255,0.12)',
                 }}
               >
                 <span
@@ -293,7 +293,7 @@ export default function CareersPage() {
                 <h3 className="mt-2 text-base font-bold" style={{ color: 'var(--color-ivory)' }}>
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: 'rgba(252,251,248,0.66)' }}>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.66)' }}>
                   {step.detail}
                 </p>
               </li>
@@ -304,7 +304,7 @@ export default function CareersPage() {
             <a
               href={applyHref(careers.subject)}
               className="inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"
-              style={{ minHeight: 56, background: 'var(--color-gold)', color: 'var(--color-plum)' }}
+              style={{ minHeight: 56, background: 'var(--color-gold)', color: '#000000' }}
             >
               Apply now
               <ArrowRight size={18} aria-hidden="true" />
@@ -314,15 +314,15 @@ export default function CareersPage() {
               className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold"
               style={{
                 minHeight: 56,
-                background: 'rgba(252,251,248,0.08)',
-                border: '1px solid rgba(252,251,248,0.28)',
+                background: 'rgba(255,255,255,0.08)',
+                border: '1px solid rgba(255,255,255,0.28)',
                 color: 'var(--color-ivory)',
               }}
             >
               Read about who we are
             </Link>
           </div>
-          <p className="mt-4 text-sm" style={{ color: 'rgba(252,251,248,0.6)' }}>
+          <p className="mt-4 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
             Applications go to{' '}
             <a href={applyHref(careers.subject)} className="underline underline-offset-2" style={{ color: 'var(--color-gold)' }}>
               {careers.email}
@@ -331,6 +331,8 @@ export default function CareersPage() {
           </p>
         </div>
       </section>
+
+      <BackToHome />
     </>
   )
 }

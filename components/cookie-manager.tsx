@@ -123,10 +123,10 @@ export default function CookieManager() {
         <section
           aria-label="Cookie choices"
           className="fixed inset-x-3 bottom-3 sm:inset-x-auto sm:left-4 sm:bottom-4 sm:max-w-md z-[60] rounded-2xl p-5 shadow-2xl"
-          style={{ background: 'var(--color-plum)', color: 'var(--color-ivory)', border: '1px solid rgba(241,181,59,0.3)' }}
+          style={{ background: 'var(--color-plum)', color: 'var(--color-ivory)', border: '1px solid rgba(239,184,60,0.3)' }}
         >
           <p className="text-sm font-bold">Your cookie choices</p>
-          <p className="text-sm leading-relaxed mt-2" style={{ color: 'rgba(252,251,248,0.75)' }}>
+          <p className="text-sm leading-relaxed mt-2" style={{ color: 'rgba(255,255,255,0.75)' }}>
             We use essential technologies to run this site. Optional analytics stay off
             until you choose. Read the{' '}
             <Link href="/legal/cookies" className="underline underline-offset-2" style={{ color: 'var(--color-gold)' }}>
@@ -139,7 +139,7 @@ export default function CookieManager() {
               type="button"
               onClick={() => commit(all)}
               className="px-4 rounded-full text-sm font-bold"
-              style={{ minHeight: 40, background: 'var(--color-gold)', color: 'var(--color-plum)' }}
+              style={{ minHeight: 40, background: 'var(--color-gold)', color: '#000000' }}
             >
               Accept all
             </button>
@@ -147,7 +147,7 @@ export default function CookieManager() {
               type="button"
               onClick={() => commit(none)}
               className="px-4 rounded-full text-sm font-bold"
-              style={{ minHeight: 40, border: '1px solid rgba(252,251,248,0.4)', color: 'var(--color-ivory)' }}
+              style={{ minHeight: 40, border: '1px solid rgba(255,255,255,0.4)', color: 'var(--color-ivory)' }}
             >
               Essential only
             </button>
@@ -198,7 +198,7 @@ export default function CookieManager() {
                 >
                   <label htmlFor={id} className="text-sm">
                     <span className="font-bold block">{cat.name}</span>
-                    <span className="block mt-0.5 leading-relaxed" style={{ color: 'rgba(75,13,36,0.7)' }}>
+                    <span className="block mt-0.5 leading-relaxed" style={{ color: 'rgba(0,0,0,0.7)' }}>
                       {cat.desc}
                     </span>
                   </label>

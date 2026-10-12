@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Manrope, Source_Serif_4 } from 'next/font/google'
+import { Cormorant_Garamond, Manrope } from 'next/font/google'
 import SiteHeader from '@/components/site-header'
 import SiteFooter from '@/components/site-footer'
-import ScrollBattery from '@/components/scroll-battery'
 import CookieManager from '@/components/cookie-manager'
 import './globals.css'
 
@@ -13,12 +12,13 @@ const manrope = Manrope({
   display: 'swap',
 })
 
-const sourceSerif = Source_Serif_4({
+// Headings (brand guidelines, change guide 28 Sep 2026). Normal style only:
+// Turbopack's font loader cannot resolve Google's italic /l/font?kit= URLs.
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400', '600'],
-  variable: '--font-source-serif',
+  weight: ['500', '600', '700'],
+  variable: '--font-cormorant',
   display: 'swap',
-  style: ['normal', 'italic'],
 })
 
 export const SITE_URL = 'https://sixjarsglobal.com'
@@ -26,12 +26,12 @@ export const SITE_URL = 'https://sixjarsglobal.com'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Six Jars Global — Complex work. One accountable partner.',
+    default: 'Six Jars Global — Practical help to bring your ideas to life.',
     // Every page supplies its own title; this frames it consistently.
     template: '%s | Six Jars Global',
   },
   description:
-    'Six Jars connects publishing, media, digital platforms, data and business operations, AI and future-skills training, and cybersecurity and forensics under one accountable partner — governed, human-reviewed and proved at close.',
+    'Publishing, media, digital platforms, data and business operations, AI and future-skills training, and cybersecurity and forensics — six services with one contact to guide your work from first brief to finished result. Scope and price agreed with you.',
   keywords: [
     'governed operations',
     'accountable delivery partner',
@@ -51,21 +51,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: 'Six Jars Global',
-    title: 'Six Jars Global — Complex work. One accountable partner.',
+    title: 'Six Jars Global — Practical help to bring your ideas to life.',
     description:
-      'Six connected capabilities for work that must be governed, human-reviewed and proved at close.',
+      'Six services for individuals and organisations, with one contact to guide the work from first brief to finished result.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Six Jars Global — Complex work. One accountable partner.',
+    title: 'Six Jars Global — Practical help to bring your ideas to life.',
     description:
-      'Six connected capabilities for work that must be governed, human-reviewed and proved at close.',
+      'Six services for individuals and organisations, with one contact to guide the work from first brief to finished result.',
   },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#4B0D24',
+  themeColor: '#3A0D27',
   width: 'device-width',
   initialScale: 1,
   // Never block zoom — pinch-zoom is an accessibility requirement.
@@ -76,12 +76,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${sourceSerif.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
       <body className="antialiased font-sans">
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        <ScrollBattery />
         <CookieManager />
       </body>
     </html>

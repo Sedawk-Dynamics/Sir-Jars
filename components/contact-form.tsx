@@ -25,7 +25,7 @@ function StaffedState() {
   return (
     <p
       className="mt-3 flex items-start gap-2.5 text-sm leading-relaxed rounded-xl p-3.5"
-      style={{ background: '#FFFFFF', border: '1px solid var(--color-line)', color: 'rgba(75,13,36,0.78)' }}
+      style={{ background: '#FFFFFF', border: '1px solid var(--color-line)', color: 'rgba(0,0,0,0.78)' }}
     >
       <span
         aria-hidden="true"
@@ -39,7 +39,7 @@ function StaffedState() {
           {staffed === null ? 'Checking desk status…' : staffed ? 'Staffed now.' : 'Offline right now.'}
         </span>{' '}
         {staffed === false
-          ? `Your inquiry is queued and picked up at the start of the next working window (${org.hours}).`
+          ? `Outside office hours, the response window starts at the next opening (${org.hours}).`
           : `Hours: ${org.hours}.`}
       </span>
     </p>
@@ -49,16 +49,15 @@ function StaffedState() {
 /**
  * Contact form.
  *
- * The live DOM review found inputs with no id, no name and no bound label —
- * placeholders were doing the work of labels. Every field here has a visible
- * <label for>, an id, a name, an autocomplete token, an inline error tied by
- * aria-describedby, and a live-region status message on submit.
+ * Every field has a visible <label for>, an id, a name, an autocomplete token,
+ * an inline error tied by aria-describedby, and a live-region status message.
  *
- * The intent selector is preserved (it was called out as a genuine asset) and
- * now preconfigures the form and states the response channel for that intent.
+ * Only name, email and goal are required. The enquiry is POSTed to
+ * /api/enquiry, and success is shown only once that request is confirmed —
+ * a failure keeps every typed value and offers the email address instead.
  */
 
-type Errors = Partial<Record<'name' | 'org' | 'email' | 'message', string>>
+type Errors = Partial<Record<'name' | 'email' | 'message', string>>
 
 const fieldStyle: React.CSSProperties = {
   background: '#FFFFFF',
@@ -75,19 +74,20 @@ export default function ContactForm({
   defaultRoute?: string
 }) {
   const [path, setPath] = useState<ContactPathId>(defaultPath)
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'sent'>('idle')
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'sent' | 'failed'>('idle')
   const [errors, setErrors] = useState<Errors>({})
   const [values, setValues] = useState({
     name: '',
-    org: '',
     email: '',
-    route: defaultRoute,
+    enquiringFor: '',
+    org: '',
+    route: capabilities.some((c) => c.shortName === defaultRoute) ? defaultRoute : '',
     message: '',
   })
   const errorSummaryRef = useRef<HTMLDivElement>(null)
 
   // A ?path= or ?route= query param preselects the form — this is what makes
-  // "Discuss a sensitive matter" links from elsewhere on the site meaningful.
+  // "Get secure-channel guidance first" links from elsewhere on the site meaningful.
   useEffect(() => {
     setPath(defaultPath)
   }, [defaultPath])
@@ -96,20 +96,17 @@ export default function ContactForm({
 
   const validate = (): Errors => {
     const next: Errors = {}
-    if (!values.name.trim()) next.name = 'Enter your name so we know who to reply to.'
-    if (!values.org.trim()) next.org = 'Enter the organization you represent.'
-    if (!values.email.trim()) {
-      next.email = 'Enter an email address so we can respond.'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      next.email = 'Enter an email address in the format name@organization.com.'
+    if (!values.name.trim()) next.name = 'Enter your name.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+      next.email = 'Enter a valid email address.'
     }
     if (!values.message.trim()) {
-      next.message = 'Tell us briefly what must work, so we can route your inquiry.'
+      next.message = 'Tell us briefly what you would like to achieve.'
     }
     return next
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const found = validate()
     setErrors(found)
@@ -119,9 +116,16 @@ export default function ContactForm({
       return
     }
     setStatus('submitting')
-    // No backend is wired up yet. Submission is acknowledged locally and the
-    // visitor is told plainly how to reach us in the meantime.
-    setTimeout(() => setStatus('sent'), 400)
+    try {
+      const res = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, path }),
+      })
+      setStatus(res.ok ? 'sent' : 'failed')
+    } catch {
+      setStatus('failed')
+    }
   }
 
   const set = (key: keyof typeof values) => (
@@ -140,7 +144,7 @@ export default function ContactForm({
         className="rounded-2xl p-8 text-center"
         style={{
           background: 'var(--color-plum)',
-          border: '1px solid rgba(241,181,59,0.3)',
+          border: '1px solid rgba(239,184,60,0.3)',
         }}
       >
         <CheckCircle
@@ -149,14 +153,11 @@ export default function ContactForm({
           className="mx-auto mb-4"
           style={{ color: 'var(--color-gold)' }}
         />
-        <h3 className="text-xl font-bold" style={{ color: 'var(--color-ivory)' }}>
-          Inquiry recorded
-        </h3>
         <p
-          className="text-sm leading-relaxed mt-3 max-w-md mx-auto"
-          style={{ color: 'rgba(252,251,248,0.72)' }}
+          className="text-base leading-relaxed max-w-md mx-auto"
+          style={{ color: 'var(--color-ivory)' }}
         >
-          Thank you, {values.name}. {activePath.responseChannel}
+          Thank you. Your enquiry has been received. We will reply by email with the next step.
         </p>
       </div>
     )
@@ -194,7 +195,7 @@ export default function ContactForm({
                     value={p.id}
                     checked={isActive}
                     onChange={() => setPath(p.id)}
-                    className="w-4 h-4 accent-[#F1B53B]"
+                    className="w-4 h-4 accent-[#EFB83C]"
                   />
                   <span
                     className="text-sm font-bold"
@@ -206,7 +207,7 @@ export default function ContactForm({
                 <span
                   className="text-xs leading-relaxed mt-2"
                   style={{
-                    color: isActive ? 'rgba(252,251,248,0.65)' : 'rgba(75,13,36,0.62)',
+                    color: isActive ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,0.65)',
                   }}
                 >
                   {p.desc}
@@ -223,7 +224,7 @@ export default function ContactForm({
           style={{
             background: 'var(--color-parchment)',
             border: '1px solid var(--color-line)',
-            color: 'rgba(75,13,36,0.78)',
+            color: 'rgba(0,0,0,0.78)',
           }}
         >
           <span className="font-semibold">What happens next: </span>
@@ -249,8 +250,8 @@ export default function ContactForm({
             />
             <div className="text-sm leading-relaxed" style={{ color: 'var(--color-plum)' }}>
               <p className="font-bold">Secure-routing boundary — read before you write</p>
-              <ul className="mt-1.5 space-y-1 list-disc pl-4" style={{ color: 'rgba(75,13,36,0.8)' }}>
-                <li>This form is not a secure channel. Share only your name, organization and a one-line, non-identifying description.</li>
+              <ul className="mt-1.5 space-y-1 list-disc pl-4" style={{ color: 'rgba(0,0,0,0.8)' }}>
+                <li>This form is not a secure channel. Share your name, email address and a one-line, non-identifying description. Organisation is optional.</li>
                 <li>Do not send names of individuals, evidence, credentials, documents or incident details here.</li>
                 <li>We reply with secure-channel instructions first; detail is shared only after that channel is confirmed.</li>
                 <li>If there is an immediate risk to life or safety, contact local emergency services — this is not an emergency line.</li>
@@ -309,28 +310,58 @@ export default function ContactForm({
             onChange={set('name')}
           />
           <Field
-            id="field-org"
-            name="organization"
-            label="Organization"
+            id="field-email"
+            name="email"
+            type="email"
+            label="Email address"
             required
-            autoComplete="organization"
-            value={values.org}
-            error={errors.org}
-            onChange={set('org')}
+            autoComplete="email"
+            inputMode="email"
+            value={values.email}
+            error={errors.email}
+            onChange={set('email')}
           />
         </div>
 
+        <fieldset className="border-0 p-0 m-0">
+          <legend
+            className="block text-sm font-semibold mb-1.5"
+            style={{ color: 'var(--color-plum)' }}
+          >
+            I am enquiring for{' '}
+            <span className="font-normal" style={{ color: 'rgba(0,0,0,0.65)' }}>
+              (optional)
+            </span>
+          </legend>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            {['Myself', 'An organisation'].map((option) => (
+              <label
+                key={option}
+                className="inline-flex items-center gap-2 text-sm cursor-pointer"
+                style={{ color: 'var(--color-plum)', minHeight: 44 }}
+              >
+                <input
+                  type="radio"
+                  name="enquiringFor"
+                  value={option}
+                  checked={values.enquiringFor === option}
+                  onChange={set('enquiringFor')}
+                  className="w-4 h-4 accent-[#6B153F]"
+                />
+                {option}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
         <Field
-          id="field-email"
-          name="email"
-          type="email"
-          label="Email address"
-          required
-          autoComplete="email"
-          inputMode="email"
-          value={values.email}
-          error={errors.email}
-          onChange={set('email')}
+          id="field-org"
+          name="organization"
+          label="Organisation"
+          optional
+          autoComplete="organization"
+          value={values.org}
+          onChange={set('org')}
         />
 
         <div>
@@ -339,8 +370,8 @@ export default function ContactForm({
             className="block text-sm font-semibold mb-1.5"
             style={{ color: 'var(--color-plum)' }}
           >
-            Capability route{' '}
-            <span className="font-normal" style={{ color: 'rgba(75,13,36,0.55)' }}>
+            Service{' '}
+            <span className="font-normal" style={{ color: 'rgba(0,0,0,0.65)' }}>
               (optional)
             </span>
           </label>
@@ -352,7 +383,7 @@ export default function ContactForm({
             className="w-full px-4 rounded-xl text-sm"
             style={fieldStyle}
           >
-            <option value="">Not sure yet</option>
+            <option value="">Help me choose</option>
             {capabilities.map((c) => (
               <option key={c.slug} value={c.shortName}>
                 {c.fullName}
@@ -367,7 +398,7 @@ export default function ContactForm({
             className="block text-sm font-semibold mb-1.5"
             style={{ color: 'var(--color-plum)' }}
           >
-            What must work — and what cannot be compromised?{' '}
+            What would you like to achieve?{' '}
             <span aria-hidden="true" style={{ color: 'var(--color-rose)' }}>
               *
             </span>
@@ -375,11 +406,11 @@ export default function ContactForm({
           <p
             id="field-message-hint"
             className="text-xs mb-2"
-            style={{ color: 'rgba(75,13,36,0.58)' }}
+            style={{ color: 'rgba(0,0,0,0.65)' }}
           >
-            Please do not include confidential detail here. If your matter is sensitive,
-            select &ldquo;Sensitive matter&rdquo; above and we will send secure-channel
-            instructions first.
+            A short description is enough to get started. Please do not include confidential
+            detail here. If your matter is sensitive, select &ldquo;Sensitive matter&rdquo;
+            above and we will send secure-channel instructions first.
           </p>
           <textarea
             id="field-message"
@@ -410,6 +441,27 @@ export default function ContactForm({
           )}
         </div>
 
+        {status === 'failed' && (
+          <p
+            role="alert"
+            className="flex items-start gap-2 rounded-xl p-4 text-sm font-medium"
+            style={{
+              background: 'rgba(154,46,79,0.08)',
+              border: '1px solid var(--color-rose)',
+              color: 'var(--color-plum)',
+            }}
+          >
+            <AlertCircle size={16} aria-hidden="true" className="shrink-0 mt-0.5" style={{ color: 'var(--color-rose)' }} />
+            <span>
+              Your enquiry could not be sent. Please try again, or email{' '}
+              <a href={`mailto:${org.email}`} className="underline underline-offset-2 font-semibold">
+                {org.email}
+              </a>
+              .
+            </span>
+          </p>
+        )}
+
         <button
           type="submit"
           disabled={status === 'submitting'}
@@ -421,12 +473,12 @@ export default function ContactForm({
           }}
         >
           <Send size={17} aria-hidden="true" />
-          {status === 'submitting' ? 'Sending…' : 'Start a conversation'}
+          {status === 'submitting' ? 'Sending your enquiry…' : 'Send enquiry'}
         </button>
 
         <p
           className="text-xs text-center leading-relaxed"
-          style={{ color: 'rgba(75,13,36,0.55)' }}
+          style={{ color: 'rgba(0,0,0,0.65)' }}
         >
           Handled confidentially. Every inquiry is acknowledged with a named owner and a
           documented next step.
@@ -442,6 +494,7 @@ function Field({
   label,
   type = 'text',
   required,
+  optional,
   autoComplete,
   inputMode,
   value,
@@ -453,6 +506,7 @@ function Field({
   label: string
   type?: string
   required?: boolean
+  optional?: boolean
   autoComplete?: string
   inputMode?: 'email' | 'text' | 'tel'
   value: string
@@ -470,6 +524,11 @@ function Field({
         {required && (
           <span aria-hidden="true" style={{ color: 'var(--color-rose)' }}>
             *
+          </span>
+        )}
+        {optional && (
+          <span className="font-normal" style={{ color: 'rgba(0,0,0,0.65)' }}>
+            (optional)
           </span>
         )}
       </label>

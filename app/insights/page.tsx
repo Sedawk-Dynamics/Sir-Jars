@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import PageHeader from '@/components/page-header'
 import InsightList from '@/components/insight-list'
-import ClosingCta from '@/components/home/closing-cta'
+import EnquiryBlock from '@/components/enquiry-block'
+import BackToHome from '@/components/back-to-home'
 
 export const metadata: Metadata = {
   title: 'Insights',
@@ -16,20 +17,21 @@ export default function InsightsPage() {
       <PageHeader
         eyebrow="Insights"
         title="Useful ideas for the work in front of you."
-        intro="Short articles on publishing, media, digital systems, business operations, skills and security. Each one looks at a familiar problem and gives you a practical place to start."
+        intro="Practical ideas to help you publish, create, build, organise, learn and protect what matters. Each article gives you a useful next step."
         breadcrumbs={[{ label: 'Insights', href: '/insights' }]}
-        image="/images/insights-editorial.png"
-        imageAlt="A colleague reviewing research material at a desk."
+        image={null}
         pattern="waves"
       />
 
       <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <InsightList />
+          <InsightList layout="rows" />
         </div>
       </section>
 
-      <ClosingCta />
+      <EnquiryBlock />
+
+      <BackToHome />
     </>
   )
 }

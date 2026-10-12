@@ -19,8 +19,8 @@ export type PatternName =
 export type PatternTone = 'ivory' | 'gold' | 'rose'
 
 const tones: Record<PatternTone, string> = {
-  ivory: 'rgba(252,251,248,0.09)',
-  gold: 'rgba(241,181,59,0.13)',
+  ivory: 'rgba(255,255,255,0.09)',
+  gold: 'rgba(239,184,60,0.13)',
   rose: 'rgba(214,112,150,0.16)',
 }
 

@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone } from 'lucide-react'
 import { capabilities, org } from '@/lib/content'
 import { legalDocs, legalOrder } from '@/lib/legal'
 import { LOGO_SRC, LOGO_W, LOGO_H } from './site-header'
@@ -62,65 +61,13 @@ export default function SiteFooter() {
             </p>
             <p className="text-sm leading-relaxed max-w-xs mt-2 text-ivory/55">
               Six services. One contact coordinating the work, with clear
-              approvals and a handover your team can use.
+              approvals and a handover you can use.
             </p>
-
-            <ul className="flex items-center gap-3 mt-6">
-              <li>
-                <a
-                  href={org.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="tap-target inline-flex items-center justify-center rounded-xl transition-colors"
-                  style={{ background: 'rgba(252,251,248,0.08)' }}
-                  aria-label="Six Jars Global on LinkedIn (opens in a new tab)"
-                >
-                  <LinkedInMark />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${org.email}`}
-                  className="tap-target inline-flex items-center justify-center rounded-xl transition-colors"
-                  style={{ background: 'rgba(252,251,248,0.08)' }}
-                  aria-label={`Email ${org.email}`}
-                >
-                  <Mail size={18} />
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`tel:${org.phoneHref}`}
-                  className="tap-target inline-flex items-center justify-center rounded-xl transition-colors"
-                  style={{ background: 'rgba(252,251,248,0.08)' }}
-                  aria-label={`Call ${org.phone}`}
-                >
-                  <Phone size={18} />
-                </a>
-              </li>
-            </ul>
-
-            <Link
-              href="/careers"
-              className="group mt-6 inline-flex items-center gap-2 px-5 rounded-full text-sm font-bold transition-transform duration-200 hover:-translate-y-0.5"
-              style={{
-                minHeight: 44,
-                background: 'var(--color-gold)',
-                color: 'var(--color-plum)',
-              }}
-            >
-              Careers at Six Jars
-              <ArrowRight
-                size={15}
-                aria-hidden="true"
-                className="transition-transform duration-200 group-hover:translate-x-0.5"
-              />
-            </Link>
           </div>
 
-          <nav className="md:col-span-3" aria-label="Capabilities">
+          <nav className="md:col-span-3" aria-label="Services">
             <h2 className="text-xs font-bold tracking-widest uppercase mb-4 text-ivory/45">
-              Capabilities
+              Services
             </h2>
             <ul className="space-y-3">
               {capabilities.map((c) => (
@@ -200,6 +147,17 @@ export default function SiteFooter() {
                 {org.privacyEmail}
               </a>
             </p>
+            <a
+              href={org.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ivory/80 hover:text-gold transition-colors"
+              style={{ minHeight: 44 }}
+            >
+              <LinkedInMark />
+              LinkedIn
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </div>
         </div>
 
@@ -207,7 +165,7 @@ export default function SiteFooter() {
         <nav
           aria-label="Legal"
           className="py-5"
-          style={{ borderTop: '1px solid rgba(252,251,248,0.12)' }}
+          style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}
         >
           <ul className="flex flex-wrap justify-center gap-y-2 text-xs">
             {legalOrder.map((slug, i) => (
@@ -215,7 +173,7 @@ export default function SiteFooter() {
                 key={slug}
                 className="px-3"
                 style={
-                  i === 0 ? undefined : { borderLeft: '1px solid rgba(252,251,248,0.2)' }
+                  i === 0 ? undefined : { borderLeft: '1px solid rgba(255,255,255,0.2)' }
                 }
               >
                 <Link
@@ -231,7 +189,7 @@ export default function SiteFooter() {
 
         <div
           className="flex flex-col md:flex-row items-center justify-between gap-4 pt-5 text-center md:text-left"
-          style={{ borderTop: '1px solid rgba(252,251,248,0.12)' }}
+          style={{ borderTop: '1px solid rgba(255,255,255,0.12)' }}
         >
           <div>
             <p className="text-xs text-ivory/45">
@@ -244,7 +202,7 @@ export default function SiteFooter() {
           </div>
           <div className="flex items-center gap-3">
             <CookieSettingsButton className="inline-flex items-center px-4 rounded-full text-xs font-semibold text-ivory/80 hover:text-gold border border-ivory/20 transition-colors min-h-10" />
-            <BackToTop className="inline-flex items-center gap-1.5 px-4 rounded-full text-xs font-bold min-h-10 bg-gold text-plum transition-transform hover:-translate-y-0.5" />
+            <BackToTop className="inline-flex items-center gap-1.5 px-4 rounded-full text-xs font-bold min-h-10 bg-gold text-black transition-transform hover:-translate-y-0.5" />
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import PageHeader from '@/components/page-header'
 import CapabilityCards from '@/components/capability-cards'
-import CapabilityOrbit from '@/components/capability-orbit'
-import ClosingCta from '@/components/home/closing-cta'
-import { patternVars } from '@/lib/patterns'
+import EnquiryBlock from '@/components/enquiry-block'
+import BackToHome from '@/components/back-to-home'
 
 export const metadata: Metadata = {
   title: 'Services — what do you need help with?',
@@ -12,48 +11,52 @@ export const metadata: Metadata = {
   alternates: { canonical: '/capabilities' },
 }
 
+/** Services-page card images and alt text (change guide, 02 02). */
+const serviceImages: Record<string, { src: string; alt: string }> = {
+  publishing: {
+    src: '/Allimages/sixjars-services-publishing.png',
+    alt: 'Illustration of an Indian print technician checking a book proof.',
+  },
+  media: {
+    src: '/Allimages/sixjars-services-media.png',
+    alt: 'Illustration of an Indian crew recording an interview in an office courtyard.',
+  },
+  'digital-platforms': {
+    src: '/Allimages/sixjars-services-digital.png',
+    alt: 'An Indian developer explaining connected workflow steps to a customer.',
+  },
+  'data-operations': {
+    src: '/Allimages/sixjars-services-data.png',
+    alt: 'An Indian operations specialist reviewing a report with a client.',
+  },
+  'ai-academy': {
+    src: '/Allimages/sixjars-services-academy.png',
+    alt: 'Illustration of an Indian teacher practising a lesson while a facilitator observes.',
+  },
+  'cybersecurity-forensics': {
+    src: '/Allimages/sixjars-services-security.png',
+    alt: 'Indian colleagues checking a backup restoration test.',
+  },
+}
+
 export default function CapabilitiesPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Capabilities"
-        title="Six services. One contact coordinating the work."
+        eyebrow="Our services"
+        title="Find the support your next project needs."
         intro="Publishing, media, digital systems, business operations, skills and security. Choose the service that fits your need — if the work crosses several areas, we plan it with you as one job."
-        breadcrumbs={[{ label: 'Capabilities', href: '/capabilities' }]}
-        image="/images/hero-cinematic.png"
-        imageAlt="Specialists at work across connected disciplines."
+        note="You can enquire as an individual or on behalf of an organisation. We agree the work and price with you before it begins."
+        breadcrumbs={[{ label: 'Services', href: '/capabilities' }]}
+        image={null}
         pattern="hatch"
       />
 
-      <CapabilityCards />
+      <CapabilityCards images={serviceImages} />
 
-      <section
-        className="on-dark patterned py-20 lg:py-28"
-        style={{ background: 'var(--color-plum)', ...patternVars('diagonal') }}
-      >
-        <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2
-              className="font-extrabold tracking-tight leading-tight"
-              style={{
-                color: 'var(--color-ivory)',
-                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-              }}
-            >
-              How the six connect
-            </h2>
-            <p
-              className="mt-4 text-base leading-relaxed"
-              style={{ color: 'rgba(252,251,248,0.7)' }}
-            >
-              Select a capability to see what it covers and where human review sits.
-            </p>
-          </div>
-          <CapabilityOrbit variant="dark" />
-        </div>
-      </section>
+      <EnquiryBlock />
 
-      <ClosingCta />
+      <BackToHome />
     </>
   )
 }

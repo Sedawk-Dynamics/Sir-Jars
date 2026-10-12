@@ -42,11 +42,11 @@ uniform float uTime;
 uniform vec2  uPointer;
 
 // Logo-led palette (review p.6)
-const vec3 PLUM     = vec3(0.294, 0.051, 0.141); // #4B0D24
-const vec3 WINE     = vec3(0.439, 0.051, 0.173); // #700D2C
+const vec3 PLUM     = vec3(0.294, 0.051, 0.141); // #3A0D27
+const vec3 WINE     = vec3(0.439, 0.051, 0.173); // #6B153F
 const vec3 BURGUNDY = vec3(0.529, 0.129, 0.263); // #872143
 const vec3 ROSE     = vec3(0.604, 0.180, 0.310); // #9A2E4F
-const vec3 GOLD     = vec3(0.945, 0.710, 0.231); // #F1B53B
+const vec3 GOLD     = vec3(0.945, 0.710, 0.231); // #EFB83C
 
 // Ramp the wave field across the brand family: deepest plum in the troughs,
 // gold only on the crests, so gold stays a fill and never becomes text.
