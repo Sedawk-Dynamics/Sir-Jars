@@ -3,7 +3,6 @@ import { ArrowRight, ShieldCheck } from 'lucide-react'
 import JarConstellation from '@/components/home/jar-constellation'
 import { FlyingDoves } from '@/components/brand/dove'
 import HeroPattern, { HERO_BASE } from '@/components/home/hero-pattern'
-import { commitments } from '@/lib/content'
 
 /**
  * Hero: audience, outcome, operating advantage, one primary CTA.
@@ -60,26 +59,31 @@ export default function Hero() {
                 className="inline-block h-px w-8"
                 style={{ background: 'var(--color-gold)' }}
               />
-              Complex work. One accountable partner.
+              Six services. Built around your goals.
             </p>
 
             <h1
               className="mt-6 font-extrabold tracking-tight leading-[1.05]"
               style={{ fontSize: 'clamp(2.25rem, 4vw, 3.5rem)' }}
             >
-              <span style={{ color: 'var(--color-ivory)' }}>Practical support for the work </span>
-              <span className="text-gold-gradient">your organisation needs to get done.</span>
+              <span style={{ color: 'var(--color-ivory)' }}>Practical help to </span>
+              <span className="text-gold-gradient">bring your ideas to life.</span>
             </h1>
 
             <p
               className="mt-6 text-base sm:text-lg leading-relaxed max-w-xl"
               style={{ color: 'rgba(252,251,248,0.78)' }}
             >
-              You may need to publish a book, produce a video, connect your systems,
-              organise your records, train your team or prepare for a security
-              incident. Six Jars brings the people for that work together, with one
-              contact coordinating delivery. We agree what you need, keep you involved
-              in key decisions and hand over work your team can use.
+              You might be preparing a book, planning a podcast, improving a work process
+              or learning a new skill. We bring the right people together and give you one
+              contact to guide the work from your first brief to the finished result.
+            </p>
+
+            <p
+              className="mt-4 text-sm sm:text-base font-semibold"
+              style={{ color: 'var(--color-gold)' }}
+            >
+              For individuals and organisations. Scope and price agreed with you.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
@@ -88,12 +92,12 @@ export default function Hero() {
                 className="group inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5"
                 style={{
                   background: 'var(--color-gold)',
-                  color: 'var(--color-plum)',
+                  color: '#000000',
                   minHeight: 56,
-                  boxShadow: '0 8px 30px rgba(241,181,59,0.28)',
+                  boxShadow: '0 8px 30px rgba(239,184,60,0.28)',
                 }}
               >
-                Start a conversation
+                Tell us what you want to achieve
                 <ArrowRight
                   size={18}
                   aria-hidden="true"
@@ -110,7 +114,7 @@ export default function Hero() {
                   minHeight: 56,
                 }}
               >
-                Explore six capabilities
+                Explore our services
               </Link>
             </div>
 
@@ -150,53 +154,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Proof rail — operating commitments, explicitly labelled as such.
-          No invented metrics sit next to a call to action. */}
-      <div
-        className="relative"
-        style={{
-          background: 'rgba(20,3,10,0.72)',
-          borderTop: '1px solid rgba(241,181,59,0.2)',
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-8">
-          <h2 className="sr-only">Our operating commitments</h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {commitments.map((c) => (
-              <li key={c.title} className="flex items-start gap-3">
-                <span
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
-                  style={{
-                    background: 'rgba(241,181,59,0.16)',
-                    color: 'var(--color-gold)',
-                    border: '1px solid rgba(241,181,59,0.35)',
-                  }}
-                >
-                  {c.mark}
-                </span>
-                <span>
-                  <span
-                    className="block text-sm font-bold"
-                    style={{ color: 'var(--color-ivory)' }}
-                  >
-                    {c.title}
-                  </span>
-                  <span
-                    className="block text-xs leading-relaxed mt-0.5"
-                    style={{ color: 'rgba(252,251,248,0.6)' }}
-                  >
-                    {c.detail}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-xs" style={{ color: 'rgba(252,251,248,0.42)' }}>
-            These are operating commitments we hold ourselves to.
-          </p>
-        </div>
-      </div>
     </section>
   )
 }

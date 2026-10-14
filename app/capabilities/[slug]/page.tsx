@@ -7,7 +7,6 @@ import AcademyPathways from '@/components/academy-pathways'
 import EnquiryBlock from '@/components/enquiry-block'
 import BackToHome from '@/components/back-to-home'
 import { capabilities, engagements, getCapability } from '@/lib/content'
-import { patternVars } from '@/lib/patterns'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -155,25 +154,29 @@ export default async function CapabilityPage({ params }: Params) {
 
           {/* Why choose this service — the customer reason, after what we do. */}
           <div
-            className="patterned mt-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
-            style={{ background: 'var(--color-plum)', ...patternVars('diagonal') }}
+            className="mt-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+            style={{
+              background: 'rgba(239,184,60,0.12)',
+              border: '1px solid rgba(239,184,60,0.45)',
+              borderLeft: '4px solid var(--color-gold)',
+            }}
           >
             <Compass
               size={28}
               aria-hidden="true"
               className="shrink-0"
-              style={{ color: 'var(--color-gold)' }}
+              style={{ color: 'var(--color-wine)' }}
             />
             <div>
               <h2
                 className="text-xs font-bold tracking-[0.18em] uppercase"
-                style={{ color: 'var(--color-gold)' }}
+                style={{ color: 'var(--color-wine)' }}
               >
                 Why choose this service
               </h2>
               <p
                 className="mt-2 text-base lg:text-lg leading-relaxed font-semibold"
-                style={{ color: 'var(--color-ivory)' }}
+                style={{ color: '#000000' }}
               >
                 {capability.chooseWhen}
               </p>

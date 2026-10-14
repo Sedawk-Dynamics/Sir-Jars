@@ -444,34 +444,6 @@ export const care = [
   },
 ]
 
-/* ── Operating commitments ──────────────────────────────────────────────
-   Shown in the homepage hero strip. These are commitments we hold
-   ourselves to, NOT measured results, and are labelled as such.
-   ──────────────────────────────────────────────────────────────────── */
-
-export const commitments = [
-  {
-    mark: 'C',
-    title: 'Connected capabilities',
-    detail: 'One coordinated scope across all six disciplines.',
-  },
-  {
-    mark: 'H',
-    title: 'Human-reviewed',
-    detail: 'A named person approves before release. Accountability stays visible.',
-  },
-  {
-    mark: 'G',
-    title: 'Agreed approvals',
-    detail: 'Who approves what is agreed before work starts, not after.',
-  },
-  {
-    mark: 'E',
-    title: 'Clear handover',
-    detail: 'You receive the files, records and documentation your team can use.',
-  },
-]
-
 /* ── Engagement examples ────────────────────────────────────────────────
    Illustrative composites of the shape of our work. They are labelled as
    examples, not case studies, and carry no client names or metrics until
@@ -893,7 +865,10 @@ export const org = {
   grievanceOfficer: 'Sreejith S, Cofounder & CEO',
   gstin: '29ABUCS1730R1ZC',
   cin: 'U62020KA2026OPC223063' as string | null,
-  linkedin: 'https://www.linkedin.com/company/six-jars-global',
+  linkedin: 'https://www.linkedin.com/company/six-jars-global/',
+  instagram: 'https://www.instagram.com/sixjars.global/',
+  x: 'https://x.com/SixJarsGlobal',
+  facebook: 'https://www.facebook.com/sixjarsglobal',
   /** Google Maps pin for Cumins Estates – Genesis, Horamavu. */
   mapUrl: 'https://maps.app.goo.gl/2jPfGFdGNLjiFsPs7',
   mapEmbed: 'https://www.google.com/maps?q=13.0289617,77.6687345&z=17&output=embed',

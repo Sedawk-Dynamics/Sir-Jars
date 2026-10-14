@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google'
 import SiteHeader from '@/components/site-header'
 import SiteFooter from '@/components/site-footer'
 import CookieManager from '@/components/cookie-manager'
+import ScrollBattery from '@/components/scroll-battery'
 import './globals.css'
 
 const manrope = Manrope({
@@ -81,6 +82,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <ScrollBattery />
         <CookieManager />
       </body>
     </html>

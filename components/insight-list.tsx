@@ -91,10 +91,11 @@ export default function InsightList({
             return (
               <li key={article.slug}>
                 <article
-                  className="grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] rounded-2xl overflow-hidden"
+                  className="grid md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-center rounded-2xl overflow-hidden"
                   style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
                 >
-                  <div className="relative aspect-[3/2] md:aspect-auto md:min-h-full">
+                  {/* Always 3:2 (brand guide); height follows width. */}
+                  <div className="relative aspect-[3/2]">
                     <Image
                       src={image.src}
                       alt={image.alt}
