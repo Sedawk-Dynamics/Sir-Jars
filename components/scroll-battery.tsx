@@ -81,6 +81,10 @@ export default function ScrollBattery({
   const fillBottom = useTransform(level, [0, 0.5, 1], ['#872143', '#B8452E', '#D99A1F'])
 
   const contentsDim = useTransform(draining, [0, 1], [1, 0.72])
+
+  // Top edge of the contents (the fill rect spans y=-6..VH, scaled from the
+  // base), so the liquid surface ellipse rides exactly on the level.
+  const surfaceY = useTransform(level, (v) => JAR_VIEWBOX.h - (JAR_VIEWBOX.h + 6) * v)
   const glowFilter = useTransform(
     filling,
     (c) =>
@@ -149,7 +153,34 @@ export default function ScrollBattery({
             <clipPath id={`${id}-jar`}>
               <path d={JAR_PATH} />
             </clipPath>
+            {/* 3D shading: darker at both sides, a lit band left of centre —
+                the way light falls across a rounded vessel. */}
+            <linearGradient id={`${id}-round`} x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stopColor="#1A0410" stopOpacity="0.55" />
+              <stop offset="0.22" stopColor="#1A0410" stopOpacity="0.08" />
+              <stop offset="0.36" stopColor="#FFFFFF" stopOpacity="0.22" />
+              <stop offset="0.5" stopColor="#FFFFFF" stopOpacity="0" />
+              <stop offset="0.78" stopColor="#1A0410" stopOpacity="0.18" />
+              <stop offset="1" stopColor="#1A0410" stopOpacity="0.6" />
+            </linearGradient>
+            {/* Base shading: the belly darkens toward the foot. */}
+            <linearGradient id={`${id}-base`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0.55" stopColor="#1A0410" stopOpacity="0" />
+              <stop offset="1" stopColor="#1A0410" stopOpacity="0.4" />
+            </linearGradient>
+            {/* Glossy specular highlight on the upper-left shoulder. */}
+            <radialGradient id={`${id}-gloss`} cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.85" />
+              <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id={`${id}-ground`} cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stopColor="#14030A" stopOpacity="0.55" />
+              <stop offset="1" stopColor="#14030A" stopOpacity="0" />
+            </radialGradient>
           </defs>
+
+          {/* Contact shadow on the ground. */}
+          <ellipse cx={VW / 2} cy={VH + 2} rx={44} ry={7} fill={`url(#${id}-ground)`} />
 
           {/* Empty vessel: warm ivory glass so it reads on light and dark. */}
           <path
@@ -188,7 +219,50 @@ export default function ScrollBattery({
                 }
               />
             </motion.g>
+
+            {/* Liquid surface — a lit ellipse riding on the level. */}
+            <motion.ellipse
+              cx={VW / 2}
+              cy={surfaceY}
+              rx={VW / 2}
+              ry={5}
+              style={{ fill: fillTop }}
+            />
+            <motion.ellipse
+              cx={VW / 2}
+              cy={surfaceY}
+              rx={VW / 2}
+              ry={5}
+              fill="rgba(255,255,255,0.28)"
+            />
           </motion.g>
+
+          {/* Volume: side shading, base shading and gloss, over glass and contents. */}
+          <g clipPath={`url(#${id}-jar)`}>
+            <rect x={0} y={0} width={VW} height={VH} fill={`url(#${id}-round)`} />
+            <rect x={0} y={0} width={VW} height={VH} fill={`url(#${id}-base)`} />
+            <ellipse
+              cx={36}
+              cy={58}
+              rx={10}
+              ry={24}
+              transform="rotate(18 36 58)"
+              fill={`url(#${id}-gloss)`}
+            />
+            <ellipse cx={34} cy={96} rx={4} ry={9} fill={`url(#${id}-gloss)`} opacity={0.5} />
+          </g>
+
+          {/* Mouth of the jar: the dark opening seen from slightly above. */}
+          <ellipse cx={VW / 2} cy={9} rx={19} ry={3.2} fill="#2A0716" opacity={0.75} />
+          <ellipse
+            cx={VW / 2}
+            cy={8.4}
+            rx={19}
+            ry={3.2}
+            fill="none"
+            stroke="rgba(255,255,255,0.55)"
+            strokeWidth="1.2"
+          />
 
           {/* Rim, so the lip stays crisp over the contents. */}
           <path
