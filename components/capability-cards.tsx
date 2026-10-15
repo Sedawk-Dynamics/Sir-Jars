@@ -16,6 +16,7 @@ export default function CapabilityCards({
   eyebrow = 'Our services',
   headingLevel: Heading = 'h2',
   images,
+  compactTop = false,
 }: {
   heading?: string
   intro?: string
@@ -23,11 +24,13 @@ export default function CapabilityCards({
   headingLevel?: 'h1' | 'h2'
   /** Per-slug card image. When given, each card reads image, title, paragraph, button. */
   images?: Record<string, { src: string; alt: string }>
+  /** Smaller top padding, for when it follows another light band. */
+  compactTop?: boolean
 }) {
   return (
     <section
       id="capabilities"
-      className="py-20 lg:py-28"
+      className={compactTop ? 'pt-12 lg:pt-16 pb-20 lg:pb-28' : 'py-20 lg:py-28'}
       style={{ background: 'var(--color-ivory)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">

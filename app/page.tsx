@@ -41,7 +41,7 @@ export default function HomePage() {
     <>
       <Hero />
       <Care />
-      <CapabilityCards images={homeImages} />
+      <CapabilityCards images={homeImages} compactTop />
       <WhySixJars />
       <ProcessSteps />
 
