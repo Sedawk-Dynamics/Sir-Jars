@@ -85,6 +85,10 @@ export default function ScrollBattery({
   // Top edge of the contents (the fill rect spans y=-6..VH, scaled from the
   // base), so the liquid surface ellipse rides exactly on the level.
   const surfaceY = useTransform(level, (v) => JAR_VIEWBOX.h - (JAR_VIEWBOX.h + 6) * v)
+  // The contents slide up from below the base rather than scaling: Framer
+  // Motion sets its own transform-origin on SVG, so a scaleY grew from the
+  // middle of the jar instead of the bottom.
+  const fillOffset = useTransform(level, (v) => (JAR_VIEWBOX.h + 6) * (1 - v))
   const glowFilter = useTransform(
     filling,
     (c) =>
@@ -195,13 +199,7 @@ export default function ScrollBattery({
             clipPath={`url(#${id}-jar)`}
             style={{ opacity: reduce ? 1 : contentsDim }}
           >
-            <motion.g
-              style={{
-                scaleY: level,
-                transformBox: 'view-box',
-                transformOrigin: `${VW / 2}px ${VH}px`,
-              }}
-            >
+            <motion.g style={{ y: fillOffset }}>
               <motion.rect
                 x={-VW}
                 y={-6}
@@ -213,8 +211,9 @@ export default function ScrollBattery({
                     ? undefined
                     : {
                         rotate: tilt,
-                        transformBox: 'view-box',
-                        transformOrigin: `${VW / 2}px 0px`,
+                        // Pivot on the middle of the surface (top edge).
+                        originX: 0.5,
+                        originY: 0,
                       }
                 }
               />
