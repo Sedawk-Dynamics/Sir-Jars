@@ -66,7 +66,7 @@ const companyLinks = [
   { label: 'Contact', href: '/contact' },
 ]
 
-const columnHeading = 'text-xl font-bold leading-tight mb-4 text-gold'
+const columnHeading = 'text-lg font-bold leading-tight mb-3 text-gold'
 const columnLink =
   'group inline-flex items-center gap-2.5 text-sm text-ivory/80 hover:text-gold transition-colors'
 
@@ -104,8 +104,8 @@ export default function SiteFooter() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-10 lg:pt-12">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.35fr] gap-x-12 gap-y-8 pb-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-8 lg:pt-9">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.35fr] gap-x-10 gap-y-7 pb-6">
           {/* Brand */}
           <div>
             {/* The wordmark and jars are burgundy and gold on transparency, so
@@ -114,7 +114,7 @@ export default function SiteFooter() {
             <Link
               href="/"
               aria-label="Six Jars Global — home"
-              className="inline-flex items-center justify-center rounded-xl px-3.5 py-2.5"
+              className="inline-flex items-center justify-center rounded-xl px-3 py-2"
               style={{ background: 'var(--color-ivory)' }}
             >
               <Image
@@ -122,28 +122,28 @@ export default function SiteFooter() {
                 alt="Six Jars Global"
                 width={LOGO_W}
                 height={LOGO_H}
-                className="h-12 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </Link>
             <p
-              className="mt-4 font-bold leading-tight text-ivory"
-              style={{ fontFamily: 'var(--font-heading)', fontSize: '1.375rem' }}
+              className="mt-3 font-bold leading-tight text-ivory"
+              style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem' }}
             >
               Six Services. Built Around Your Goals.
             </p>
-            <p className="mt-2 text-sm leading-relaxed max-w-xs text-ivory/75">
+            <p className="mt-1.5 text-[13px] leading-snug max-w-xs text-ivory/75">
               Six services. One contact coordinating the work, with clear approvals and a
               handover you can use.
             </p>
 
-            <ul className="mt-5 flex flex-wrap items-center gap-2.5" aria-label="Social and contact links">
+            <ul className="mt-4 flex flex-wrap items-center gap-2" aria-label="Social and contact links">
               {socialLinks.map((s) => (
                 <li key={s.href}>
                   <a
                     href={s.href}
                     {...(s.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     aria-label={s.external ? `${s.label} (opens in a new tab)` : s.label}
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-full text-gold bg-white/10 transition-colors hover:text-black hover:bg-gold"
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-full text-gold bg-white/10 transition-colors hover:text-black hover:bg-gold"
                   >
                     {s.icon}
                   </a>
@@ -155,7 +155,7 @@ export default function SiteFooter() {
           {/* Services */}
           <nav aria-label="Services">
             <h2 className={columnHeading} style={{ fontFamily: 'var(--font-heading)' }}>Services</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1.5">
               {capabilities.map((c) => (
                 <li key={c.slug}>
                   <Link href={`/capabilities/${c.slug}`} className={columnLink}>
@@ -170,7 +170,7 @@ export default function SiteFooter() {
           {/* Company */}
           <nav aria-label="Company">
             <h2 className={columnHeading} style={{ fontFamily: 'var(--font-heading)' }}>Company</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1.5">
               {companyLinks.map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className={columnLink}>
@@ -185,7 +185,7 @@ export default function SiteFooter() {
           {/* Contact */}
           <div>
             <h2 className={columnHeading} style={{ fontFamily: 'var(--font-heading)' }}>Contact</h2>
-            <address className="not-italic space-y-2.5 text-sm leading-relaxed text-ivory/80">
+            <address className="not-italic space-y-1.5 text-sm leading-snug text-ivory/80">
               <p className="flex gap-3">
                 <MapPin size={16} aria-hidden="true" className="shrink-0 mt-0.5 text-gold" />
                 <span>
@@ -223,7 +223,7 @@ export default function SiteFooter() {
             {/* Grievance officer — required to be published under the
                 Consumer Protection (E-Commerce) Rules, 2020. */}
             <p
-              className="mt-4 pt-3 text-sm leading-relaxed text-ivory/75"
+              className="mt-3 pt-2.5 text-[13px] leading-snug text-ivory/75"
               style={{ borderTop: '1px solid rgba(255,255,255,0.14)' }}
             >
               <span className="block text-ivory/90 font-semibold">Grievance officer</span>
@@ -240,16 +240,16 @@ export default function SiteFooter() {
       {/* Legal links — a full-width centred bar with dividers. */}
       <nav
         aria-label="Legal"
-        className="py-3.5"
+        className="py-2.5"
         style={{
           borderTop: '1px solid rgba(255,255,255,0.14)',
           borderBottom: '1px solid rgba(255,255,255,0.14)',
         }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <ul className="flex flex-wrap justify-center gap-y-2 text-[13px] font-semibold">
+          <ul className="flex flex-wrap justify-center gap-y-1.5 text-[13px] font-semibold">
             {legalOrder.map((slug) => (
-              <li key={slug} className="px-3 border-l border-white/20 first:border-l-0">
+              <li key={slug} className="px-2.5 border-l border-white/20 first:border-l-0">
                 <Link href={`/legal/${slug}`} className="text-ivory/85 hover:text-gold transition-colors">
                   {legalDocs[slug].title}
                 </Link>
@@ -259,20 +259,20 @@ export default function SiteFooter() {
         </div>
       </nav>
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-3">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5">
           <div>
             <p className="text-xs text-ivory/70">
               &copy; {year} {org.legalName}. All rights reserved.
             </p>
-            <p className="text-xs text-ivory/60 mt-1">
+            <p className="text-xs text-ivory/60 mt-0.5">
               GSTIN: {org.gstin}
               {org.cin ? <> &middot; CIN: {org.cin}</> : null}
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <CookieSettingsButton className="inline-flex items-center px-4 rounded-full text-xs font-semibold text-ivory/85 hover:text-gold border border-ivory/25 transition-colors min-h-10" />
-            <BackToTop className="inline-flex items-center gap-1.5 px-4 rounded-full text-xs font-bold min-h-10 bg-gold text-black transition-transform hover:-translate-y-0.5" />
+            <CookieSettingsButton className="inline-flex items-center px-4 rounded-full text-xs font-semibold text-ivory/85 hover:text-gold border border-ivory/25 transition-colors min-h-9" />
+            <BackToTop className="inline-flex items-center gap-1.5 px-4 rounded-full text-xs font-bold min-h-9 bg-gold text-black transition-transform hover:-translate-y-0.5" />
           </div>
         </div>
       </div>
