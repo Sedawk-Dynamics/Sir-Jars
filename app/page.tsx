@@ -40,8 +40,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <CapabilityCards images={homeImages} />
       <Care />
+      <CapabilityCards images={homeImages} />
       <WhySixJars />
       <ProcessSteps />
 

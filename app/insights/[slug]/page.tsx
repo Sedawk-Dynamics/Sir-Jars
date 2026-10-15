@@ -81,13 +81,13 @@ export default async function ArticlePage({ params }: Params) {
             </Link>
           </div>
 
-          <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden my-8">
+          <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden my-8" style={{ background: 'var(--color-parchment)' }}>
             <Image
               src={image.src}
               alt={image.alt}
               fill
               sizes="(max-width: 768px) 100vw, 768px"
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>

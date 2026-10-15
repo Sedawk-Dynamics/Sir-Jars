@@ -679,7 +679,7 @@ const articleData: Omit<Article, 'capability'>[] = [
       'Operational guidance; adapt the process to the organisation and its information requirements.',
     date: 'September 2026',
     isoDate: '2026-09-26',
-    image: '/Allimages/sixjars-home-insight-handover.png',
+    image: '/Allimages/Warm Office Collaboration with Folder Exchange.png',
     imageAlt: 'Indian colleagues handing over a folder and task checklist.',
     articleImage: {
       src: '/Allimages/sixjars-article-handover.png',

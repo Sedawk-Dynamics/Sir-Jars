@@ -66,24 +66,46 @@ const companyLinks = [
   { label: 'Contact', href: '/contact' },
 ]
 
-const columnHeading = 'text-xs font-bold tracking-[0.16em] uppercase mb-5 text-gold'
-const columnLink = 'text-sm text-ivory/80 hover:text-gold transition-colors'
+const columnHeading = 'text-xl font-bold leading-tight mb-4 text-gold'
+const columnLink =
+  'group inline-flex items-center gap-2.5 text-sm text-ivory/80 hover:text-gold transition-colors'
+
+/** Small gold bullet in front of each column link. */
+function Bullet() {
+  return (
+    <span
+      aria-hidden="true"
+      className="w-1.5 h-1.5 rounded-full shrink-0 bg-gold/70 transition-colors group-hover:bg-gold"
+    />
+  )
+}
 
 /**
  * Four columns on desktop (brand · services · company · contact), two on
  * tablet, stacked on mobile; every column starts on the same top line.
- * Legal links and the copyright bar share the same left edge as the columns.
+ * A centred legal bar with dividers sits between the columns and the
+ * copyright row.
  */
 export default function SiteFooter() {
   const year = new Date().getFullYear()
 
   return (
     <footer
-      className="on-dark patterned pt-16 pb-8"
+      className="on-dark patterned"
       style={{ background: 'var(--color-plum)', color: 'var(--color-ivory)', ...patternVars('hatch', 'gold') }}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.35fr] gap-x-10 gap-y-12 pb-12">
+      {/* Brand gradient rule across the top edge. */}
+      <div
+        aria-hidden="true"
+        className="h-1"
+        style={{
+          background:
+            'linear-gradient(90deg, var(--color-rose) 0%, var(--color-gold) 50%, var(--color-rose) 100%)',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-10 lg:pt-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.35fr] gap-x-12 gap-y-8 pb-8">
           {/* Brand */}
           <div>
             {/* The wordmark and jars are burgundy and gold on transparency, so
@@ -92,7 +114,7 @@ export default function SiteFooter() {
             <Link
               href="/"
               aria-label="Six Jars Global — home"
-              className="inline-flex items-center justify-center rounded-xl px-4 py-3"
+              className="inline-flex items-center justify-center rounded-xl px-3.5 py-2.5"
               style={{ background: 'var(--color-ivory)' }}
             >
               <Image
@@ -100,29 +122,28 @@ export default function SiteFooter() {
                 alt="Six Jars Global"
                 width={LOGO_W}
                 height={LOGO_H}
-                className="h-14 w-auto object-contain"
+                className="h-12 w-auto object-contain"
               />
             </Link>
             <p
-              className="mt-6 font-bold leading-tight text-ivory"
-              style={{ fontFamily: 'var(--font-heading)', fontSize: '1.625rem' }}
+              className="mt-4 font-bold leading-tight text-ivory"
+              style={{ fontFamily: 'var(--font-heading)', fontSize: '1.375rem' }}
             >
-              Capability, made accountable.
+              Six Services. Built Around Your Goals.
             </p>
-            <p className="mt-3 text-sm leading-relaxed max-w-xs text-ivory/75">
+            <p className="mt-2 text-sm leading-relaxed max-w-xs text-ivory/75">
               Six services. One contact coordinating the work, with clear approvals and a
               handover you can use.
             </p>
 
-            <ul className="mt-6 flex flex-wrap items-center gap-3" aria-label="Social and contact links">
+            <ul className="mt-5 flex flex-wrap items-center gap-2.5" aria-label="Social and contact links">
               {socialLinks.map((s) => (
                 <li key={s.href}>
                   <a
                     href={s.href}
                     {...(s.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     aria-label={s.external ? `${s.label} (opens in a new tab)` : s.label}
-                    className="tap-target inline-flex items-center justify-center rounded-full text-ivory transition-colors hover:text-black hover:bg-gold"
-                    style={{ border: '1px solid rgba(255,255,255,0.3)' }}
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-full text-gold bg-white/10 transition-colors hover:text-black hover:bg-gold"
                   >
                     {s.icon}
                   </a>
@@ -133,11 +154,12 @@ export default function SiteFooter() {
 
           {/* Services */}
           <nav aria-label="Services">
-            <h2 className={columnHeading}>Services</h2>
-            <ul className="space-y-3">
+            <h2 className={columnHeading} style={{ fontFamily: 'var(--font-heading)' }}>Services</h2>
+            <ul className="space-y-2.5">
               {capabilities.map((c) => (
                 <li key={c.slug}>
                   <Link href={`/capabilities/${c.slug}`} className={columnLink}>
+                    <Bullet />
                     {c.shortName}
                   </Link>
                 </li>
@@ -147,11 +169,12 @@ export default function SiteFooter() {
 
           {/* Company */}
           <nav aria-label="Company">
-            <h2 className={columnHeading}>Company</h2>
-            <ul className="space-y-3">
+            <h2 className={columnHeading} style={{ fontFamily: 'var(--font-heading)' }}>Company</h2>
+            <ul className="space-y-2.5">
               {companyLinks.map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className={columnLink}>
+                    <Bullet />
                     {l.label}
                   </Link>
                 </li>
@@ -161,8 +184,8 @@ export default function SiteFooter() {
 
           {/* Contact */}
           <div>
-            <h2 className={columnHeading}>Contact</h2>
-            <address className="not-italic space-y-3 text-sm leading-relaxed text-ivory/80">
+            <h2 className={columnHeading} style={{ fontFamily: 'var(--font-heading)' }}>Contact</h2>
+            <address className="not-italic space-y-2.5 text-sm leading-relaxed text-ivory/80">
               <p className="flex gap-3">
                 <MapPin size={16} aria-hidden="true" className="shrink-0 mt-0.5 text-gold" />
                 <span>
@@ -200,7 +223,7 @@ export default function SiteFooter() {
             {/* Grievance officer — required to be published under the
                 Consumer Protection (E-Commerce) Rules, 2020. */}
             <p
-              className="mt-5 pt-4 text-sm leading-relaxed text-ivory/75"
+              className="mt-4 pt-3 text-sm leading-relaxed text-ivory/75"
               style={{ borderTop: '1px solid rgba(255,255,255,0.14)' }}
             >
               <span className="block text-ivory/90 font-semibold">Grievance officer</span>
@@ -212,28 +235,32 @@ export default function SiteFooter() {
             </p>
           </div>
         </div>
+      </div>
 
-        {/* Legal links — left-aligned with the columns above. */}
-        <nav
-          aria-label="Legal"
-          className="py-6"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.14)' }}
-        >
-          <ul className="flex flex-wrap gap-x-6 gap-y-3 text-xs">
+      {/* Legal links — a full-width centred bar with dividers. */}
+      <nav
+        aria-label="Legal"
+        className="py-3.5"
+        style={{
+          borderTop: '1px solid rgba(255,255,255,0.14)',
+          borderBottom: '1px solid rgba(255,255,255,0.14)',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <ul className="flex flex-wrap justify-center gap-y-2 text-[13px] font-semibold">
             {legalOrder.map((slug) => (
-              <li key={slug}>
-                <Link href={`/legal/${slug}`} className="text-ivory/75 hover:text-gold transition-colors">
+              <li key={slug} className="px-3 border-l border-white/20 first:border-l-0">
+                <Link href={`/legal/${slug}`} className="text-ivory/85 hover:text-gold transition-colors">
                   {legalDocs[slug].title}
                 </Link>
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
+      </nav>
 
-        <div
-          className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-6"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.14)' }}
-        >
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <p className="text-xs text-ivory/70">
               &copy; {year} {org.legalName}. All rights reserved.

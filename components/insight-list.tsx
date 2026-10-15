@@ -95,13 +95,13 @@ export default function InsightList({
                   style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
                 >
                   {/* Always 3:2 (brand guide); height follows width. */}
-                  <div className="relative aspect-[3/2]">
+                  <div className="relative aspect-[3/2]" style={{ background: 'var(--color-parchment)' }}>
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
                       sizes="(max-width: 768px) 100vw, 40vw"
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </div>
                   <div className="flex flex-col p-6 lg:p-8">
@@ -165,13 +165,13 @@ export default function InsightList({
                 border: '1px solid var(--color-line)',
               }}
             >
-              <span className="relative block aspect-[3/2] overflow-hidden">
+              <span className="relative block aspect-[3/2] overflow-hidden" style={{ background: 'var(--color-parchment)' }}>
                 <Image
                   src={article.image}
                   alt={article.imageAlt ?? ''}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-contain"
                 />
               </span>
               <span className="flex flex-col flex-1 p-5">
