@@ -49,45 +49,43 @@ export default function MissionValues() {
     <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-12 items-start">
-          {/* Mission and vision */}
-          <div
-            className="on-dark patterned rounded-3xl p-8 lg:p-10 flex flex-col justify-between lg:min-h-full lg:self-stretch"
-            style={{ background: '#3A0A24', ...patternVars('hatch', 'gold') }}
-          >
-            <div>
-              <h2
-                className="text-xs font-bold tracking-[0.18em] uppercase"
-                style={{ color: 'var(--color-gold)' }}
+          {/* Mission and vision — two cards sharing the column height. */}
+          <div className="flex flex-col gap-5 lg:self-stretch">
+            {[
+              {
+                label: 'Mission',
+                text: 'Turn complex work into clear, secure and measurable outcomes through coordinated expertise, practical technology and responsible execution.',
+                background: '#3A0A24',
+              },
+              {
+                label: 'Vision',
+                text: 'A world where every organization and learner can access the skills, systems and safeguards needed to adapt, grow and create lasting value.',
+                background: 'linear-gradient(135deg, var(--color-wine) 0%, var(--color-burgundy) 100%)',
+              },
+            ].map((card) => (
+              <div
+                key={card.label}
+                className="on-dark patterned rounded-3xl p-7 lg:p-8 flex flex-col justify-center lg:flex-1"
+                style={{ background: card.background, ...patternVars('hatch', 'gold') }}
               >
-                Mission
-              </h2>
-              <p
-                className="mt-5 font-semibold leading-snug"
-                style={{
-                  color: 'var(--color-ivory)',
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(1.5rem, 2.6vw, 2rem)',
-                }}
-              >
-                Turn complex work into clear, secure and measurable outcomes through
-                coordinated expertise, practical technology and responsible execution.
-              </p>
-            </div>
-            <div className="mt-12">
-              <h2
-                className="text-xs font-bold tracking-[0.18em] uppercase"
-                style={{ color: 'var(--color-gold)' }}
-              >
-                Vision
-              </h2>
-              <p
-                className="mt-3 text-base leading-relaxed"
-                style={{ color: 'rgba(255,255,255,0.82)' }}
-              >
-                A world where every organization and learner can access the skills, systems
-                and safeguards needed to adapt, grow and create lasting value.
-              </p>
-            </div>
+                <h2
+                  className="text-xs font-bold tracking-[0.18em] uppercase"
+                  style={{ color: 'var(--color-gold)' }}
+                >
+                  {card.label}
+                </h2>
+                <p
+                  className="mt-4 font-semibold leading-snug"
+                  style={{
+                    color: 'var(--color-ivory)',
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)',
+                  }}
+                >
+                  {card.text}
+                </p>
+              </div>
+            ))}
           </div>
 
           {/* Values as observable behaviours */}

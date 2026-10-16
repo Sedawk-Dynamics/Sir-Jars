@@ -250,8 +250,14 @@ export default function SiteFooter() {
           <ul className="flex flex-wrap justify-center gap-y-1.5 text-[13px] font-semibold">
             {legalOrder.map((slug) => (
               <li key={slug} className="px-2.5 border-l border-white/20 first:border-l-0">
-                <Link href={`/legal/${slug}`} className="text-ivory/85 hover:text-gold transition-colors">
+                <Link
+                  href={`/legal/${slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ivory/85 hover:text-gold transition-colors"
+                >
                   {legalDocs[slug].title}
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </Link>
               </li>
             ))}
