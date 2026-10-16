@@ -28,7 +28,7 @@ export default function AboutPage() {
       {/* Mission, vision and values. */}
       <MissionValues />
 
-      <section className="py-14 lg:py-20" style={{ background: 'var(--color-parchment)' }}>
+      <section className="py-10 lg:py-12" style={{ background: 'var(--color-parchment)' }}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="pl-5" style={{ borderLeft: '3px solid var(--color-gold)' }}>
             <h2
@@ -52,7 +52,7 @@ export default function AboutPage() {
       <FounderSection />
 
       <section
-        className="py-16 lg:py-20"
+        className="py-10 lg:py-12"
         style={{ background: 'var(--color-parchment)' }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">

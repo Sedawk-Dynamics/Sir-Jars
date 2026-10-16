@@ -23,7 +23,7 @@ export default function InsightsPage() {
         pattern="waves"
       />
 
-      <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <InsightList layout="rows" />
         </div>

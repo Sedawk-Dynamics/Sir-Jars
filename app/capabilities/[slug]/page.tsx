@@ -75,7 +75,7 @@ export default async function CapabilityPage({ params }: Params) {
 
       {capability.audience && (
         <section
-          className="py-12 lg:py-16"
+          className="py-8 lg:py-10"
           style={{ background: 'var(--color-parchment)', borderBottom: '1px solid var(--color-line)' }}
         >
           <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row gap-5">
@@ -109,7 +109,7 @@ export default async function CapabilityPage({ params }: Params) {
         </section>
       )}
 
-      <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
             <div>
@@ -154,7 +154,7 @@ export default async function CapabilityPage({ params }: Params) {
 
           {/* Why choose this service — the customer reason, after what we do. */}
           <div
-            className="mt-12 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
+            className="mt-8 rounded-2xl p-6 lg:p-8 flex flex-col sm:flex-row gap-5"
             style={{
               background: 'rgba(239,184,60,0.12)',
               border: '1px solid rgba(239,184,60,0.45)',
@@ -247,7 +247,7 @@ export default async function CapabilityPage({ params }: Params) {
 
       {example && (
         <section
-          className="py-16 lg:py-24"
+          className="py-10 lg:py-14"
           style={{ background: 'var(--color-parchment)' }}
         >
           <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -334,7 +334,7 @@ export default async function CapabilityPage({ params }: Params) {
 
       <EnquiryBlock />
 
-      <section className="py-10" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-4" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex justify-end">
           <Link
             href={`/capabilities/${next.slug}`}

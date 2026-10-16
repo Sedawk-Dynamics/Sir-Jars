@@ -13,7 +13,7 @@ const steps = [
 /** How it works — six numbered steps, all visible without interaction. */
 export default function ProcessSteps() {
   return (
-    <section id="how-we-work" className="py-20 lg:py-28" style={{ background: 'var(--color-ivory)' }}>
+    <section id="how-we-work" className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <p
           className="text-xs font-bold tracking-[0.18em] uppercase"

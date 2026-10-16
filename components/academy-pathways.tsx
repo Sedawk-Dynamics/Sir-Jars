@@ -77,7 +77,7 @@ export default function AcademyPathways() {
   return (
     <section
       id="academy-pathways"
-      className="py-16 lg:py-24"
+      className="py-10 lg:py-14"
       style={{ background: 'var(--color-parchment)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -136,15 +136,21 @@ export default function AcademyPathways() {
                     {p.promise}
                   </p>
 
-                  <dl className="mt-6 space-y-1.5 text-sm" style={{ color: 'rgba(0,0,0,0.8)' }}>
-                    <div className="flex gap-1.5">
-                      <dt>Format:</dt>
-                      <dd className="font-semibold">{p.format}</dd>
-                    </div>
-                    <div className="flex gap-1.5">
-                      <dt>Assessment:</dt>
-                      <dd className="font-semibold">{p.assessment}</dd>
-                    </div>
+                  <dl className="mt-5 space-y-3 text-sm leading-snug" style={{ color: 'rgba(0,0,0,0.8)' }}>
+                    {[
+                      { term: 'Format', detail: p.format },
+                      { term: 'Assessment', detail: p.assessment },
+                    ].map((row) => (
+                      <div key={row.term}>
+                        <dt
+                          className="text-[11px] font-bold tracking-[0.14em] uppercase"
+                          style={{ color: p.color }}
+                        >
+                          {row.term}
+                        </dt>
+                        <dd className="mt-1 font-semibold">{row.detail}</dd>
+                      </div>
+                    ))}
                   </dl>
 
                   <div

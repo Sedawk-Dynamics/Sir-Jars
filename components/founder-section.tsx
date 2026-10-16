@@ -10,7 +10,7 @@ export default function FounderSection() {
 
   return (
     <section
-      className="py-12 lg:py-16"
+      className="py-8 lg:py-10"
       style={{ background: 'var(--color-ivory)' }}
       aria-labelledby="founder-heading"
     >

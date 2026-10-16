@@ -22,7 +22,7 @@ const reasons = [
 export default function WhySixJars() {
   return (
     <section
-      className="on-dark patterned py-20 lg:py-28"
+      className="on-dark patterned py-12 lg:py-16"
       style={{ background: 'var(--color-plum)', ...patternVars('weave', 'gold') }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -52,7 +52,7 @@ export default function WhySixJars() {
           </p>
         </div>
 
-        <ul className="grid md:grid-cols-3 gap-5 mt-12">
+        <ul className="grid md:grid-cols-3 gap-5 mt-8">
           {reasons.map((r, i) => (
             <li
               key={r.title}

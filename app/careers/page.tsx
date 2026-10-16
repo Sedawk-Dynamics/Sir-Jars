@@ -52,7 +52,7 @@ export default function CareersPage() {
       />
 
       {/* ── Why work here ─────────────────────────────────────────────── */}
-      <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -99,7 +99,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── Where you could work ─────────────────────────────────────── */}
-      <section className="py-16 lg:py-24" style={{ background: 'var(--color-parchment)' }}>
+      <section className="py-10 lg:py-14" style={{ background: 'var(--color-parchment)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -159,7 +159,7 @@ export default function CareersPage() {
       {/* ── Open roles ───────────────────────────────────────────────── */}
       <section
         id="open-roles"
-        className="py-16 lg:py-24"
+        className="py-10 lg:py-14"
         style={{ background: 'var(--color-ivory)' }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -256,7 +256,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── How we hire ──────────────────────────────────────────────── */}
-      <section className="on-dark patterned py-16 lg:py-24" style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}>
+      <section className="on-dark patterned py-10 lg:py-14" style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -300,7 +300,7 @@ export default function CareersPage() {
             ))}
           </ol>
 
-          <div className="mt-12 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <a
               href={applyHref(careers.subject)}
               className="inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"

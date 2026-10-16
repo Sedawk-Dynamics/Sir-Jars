@@ -36,7 +36,7 @@ export default async function ContactPage({ searchParams }: Search) {
         pattern="diagonal"
       />
 
-      <section className="py-16 lg:py-24" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16">
             <div>
@@ -173,7 +173,7 @@ export default async function ContactPage({ searchParams }: Search) {
           </div>
 
           {/* Office location */}
-          <div className="mt-14">
+          <div className="mt-10">
             <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
               <h2 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--color-plum)' }}>
                 Find us

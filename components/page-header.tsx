@@ -50,7 +50,7 @@ export default function PageHeader({
   const right = imageSide === 'right'
   return (
     <header
-      className="on-dark patterned overflow-hidden pt-10 pb-14 lg:pt-14 lg:pb-20"
+      className="on-dark patterned overflow-hidden pt-6 pb-8 lg:pt-7 lg:pb-10"
       style={{ background: 'var(--color-plum)', ...patternVars(pattern) }}
     >
       {/* Soft vignette so the texture never competes with the heading. */}
@@ -65,7 +65,7 @@ export default function PageHeader({
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {breadcrumbs.length > 0 && (
-          <nav aria-label="Breadcrumb" className="mb-8">
+          <nav aria-label="Breadcrumb" className="mb-5">
             <ol className="flex flex-wrap items-center gap-1 text-xs">
               <li>
                 <Link
@@ -142,7 +142,7 @@ export default function PageHeader({
               {eyebrow}
             </p>
             <h1
-              className="mt-3 font-extrabold tracking-tight leading-[1.08]"
+              className="mt-2 font-extrabold tracking-tight leading-[1.08]"
               style={{
                 color: 'var(--color-ivory)',
                 fontSize: 'clamp(2.25rem, 4.6vw, 3.5rem)',
@@ -152,7 +152,7 @@ export default function PageHeader({
             </h1>
             {intro && (
               <p
-                className="mt-5 text-base sm:text-lg leading-relaxed max-w-2xl"
+                className="mt-3 text-base sm:text-lg leading-relaxed max-w-2xl"
                 style={{ color: 'rgba(255,255,255,0.76)' }}
               >
                 {intro}
@@ -166,7 +166,7 @@ export default function PageHeader({
                 {note}
               </p>
             )}
-            {action && <div className="mt-8">{action}</div>}
+            {action && <div className="mt-6">{action}</div>}
           </div>
         </div>
       </div>

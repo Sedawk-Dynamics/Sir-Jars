@@ -50,7 +50,7 @@ export default async function LegalPage({ params }: Params) {
         pattern="weave"
       />
 
-      <section className="py-14 lg:py-20" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-10 lg:py-12" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
           {doc.effective && (
             <dl
@@ -142,7 +142,7 @@ export default async function LegalPage({ params }: Params) {
 
           <nav
             aria-label="Other policies"
-            className="mt-14 pt-8"
+            className="mt-10 pt-6"
             style={{ borderTop: '1px solid var(--color-line)' }}
           >
             <h2

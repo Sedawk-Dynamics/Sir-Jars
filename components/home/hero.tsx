@@ -47,7 +47,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-14 pb-16 lg:pt-24 lg:pb-24">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-10 pb-12 lg:pt-16 lg:pb-16">
         <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-10 lg:gap-12 items-center">
           <div>
             <p

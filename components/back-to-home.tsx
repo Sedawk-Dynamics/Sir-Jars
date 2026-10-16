@@ -6,7 +6,7 @@ export default function BackToHome() {
   return (
     <nav
       aria-label="Page navigation"
-      className="py-8"
+      className="py-5"
       style={{ background: 'var(--color-ivory)', borderTop: '1px solid var(--color-line)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">

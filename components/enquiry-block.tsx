@@ -18,10 +18,10 @@ const promises = [
 export default function EnquiryBlock() {
   return (
     <section
-      className="py-16 lg:py-24"
+      className="py-8 lg:py-10"
       style={{ background: 'linear-gradient(180deg, var(--color-parchment) 0%, #FFFFFF 100%)' }}
     >
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Gold-gradient frame: 1.5px of padding shows through as the border. */}
         <div
           className="rounded-[30px] p-[1.5px]"
@@ -32,7 +32,7 @@ export default function EnquiryBlock() {
           }}
         >
           <div
-            className="on-dark relative overflow-hidden rounded-[28.5px] px-6 py-12 sm:px-10 lg:px-14 lg:py-16"
+            className="on-dark relative overflow-hidden rounded-[28.5px] px-6 py-8 sm:px-8 lg:px-10 lg:py-10"
             style={{
               background: [
                 'radial-gradient(circle at 88% 0%, rgba(239,184,60,0.30), transparent 42%)',
@@ -56,7 +56,7 @@ export default function EnquiryBlock() {
               <path d={JAR_PATH} fill="url(#enquiry-jar)" />
             </svg>
 
-            <div className="relative grid lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-10 lg:gap-14 items-center">
+            <div className="relative grid lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] gap-8 lg:gap-10 items-center">
               <div>
                 <p
                   className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-extrabold tracking-[0.18em] uppercase"
@@ -74,27 +74,27 @@ export default function EnquiryBlock() {
                   Start a conversation
                 </p>
                 <h2
-                  className="mt-5 font-bold tracking-tight leading-[1.05]"
-                  style={{ color: 'var(--color-ivory)', fontSize: 'clamp(2.1rem, 5vw, 3.5rem)' }}
+                  className="mt-4 font-bold tracking-tight leading-[1.05]"
+                  style={{ color: 'var(--color-ivory)', fontSize: 'clamp(1.9rem, 4vw, 2.75rem)' }}
                 >
                   Tell us what you want to <span className="text-gold-gradient">achieve</span>
                 </h2>
                 <p
-                  className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed"
+                  className="mt-3 max-w-xl text-base leading-relaxed"
                   style={{ color: 'rgba(255,255,255,0.8)' }}
                 >
                   Tell us what you are working on and where you need help. We will discuss what is
                   involved, what it will cost and how to get started.
                 </p>
 
-                <div className="mt-9 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href="/contact"
-                    className="group inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"
+                    className="group inline-flex items-center justify-center gap-2 px-6 rounded-full text-[15px] font-bold whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5"
                     style={{
                       background: 'linear-gradient(96deg, #EFB83C 0%, #FFD37A 50%, #E0A21F 100%)',
                       color: '#000000',
-                      minHeight: 56,
+                      minHeight: 50,
                       boxShadow: '0 12px 28px -12px rgba(239,184,60,0.7)',
                     }}
                   >
@@ -107,11 +107,11 @@ export default function EnquiryBlock() {
                   </Link>
                   <Link
                     href="/capabilities"
-                    className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold transition-colors duration-200 hover:bg-white/10"
+                    className="inline-flex items-center justify-center px-6 rounded-full text-[15px] font-semibold whitespace-nowrap transition-colors duration-200 hover:bg-white/10"
                     style={{
                       border: '1px solid rgba(255,255,255,0.5)',
                       color: 'var(--color-ivory)',
-                      minHeight: 56,
+                      minHeight: 50,
                     }}
                   >
                     Explore our services
@@ -119,11 +119,11 @@ export default function EnquiryBlock() {
                 </div>
               </div>
 
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {promises.map(({ icon: Icon, text }) => (
                   <li
                     key={text}
-                    className="flex items-center gap-4 rounded-2xl p-4 backdrop-blur-sm"
+                    className="flex items-center gap-3 rounded-2xl px-4 py-3 backdrop-blur-sm"
                     style={{
                       background: 'rgba(255,255,255,0.07)',
                       border: '1px solid rgba(255,255,255,0.14)',
@@ -131,16 +131,16 @@ export default function EnquiryBlock() {
                   >
                     <span
                       aria-hidden="true"
-                      className="shrink-0 w-11 h-11 rounded-full inline-flex items-center justify-center"
+                      className="shrink-0 w-10 h-10 rounded-full inline-flex items-center justify-center"
                       style={{
                         background: 'linear-gradient(135deg, #EFB83C 0%, #E0A21F 100%)',
                         color: 'var(--color-plum)',
                       }}
                     >
-                      <Icon size={20} />
+                      <Icon size={18} />
                     </span>
                     <span
-                      className="text-sm sm:text-base font-semibold leading-snug"
+                      className="text-sm font-semibold leading-snug"
                       style={{ color: 'var(--color-ivory)' }}
                     >
                       {text}

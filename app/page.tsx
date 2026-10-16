@@ -48,11 +48,11 @@ export default function HomePage() {
 
       <section
         id="insights"
-        className="py-20 lg:py-28"
+        className="py-8 lg:py-10"
         style={{ background: 'var(--color-parchment)' }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
             <div className="max-w-2xl">
               <p
                 className="text-xs font-bold tracking-[0.18em] uppercase"

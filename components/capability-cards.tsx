@@ -30,11 +30,11 @@ export default function CapabilityCards({
   return (
     <section
       id="capabilities"
-      className={compactTop ? 'pt-12 lg:pt-16 pb-20 lg:pb-28' : 'py-20 lg:py-28'}
+      className={compactTop ? 'pt-8 lg:pt-10 pb-12 lg:pb-16' : 'py-12 lg:py-16'}
       style={{ background: 'var(--color-ivory)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-end mb-12">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-end mb-8">
           <div>
             <p
               className="text-xs font-bold tracking-[0.18em] uppercase"
