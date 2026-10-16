@@ -8,6 +8,7 @@ import ProcessSteps from '@/components/home/process-steps'
 import EnquiryBlock from '@/components/enquiry-block'
 import InsightList from '@/components/insight-list'
 
+
 /** Homepage service-card images and alt text (change guide, 01 03). */
 const homeImages: Record<string, { src: string; alt: string }> = {
   publishing: {
