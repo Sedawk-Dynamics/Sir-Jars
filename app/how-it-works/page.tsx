@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
                   <span
                     aria-hidden="true"
                     className="text-5xl font-black leading-none tabular-nums"
-                    style={{ color: 'rgba(107,21,63,0.14)' }}
+                    style={{ color: 'rgb(110, 27, 62)' }}
                   >
                     {phase.number}
                   </span>
