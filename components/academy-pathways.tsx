@@ -77,7 +77,7 @@ export default function AcademyPathways() {
   return (
     <section
       id="academy-pathways"
-      className="py-10 lg:py-14"
+      className="py-8 lg:py-10"
       style={{ background: 'var(--color-parchment)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">

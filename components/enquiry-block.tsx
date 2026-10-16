@@ -18,7 +18,7 @@ const promises = [
 export default function EnquiryBlock() {
   return (
     <section
-      className="py-8 lg:py-10"
+      className="py-6 lg:py-8"
       style={{ background: 'linear-gradient(180deg, var(--color-parchment) 0%, #FFFFFF 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">

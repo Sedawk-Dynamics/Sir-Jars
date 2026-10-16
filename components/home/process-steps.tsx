@@ -28,7 +28,7 @@ export default function ProcessSteps() {
           A clear plan from first conversation to handover
         </h2>
 
-        <ol className="mt-10 grid sm:grid-cols-2 lg:grid-cols-6 gap-4">
+        <ol className="mt-8 grid sm:grid-cols-2 lg:grid-cols-6 gap-4">
           {steps.map((step, i) => (
             <li
               key={step.name}
@@ -54,7 +54,7 @@ export default function ProcessSteps() {
 
         <Link
           href="/how-it-works"
-          className="group mt-10 inline-flex items-center gap-2 px-7 rounded-full text-base font-bold"
+          className="group mt-6 inline-flex items-center gap-2 px-7 rounded-full text-base font-bold"
           style={{ minHeight: 52, background: 'var(--color-wine)', color: '#FFFFFF' }}
         >
           See how it works

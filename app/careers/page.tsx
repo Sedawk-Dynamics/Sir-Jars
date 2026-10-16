@@ -52,7 +52,7 @@ export default function CareersPage() {
       />
 
       {/* ── Why work here ─────────────────────────────────────────────── */}
-      <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -99,7 +99,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── Where you could work ─────────────────────────────────────── */}
-      <section className="py-10 lg:py-14" style={{ background: 'var(--color-parchment)' }}>
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-parchment)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -159,7 +159,7 @@ export default function CareersPage() {
       {/* ── Open roles ───────────────────────────────────────────────── */}
       <section
         id="open-roles"
-        className="py-10 lg:py-14"
+        className="py-8 lg:py-10"
         style={{ background: 'var(--color-ivory)' }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -256,7 +256,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── How we hire ──────────────────────────────────────────────── */}
-      <section className="on-dark patterned py-10 lg:py-14" style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}>
+      <section className="on-dark patterned py-8 lg:py-10" style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p

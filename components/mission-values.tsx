@@ -46,7 +46,7 @@ const values = [
 
 export default function MissionValues() {
   return (
-    <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
+    <section className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-12 items-start">
           {/* Mission and vision — two cards sharing the column height. */}

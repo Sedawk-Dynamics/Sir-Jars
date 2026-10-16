@@ -22,7 +22,7 @@ const reasons = [
 export default function WhySixJars() {
   return (
     <section
-      className="on-dark patterned py-12 lg:py-16"
+      className="on-dark patterned py-8 lg:py-10"
       style={{ background: 'var(--color-plum)', ...patternVars('weave', 'gold') }}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -85,7 +85,7 @@ export default function WhySixJars() {
 
         <Link
           href="/about"
-          className="inline-flex items-center gap-2 mt-10 text-sm font-semibold"
+          className="inline-flex items-center gap-2 mt-6 text-sm font-semibold"
           style={{ color: 'var(--color-gold)' }}
         >
           Read our mission, vision and values

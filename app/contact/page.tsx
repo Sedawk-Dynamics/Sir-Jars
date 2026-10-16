@@ -36,7 +36,7 @@ export default async function ContactPage({ searchParams }: Search) {
         pattern="diagonal"
       />
 
-      <section className="py-10 lg:py-14" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-16">
             <div>

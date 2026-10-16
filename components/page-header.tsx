@@ -50,7 +50,7 @@ export default function PageHeader({
   const right = imageSide === 'right'
   return (
     <header
-      className="on-dark patterned overflow-hidden pt-6 pb-8 lg:pt-7 lg:pb-10"
+      className="on-dark patterned overflow-hidden pt-6 pb-8 lg:pt-7 lg:pb-8"
       style={{ background: 'var(--color-plum)', ...patternVars(pattern) }}
     >
       {/* Soft vignette so the texture never competes with the heading. */}

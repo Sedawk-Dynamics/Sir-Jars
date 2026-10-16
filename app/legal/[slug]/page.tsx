@@ -50,7 +50,7 @@ export default async function LegalPage({ params }: Params) {
         pattern="weave"
       />
 
-      <section className="py-10 lg:py-12" style={{ background: 'var(--color-ivory)' }}>
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8">
           {doc.effective && (
             <dl
