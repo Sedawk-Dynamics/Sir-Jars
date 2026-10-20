@@ -55,7 +55,7 @@ export default function MissionValues() {
               {
                 label: 'Mission',
                 text: 'Turn complex work into clear, secure and measurable outcomes through coordinated expertise, practical technology and responsible execution.',
-                background: '#3A0A24',
+                background: 'rgb(125, 41, 62)',
               },
               {
                 label: 'Vision',
