@@ -55,12 +55,12 @@ export default function MissionValues() {
               {
                 label: 'Mission',
                 text: 'Turn complex work into clear, secure and measurable outcomes through coordinated expertise, practical technology and responsible execution.',
-                background: 'rgb(125, 41, 62)',
+                background: '#5A0F23',
               },
               {
                 label: 'Vision',
                 text: 'A world where every organization and learner can access the skills, systems and safeguards needed to adapt, grow and create lasting value.',
-                background: 'linear-gradient(135deg, var(--color-wine) 0%, var(--color-burgundy) 100%)',
+                background: 'linear-gradient(135deg, #7A1530 0%, #9A2E4F 100%)',
               },
             ].map((card) => (
               <div
