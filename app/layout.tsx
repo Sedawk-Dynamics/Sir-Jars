@@ -4,6 +4,8 @@ import SiteHeader from '@/components/site-header'
 import SiteFooter from '@/components/site-footer'
 import CookieManager from '@/components/cookie-manager'
 import ScrollBattery from '@/components/scroll-battery'
+import JsonLd from '@/components/json-ld'
+import { LOCALE, SITE_NAME, SITE_URL, organizationSchema, websiteSchema } from '@/lib/seo'
 import './globals.css'
 
 const manrope = Manrope({
@@ -22,46 +24,59 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 })
 
-export const SITE_URL = 'https://sixjarsglobal.com'
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Six Jars Global — Practical help to bring your ideas to life.',
+    default: 'Six Jars Global — Practical help to bring your ideas to life',
     // Every page supplies its own title; this frames it consistently.
     template: '%s | Six Jars Global',
   },
   description:
-    'Publishing, media, digital platforms, data and business operations, AI and future-skills training, and cybersecurity and forensics — six services with one contact to guide your work from first brief to finished result. Scope and price agreed with you.',
+    'Publishing, media, digital platforms, data operations, AI skills training and cybersecurity from Bengaluru — six services, one accountable contact.',
+  applicationName: SITE_NAME,
+  // Ignored by Google, still read by some smaller engines. Kept to real service terms.
   keywords: [
-    'governed operations',
-    'accountable delivery partner',
-    'publishing operations',
-    'AI governance',
-    'cybersecurity',
+    'Six Jars Global',
+    'publishing services Bengaluru',
+    'book publishing and print operations',
+    'media and content production',
+    'website and app development',
+    'business process automation',
+    'data and business operations',
     'AI skills training',
-    'business process operations',
-    'digital forensics',
-    'Bangalore',
+    'cybersecurity services',
+    'digital forensics India',
   ],
-  authors: [{ name: 'Six Jars Global' }],
-  creator: 'Six Jars Global',
-  alternates: { canonical: '/' },
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  // No canonical here: it would be inherited by any page that forgets its own.
+  // Each page sets one through pageMetadata().
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    url: SITE_URL,
-    siteName: 'Six Jars Global',
-    title: 'Six Jars Global — Practical help to bring your ideas to life.',
-    description:
-      'Six services for individuals and organisations, with one contact to guide the work from first brief to finished result.',
+    locale: LOCALE,
+    siteName: SITE_NAME,
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Six Jars Global — Practical help to bring your ideas to life.',
-    description:
-      'Six services for individuals and organisations, with one contact to guide the work from first brief to finished result.',
+  twitter: { card: 'summary_large_image', site: '@SixJarsGlobal' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
+  icons: {
+    icon: [
+      { url: '/icon-light-32x32.png', sizes: '32x32', type: 'image/png', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark-32x32.png', sizes: '32x32', type: 'image/png', media: '(prefers-color-scheme: dark)' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
+  },
+  formatDetection: { telephone: false, email: false, address: false },
+  // Google Search Console: set GOOGLE_SITE_VERIFICATION to the token from the
+  // "HTML tag" method (or verify by DNS instead and leave it unset).
+  ...(process.env.GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
+  }),
 }
 
 export const viewport: Viewport = {
@@ -77,8 +92,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
+    <html lang="en-IN" className={`${manrope.variable} ${cormorant.variable}`}>
       <body className="antialiased font-sans">
+        <JsonLd data={[organizationSchema, websiteSchema]} />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

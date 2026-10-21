@@ -3,13 +3,14 @@ import PageHeader from '@/components/page-header'
 import InsightList from '@/components/insight-list'
 import EnquiryBlock from '@/components/enquiry-block'
 import BackToHome from '@/components/back-to-home'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Insights',
+export const metadata: Metadata = pageMetadata({
+  title: 'Insights — practical guides and articles',
   description:
-    'Short articles on publishing, media, digital systems, business operations, skills and security — each with a practical place to start.',
-  alternates: { canonical: '/insights' },
-}
+    'Short articles on publishing, media, digital systems, business operations, skills and security, each with a practical place to start.',
+  path: '/insights',
+})
 
 export default function InsightsPage() {
   return (

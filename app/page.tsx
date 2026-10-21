@@ -7,6 +7,15 @@ import WhySixJars from '@/components/home/why-six-jars'
 import ProcessSteps from '@/components/home/process-steps'
 import EnquiryBlock from '@/components/enquiry-block'
 import InsightList from '@/components/insight-list'
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  title: 'Six Jars Global — Practical help to bring your ideas to life',
+  description:
+    'Publishing, media, digital platforms, data operations, AI skills training and cybersecurity from Bengaluru — six services, one accountable contact.',
+  path: '/',
+  absoluteTitle: true,
+})
 
 
 /** Homepage service-card images and alt text (change guide, 01 03). */

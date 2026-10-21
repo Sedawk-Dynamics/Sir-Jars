@@ -20,6 +20,8 @@ export type Capability = {
   summary: string
   /** Homepage card copy — also the detail page intro. */
   intro: string
+  /** Search-result snippet, 140–158 characters, leading with the service keyword. */
+  metaDescription: string
   /** Service page body copy. */
   overview: string
   /** Scope list (kept for reference; the page shows `deliverables`). */
@@ -57,6 +59,8 @@ export const capabilities: Capability[] = [
     summary: 'Editorial, design and production support for books, reports and guides.',
     intro:
       'Have a manuscript, report or guide to publish? We help edit the words, design the pages and prepare the files for print or digital release, with you involved in the final decisions.',
+    metaDescription:
+      'Book, report and guide publishing in Bengaluru: editing, page design and print-ready or digital files, with you involved in every final decision.',
     audience:
       'For independent authors and teams preparing a book, report or guide for publication.',
     heroImage: {
@@ -96,6 +100,8 @@ export const capabilities: Capability[] = [
     summary: 'Video, podcasts and social content built around your message.',
     intro:
       'Bring us the story you want to tell. We help plan and produce videos, podcasts and social content, then prepare the versions you need and review them with you before release.',
+    metaDescription:
+      'Video, podcast and social content production: we plan, film and edit your story, prepare each channel version and review it with you before release.',
     audience:
       'For people and teams who want to turn a story, interview or event into useful media.',
     heroImage: {
@@ -136,6 +142,8 @@ export const capabilities: Capability[] = [
     summary: 'Websites, applications and connected workflows that support everyday work.',
     intro:
       'Build a website, application or workflow around the way you work. We help connect your tools and information so everyday tasks are easier to manage.',
+    metaDescription:
+      'Website, app and workflow development built around how you work, connecting your tools and information so everyday tasks are easier to manage.',
     audience:
       'For individuals and teams who need a website, application or a better way to connect everyday tasks.',
     heroImage: {
@@ -175,6 +183,8 @@ export const capabilities: Capability[] = [
     summary: 'Support for records, reporting, registrations and recurring administration.',
     intro:
       'Keep records, reports and recurring tasks in order. We help organise the information, track what needs attention and make handovers easier.',
+    metaDescription:
+      'Data and business operations support: organised records, reliable reporting, registrations and recurring admin, with clear handovers at every step.',
     audience:
       'For people and teams managing records, reports, registrations or recurring administration.',
     heroImage: {
@@ -215,6 +225,8 @@ export const capabilities: Capability[] = [
     summary: 'Practical learning for students, educators, professionals and teams.',
     intro:
       'Learn by working on tasks you recognise. Our workshops give students, educators, professionals and teams time to practise, ask questions and improve their work with feedback.',
+    metaDescription:
+      'Practical AI and future-skills training for students, educators, professionals and teams: hands-on workshops on real tasks, with expert feedback.',
     audience:
       'For students, educators, professionals and teams who want to practise a skill and use it in their own work.',
     heroImage: {
@@ -255,6 +267,8 @@ export const capabilities: Capability[] = [
     summary: 'Support for security risks, incident readiness and authorised digital investigations.',
     intro:
       'Understand your security risks and prepare for incidents. When a digital event needs examination, we agree a separate, authorised forensic scope and handle information and evidence with care.',
+    metaDescription:
+      'Cybersecurity risk assessment, incident readiness and authorised digital forensics, with evidence handled carefully under a clearly agreed scope.',
     audience:
       'For people and organisations seeking security support or an authorised examination of a digital matter.',
     heroImage: {
@@ -679,7 +693,7 @@ const articleData: Omit<Article, 'capability'>[] = [
       'Operational guidance; adapt the process to the organisation and its information requirements.',
     date: 'September 2026',
     isoDate: '2026-09-26',
-    image: '/Allimages/Warm Office Collaboration with Folder Exchange.png',
+    image: '/Allimages/sixjars-article-handover-team.png',
     imageAlt: 'Indian colleagues handing over a folder and task checklist.',
     articleImage: {
       src: '/Allimages/sixjars-article-handover.png',

@@ -16,13 +16,14 @@ import PageHeader from '@/components/page-header'
 import BackToHome from '@/components/back-to-home'
 import { capabilities, careers } from '@/lib/content'
 import { patternVars } from '@/lib/patterns'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Careers',
+export const metadata: Metadata = pageMetadata({
+  title: 'Careers — join our Bengaluru team',
   description:
-    'Work across six connected capabilities on complex, high-stakes delivery — with human judgment in the loop and named ownership of every piece of work.',
-  alternates: { canonical: '/careers' },
-}
+    'Work across six connected capabilities on complex, high-stakes delivery, with human judgment in the loop and named ownership of every piece of work.',
+  path: '/careers',
+})
 
 /** Same icon per capability as the hero jars, so the two read as one system. */
 const ICONS: Record<string, typeof BookOpen> = {

@@ -6,7 +6,9 @@ import PageHeader, { verticalVisuals } from '@/components/page-header'
 import AcademyPathways from '@/components/academy-pathways'
 import EnquiryBlock from '@/components/enquiry-block'
 import BackToHome from '@/components/back-to-home'
+import JsonLd from '@/components/json-ld'
 import { capabilities, engagements, getCapability } from '@/lib/content'
+import { pageMetadata, serviceSchema } from '@/lib/seo'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -19,16 +21,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
   const capability = getCapability(slug)
   if (!capability) return {}
-  return {
+  return pageMetadata({
     title: capability.fullName,
-    description: capability.intro,
-    alternates: { canonical: `/capabilities/${capability.slug}` },
-    openGraph: {
-      title: `${capability.fullName} | Six Jars Global`,
-      description: capability.intro,
-      url: `/capabilities/${capability.slug}`,
-    },
-  }
+    description: capability.metaDescription,
+    path: `/capabilities/${capability.slug}`,
+    image: `/capabilities/${capability.slug}/opengraph-image`,
+  })
 }
 
 export default async function CapabilityPage({ params }: Params) {
@@ -45,6 +43,14 @@ export default async function CapabilityPage({ params }: Params) {
 
   return (
     <>
+      <JsonLd
+        data={serviceSchema({
+          slug: capability.slug,
+          name: capability.fullName,
+          description: capability.metaDescription,
+          audience: capability.audience,
+        })}
+      />
       <PageHeader
         eyebrow={`${capability.number} · ${capability.fullName}`}
         title={capability.headline}

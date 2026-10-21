@@ -4,13 +4,14 @@ import PageHeader from '@/components/page-header'
 import EnquiryBlock from '@/components/enquiry-block'
 import BackToHome from '@/components/back-to-home'
 import { phases } from '@/lib/content'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'How it works — Understand, Plan, Execute, Review, Validate, Improve',
+export const metadata: Metadata = pageMetadata({
+  title: 'How it works — our six-stage delivery process',
   description:
-    'Six stages — Understand, Plan, Execute, Review, Validate and Improve — each with a named owner and the exit evidence that closes it.',
-  alternates: { canonical: '/how-it-works' },
-}
+    'Six stages: Understand, Plan, Execute, Review, Validate and Improve. Each has a named owner and the evidence that closes it, so you know where work stands.',
+  path: '/how-it-works',
+})
 
 /**
  * The full six-stage model. Every stage states its accountable owner, the

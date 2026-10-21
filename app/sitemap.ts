@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { articles, capabilities } from '@/lib/content'
 import { legalOrder } from '@/lib/legal'
-import { SITE_URL } from './layout'
+import { SITE_URL } from '@/lib/seo'
 
 /** Derived from the content library, so a new page cannot be left out. */
 export default function sitemap(): MetadataRoute.Sitemap {

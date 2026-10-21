@@ -5,13 +5,14 @@ import BackToHome from '@/components/back-to-home'
 import FounderSection from '@/components/founder-section'
 import MissionValues from '@/components/mission-values'
 import { org } from '@/lib/content'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'About — Capability, made accountable',
+export const metadata: Metadata = pageMetadata({
+  title: 'About us — one accountable partner',
   description:
     'Six Jars Global brings six connected services together for individuals, organisations, educators and communities. Our mission, vision, values and promise.',
-  alternates: { canonical: '/about' },
-}
+  path: '/about',
+})
 
 export default function AboutPage() {
   return (

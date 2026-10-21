@@ -7,7 +7,9 @@ const nextConfig = {
   },
   // All imagery is local to /public now — the logo included — so no remote
   // hosts need allowing.
-  images: {},
+  // AVIF first, WebP fallback: the source PNGs are 0.9–2 MB each.
+  images: { formats: ['image/avif', 'image/webp'] },
+  poweredByHeader: false,
   // The six verticals were restructured in Aug 2026: Digital + AI became
   // Digital Platforms & Intelligent Automation, and Cybersecurity and Digital
   // Forensics merged into one vertical. Old URLs redirect permanently.
@@ -25,6 +27,7 @@ const nextConfig = {
         source: '/(.*)',
         headers: [
           { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           {
             key: 'Strict-Transport-Security',

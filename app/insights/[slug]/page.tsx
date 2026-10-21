@@ -5,7 +5,9 @@ import { notFound } from 'next/navigation'
 import { ArrowRight, Clock, Lightbulb, ShieldCheck, UserCheck } from 'lucide-react'
 import PageHeader, { verticalVisuals } from '@/components/page-header'
 import BackToHome from '@/components/back-to-home'
+import JsonLd from '@/components/json-ld'
 import { articles, getArticle, readTime } from '@/lib/content'
+import { articleSchema, pageMetadata } from '@/lib/seo'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -17,18 +19,16 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
   const article = getArticle(slug)
   if (!article) return {}
-  return {
+  return pageMetadata({
     title: article.title,
     description: article.excerpt,
-    alternates: { canonical: `/insights/${article.slug}` },
-    openGraph: {
-      type: 'article',
-      title: article.title,
-      description: article.excerpt,
-      url: `/insights/${article.slug}`,
-      publishedTime: article.isoDate,
-    },
-  }
+    path: `/insights/${article.slug}`,
+    type: 'article',
+    publishedTime: article.isoDate,
+    modifiedTime: article.isoDate,
+    authors: [article.author.name],
+    image: `/insights/${article.slug}/opengraph-image`,
+  })
 }
 
 export default async function ArticlePage({ params }: Params) {
@@ -41,6 +41,17 @@ export default async function ArticlePage({ params }: Params) {
 
   return (
     <>
+      <JsonLd
+        data={articleSchema({
+          slug: article.slug,
+          title: article.title,
+          excerpt: article.excerpt,
+          isoDate: article.isoDate,
+          image: image.src,
+          author: article.author,
+          section: article.capability,
+        })}
+      />
       <PageHeader
         eyebrow={article.capability}
         title={article.title}

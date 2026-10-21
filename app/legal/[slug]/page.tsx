@@ -5,6 +5,7 @@ import PageHeader from '@/components/page-header'
 import BackToHome from '@/components/back-to-home'
 import { org } from '@/lib/content'
 import { legalDocs, legalOrder } from '@/lib/legal'
+import { pageMetadata } from '@/lib/seo'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -24,11 +25,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
   const doc = legalDocs[slug]
   if (!doc) return {}
-  return {
-    title: doc.title,
-    description: doc.intro,
-    alternates: { canonical: `/legal/${slug}` },
-  }
+  return pageMetadata({ title: doc.title, description: doc.intro, path: `/legal/${slug}` })
 }
 
 export default async function LegalPage({ params }: Params) {

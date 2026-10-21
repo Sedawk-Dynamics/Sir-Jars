@@ -1,3 +1,5 @@
+import JsonLd from '@/components/json-ld'
+import { breadcrumbSchema } from '@/lib/seo'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -64,6 +66,7 @@ export default function PageHeader({
       />
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        {breadcrumbs.length > 0 && <JsonLd data={breadcrumbSchema(breadcrumbs)} />}
         {breadcrumbs.length > 0 && (
           <nav aria-label="Breadcrumb" className="mb-5">
             <ol className="flex flex-wrap items-center gap-1 text-xs">

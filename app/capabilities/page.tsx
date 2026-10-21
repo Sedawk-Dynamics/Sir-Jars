@@ -3,13 +3,14 @@ import PageHeader from '@/components/page-header'
 import CapabilityCards from '@/components/capability-cards'
 import EnquiryBlock from '@/components/enquiry-block'
 import BackToHome from '@/components/back-to-home'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Services — what do you need help with?',
+export const metadata: Metadata = pageMetadata({
+  title: 'Services — publishing, media, AI and security',
   description:
-    'Publishing, media, digital platforms, data and business operations, the AI & Future Skills Academy, and cybersecurity and digital forensics — six connected capabilities coordinated by one accountable partner.',
-  alternates: { canonical: '/capabilities' },
-}
+    'Publishing, media, digital platforms, data operations, AI skills training and cybersecurity: six connected services coordinated by one accountable partner.',
+  path: '/capabilities',
+})
 
 /** Services-page card images and alt text (change guide, 02 02). */
 const serviceImages: Record<string, { src: string; alt: string }> = {

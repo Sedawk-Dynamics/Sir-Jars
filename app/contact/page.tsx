@@ -5,13 +5,14 @@ import { patternVars } from '@/lib/patterns'
 import ContactForm from '@/components/contact-form'
 import BackToHome from '@/components/back-to-home'
 import { contactPaths, org, type ContactPathId } from '@/lib/content'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Contact',
+export const metadata: Metadata = pageMetadata({
+  title: 'Contact us — start your project',
   description:
-    'Tell us what you want to achieve. We will help you identify the right service and agree the next step — scope and price are agreed with you.',
-  alternates: { canonical: '/contact' },
-}
+    'Tell us what you want to achieve. We will help you choose the right service and agree the next step. Call, email or send an enquiry from Bengaluru, India.',
+  path: '/contact',
+})
 
 type Search = { searchParams: Promise<{ path?: string; route?: string }> }
 
