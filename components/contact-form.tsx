@@ -53,9 +53,13 @@ function StaffedState() {
  * an inline error tied by aria-describedby, and a live-region status message.
  *
  * Only name, email and goal are required. The enquiry is POSTed to
- * /api/enquiry, and success is shown only once that request is confirmed —
- * a failure keeps every typed value and offers the email address instead.
+ * Web3Forms, which emails it to the inbox the access key is registered to.
+ * Success is shown only once Web3Forms confirms delivery — a failure keeps
+ * every typed value and offers the email address instead.
  */
+
+// Public by design: the key can only send to its registered inbox.
+const WEB3FORMS_ACCESS_KEY = 'bdafb4f8-4bef-4106-901d-0598a9e3a927'
 
 type Errors = Partial<Record<'name' | 'email' | 'message', string>>
 
@@ -85,6 +89,8 @@ export default function ContactForm({
     message: '',
   })
   const errorSummaryRef = useRef<HTMLDivElement>(null)
+  // Web3Forms honeypot: hidden from people, ticked only by bots.
+  const botcheckRef = useRef<HTMLInputElement>(null)
 
   // A ?path= or ?route= query param preselects the form — this is what makes
   // "Get secure-channel guidance first" links from elsewhere on the site meaningful.
@@ -117,12 +123,25 @@ export default function ContactForm({
     }
     setStatus('submitting')
     try {
-      const res = await fetch('/api/enquiry', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, path }),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New enquiry (${activePath.label}) from ${values.name.trim()}`,
+          from_name: 'Six Jars Global website',
+          botcheck: botcheckRef.current?.checked ?? false,
+          name: values.name.trim(),
+          email: values.email.trim(),
+          enquiry_type: activePath.label,
+          enquiring_for: values.enquiringFor || 'Not stated',
+          organisation: values.org.trim() || 'Not stated',
+          service: values.route || 'Help me choose',
+          message: values.message.trim(),
+        }),
       })
-      setStatus(res.ok ? 'sent' : 'failed')
+      const data = await res.json().catch(() => null)
+      setStatus(res.ok && data?.success ? 'sent' : 'failed')
     } catch {
       setStatus('failed')
     }
@@ -169,6 +188,15 @@ export default function ContactForm({
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      <input
+        ref={botcheckRef}
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <fieldset className="border-0 p-0 m-0 mb-8">
         <legend
           className="text-xs font-bold tracking-[0.16em] uppercase mb-3"
