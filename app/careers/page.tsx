@@ -202,14 +202,33 @@ export default function CareersPage() {
                         {role.location}
                       </p>
                     </div>
-                    <a
-                      href={applyHref(`${careers.subject}: ${role.title}`)}
-                      className="shrink-0 inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-bold"
-                      style={{ minHeight: 48, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
-                    >
-                      Apply for this role
-                      <ArrowRight size={16} aria-hidden="true" />
-                    </a>
+                    <div className="shrink-0 flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2">
+                      <Link
+                        href={`/careers/${role.slug}`}
+                        className="group inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-bold"
+                        style={{ minHeight: 48, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
+                      >
+                        View role
+                        <span className="sr-only">: {role.title}</span>
+                        <ArrowRight
+                          size={16}
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover:translate-x-1"
+                        />
+                      </Link>
+                      <a
+                        href={applyHref(role.applySubject)}
+                        className="inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-semibold"
+                        style={{
+                          minHeight: 48,
+                          border: '1px solid rgba(107,21,63,0.3)',
+                          color: 'var(--color-wine)',
+                        }}
+                      >
+                        <Send size={15} aria-hidden="true" />
+                        Apply by email
+                      </a>
+                    </div>
                   </li>
                 )
               })}

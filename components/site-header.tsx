@@ -24,6 +24,7 @@ const navLinks = [
   { label: 'How it works', href: '/how-it-works' },
   { label: 'Insights', href: '/insights' },
   { label: 'About', href: '/about' },
+  { label: 'Careers', href: '/careers' },
 ]
 
 const CTA = { label: 'Tell us what you want to achieve', href: '/contact' }
@@ -128,7 +129,7 @@ export default function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive(link.href) ? 'page' : undefined}
-                className="px-3 h-10 inline-flex items-center rounded-lg text-sm font-medium transition-colors duration-200"
+                className="px-2 xl:px-3 h-10 inline-flex items-center rounded-lg text-sm font-medium whitespace-nowrap transition-colors duration-200"
                 style={linkStyle(isActive(link.href))}
               >
                 {link.label}

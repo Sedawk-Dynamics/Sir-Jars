@@ -171,6 +171,54 @@ export function articleSchema(a: {
   }
 }
 
+/** Google for Jobs reads this; description must be the full posting text. */
+export function jobPostingSchema(r: {
+  slug: string
+  title: string
+  description: string
+  datePosted: string
+  type: string
+  monthlyPay?: number
+  email: string
+}) {
+  const employmentType: Record<string, string> = {
+    'Full-time': 'FULL_TIME',
+    'Part-time': 'PART_TIME',
+    Contract: 'CONTRACTOR',
+    Internship: 'INTERN',
+  }
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    url: `${SITE_URL}/careers/${r.slug}`,
+    title: r.title,
+    description: r.description,
+    datePosted: r.datePosted,
+    employmentType: employmentType[r.type] ?? 'OTHER',
+    hiringOrganization: { '@id': ORG_ID, '@type': 'Organization', name: SITE_NAME, sameAs: SITE_URL },
+    jobLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: organizationSchema.address.streetAddress,
+        addressLocality: 'Bengaluru',
+        addressRegion: 'Karnataka',
+        postalCode: '560043',
+        addressCountry: 'IN',
+      },
+    },
+    ...(r.monthlyPay && {
+      baseSalary: {
+        '@type': 'MonetaryAmount',
+        currency: 'INR',
+        value: { '@type': 'QuantitativeValue', value: r.monthlyPay, unitText: 'MONTH' },
+      },
+    }),
+    applicationContact: { '@type': 'ContactPoint', email: r.email },
+    directApply: false,
+  }
+}
+
 export function serviceSchema(s: { slug: string; name: string; description: string; audience?: string }) {
   return {
     '@context': 'https://schema.org',
