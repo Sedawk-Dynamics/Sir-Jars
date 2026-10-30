@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { articles, capabilities } from '@/lib/content'
+import { articles, capabilities, careers } from '@/lib/content'
 import { legalOrder } from '@/lib/legal'
 import { SITE_URL } from '@/lib/seo'
 
@@ -31,6 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/insights/${a.slug}`,
       lastModified: new Date(a.isoDate),
       changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    })),
+    ...careers.roles.map((r) => ({
+      url: `${SITE_URL}/careers/${r.slug}`,
+      lastModified: new Date(r.datePosted),
+      changeFrequency: 'weekly' as const,
       priority: 0.6,
     })),
   ]
