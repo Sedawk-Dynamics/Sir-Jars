@@ -72,11 +72,11 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   formatDetection: { telephone: false, email: false, address: false },
-  // Google Search Console: set GOOGLE_SITE_VERIFICATION to the token from the
-  // "HTML tag" method (or verify by DNS instead and leave it unset).
-  ...(process.env.GOOGLE_SITE_VERIFICATION && {
-    verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
-  }),
+  // Google Search Console "HTML tag" token. GOOGLE_SITE_VERIFICATION overrides
+  // it, e.g. to verify a second property. Remove only after switching to DNS.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || 'gLFsJoX1a20dA-GXA4Tnykr3MHDYZswQzZWKZc9yzDE',
+  },
 }
 
 export const viewport: Viewport = {
