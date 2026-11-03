@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { org } from '@/lib/content'
 
-export const SITE_URL = 'https://sixjarsglobal.com'
+// Must match the primary domain in Vercel: the apex 308-redirects to www, and
+// canonicals or sitemap URLs that redirect are dropped from Google's index.
+export const SITE_URL = 'https://www.sixjarsglobal.com'
 export const SITE_NAME = 'Six Jars Global'
 export const LOCALE = 'en_IN'
 

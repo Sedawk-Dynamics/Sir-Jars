@@ -7,7 +7,7 @@ import PageHeader, { verticalVisuals } from '@/components/page-header'
 import BackToHome from '@/components/back-to-home'
 import JsonLd from '@/components/json-ld'
 import { articles, getArticle, readTime } from '@/lib/content'
-import { articleSchema, pageMetadata } from '@/lib/seo'
+import { SITE_NAME, articleSchema, pageMetadata } from '@/lib/seo'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!article) return {}
   return pageMetadata({
     title: article.title,
+    // Google truncates titles past ~60 characters; long headlines drop the brand suffix.
+    absoluteTitle: `${article.title} | ${SITE_NAME}`.length > 60,
     description: article.excerpt,
     path: `/insights/${article.slug}`,
     type: 'article',

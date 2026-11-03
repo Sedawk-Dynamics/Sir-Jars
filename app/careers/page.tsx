@@ -158,15 +158,17 @@ export default function CareersPage() {
       </section>
 
       {/* ── Open roles ───────────────────────────────────────────────── */}
+      {/* The page's one dark band sits here, not in the last section, so it
+          never runs into the plum footer. The white role cards keep full contrast. */}
       <section
         id="open-roles"
-        className="py-8 lg:py-10"
-        style={{ background: 'var(--color-ivory)' }}
+        className="on-dark patterned py-8 lg:py-10"
+        style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <h2
             className="font-extrabold tracking-tight leading-tight"
-            style={{ color: 'var(--color-plum)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
+            style={{ color: 'var(--color-ivory)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
           >
             Open roles
           </h2>
@@ -276,18 +278,18 @@ export default function CareersPage() {
       </section>
 
       {/* ── How we hire ──────────────────────────────────────────────── */}
-      <section className="on-dark patterned py-8 lg:py-10" style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}>
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-parchment)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
               className="text-xs font-bold tracking-[0.18em] uppercase"
-              style={{ color: 'var(--color-gold)' }}
+              style={{ color: 'var(--color-wine)' }}
             >
               How we hire
             </p>
             <h2
               className="mt-3 font-extrabold tracking-tight leading-tight"
-              style={{ color: 'var(--color-ivory)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
+              style={{ color: 'var(--color-plum)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
             >
               The same accountability we promise clients
             </h2>
@@ -298,22 +300,19 @@ export default function CareersPage() {
               <li
                 key={step.title}
                 className="rounded-2xl p-6"
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                }}
+                style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
               >
                 <span
                   aria-hidden="true"
                   className="text-xs font-bold tracking-[0.16em]"
-                  style={{ color: 'var(--color-gold)' }}
+                  style={{ color: 'var(--color-gold-deep)' }}
                 >
                   STEP {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-2 text-base font-bold" style={{ color: 'var(--color-ivory)' }}>
+                <h3 className="mt-2 text-base font-bold" style={{ color: 'var(--color-plum)' }}>
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.66)' }}>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: 'rgba(0,0,0,0.72)' }}>
                   {step.detail}
                 </p>
               </li>
@@ -324,7 +323,7 @@ export default function CareersPage() {
             <a
               href={applyHref(careers.subject)}
               className="inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"
-              style={{ minHeight: 56, background: 'var(--color-gold)', color: '#000000' }}
+              style={{ minHeight: 56, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
             >
               Apply now
               <ArrowRight size={18} aria-hidden="true" />
@@ -334,17 +333,16 @@ export default function CareersPage() {
               className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold"
               style={{
                 minHeight: 56,
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.28)',
-                color: 'var(--color-ivory)',
+                border: '1px solid rgba(107,21,63,0.3)',
+                color: 'var(--color-wine)',
               }}
             >
               Read about who we are
             </Link>
           </div>
-          <p className="mt-4 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
+          <p className="mt-4 text-sm" style={{ color: 'rgba(0,0,0,0.68)' }}>
             Applications go to{' '}
-            <a href={applyHref(careers.subject)} className="underline underline-offset-2" style={{ color: 'var(--color-gold)' }}>
+            <a href={applyHref(careers.subject)} className="underline underline-offset-2 font-semibold" style={{ color: 'var(--color-wine)' }}>
               {careers.email}
             </a>
             .
