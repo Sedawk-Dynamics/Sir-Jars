@@ -65,12 +65,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '16x16 32x32 48x48' },
+      // /favicon.ico is linked automatically from app/favicon.ico.
       // Google's search-result favicon wants a multiple of 48px.
       { url: '/icon-48.png', sizes: '48x48', type: 'image/png' },
       { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico',
     apple: { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
   },
   formatDetection: { telephone: false, email: false, address: false },
