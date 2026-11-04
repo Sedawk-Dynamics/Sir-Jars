@@ -27,17 +27,22 @@ const CLIP_RIGHT_WING =
 const CLIP_BODY =
   'polygon(49% 0, 60% 0, 60.4% 31.4%, 63.6% 36.1%, 62% 36.8%, 58.4% 40.4%, 57.9% 45.7%, 58.9% 57.5%, 100% 59.3%, 100% 100%, 0 100%, 0 57.1%, 42.9% 56.4%, 47.5% 45.7%, 49.1% 38.6%)'
 
+// The wrapper carries the motion and the glow; the image inside carries the
+// clip. Kept apart because clip-path applies after filter and would cut the
+// glow off at the polygon's edge.
 function Layer({ clip, className, width }: { clip: string; className?: string; width: number }) {
   return (
-    <Image
-      src={DOVE_SRC}
-      alt=""
-      width={DOVE_W}
-      height={DOVE_H}
-      sizes={`${width}px`}
-      className={`absolute inset-0 w-full h-full ${className ?? ''}`}
-      style={{ clipPath: clip, WebkitClipPath: clip }}
-    />
+    <span className={`dove-layer absolute inset-0 block ${className ?? ''}`}>
+      <Image
+        src={DOVE_SRC}
+        alt=""
+        width={DOVE_W}
+        height={DOVE_H}
+        sizes={`${width}px`}
+        className="absolute inset-0 w-full h-full"
+        style={{ clipPath: clip, WebkitClipPath: clip }}
+      />
+    </span>
   )
 }
 

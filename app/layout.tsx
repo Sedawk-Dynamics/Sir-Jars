@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google'
 import SiteHeader from '@/components/site-header'
 import SiteFooter from '@/components/site-footer'
 import CookieManager from '@/components/cookie-manager'
-import ScrollBattery from '@/components/scroll-battery'
+import ScrollBattery from '@/components/scroll-battery-lazy'
 import JsonLd from '@/components/json-ld'
 import { LOCALE, SITE_NAME, SITE_URL, organizationSchema, websiteSchema } from '@/lib/seo'
 import './globals.css'
@@ -112,6 +112,16 @@ try {
 } catch (e) {}
 gtag('js', new Date());
 gtag('config', '${GA_ID}');
+// The library (~150 KB) is fetched once the page has loaded so it never
+// competes with first render; hits queued above are sent when it arrives.
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
+    document.head.appendChild(s);
+  }, 0);
+});
 `
 
 export default function RootLayout({
@@ -122,7 +132,6 @@ export default function RootLayout({
       <head>
         {/* Google tag (gtag.js) — kept first in <head>, as Google asks. */}
         <script dangerouslySetInnerHTML={{ __html: gtagInit }} />
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
       </head>
       <body className="antialiased font-sans">
         <JsonLd data={[organizationSchema, websiteSchema]} />

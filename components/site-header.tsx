@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
 /**
@@ -44,22 +43,38 @@ export default function SiteHeader() {
   const pathname = usePathname()
   const menuButtonRef = useRef<HTMLButtonElement>(null)
 
-  const { scrollY } = useScroll()
   const lastY = useRef(0)
+  const mobileOpenRef = useRef(mobileOpen)
+  mobileOpenRef.current = mobileOpen
 
-  // Hide on the way down, reveal on the way up.
-  useMotionValueEvent(scrollY, 'change', (y) => {
-    const previous = lastY.current
-    lastY.current = y
-    setScrolled(y > 24)
-    if (mobileOpen) return
-    if (y < 120) {
-      setHidden(false)
-      return
+  // Hide on the way down, reveal on the way up. A passive listener batched to
+  // one read per frame; plain CSS does the slide (see .site-header).
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const y = window.scrollY
+      const previous = lastY.current
+      lastY.current = y
+      setScrolled(y > 24)
+      if (mobileOpenRef.current) return
+      if (y < 120) {
+        setHidden(false)
+        return
+      }
+      if (y > previous + 6) setHidden(true)
+      else if (y < previous - 6) setHidden(false)
     }
-    if (y > previous + 6) setHidden(true)
-    else if (y < previous - 6) setHidden(false)
-  })
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
 
   // A route change closes the menu, including on back/forward.
   useEffect(() => {
@@ -100,11 +115,9 @@ export default function SiteHeader() {
         Skip to main content
       </a>
 
-      <motion.header
-        className="fixed top-0 left-0 right-0 z-50 glass-ivory"
-        initial={false}
-        animate={{ y: hidden ? '-110%' : '0%' }}
-        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+      <header
+        className="site-header fixed top-0 left-0 right-0 z-50 glass-ivory"
+        data-hidden={hidden}
         style={{
           height: 'var(--header-h)',
           borderBottom: `1px solid ${scrolled ? 'rgba(58,13,39,0.14)' : 'rgba(228,217,206,0.7)'}`,
@@ -160,51 +173,45 @@ export default function SiteHeader() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 lg:hidden overflow-y-auto"
-            style={{
-              background: 'var(--color-ivory)',
-              paddingTop: 'calc(var(--header-h) + 1rem)',
-              paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)',
-            }}
-          >
-            <nav className="flex flex-col px-6 gap-1" aria-label="Mobile">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={isActive(link.href) ? 'page' : undefined}
-                  className="flex items-center text-xl font-semibold rounded-xl px-4"
-                  style={{
-                    minHeight: 56,
-                    ...linkStyle(isActive(link.href)),
-                    borderBottom: '1px solid rgba(228,217,206,0.9)',
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-
+      {mobileOpen && (
+        <div
+          id="mobile-menu"
+          className="mobile-menu fixed inset-0 z-40 lg:hidden overflow-y-auto"
+          style={{
+            background: 'var(--color-ivory)',
+            paddingTop: 'calc(var(--header-h) + 1rem)',
+            paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 2rem)',
+          }}
+        >
+          <nav className="flex flex-col px-6 gap-1" aria-label="Mobile">
+            {navLinks.map((link) => (
               <Link
-                href={CTA.href}
-                className="mt-6 flex items-center justify-center text-center px-6 rounded-full text-base font-bold"
-                style={{ minHeight: 56, background: 'var(--color-wine)', color: '#FFFFFF' }}
+                key={link.href}
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                className="flex items-center text-xl font-semibold rounded-xl px-4"
+                style={{
+                  minHeight: 56,
+                  ...linkStyle(isActive(link.href)),
+                  borderBottom: '1px solid rgba(228,217,206,0.9)',
+                }}
               >
-                {CTA.label}
+                {link.label}
               </Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+
+            <Link
+              href={CTA.href}
+              className="mt-6 flex items-center justify-center text-center px-6 rounded-full text-base font-bold"
+              style={{ minHeight: 56, background: 'var(--color-wine)', color: '#FFFFFF' }}
+            >
+              {CTA.label}
+            </Link>
+          </nav>
+        </div>
+      )}
 
       {/* Spacer so page content never starts underneath the fixed header. */}
       <div aria-hidden="true" style={{ height: 'var(--header-h)' }} />

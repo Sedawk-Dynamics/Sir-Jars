@@ -159,6 +159,20 @@
   }
 }
 
+/* The header slides away on scroll-down and back on scroll-up. */
+.site-header {
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.site-header[data-hidden="true"] {
+  transform: translateY(-110%);
+}
+@keyframes menu-in {
+  from { opacity: 0; }
+}
+.mobile-menu {
+  animation: menu-in 0.2s ease-out;
+}
+
 /* Warm ivory glass — for the sticky header only. */
 .glass-ivory {
   background: rgba(255, 255, 255, 0.92);
@@ -357,7 +371,10 @@ html {
   animation-duration: 1.15s;
 }
 
-.dove-soft-glow {
+/* The glow sits on each clipped layer, not on the flapping container: a
+   filter over moving children is re-rendered every frame, while a filter on
+   a layer that only moves is drawn once and then just composited. */
+.dove-soft-glow .dove-layer {
   filter: drop-shadow(0 0 10px rgba(241,181,59,0.35)) drop-shadow(0 6px 10px rgba(20,3,10,0.35));
 }
 
