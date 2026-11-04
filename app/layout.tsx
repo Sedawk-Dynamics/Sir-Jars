@@ -88,11 +88,41 @@ export const viewport: Viewport = {
   maximumScale: 5,
 }
 
+const GA_ID = 'G-109E92XBB8'
+
+// Google Analytics with Consent Mode v2. Everything starts denied; a visitor's
+// stored choice is applied before the tag loads so returning visitors who
+// accepted are measured from the first hit. CookieManager sends updates.
+const gtagInit = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+  analytics_storage: 'denied', wait_for_update: 500
+});
+try {
+  var c = JSON.parse(localStorage.getItem('sjg-cookie-consent-v1') || 'null');
+  if (c) gtag('consent', 'update', {
+    analytics_storage: c.analytics ? 'granted' : 'denied',
+    ad_storage: c.marketing ? 'granted' : 'denied',
+    ad_user_data: c.marketing ? 'granted' : 'denied',
+    ad_personalization: c.marketing ? 'granted' : 'denied'
+  });
+} catch (e) {}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');
+`
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-IN" className={`${manrope.variable} ${cormorant.variable}`}>
+      <head>
+        {/* Google tag (gtag.js) — kept first in <head>, as Google asks. */}
+        <script dangerouslySetInnerHTML={{ __html: gtagInit }} />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+      </head>
       <body className="antialiased font-sans">
         <JsonLd data={[organizationSchema, websiteSchema]} />
         <SiteHeader />

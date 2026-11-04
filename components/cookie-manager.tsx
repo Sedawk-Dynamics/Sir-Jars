@@ -63,6 +63,20 @@ function saveChoice(choice: Choice) {
   document.cookie = `${STORAGE_KEY}=${value}; Max-Age=${60 * 60 * 24 * 180}; Path=/; SameSite=Lax${
     location.protocol === 'https:' ? '; Secure' : ''
   }`
+  updateGoogleConsent(choice)
+}
+
+/** Passes the choice to Google Consent Mode (the tag is set up in app/layout.tsx). */
+function updateGoogleConsent(choice: Choice) {
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
+  if (!gtag) return
+  const ads = choice.marketing ? 'granted' : 'denied'
+  gtag('consent', 'update', {
+    analytics_storage: choice.analytics ? 'granted' : 'denied',
+    ad_storage: ads,
+    ad_user_data: ads,
+    ad_personalization: ads,
+  })
 }
 
 /** Opens the preferences dialog from anywhere (e.g. the footer link). */
