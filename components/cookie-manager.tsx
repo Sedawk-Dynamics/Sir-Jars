@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { X } from 'lucide-react'
 
@@ -20,6 +21,7 @@ type Choice = { analytics: boolean; functional: boolean; marketing: boolean }
 
 const STORAGE_KEY = 'sjg-cookie-consent-v1'
 const OPEN_EVENT = 'sjg:open-cookie-settings'
+const GA_ID = 'G-109E92XBB8'
 
 const categories: { key: keyof Choice | 'essential'; name: string; desc: string }[] = [
   {
@@ -30,7 +32,7 @@ const categories: { key: keyof Choice | 'essential'; name: string; desc: string 
   {
     key: 'analytics',
     name: 'Analytics',
-    desc: 'Anonymous page-view measurement that helps us improve the site.',
+    desc: 'Google Analytics (cookies _ga and _ga_*, kept for up to 2 years) and Vercel Analytics measure page use so we can improve the site.',
   },
   {
     key: 'functional',
@@ -79,6 +81,23 @@ function updateGoogleConsent(choice: Choice) {
   })
 }
 
+/**
+ * A loaded script cannot be unloaded, so withdrawing consent uses Google's
+ * opt-out flag, which stops further hits, and removes the cookies already set.
+ */
+function setGoogleAnalyticsAllowed(allowed: boolean) {
+  ;(window as unknown as Record<string, boolean>)[`ga-disable-${GA_ID}`] = !allowed
+  if (allowed) return
+  const domain = location.hostname.replace(/^www\./, '')
+  for (const cookie of document.cookie.split('; ')) {
+    const name = cookie.split('=')[0]
+    if (name === '_ga' || name.startsWith('_ga_')) {
+      document.cookie = `${name}=; Max-Age=0; Path=/; Domain=.${domain}`
+      document.cookie = `${name}=; Max-Age=0; Path=/`
+    }
+  }
+}
+
 /** Opens the preferences dialog from anywhere (e.g. the footer link). */
 export function openCookieSettings() {
   window.dispatchEvent(new Event(OPEN_EVENT))
@@ -113,6 +132,10 @@ export default function CookieManager() {
   }, [])
 
   useEffect(() => {
+    if (choice) setGoogleAnalyticsAllowed(choice.analytics)
+  }, [choice])
+
+  useEffect(() => {
     const dialog = dialogRef.current
     if (!dialog) return
     if (panelOpen && !dialog.open) dialog.showModal()
@@ -131,7 +154,22 @@ export default function CookieManager() {
 
   return (
     <>
-      {choice?.analytics && <Analytics />}
+      {choice?.analytics && (
+        <>
+          <Analytics />
+          {/* Google tag (gtag.js). GA4 counts client-side navigations itself. */}
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+          </Script>
+        </>
+      )}
 
       {bannerOpen && !panelOpen && (
         <section

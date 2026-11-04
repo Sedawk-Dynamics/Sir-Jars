@@ -1081,6 +1081,19 @@ export type Role = {
   location: string
   type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship'
   summary: string
+  /** ISO date the role was published; feeds the JobPosting datePosted. */
+  datePosted: string
+  /** Monthly pay in INR, when the posting states one. */
+  monthlyPay?: number
+  /** Subject line the posting asks applicants to use. */
+  applySubject: string
+  /** Key facts shown as a grid at the top of the role page. */
+  facts: { label: string; value: string }[]
+  about: string[]
+  responsibilities: { area: string; detail: string }[]
+  requirements: { intro: string; items: string[]; bonus: string[] }
+  benefits: string[]
+  howToApply: string[]
 }
 
 /**
@@ -1091,10 +1104,87 @@ export type Role = {
  * To publish a vacancy, add an entry to `roles` — nothing else changes.
  */
 export const careers = {
-  /** Applications go to the main inbox, tagged so they can be routed. */
-  email: org.email,
+  /** Dedicated hiring inbox, as named in published role descriptions. */
+  email: 'careers@sixjarsglobal.com',
   subject: 'Careers application',
-  roles: [] as Role[],
+  roles: [
+    {
+      slug: 'software-engineer-intern',
+      title: 'Software Engineer Intern',
+      capability: 'digital-platforms',
+      location: 'Bengaluru — on-site, with some remote flexibility',
+      type: 'Internship',
+      summary:
+        'Write code for a real production codebase, research AI tools we are evaluating for production use, and help deploy and maintain live applications.',
+      datePosted: '2026-10-30',
+      monthlyPay: 10000,
+      applySubject: 'SE Intern',
+      facts: [
+        { label: 'Duration', value: '4–6 months (flexible with your academic calendar)' },
+        { label: 'Stipend', value: '₹10,000 per month' },
+        { label: 'Location', value: 'Bengaluru — on-site, with some remote flexibility' },
+        { label: 'Start', value: 'Rolling intake — no fixed deadline' },
+        { label: 'Openings', value: '1–2' },
+        { label: 'Reports to', value: 'Senior engineer / project lead (named before you start)' },
+      ],
+      about: [
+        'We build and manage digital platforms for clients in publishing, media, and operations — and we are hiring a software engineer intern to work directly on those systems. This is not a training-module internship. You will write code that goes into a real codebase, research AI tools we are evaluating for production use, and help deploy and maintain live applications.',
+        'Your supervisor will be named before you start. Every task will have a brief. You will know exactly what done looks like before you begin.',
+      ],
+      responsibilities: [
+        {
+          area: 'Frontend',
+          detail:
+            'Build and maintain web interfaces using React and Next.js — from UI components to API integration.',
+        },
+        {
+          area: 'Backend',
+          detail:
+            'Write backend logic in Node.js or Python, build REST endpoints, query databases, and write unit tests.',
+        },
+        {
+          area: 'Cloud / hosting',
+          detail:
+            'Deploy to cloud environments (AWS), manage environment config, read logs, and help debug server-side issues.',
+        },
+        {
+          area: 'AI research',
+          detail:
+            'Research and prototype AI integrations — LLM APIs, automation workflows — and document honestly what is production-ready and what is not.',
+        },
+      ],
+      requirements: {
+        intro:
+          "Final-year student or recent graduate in CS, IT, electronics, or a related field. We don't expect you to know everything. We do expect you to be able to figure things out.",
+        items: [
+          'Working knowledge of JavaScript / TypeScript, Python, or Node.js — even from coursework or side projects.',
+          'Enough HTML and CSS to build a web page without a tutorial.',
+          'Git basics — commit, branch, pull request.',
+          'You can read documentation and get unstuck on your own. We will help, but not handhold every step.',
+          'Clear written English — you will document what you build.',
+        ],
+        bonus: [
+          'Built anything with React, Next.js, or a backend framework (Express, FastAPI, Django).',
+          'Deployed an app to Vercel, Railway, Render, AWS — anywhere.',
+          'Used an AI API (OpenAI, Anthropic, Hugging Face) in any capacity.',
+          'A GitHub profile, a project, a hackathon submission — something to show us.',
+        ],
+      },
+      benefits: [
+        'Access to a real production codebase and real client projects — not sandbox exercises.',
+        'A named supervisor, task briefs for every piece of work, and code reviews on everything you ship.',
+        'Hands-on experience with React / Next.js, Node.js or Python, SQL, and cloud deployment.',
+        'Practical AI integration work — building and evaluating LLM-based features.',
+        'A reference letter and, for strong performers, a conversation about full-time or extended engagement.',
+        "Visibility into how a consultancy runs — you'll sit inside a small team managing multiple live client workstreams.",
+      ],
+      howToApply: [
+        'Send your CV and a brief note on what you have built and what you want to work on.',
+        'Include a link to a GitHub profile, project, or any work sample — optional but strongly preferred.',
+        'We will respond within a few working days with either a short call invite or a take-home task (under two hours — paid if it runs over).',
+      ],
+    },
+  ] as Role[],
   reasons: [
     {
       title: 'Work that outlasts the engagement',
@@ -1135,4 +1225,8 @@ export const careers = {
       detail: 'A clear answer either way, with the reasoning, and a written offer if it is a yes.',
     },
   ],
+}
+
+export function getRole(slug: string) {
+  return careers.roles.find((r) => r.slug === slug)
 }

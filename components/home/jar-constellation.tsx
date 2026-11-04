@@ -157,7 +157,8 @@ export default function JarConstellation({ jars = 'logo' }: { jars?: JarStyle })
               <Link
                 href={`/capabilities/${j.slug}`}
                 className="jar-link group block relative rounded-2xl"
-                aria-label={`${j.fullName} — view capability`}
+                // Starts with the visible belly text so voice control ("click Media…") matches (WCAG 2.5.3).
+                aria-label={`${j.label} — view capability`}
               >
                 {/* Ground shadow squashes as the jar rocks. */}
                 <span
