@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { X } from 'lucide-react'
 
@@ -154,22 +153,8 @@ export default function CookieManager() {
 
   return (
     <>
-      {choice?.analytics && (
-        <>
-          <Analytics />
-          {/* Google tag (gtag.js). GA4 counts client-side navigations itself. */}
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');`}
-          </Script>
-        </>
-      )}
+      {/* The Google tag itself loads in app/layout.tsx under Consent Mode. */}
+      {choice?.analytics && <Analytics />}
 
       {bannerOpen && !panelOpen && (
         <section
