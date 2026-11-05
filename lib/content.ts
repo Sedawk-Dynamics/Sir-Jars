@@ -1078,9 +1078,21 @@ export type Role = {
   title: string
   /** Must match a capability slug, so the role files under a real discipline. */
   capability: string
+  /** Work-area label for the careers card, e.g. "Digital Platforms". Falls back to the capability's short name. */
+  area?: string
   location: string
+  /** Work mode shown after the location, e.g. "Remote". Omit when the location line already states it. */
+  mode?: string
+  /** Confirmed start, e.g. "Starts Jan 2027". Omit until it is confirmed; the card leaves it out. */
+  start?: string
+  /** Deadline line on the careers card. Must never be empty. */
+  deadline: string
+  /** URL of the full posting; defaults to `/careers/{slug}` when omitted. */
+  detailsUrl?: string
   type: 'Full-time' | 'Part-time' | 'Contract' | 'Internship'
   summary: string
+  /** One-line version of the summary for the careers page card; falls back to `summary`. */
+  cardSummary?: string
   /** ISO date the role was published; feeds the JobPosting datePosted. */
   datePosted: string
   /** Monthly pay in INR, when the posting states one. */
@@ -1112,8 +1124,13 @@ export const careers = {
       slug: 'software-engineer-intern',
       title: 'Software Engineer Intern',
       capability: 'digital-platforms',
-      location: 'Bengaluru — on-site, with some remote flexibility',
+      area: 'Digital Platforms',
+      location: 'Bengaluru',
+      mode: 'on-site, with some remote flexibility',
+      deadline: 'Rolling — apply early',
+      detailsUrl: '/careers/software-engineer-intern',
       type: 'Internship',
+      cardSummary: 'Write production code, evaluate AI tools, and support a live client platform.',
       summary:
         'Write code for a real production codebase, research AI tools we are evaluating for production use, and help deploy and maintain live applications.',
       datePosted: '2026-10-30',

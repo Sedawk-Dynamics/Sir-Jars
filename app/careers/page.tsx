@@ -15,13 +15,12 @@ import {
 import PageHeader from '@/components/page-header'
 import BackToHome from '@/components/back-to-home'
 import { capabilities, careers } from '@/lib/content'
-import { patternVars } from '@/lib/patterns'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Careers — join our Bengaluru team',
   description:
-    'Work across six connected capabilities on complex, high-stakes delivery, with human judgment in the loop and named ownership of every piece of work.',
+    'Six Jars Global is hiring a Software Engineer Intern in Bengaluru. View the role and apply to careers@sixjarsglobal.com.',
   path: '/careers',
 })
 
@@ -50,10 +49,283 @@ export default function CareersPage() {
         breadcrumbs={[{ label: 'Careers', href: '/careers' }]}
         image={null}
         pattern="dots"
+        note="We currently have one open role. See it below."
+        action={
+          <a
+            href="#open-roles"
+            className="inline-flex items-center gap-2 text-base font-bold underline underline-offset-4"
+            style={{ color: 'var(--color-gold)' }}
+          >
+            See open roles ↓
+          </a>
+        }
       />
 
-      {/* ── Why work here ─────────────────────────────────────────────── */}
+      {/* ── Open roles ───────────────────────────────────────────────── */}
+      {/* Distinct light band with a plum left border so the listings read
+          clearly against the sections around them. */}
+      <section
+        id="open-roles"
+        className="py-8 lg:py-10"
+        style={{
+          background: 'var(--color-parchment)',
+          borderLeft: '4px solid var(--color-plum)',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <h2
+            className="font-extrabold tracking-tight leading-tight"
+            style={{ color: 'var(--color-plum)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
+          >
+            Open roles
+          </h2>
+
+          {roles.length > 0 ? (
+            <ul className="mt-8 space-y-4">
+              {roles.map((role) => {
+                const discipline = capabilities.find((c) => c.slug === role.capability)
+                const detailsHref = role.detailsUrl ?? `/careers/${role.slug}`
+                const detailsIsExternal = detailsHref.startsWith('http')
+                return (
+                  <li
+                    key={role.slug}
+                    className="rounded-2xl p-6"
+                    style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                      <div className="min-w-0">
+                        <p
+                          className="text-[11px] font-bold tracking-[0.16em] uppercase"
+                          style={{ color: 'var(--color-wine)' }}
+                        >
+                          {role.area ?? discipline?.shortName ?? 'Six Jars Global'} · {role.type}
+                        </p>
+                        <h3 className="mt-1.5 text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
+                          {role.title}
+                        </h3>
+                        <p className="mt-2 text-base leading-relaxed" style={{ color: 'rgba(0,0,0,0.72)' }}>
+                          {role.cardSummary ?? role.summary}
+                        </p>
+                        <p
+                          className="mt-3 inline-flex items-center gap-1.5 text-base font-semibold"
+                          style={{ color: 'rgba(0,0,0,0.65)' }}
+                        >
+                          <MapPin size={16} aria-hidden="true" />
+                          {role.location}
+                          {role.mode ? ` — ${role.mode}` : ''}
+                          {role.start ? ` · ${role.start}` : ''}
+                        </p>
+                        <p className="mt-2 text-base font-semibold" style={{ color: 'rgba(0,0,0,0.65)' }}>
+                          {role.deadline}
+                        </p>
+                      </div>
+                      <div className="shrink-0 flex flex-col sm:flex-row gap-2">
+                        <a
+                          href={applyHref(role.applySubject)}
+                          className="group inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-bold transition-transform duration-200 hover:-translate-y-0.5"
+                          style={{ minHeight: 48, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
+                        >
+                          <Send size={15} aria-hidden="true" />
+                          Apply — {careers.email}
+                          <span className="sr-only"> for {role.title}</span>
+                        </a>
+                        {detailsIsExternal ? (
+                          <a
+                            href={detailsHref}
+                            className="inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-semibold"
+                            style={{
+                              minHeight: 48,
+                              border: '1px solid rgba(107,21,63,0.3)',
+                              color: 'var(--color-wine)',
+                            }}
+                          >
+                            Full role details ↗
+                          </a>
+                        ) : (
+                          <Link
+                            href={detailsHref}
+                            className="inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-semibold"
+                            style={{
+                              minHeight: 48,
+                              border: '1px solid rgba(107,21,63,0.3)',
+                              color: 'var(--color-wine)',
+                            }}
+                          >
+                            Full role details ↗
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          ) : (
+            // No vacancy is advertised that does not exist. An honest empty
+            // state with a real next step beats a stale or invented listing.
+            <div
+              className="mt-8 rounded-2xl p-7 lg:p-9 flex flex-col md:flex-row md:items-center justify-between gap-6"
+              style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
+            >
+              <div className="flex gap-4">
+                <span
+                  aria-hidden="true"
+                  className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ background: 'rgba(239,184,60,0.18)', color: 'var(--color-gold-deep)' }}
+                >
+                  <Briefcase size={22} />
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
+                    No open roles right now
+                  </h3>
+                  <p
+                    className="mt-1.5 text-base leading-relaxed max-w-xl"
+                    style={{ color: 'rgba(0,0,0,0.72)' }}
+                  >
+                    We still want to hear from people who fit how we work. Send a general
+                    application and we will keep it on file for the next opening in your
+                    discipline.
+                  </p>
+                </div>
+              </div>
+              <a
+                href={applyHref(careers.subject)}
+                className="shrink-0 inline-flex items-center justify-center gap-2 px-7 rounded-full text-sm font-bold"
+                style={{ minHeight: 52, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
+              >
+                <Send size={16} aria-hidden="true" />
+                Send a general application
+              </a>
+            </div>
+          )}
+
+          <p className="mt-6 text-base leading-relaxed max-w-3xl" style={{ color: 'rgba(0,0,0,0.72)' }}>
+            No role listed here matches what you do? Send a speculative application to{' '}
+            <a
+              href={applyHref('Speculative application')}
+              className="underline underline-offset-2 font-semibold"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              {careers.email}
+            </a>{' '}
+            — describe the capability area you want to work in and attach your CV or portfolio. We
+            keep strong applications on file.
+          </p>
+          <p className="mt-4">
+            <a
+              href={applyHref('Speculative application')}
+              className="text-base font-bold underline underline-offset-4"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              Send a speculative application ↗
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* ── How we hire ──────────────────────────────────────────────── */}
       <section className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <p
+              className="text-xs font-bold tracking-[0.18em] uppercase"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              How we hire
+            </p>
+            <h2
+              className="mt-3 font-extrabold tracking-tight leading-tight"
+              style={{ color: 'var(--color-plum)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
+            >
+              The same accountability we promise clients
+            </h2>
+          </div>
+
+          <p className="mt-6 text-base leading-relaxed max-w-3xl" style={{ color: 'rgba(0,0,0,0.78)' }}>
+            Your first point of contact is Sreejith. Write to{' '}
+            <a
+              href={applyHref('Careers application')}
+              className="underline underline-offset-2 font-semibold"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              {careers.email}
+            </a>{' '}
+            with the role name in the subject line.
+          </p>
+
+          <ol className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {careers.process.map((step, i) => (
+              <li
+                key={step.title}
+                className="rounded-2xl p-6"
+                style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
+              >
+                <span
+                  aria-hidden="true"
+                  className="text-xs font-bold tracking-[0.16em]"
+                  style={{ color: 'var(--color-gold-deep)' }}
+                >
+                  STEP {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="mt-2 text-base font-bold" style={{ color: 'var(--color-plum)' }}>
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-base leading-relaxed" style={{ color: 'rgba(0,0,0,0.74)' }}>
+                  {step.detail}
+                </p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <a
+              href={applyHref('Careers application')}
+              className="inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"
+              style={{ minHeight: 56, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
+            >
+              Apply now
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+            <Link
+              href="/about"
+              className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold"
+              style={{
+                minHeight: 56,
+                border: '1px solid rgba(107,21,63,0.3)',
+                color: 'var(--color-wine)',
+              }}
+            >
+              Read about who we are
+            </Link>
+          </div>
+          <p className="mt-4 text-sm" style={{ color: 'rgba(0,0,0,0.68)' }}>
+            Send your CV or portfolio to{' '}
+            <a
+              href={applyHref('Careers application')}
+              className="underline underline-offset-2 font-semibold"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              {careers.email}
+            </a>
+            .
+          </p>
+          <p className="mt-4 text-sm" style={{ color: 'rgba(0,0,0,0.58)' }}>
+            For careers enquiries, write to{' '}
+            <a
+              href={applyHref('Careers application')}
+              className="underline underline-offset-2 font-semibold"
+              style={{ color: 'var(--color-wine)' }}
+            >
+              {careers.email}
+            </a>{' '}
+            — not our general inbox.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Why work here ─────────────────────────────────────────────── */}
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-parchment)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -100,7 +372,7 @@ export default function CareersPage() {
       </section>
 
       {/* ── Where you could work ─────────────────────────────────────── */}
-      <section className="py-8 lg:py-10" style={{ background: 'var(--color-parchment)' }}>
+      <section className="py-8 lg:py-10" style={{ background: 'var(--color-ivory)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <p
@@ -154,199 +426,6 @@ export default function CareersPage() {
               )
             })}
           </ul>
-        </div>
-      </section>
-
-      {/* ── Open roles ───────────────────────────────────────────────── */}
-      {/* The page's one dark band sits here, not in the last section, so it
-          never runs into the plum footer. The white role cards keep full contrast. */}
-      <section
-        id="open-roles"
-        className="on-dark patterned py-8 lg:py-10"
-        style={{ background: 'var(--color-plum)', ...patternVars('waves', 'rose') }}
-      >
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <h2
-            className="font-extrabold tracking-tight leading-tight"
-            style={{ color: 'var(--color-ivory)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
-          >
-            Open roles
-          </h2>
-
-          {roles.length > 0 ? (
-            <ul className="mt-8 space-y-4">
-              {roles.map((role) => {
-                const discipline = capabilities.find((c) => c.slug === role.capability)
-                return (
-                  <li
-                    key={role.slug}
-                    className="rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-5"
-                    style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
-                  >
-                    <div>
-                      <p
-                        className="text-[11px] font-bold tracking-[0.16em] uppercase"
-                        style={{ color: 'var(--color-wine)' }}
-                      >
-                        {discipline?.shortName ?? 'Six Jars Global'} · {role.type}
-                      </p>
-                      <h3 className="mt-1.5 text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
-                        {role.title}
-                      </h3>
-                      <p className="mt-1.5 text-sm leading-relaxed" style={{ color: 'rgba(0,0,0,0.72)' }}>
-                        {role.summary}
-                      </p>
-                      <p
-                        className="mt-2 inline-flex items-center gap-1.5 text-sm"
-                        style={{ color: 'rgba(0,0,0,0.65)' }}
-                      >
-                        <MapPin size={14} aria-hidden="true" />
-                        {role.location}
-                      </p>
-                    </div>
-                    <div className="shrink-0 flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2">
-                      <Link
-                        href={`/careers/${role.slug}`}
-                        className="group inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-bold"
-                        style={{ minHeight: 48, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
-                      >
-                        View role
-                        <span className="sr-only">: {role.title}</span>
-                        <ArrowRight
-                          size={16}
-                          aria-hidden="true"
-                          className="transition-transform duration-200 group-hover:translate-x-1"
-                        />
-                      </Link>
-                      <a
-                        href={applyHref(role.applySubject)}
-                        className="inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-semibold"
-                        style={{
-                          minHeight: 48,
-                          border: '1px solid rgba(107,21,63,0.3)',
-                          color: 'var(--color-wine)',
-                        }}
-                      >
-                        <Send size={15} aria-hidden="true" />
-                        Apply by email
-                      </a>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-          ) : (
-            // No vacancy is advertised that does not exist. An honest empty
-            // state with a real next step beats a stale or invented listing.
-            <div
-              className="mt-8 rounded-2xl p-7 lg:p-9 flex flex-col md:flex-row md:items-center justify-between gap-6"
-              style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
-            >
-              <div className="flex gap-4">
-                <span
-                  aria-hidden="true"
-                  className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ background: 'rgba(239,184,60,0.18)', color: 'var(--color-gold-deep)' }}
-                >
-                  <Briefcase size={22} />
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold" style={{ color: 'var(--color-plum)' }}>
-                    No open roles right now
-                  </h3>
-                  <p
-                    className="mt-1.5 text-base leading-relaxed max-w-xl"
-                    style={{ color: 'rgba(0,0,0,0.72)' }}
-                  >
-                    We still want to hear from people who fit how we work. Send a general
-                    application and we will keep it on file for the next opening in your
-                    discipline.
-                  </p>
-                </div>
-              </div>
-              <a
-                href={applyHref(careers.subject)}
-                className="shrink-0 inline-flex items-center justify-center gap-2 px-7 rounded-full text-sm font-bold"
-                style={{ minHeight: 52, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
-              >
-                <Send size={16} aria-hidden="true" />
-                Send a general application
-              </a>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── How we hire ──────────────────────────────────────────────── */}
-      <section className="py-8 lg:py-10" style={{ background: 'var(--color-parchment)' }}>
-        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <p
-              className="text-xs font-bold tracking-[0.18em] uppercase"
-              style={{ color: 'var(--color-wine)' }}
-            >
-              How we hire
-            </p>
-            <h2
-              className="mt-3 font-extrabold tracking-tight leading-tight"
-              style={{ color: 'var(--color-plum)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
-            >
-              The same accountability we promise clients
-            </h2>
-          </div>
-
-          <ol className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {careers.process.map((step, i) => (
-              <li
-                key={step.title}
-                className="rounded-2xl p-6"
-                style={{ background: '#FFFFFF', border: '1px solid var(--color-line)' }}
-              >
-                <span
-                  aria-hidden="true"
-                  className="text-xs font-bold tracking-[0.16em]"
-                  style={{ color: 'var(--color-gold-deep)' }}
-                >
-                  STEP {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-2 text-base font-bold" style={{ color: 'var(--color-plum)' }}>
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: 'rgba(0,0,0,0.72)' }}>
-                  {step.detail}
-                </p>
-              </li>
-            ))}
-          </ol>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <a
-              href={applyHref(careers.subject)}
-              className="inline-flex items-center justify-center gap-2 px-8 rounded-full text-base font-bold transition-transform duration-200 hover:-translate-y-0.5"
-              style={{ minHeight: 56, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
-            >
-              Apply now
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-            <Link
-              href="/about"
-              className="inline-flex items-center justify-center px-8 rounded-full text-base font-semibold"
-              style={{
-                minHeight: 56,
-                border: '1px solid rgba(107,21,63,0.3)',
-                color: 'var(--color-wine)',
-              }}
-            >
-              Read about who we are
-            </Link>
-          </div>
-          <p className="mt-4 text-sm" style={{ color: 'rgba(0,0,0,0.68)' }}>
-            Applications go to{' '}
-            <a href={applyHref(careers.subject)} className="underline underline-offset-2 font-semibold" style={{ color: 'var(--color-wine)' }}>
-              {careers.email}
-            </a>
-            .
-          </p>
         </div>
       </section>
 
