@@ -31,8 +31,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   })
 }
 
+const applyEmailFor = (role: Role) => role.applyEmail ?? careers.email
+
 const applyHref = (role: Role) =>
-  `mailto:${careers.email}?subject=${encodeURIComponent(role.applySubject)}`
+  `mailto:${applyEmailFor(role)}?subject=${encodeURIComponent(role.applySubject)}`
 
 /** The full posting as simple HTML, which is what JobPosting.description expects. */
 function postingHtml(role: Role) {
@@ -73,7 +75,8 @@ export default async function RolePage({ params }: Params) {
           datePosted: role.datePosted,
           type: role.type,
           monthlyPay: role.monthlyPay,
-          email: careers.email,
+          email: applyEmailFor(role),
+          hiringOrganization: role.hiringOrganization,
         })}
       />
       <PageHeader
@@ -249,11 +252,9 @@ export default async function RolePage({ params }: Params) {
               className="font-semibold underline underline-offset-2"
               style={{ color: 'var(--color-gold)' }}
             >
-              {careers.email}
+              {applyEmailFor(role)}
             </a>{' '}
-            with the subject line &ldquo;{role.applySubject}&rdquo; and attach your CV. Include a
-            link to something you have built — GitHub, a live project, anything that shows how you
-            think.
+            with the subject line &ldquo;{role.applySubject}&rdquo; and attach your CV.
           </p>
           <p className="mt-2 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
             We review applications on a rolling basis and respond to everyone.

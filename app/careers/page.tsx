@@ -20,7 +20,7 @@ import { pageMetadata } from '@/lib/seo'
 export const metadata: Metadata = pageMetadata({
   title: 'Careers — join our Bengaluru team',
   description:
-    'Six Jars Global is hiring a Software Engineer Intern in Bengaluru. View the role and apply to careers@sixjarsglobal.com.',
+    'Open roles at Six Jars Global, from a Bengaluru software engineering internship to remote marketing and digital publishing roles. View each role and apply by email.',
   path: '/careers',
 })
 
@@ -34,8 +34,8 @@ const ICONS: Record<string, typeof BookOpen> = {
   'cybersecurity-forensics': ShieldCheck,
 }
 
-const applyHref = (subject: string) =>
-  `mailto:${careers.email}?subject=${encodeURIComponent(subject)}`
+const applyHref = (subject: string, to: string = careers.email) =>
+  `mailto:${to}?subject=${encodeURIComponent(subject)}`
 
 export default function CareersPage() {
   const { roles } = careers
@@ -49,7 +49,7 @@ export default function CareersPage() {
         breadcrumbs={[{ label: 'Careers', href: '/careers' }]}
         image={null}
         pattern="dots"
-        note="We currently have one open role. See it below."
+        note={`We currently have ${careers.roles.length} open roles. See them below.`}
         action={
           <a
             href="#open-roles"
@@ -121,12 +121,12 @@ export default function CareersPage() {
                       </div>
                       <div className="shrink-0 flex flex-col sm:flex-row gap-2">
                         <a
-                          href={applyHref(role.applySubject)}
+                          href={applyHref(role.applySubject, role.applyEmail)}
                           className="group inline-flex items-center justify-center gap-2 px-6 rounded-full text-sm font-bold transition-transform duration-200 hover:-translate-y-0.5"
                           style={{ minHeight: 48, background: 'var(--color-wine)', color: 'var(--color-ivory)' }}
                         >
                           <Send size={15} aria-hidden="true" />
-                          Apply — {careers.email}
+                          Apply — {role.applyEmail ?? careers.email}
                           <span className="sr-only"> for {role.title}</span>
                         </a>
                         {detailsIsExternal ? (

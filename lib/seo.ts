@@ -182,6 +182,8 @@ export function jobPostingSchema(r: {
   type: string
   monthlyPay?: number
   email: string
+  /** Employer name when it is not Six Jars Global. */
+  hiringOrganization?: string
 }) {
   const employmentType: Record<string, string> = {
     'Full-time': 'FULL_TIME',
@@ -197,7 +199,9 @@ export function jobPostingSchema(r: {
     description: r.description,
     datePosted: r.datePosted,
     employmentType: employmentType[r.type] ?? 'OTHER',
-    hiringOrganization: { '@id': ORG_ID, '@type': 'Organization', name: SITE_NAME, sameAs: SITE_URL },
+    hiringOrganization: r.hiringOrganization
+      ? { '@type': 'Organization', name: r.hiringOrganization }
+      : { '@id': ORG_ID, '@type': 'Organization', name: SITE_NAME, sameAs: SITE_URL },
     jobLocation: {
       '@type': 'Place',
       address: {
