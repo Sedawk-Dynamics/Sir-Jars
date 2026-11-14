@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Manrope } from 'next/font/google'
+import localFont from 'next/font/local'
 import SiteHeader from '@/components/site-header'
 import SiteFooter from '@/components/site-footer'
 import CookieManager from '@/components/cookie-manager'
@@ -8,18 +8,21 @@ import JsonLd from '@/components/json-ld'
 import { LOCALE, SITE_NAME, SITE_URL, organizationSchema, websiteSchema } from '@/lib/seo'
 import './globals.css'
 
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+// Fonts are self-hosted in app/fonts so the build never fetches from Google.
+// Both are the Latin subset of the Google Fonts variable files (SIL OFL).
+const manrope = localFont({
+  src: './fonts/manrope-latin-variable.woff2',
+  weight: '400 800',
+  style: 'normal',
   variable: '--font-manrope',
   display: 'swap',
 })
 
-// Headings (brand guidelines, change guide 28 Sep 2026). Normal style only:
-// Turbopack's font loader cannot resolve Google's italic /l/font?kit= URLs.
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
+// Headings (brand guidelines, change guide 28 Sep 2026). Normal style only.
+const cormorant = localFont({
+  src: './fonts/cormorant-garamond-latin-variable.woff2',
+  weight: '500 700',
+  style: 'normal',
   variable: '--font-cormorant',
   display: 'swap',
 })
