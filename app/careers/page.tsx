@@ -38,7 +38,8 @@ const applyHref = (subject: string, to: string = careers.email) =>
   `mailto:${to}?subject=${encodeURIComponent(subject)}`
 
 export default function CareersPage() {
-  const { roles } = careers
+  // Newest posting first, so the oldest role sits at the bottom. ISO dates sort as text.
+  const roles = [...careers.roles].sort((a, b) => b.datePosted.localeCompare(a.datePosted))
 
   return (
     <>

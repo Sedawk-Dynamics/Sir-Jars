@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Analytics } from '@vercel/analytics/next'
 import { X } from 'lucide-react'
+
+/** Pages that are never measured: the enquiry page (mirrors app/layout.tsx). */
+const isNoAnalyticsPath = (path: string) => /^\/contact(\/|$)/.test(path)
 
 /**
  * Cookie manager.
@@ -78,6 +82,10 @@ function updateGoogleConsent(choice: Choice) {
     ad_user_data: ads,
     ad_personalization: ads,
   })
+  // Only now, after an explicit analytics opt-in, does the Google library load.
+  if (choice.analytics && !isNoAnalyticsPath(location.pathname)) {
+    ;(window as unknown as { __sjgLoadGa?: () => void }).__sjgLoadGa?.()
+  }
 }
 
 /**
@@ -116,6 +124,7 @@ export default function CookieManager() {
   const [panelOpen, setPanelOpen] = useState(false)
   const [draft, setDraft] = useState<Choice>({ analytics: false, functional: false, marketing: false })
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     const stored = readChoice()
@@ -154,7 +163,7 @@ export default function CookieManager() {
   return (
     <>
       {/* The Google tag itself loads in app/layout.tsx under Consent Mode. */}
-      {choice?.analytics && <Analytics />}
+      {choice?.analytics && !isNoAnalyticsPath(pathname) && <Analytics />}
 
       {bannerOpen && !panelOpen && (
         <section

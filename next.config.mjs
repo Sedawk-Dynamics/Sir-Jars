@@ -22,16 +22,38 @@ const nextConfig = {
     ]
   },
   async headers() {
+    const isDev = process.env.NODE_ENV !== 'production'
+    // Only what the site actually loads: Google Analytics (consent-gated),
+    // Vercel Analytics (same origin), the Web3Forms enquiry endpoint and the
+    // Google Maps embed on /contact. Scripts are 'unsafe-inline' because Next
+    // and the consent bootstrap emit inline scripts; a nonce-based policy would
+    // need per-request middleware and would turn off static rendering.
+    const csp = [
+      "default-src 'self'",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com`,
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://www.googletagmanager.com",
+      "font-src 'self' data:",
+      "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
+      'frame-src https://www.google.com',
+      "form-action 'self'",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      'upgrade-insecure-requests',
+    ].join('; ')
+
     return [
       {
         source: '/(.*)',
         headers: [
+          { key: 'Content-Security-Policy', value: csp },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000',
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'Permissions-Policy',

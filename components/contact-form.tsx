@@ -53,13 +53,10 @@ function StaffedState() {
  * an inline error tied by aria-describedby, and a live-region status message.
  *
  * Only name, email and goal are required. The enquiry is POSTed to
- * Web3Forms, which emails it to the inbox the access key is registered to.
- * Success is shown only once Web3Forms confirms delivery — a failure keeps
+ * /api/enquiry, which validates it and delivers it through Web3Forms.
+ * Success is shown only once delivery is confirmed — a failure keeps
  * every typed value and offers the email address instead.
  */
-
-// Public by design: the key can only send to its registered inbox.
-const WEB3FORMS_ACCESS_KEY = 'bdafb4f8-4bef-4106-901d-0598a9e3a927'
 
 type Errors = Partial<Record<'name' | 'email' | 'message', string>>
 
@@ -123,25 +120,23 @@ export default function ContactForm({
     }
     setStatus('submitting')
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      // Same-origin intake: the server validates, sanitises and delivers.
+      const res = await fetch('/api/enquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `New enquiry (${activePath.label}) from ${values.name.trim()}`,
-          from_name: 'Six Jars Global website',
+          path: activePath.id,
           botcheck: botcheckRef.current?.checked ?? false,
-          name: values.name.trim(),
-          email: values.email.trim(),
-          enquiry_type: activePath.label,
-          enquiring_for: values.enquiringFor || 'Not stated',
-          organisation: values.org.trim() || 'Not stated',
-          service: values.route || 'Help me choose',
-          message: values.message.trim(),
+          name: values.name,
+          email: values.email,
+          enquiringFor: values.enquiringFor,
+          org: values.org,
+          route: values.route,
+          message: values.message,
         }),
       })
       const data = await res.json().catch(() => null)
-      setStatus(res.ok && data?.success ? 'sent' : 'failed')
+      setStatus(res.ok && data?.ok ? 'sent' : 'failed')
     } catch {
       setStatus('failed')
     }

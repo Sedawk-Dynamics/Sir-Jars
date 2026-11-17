@@ -104,27 +104,35 @@ gtag('consent', 'default', {
   ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
   analytics_storage: 'denied', wait_for_update: 500
 });
+var c = null;
 try {
-  var c = JSON.parse(localStorage.getItem('sjg-cookie-consent-v1') || 'null');
-  if (c) gtag('consent', 'update', {
-    analytics_storage: c.analytics ? 'granted' : 'denied',
-    ad_storage: c.marketing ? 'granted' : 'denied',
-    ad_user_data: c.marketing ? 'granted' : 'denied',
-    ad_personalization: c.marketing ? 'granted' : 'denied'
-  });
+  c = JSON.parse(localStorage.getItem('sjg-cookie-consent-v1') || 'null');
 } catch (e) {}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');
-// The library (~150 KB) is fetched once the page has loaded so it never
-// competes with first render; hits queued above are sent when it arrives.
-window.addEventListener('load', function () {
-  setTimeout(function () {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
-    document.head.appendChild(s);
-  }, 0);
+if (c) gtag('consent', 'update', {
+  analytics_storage: c.analytics ? 'granted' : 'denied',
+  ad_storage: c.marketing ? 'granted' : 'denied',
+  ad_user_data: c.marketing ? 'granted' : 'denied',
+  ad_personalization: c.marketing ? 'granted' : 'denied'
 });
+// Nothing is initialised, and no cookies are set, until the visitor opts in
+// to analytics. The enquiry page is never measured. CookieManager calls
+// window.__sjgLoadGa when the visitor opts in during this visit.
+var NO_ANALYTICS = /^\\/contact(\\/|$)/.test(location.pathname);
+window.__sjgLoadGa = function () {
+  if (window.__sjgGa || NO_ANALYTICS) return;
+  window.__sjgGa = true;
+  gtag('js', new Date());
+  gtag('config', '${GA_ID}');
+  // The library (~150 KB) is fetched after load so it never competes with
+  // first render; hits queued above are sent when it arrives.
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_ID}';
+  document.head.appendChild(s);
+};
+if (c && c.analytics) {
+  window.addEventListener('load', function () { setTimeout(window.__sjgLoadGa, 0); });
+}
 `
 
 export default function RootLayout({
