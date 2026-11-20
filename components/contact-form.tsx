@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Send, CheckCircle, AlertCircle, ShieldAlert } from 'lucide-react'
 import { capabilities, contactPaths, org, type ContactPathId } from '@/lib/content'
+import { EMAIL, submitForm } from '@/lib/web3forms'
+import { FormCaptcha, type HCaptcha } from '@/components/form-captcha'
 
 /** Whether the desk is staffed right now: Monday–Friday, 09:00–18:00 IST. */
 function isStaffedNow(now = new Date()) {
@@ -52,13 +54,14 @@ function StaffedState() {
  * Every field has a visible <label for>, an id, a name, an autocomplete token,
  * an inline error tied by aria-describedby, and a live-region status message.
  *
- * Only name, email and goal are required. The enquiry is POSTed to
- * /api/enquiry, which validates it and delivers it through Web3Forms.
- * Success is shown only once delivery is confirmed — a failure keeps
- * every typed value and offers the email address instead.
+ * Only name, email and goal are required, plus the hCaptcha check. The
+ * enquiry is cleaned in the browser and sent straight to Web3Forms (its free
+ * plan refuses server-side calls), which verifies the captcha and runs its
+ * spam filter. Success is shown only once delivery is confirmed — a failure
+ * keeps every typed value and offers the email address instead.
  */
 
-type Errors = Partial<Record<'name' | 'email' | 'message', string>>
+type Errors = Partial<Record<'name' | 'email' | 'message' | 'captcha', string>>
 
 const fieldStyle: React.CSSProperties = {
   background: '#FFFFFF',
@@ -85,6 +88,9 @@ export default function ContactForm({
     route: capabilities.some((c) => c.shortName === defaultRoute) ? defaultRoute : '',
     message: '',
   })
+  const [failMessage, setFailMessage] = useState('')
+  const [captchaToken, setCaptchaToken] = useState('')
+  const captchaRef = useRef<HCaptcha>(null)
   const errorSummaryRef = useRef<HTMLDivElement>(null)
   // Web3Forms honeypot: hidden from people, ticked only by bots.
   const botcheckRef = useRef<HTMLInputElement>(null)
@@ -100,13 +106,21 @@ export default function ContactForm({
   const validate = (): Errors => {
     const next: Errors = {}
     if (!values.name.trim()) next.name = 'Enter your name.'
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+    if (!EMAIL.test(values.email.trim())) {
       next.email = 'Enter a valid email address.'
     }
     if (!values.message.trim()) {
       next.message = 'Tell us briefly what you would like to achieve.'
     }
+    if (!captchaToken) {
+      next.captcha = 'Complete the captcha check.'
+    }
     return next
+  }
+
+  const onCaptchaToken = (token: string) => {
+    setCaptchaToken(token)
+    if (token) setErrors((prev) => ({ ...prev, captcha: undefined }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -119,26 +133,35 @@ export default function ContactForm({
       return
     }
     setStatus('submitting')
+    setFailMessage('')
+    // Only values from the fixed option lists are passed through.
+    const enquiringFor = ['Myself', 'An organisation'].includes(values.enquiringFor)
+      ? values.enquiringFor
+      : ''
+    const service = capabilities.some((c) => c.shortName === values.route) ? values.route : ''
     try {
-      // Same-origin intake: the server validates, sanitises and delivers.
-      const res = await fetch('/api/enquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          path: activePath.id,
-          botcheck: botcheckRef.current?.checked ?? false,
+      await submitForm(
+        {
+          subject: `New enquiry (${activePath.label}) from ${values.name}`,
           name: values.name,
-          email: values.email,
-          enquiringFor: values.enquiringFor,
-          org: values.org,
-          route: values.route,
+          email: values.email.trim(),
+          enquiry_type: activePath.label,
+          enquiring_for: enquiringFor || 'Not stated',
+          organisation: values.org || 'Not stated',
+          service: service || 'Help me choose',
           message: values.message,
-        }),
-      })
-      const data = await res.json().catch(() => null)
-      setStatus(res.ok && data?.ok ? 'sent' : 'failed')
-    } catch {
+          botcheck: botcheckRef.current?.checked ?? false,
+        },
+        captchaToken
+      )
+      setStatus('sent')
+    } catch (err) {
+      setFailMessage(err instanceof Error ? err.message : '')
       setStatus('failed')
+    } finally {
+      // hCaptcha tokens are single-use.
+      captchaRef.current?.resetCaptcha()
+      setCaptchaToken('')
     }
   }
 
@@ -464,6 +487,15 @@ export default function ContactForm({
           )}
         </div>
 
+        <div id="field-captcha">
+          <FormCaptcha ref={captchaRef} onToken={onCaptchaToken} />
+          {errors.captcha && (
+            <p className="mt-1.5 text-sm font-medium" style={{ color: 'var(--color-rose)' }}>
+              {errors.captcha}
+            </p>
+          )}
+        </div>
+
         {status === 'failed' && (
           <p
             role="alert"
@@ -476,7 +508,8 @@ export default function ContactForm({
           >
             <AlertCircle size={16} aria-hidden="true" className="shrink-0 mt-0.5" style={{ color: 'var(--color-rose)' }} />
             <span>
-              Your enquiry could not be sent. Please try again, or email{' '}
+              {failMessage ? `${failMessage} ` : 'Your enquiry could not be sent. '}
+              Please try again, or email{' '}
               <a href={`mailto:${org.email}`} className="underline underline-offset-2 font-semibold">
                 {org.email}
               </a>

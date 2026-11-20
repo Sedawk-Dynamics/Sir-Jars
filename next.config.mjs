@@ -24,20 +24,25 @@ const nextConfig = {
   async headers() {
     const isDev = process.env.NODE_ENV !== 'production'
     // Only what the site actually loads: Google Analytics (consent-gated),
-    // Vercel Analytics (same origin), the Web3Forms enquiry endpoint and the
-    // Google Maps embed on /contact. Scripts are 'unsafe-inline' because Next
-    // and the consent bootstrap emit inline scripts; a nonce-based policy would
-    // need per-request middleware and would turn off static rendering.
+    // Vercel Analytics (same origin), the Web3Forms enquiry endpoint, hCaptcha
+    // on the contact form (components/form-captcha.tsx) and the Google Maps
+    // embed on /contact. Scripts are 'unsafe-inline' because Next and the
+    // consent bootstrap emit inline scripts; a nonce-based policy would need
+    // per-request middleware and would turn off static rendering.
+    //
+    // If another tag (e.g. Meta Pixel, Hotjar) is added later, its domains
+    // must be added here or the browser will block it.
+    const HCAPTCHA = 'https://hcaptcha.com https://*.hcaptcha.com'
     const csp = [
       "default-src 'self'",
-      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com`,
-      "style-src 'self' 'unsafe-inline'",
+      `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com ${HCAPTCHA}`,
+      `style-src 'self' 'unsafe-inline' ${HCAPTCHA}`,
       "img-src 'self' data: blob: https://www.googletagmanager.com",
       "font-src 'self' data:",
-      "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
-      'frame-src https://www.google.com',
+      `connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com ${HCAPTCHA}`,
+      `frame-src https://www.google.com ${HCAPTCHA}`,
       "form-action 'self'",
-      "frame-ancestors 'self'",
+      "frame-ancestors 'none'",
       "base-uri 'self'",
       "object-src 'none'",
       'upgrade-insecure-requests',
@@ -49,7 +54,7 @@ const nextConfig = {
         headers: [
           { key: 'Content-Security-Policy', value: csp },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           {
             key: 'Strict-Transport-Security',
@@ -57,8 +62,9 @@ const nextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
           },
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
         ],
       },
     ]

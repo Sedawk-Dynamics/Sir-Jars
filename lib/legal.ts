@@ -541,6 +541,7 @@ export const legalDocs: Record<string, LegalDoc> = {
         heading: '3. Essential technologies',
         body: [
           'Essential technologies operate website security, load balancing, form protection, shopping carts, checkout continuity, session management and saved privacy choices. They are used only to provide or protect a function you request and cannot be switched off through the optional-choice panel. Blocking them in the browser may cause a feature to fail.',
+          'The contact form uses hCaptcha, provided by Intuition Machines, Inc., to tell people from automated spam. It loads only on the contact page, runs when you use the form, and may process your IP address and browser information for that purpose. Form submissions are delivered to our inbox by Web3Forms over HTTPS.',
         ],
       },
       {
